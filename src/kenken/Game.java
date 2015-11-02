@@ -11,7 +11,7 @@ package kenken;
  */
 public class Game {
     
-    enum Mode{easy,medium,hard};
+    enum Mode{normal,TimeAttack};
     
     private long time;
     private Mode mode;
