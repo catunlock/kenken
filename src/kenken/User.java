@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author alberto.lopez.sanchez
+ * @author marc.ferre.monne
  */
 public class User implements Serializable{
     
@@ -99,6 +99,5 @@ public class User implements Serializable{
     
     public void deleteBoard(int pos){
         createdBoards.remove(pos);
-        //No entenc perquè no em deixa posar el remove aqui...
     }
 }
