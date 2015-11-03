@@ -23,7 +23,7 @@ public class UserDBController {
     public int createUser(User newUser){
       FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(newUser.getName() + ".obj");
+            fos = new FileOutputStream(newUser.getUsername()+ ".obj");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(newUser);
             
