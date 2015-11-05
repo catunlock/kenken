@@ -17,7 +17,7 @@ public class BoardCreatorController {
         return 1;
     }
     
-    public int setRegion(ArrayList<Pos> pos, int region) {
+    public int setRegion(ArrayList<Cell> cells, int region) {
         return 1;
     }
     
@@ -30,7 +30,7 @@ public class BoardCreatorController {
         return 1;
     }
     
-    public int setEditPermission(Pos pos, boolean permission) {
-        
+    public int setEditPermission(Cell cell, boolean permission) {
+        return 1;
     }
 }
