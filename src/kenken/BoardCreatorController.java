@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class BoardCreatorController {
     
-    public int setCellValue(int posX, int posY) {
+    public int setCellValue(int posX, int posY, int value) {
         return 1;
     }
     
@@ -30,7 +30,7 @@ public class BoardCreatorController {
         return 1;
     }
     
-    public int setEditPermission(Cell cell, boolean permission) {
+    public int setEditPermission(int posX, int posY, boolean permission) {
         return 1;
     }
 }
