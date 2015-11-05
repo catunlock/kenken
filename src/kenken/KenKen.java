@@ -5,6 +5,10 @@
  */
 package kenken;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author SuNLoCK
@@ -21,11 +25,22 @@ public class KenKen {
         marc.setKekeniadas(133);
         marc.setTablerosCreados(43);
         db.createUser(marc);
+        if (db.createUser(marc) == -1) {
+            System.err.println("Usuario ya existente.");
+        }
         
-        UserKenKen marc2 = (UserKenKen) db.getUser("Marc");
+        UserKenKen marc2;
+        try {
+            marc2 = (UserKenKen) db.getUser("Marc");
+            
+            System.out.printf("Kenkeniadas: %d, TablerosCreados: %d", 
+                marc2.getKekeniadas(), marc2.getTablerosCreados());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(KenKen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        System.out.printf("Kenkeniadas: %d, TablerosCreados: %d", 
-                marc2.getKekeniadas(), marc2.getTablerosCreados());       
+               
     }
     
     public static void main(String[] args) {
