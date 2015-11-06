@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class BoardCreatorController {
     
-    public int setCellValue(int posX, int posY, int value) {
+    public int setCellValue(Cell cell, int value) {
         return 1;
     }
     
