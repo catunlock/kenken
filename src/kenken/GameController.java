@@ -13,7 +13,8 @@ import kenken.persistencia;
  */
 public class GameController {
     
-    Game game;
+    Game g;
+    String user;
     
     public Board newGame(String id){
         BoardDBController bdbc = new BoardDBController();
@@ -23,8 +24,10 @@ public class GameController {
     }
     
     public int saveGame(Game game){
+        GameDBController gdbc = new GameDBController();
+        int error = gdbc.saveGame(game, user);
         //llevar a la bd de partidas guardadas el juego
-        return 0;
+        return error;
     }
     
     public int loadGame(){
