@@ -89,8 +89,7 @@ public class User implements Serializable{
     }
     
     public void addBoard(Board newBoard){
-        createdBoards.add(0, newBoard);
-        //TODO: Parlar si s'ha de ordenar o no.
+        createdBoards.add(newBoard);
     }
     
     public void deleteBoard(int pos){
