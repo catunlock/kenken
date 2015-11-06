@@ -15,14 +15,20 @@ public class Ranking {
     
     enum GameMode{Normal, TimeAttack};
     
+    private String boardName;
     private Record record;
     private ArrayList<Record> recordList;
     private GameMode gameMode;
     private int size;
 
-    public Ranking(GameMode gameMode, int size) {
+    public Ranking(GameMode gameMode, int size, String boardName) {
         this.gameMode = gameMode;
         this.size = size;
+        this.boardName = boardName;
+    }
+
+    public String getBoardName() {
+        return boardName;
     }
 
     public ArrayList<Record> getRecordList() {
