@@ -22,7 +22,6 @@ public class User implements Serializable{
     private Duration totalTimePlayed;
     private int totalCreatedBoards;
     private ArrayList<Board> createdBoards;
-    //TODO: Falta importar Board.
     
     public User(String username, String password) {
         this.username = username;
@@ -66,11 +65,7 @@ public class User implements Serializable{
     }
     
     public Board getCreatedBoard(int pos){
-        /*
-        Com que no hem importat Board, deixo la implementació d'aquesta per més
-        endavant.
-        */
-        return null;
+        return createdBoards.get(pos);
     }
     
     public int getActualCreatedBoard(){
@@ -95,6 +90,7 @@ public class User implements Serializable{
     
     public void addBoard(Board newBoard){
         createdBoards.add(0, newBoard);
+        //TODO: Parlar si s'ha de ordenar o no.
     }
     
     public void deleteBoard(int pos){
