@@ -20,6 +20,9 @@ import java.util.logging.Logger;
 /**
  *
  * @author alberto.lopez.sanchez
+ * 
+ * Detalles que no tienen sentido de la especificacion:
+ * 
  */
 public class UserDBController {
    
@@ -63,17 +66,19 @@ public class UserDBController {
         int result = -2;
         
         if (oldName != null && ! exists(user)) {
-            deleteUser(oldName);
-            result = writeUser(user, getPath(user));
+            if (deleteUser(oldName) == 0){
+                result = writeUser(user, getPath(user));
+            }
+        }
+        else if (oldName == null){
+            if (exists(user)) {
+                result = writeUser(user, getPath(user));
+            }
+            else {
+                result = -1;
+            }
+        } 
             
-        }
-        else if (exists(user)) {
-            result = writeUser(user, getPath(user));
-        }
-        else {
-            result = -1;
-        }
-        
         return result;
     }
     
@@ -112,7 +117,7 @@ public class UserDBController {
     */
     public User getUser(String username) throws FileNotFoundException, IOException{
         
-        FileInputStream fis = null;
+        FileInputStream fis;
         User user = null;
         
         try {
