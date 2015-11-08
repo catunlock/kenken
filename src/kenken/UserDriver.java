@@ -25,17 +25,20 @@ public class UserDriver {
         System.out.println(test.getStartedGames());
         System.out.println(test.getTotalTimePlayed());
         System.out.println(test.getTotalCreatedBoards());
+        //System.out.println(test.getActualCreatedBoard());
         
         test.setUsername("manolo");
         System.out.println("L'usuari ara es dira Manolo:");
         System.out.println(test.getUsername());
         System.out.println(test.getPassword());
         
-        System.out.println("Incrementar resolts i started, incrementar duration 2m");
+        System.out.println("Incrementar resolts, started, totalcreatedboards, incrementar duration 2m");
         test.incrementSolvedGames();
         test.incrementStartedGames();
+        test.incrementTotalCreatedBoards();
         System.out.println(test.getSolvedGames());
         System.out.println(test.getStartedGames());
+        System.out.println(test.getTotalCreatedBoards());
         
         //salta error NullPointerException desde la classe User
         Duration temps = Duration.ofMinutes(2);
@@ -52,14 +55,6 @@ public class UserDriver {
     
         public Board getCreatedBoard(int pos){
             return createdBoards.get(pos);
-        }
-
-        public int getActualCreatedBoard(){
-            return createdBoards.size();
-        }
-
-        public void incrementTotalCreatedBoards(){
-            totalCreatedBoards++;
         }
 
         public void addBoard(Board newBoard){
