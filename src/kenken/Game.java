@@ -7,7 +7,7 @@ package kenken;
 
 /**
  *
- * @author pol
+ * @author pol (Gerard ha añadido cosas del Board)
  */
 public class Game {
     
@@ -15,6 +15,7 @@ public class Game {
     
     private long time;
     private Mode mode;
+    private Board board;
 
     public Game(Mode mode)
     {
@@ -30,5 +31,10 @@ public class Game {
     public Mode getMode()
     {
         return mode;
+    }
+    
+    public Board getBoard()
+    {
+        return board;
     }
 }
