@@ -7,7 +7,7 @@ package kenken;
 
 /**
  *
- * @author pol (Gerard ha añadido cosas del Board)
+ * @author pol
  */
 public class Game {
     
