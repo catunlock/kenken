@@ -25,18 +25,21 @@ public class UserDriver {
         System.out.println(test.getStartedGames());
         System.out.println(test.getTotalTimePlayed());
         System.out.println(test.getTotalCreatedBoards());
+        
         test.setUsername("manolo");
         System.out.println("L'usuari ara es dira Manolo:");
         System.out.println(test.getUsername());
         System.out.println(test.getPassword());
+        
         System.out.println("Incrementar resolts i started, incrementar duration 2m");
         test.incrementSolvedGames();
         test.incrementStartedGames();
         System.out.println(test.getSolvedGames());
         System.out.println(test.getStartedGames());
+        
+        //salta error NullPointerException desde la classe User
         Duration temps = Duration.ofMinutes(2);
-        System.out.println(temps.getSeconds());
-        //test.incrementTotalTimePlayed(temps);
+        test.incrementTotalTimePlayed(temps);
         System.out.println(test.getTotalTimePlayed());       
         
         //apartado de accesos a tableros, falta UserController para poder
