@@ -5,16 +5,13 @@
  */
 package kenken;
 
-import kenken.persistencia;
+import java.io.IOException;
 
 /**
  *
  * @author GERARD
  */
 public class GameController {
-    
-    Game g;
-    String user;
     
     public Board newGame(String id){
         BoardDBController bdbc = new BoardDBController();
@@ -23,16 +20,15 @@ public class GameController {
         return b;
     }
     
-    public int saveGame(Game game){
+    public int saveGame(Game game, String username){
         GameDBController gdbc = new GameDBController();
-        int error = gdbc.saveGame(game, user);
-        //llevar a la bd de partidas guardadas el juego
+        int error = gdbc.saveGame(game, username);
         return error;
     }
     
-    public int loadGame(){
-        //traer de la BD de partidas guardadas el Game
-        return 0;
+    public Game loadGame(String username, String id) throws IOException {
+        GameDBController gdbc = new GameDBController();
+        return gdbc.loadGame(username, id);
     }
     
 }
