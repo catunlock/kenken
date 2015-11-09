@@ -26,6 +26,7 @@ public class User implements Serializable{
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        totalTimePlayed = Duration.ZERO;
     }
 
     public String getUsername() {
@@ -81,7 +82,7 @@ public class User implements Serializable{
     }
     
     public void incrementTotalTimePlayed(Duration time){
-        totalTimePlayed.plus(time);
+        totalTimePlayed = totalTimePlayed.plus(time);
     }
     
     public void incrementTotalCreatedBoards(){
