@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import static java.time.Clock.system;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -21,29 +22,57 @@ public class UserDriver {
     
     public static void main(String[] args) throws IOException
     {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Probando getUsername");
-        System.out.println("-----------------------------------------------"); 
-        System.out.println("Introduce un numero para ejecutar la operacion:");
-        System.out.println("-----------------------------------------------"); 
-        System.out.println("1. Crear usuario");
-        System.out.println("2. Mostrar usuario y contraseña");
-        System.out.println("3. Mostrar SolvedGames, StartedGames, TotalTimePlayed, TotalCreatedBoards y ActualCreatedBoards");
+        Scanner sc = new Scanner(System.in);
         
-        System.out.println("5. Cambiar nombre de usuario");
-        System.out.println("6. Cambiar contraseña");
-        System.out.println("Introduce un numero para ejecutar la operacion:");
-        
-        String user = br.readLine();
+        System.out.println("Introdueix nom d'usuari:");
+        String user = sc.nextLine();
         System.out.println("Introdueix contrasenya:");
-        String pass = br.readLine();
+        String pass = sc.nextLine();
         User test = new User(user,pass);
-        System.out.println("Nom d'usuari:" + test.getUsername());
-        System.out.println("Contrasenya d'usuari:" + test.getPassword());
-        /*
-        User test = new User("test","pass");
+        
+        System.out.println("-----------------------------------------------");
         System.out.println("Probando getUsername");
-        System.out.println(test.getUsername());
+        System.out.println("-----------------------------------------------");
+        System.out.println("Introduce un numero para ejecutar la operacion:");
+        System.out.println("-----------------------------------------------"); 
+        System.out.println("1. Mostrar usuari y contrasenya");
+        System.out.println("2. Mostrar SolvedGames, StartedGames, TotalTimePlayed, TotalCreatedBoards y ActualCreatedBoards");
+        System.out.println("3. Canviar nom d'usuari");
+        System.out.println("4. Canviar contrasenya");
+        System.out.println("5. Incrementar SolvedGames");
+        System.out.println("6. Incrementar StartedGames");
+        System.out.println("7. Incrementar TotalCreatedBoards");
+        System.out.println("8. Incrementar TotalTimePlayed");
+        System.out.println("-1. Exit");
+        System.out.println("-----------------------------------------------");
+        
+        Integer option;
+        
+        while((option = sc.nextInt()) != -1) {
+        
+            switch(option){
+                case 1: 
+                    System.out.println("Nom d'usuari:" + test.getUsername());
+                    System.out.println("Contrasenya d'usuari:" + test.getPassword());
+                    break;
+                case 2:
+                    System.out.println("Solved Games:" + test.getSolvedGames());
+                    System.out.println("Started Games:" + test.getStartedGames());
+                    System.out.println("Total Time Played:" + test.getTotalTimePlayed());
+                    System.out.println("Total Created Boards:" + test.getTotalCreatedBoards());
+                    //System.out.println("Actual Created Boards:" + test.getActualCreatedBoard());
+                    break;                    
+                case 3:
+                    
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+            }
+        }
+        /*
         System.out.println("Todo tendria que estar a cero:");
         System.out.println(test.getSolvedGames());
         System.out.println(test.getStartedGames());
