@@ -24,9 +24,66 @@ public class RankingDBController {
     private static final String Directory = "Rankings/";
     private static final String Extension = ".rank";
     
-    public int createRanking(String boardName){
-        int result = -2;
+    public int createRanking(Ranking newRanking){
+        int result = 1;
+        String filepath = getPath(newRanking);
+        
+        if (new File(filepath).isFile()){
+            result = -1;
+        }
+        else {
+            result = writeRanking(newRanking, filepath);
+        }
+       
         return result;
+    }
+    
+    
+    public int modifyRanking(Ranking ranking){
+        int result = -2;
+        
+        if (exists(ranking)){
+            result = writeRanking(ranking, getPath(ranking));
+        }
+        else result = -1;
+        
+	return result;
+    }
+    
+    /*
+    public int deleteRanking(String boardName){
+        int result = -3;
+        
+        if(!exists(boardName)){
+            result = -1;
+        }else {
+            try {
+                Files.delete(FileSystems.getDefault().getPath(getPath(boardName)));
+                result = 0;
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+                result = -3;
+            }
+        }
+        
+        return result;
+    }
+    */
+    
+    public User getRanking(String username) throws FileNotFoundException, IOException{
+        
+        FileInputStream fis;
+        User user = null;
+        
+        try {
+            fis = new FileInputStream(getPath(username));
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            user = (User) ois.readObject();
+            fis.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
     
     private String getPath(Ranking ranking) {
