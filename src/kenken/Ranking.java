@@ -21,11 +21,14 @@ public class Ranking {
     private GameMode gameMode;
     private int size;
 
-    public Ranking(GameMode gameMode, int size, String boardName) {
+    public Ranking(String boardName, ArrayList<Record> recordList, GameMode gameMode, int size) {
+        this.boardName = boardName;
+        this.recordList = recordList;
         this.gameMode = gameMode;
         this.size = size;
-        this.boardName = boardName;
     }
+
+    
 
     public String getBoardName() {
         return boardName;
