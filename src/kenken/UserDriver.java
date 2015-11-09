@@ -23,8 +23,17 @@ public class UserDriver {
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Probando getUsername");
-        System.out.println("----------------------"); 
-        System.out.println("Introdueix nom d'usuari:");
+        System.out.println("-----------------------------------------------"); 
+        System.out.println("Introduce un numero para ejecutar la operacion:");
+        System.out.println("-----------------------------------------------"); 
+        System.out.println("1. Crear usuario");
+        System.out.println("2. Mostrar usuario y contraseña");
+        System.out.println("3. Mostrar SolvedGames, StartedGames, TotalTimePlayed, TotalCreatedBoards y ActualCreatedBoards");
+        
+        System.out.println("5. Cambiar nombre de usuario");
+        System.out.println("6. Cambiar contraseña");
+        System.out.println("Introduce un numero para ejecutar la operacion:");
+        
         String user = br.readLine();
         System.out.println("Introdueix contrasenya:");
         String pass = br.readLine();
