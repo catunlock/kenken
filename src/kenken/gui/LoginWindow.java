@@ -56,6 +56,9 @@ public class LoginWindow extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+
+        jTextField2.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
