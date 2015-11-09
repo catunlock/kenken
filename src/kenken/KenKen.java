@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package kenken;
-
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author SuNLoCK
@@ -23,8 +18,9 @@ public class KenKen {
     
     
     public KenKen() {
-        
-               
+        Generator gen = new Generator();
+        Board b = gen.generate(4);
+        System.out.println("Board: " + b);
     }
     
     public static void main(String[] args) {
