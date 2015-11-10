@@ -19,13 +19,10 @@ public class Ranking {
     private Record record;
     private ArrayList<Record> recordList;
     private GameMode gameMode;
-    private int size;
 
-    public Ranking(String boardName, ArrayList<Record> recordList, GameMode gameMode, int size) {
+    public Ranking(String boardName, GameMode gameMode) {
         this.boardName = boardName;
-        this.recordList = recordList;
         this.gameMode = gameMode;
-        this.size = size;
     }
 
     
