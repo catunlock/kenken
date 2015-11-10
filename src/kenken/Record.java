@@ -16,4 +16,24 @@ public class Record {
     private String namePlayer;
     private Duration time;
     
+    public Record(String namePlayer, long time){
+        this.namePlayer = namePlayer;
+        this.time = Duration.ZERO;
+        this.time = this.time.plusSeconds(time);
+    }
+
+    public String getNamePlayer() {
+        return namePlayer;
+    }
+
+    public Duration getTime() {
+        return time;
+    }
+    
+    public String getTimeAsString(){
+        long timeToLong = this.time.getSeconds();
+        String timeToString = Long.toString(timeToLong);
+        return timeToString;
+    }
+    
 }
