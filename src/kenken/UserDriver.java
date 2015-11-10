@@ -63,41 +63,36 @@ public class UserDriver {
                     //System.out.println("Actual Created Boards:" + test.getActualCreatedBoard());
                     break;                    
                 case 3:
-                    
+                    System.out.println("Introdueix el nou nom d'usuari:");
+                    user = sc.nextLine();
+                    test.setUsername(user);
+                    break;
                 case 4:
+                    System.out.println("Introdueix la nova contrasenya:");
+                    pass = sc.nextLine();
+                    test.setPassword(pass);
+                    break;            
                 case 5:
+                    test.incrementSolvedGames();
+                    break;
                 case 6:
+                    test.incrementStartedGames();
+                    break;
                 case 7:
+                    test.incrementTotalCreatedBoards();
+                    break;
                 case 8:
-                case 9:
+                    System.out.println("Introdueix els segons a incrementar:");
+                    long segons = sc.nextLong();
+                    Duration temps = Duration.ofSeconds(segons);
+                    test.incrementTotalTimePlayed(temps);
             }
         }
+
         /*
-        System.out.println("Todo tendria que estar a cero:");
-        System.out.println(test.getSolvedGames());
-        System.out.println(test.getStartedGames());
-        System.out.println(test.getTotalTimePlayed());
-        System.out.println(test.getTotalCreatedBoards());
-        //System.out.println(test.getActualCreatedBoard());
-        test.setUsername("manolo");
-        System.out.println("L'usuari ara es dira Manolo:");
-        System.out.println(test.getUsername());
-        System.out.println(test.getPassword());
-        System.out.println("Incrementar resolts, started, totalcreatedboards, incrementar duration 2m");
-        test.incrementSolvedGames();
-        test.incrementStartedGames();
-        test.incrementTotalCreatedBoards();
-        System.out.println("Solved Games: " + test.getSolvedGames());
-        System.out.println("Started Games: " + test.getStartedGames());
-        System.out.println("Created boards: " + test.getTotalCreatedBoards());
-        //salta error NullPointerException desde la classe User
-        Duration temps = Duration.ofMinutes(2);
-        test.incrementTotalTimePlayed(temps);
-        System.out.println(test.getTotalTimePlayed().getSeconds());
         //apartado de accesos a tableros, falta UserController para poder
         //probar del todo la funcionalidad
-         */
-        /*
+        
         ArrayListArrayList<Board> getCreatedBoards(){
         return createdBoards;
         }
