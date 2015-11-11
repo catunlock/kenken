@@ -6,6 +6,7 @@
 package kenken;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,10 +31,18 @@ public class Record {
         return time;
     }
     
-    public String getTimeAsString(){
+    public ArrayList<String> recordToString(){
+        ArrayList<String> result = new ArrayList();
+        result.add(this.namePlayer);
         long timeToLong = this.time.getSeconds();
-        String timeToString = Long.toString(timeToLong);
-        return timeToString;
+        result.add(Long.toString(timeToLong));
+        return result;
+    }
+    
+    public static Record stringToRecord(ArrayList<String> arr){
+        long time = Long.parseLong(arr.get(1));
+        Record rec = new Record(arr.get(0), time);
+        return rec;
     }
     
 }
