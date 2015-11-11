@@ -30,7 +30,7 @@ public class Record {
     public Duration getTime() {
         return time;
     }
-    
+    /*
     public ArrayList<String> recordToString(){
         ArrayList<String> result = new ArrayList();
         result.add(this.namePlayer);
@@ -44,5 +44,6 @@ public class Record {
         Record rec = new Record(arr.get(0), time);
         return rec;
     }
+    */
     
 }
