@@ -5,6 +5,9 @@
  */
 package kenken;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Marc Ferré Monné
@@ -16,16 +19,36 @@ public class RankingController {
     }
     
     public int createRanking(String boardName, Ranking.GameMode gameMode){
+        RankingDBController rkDBC = new RankingDBController();
         Ranking newRanking = new Ranking(boardName, gameMode);
-        return 0;
+        int result = rkDBC.createRanking(newRanking.rankingToString());
+        return result;
     }
     
-    public Ranking getRanking(){
-        return null;
+    public Ranking getRanking(String boardName) throws IOException{
+        RankingDBController rkDBC = new RankingDBController();
+        ArrayList<String> arr = rkDBC.getRanking(boardName);
+        Ranking ranking = Ranking.stringToRanking(arr);
+        return ranking;
     }
     
     public int modifyRanking(Ranking ranking, Record record){
-        return 0;
+        RankingDBController rkDBC = new RankingDBController();
+        for(int i = 0; i < ranking.getRecordList().size(); i++){
+            if (ranking.getRecordByPos(i).getTime().getSeconds() < record.getTime().getSeconds()){
+                if (ranking.getRecordList().size() == 10){
+                    ranking.setRecordByPos(i, record);
+                    break;
+                }
+                else if (ranking.getRecordList().size() < 10){
+                    ranking.addRecordAtPos(i, record);
+                    break;
+                }
+            }
+        }
+        ArrayList<String> modRank = ranking.rankingToString();
+        int result = rkDBC.modifyRanking(modRank);
+        return result;
     }
     
     
