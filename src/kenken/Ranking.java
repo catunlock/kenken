@@ -36,6 +36,17 @@ public class Ranking {
     public Record getRecordByPos(int pos){
         return this.recordList.get(pos);
     }
+    /*
+    Pre: this.recordList.size() == 10
+    */
+    public void setRecordByPos(int pos, Record rec){
+        int i = this.recordList.size() - 1;
+        while (pos != i){
+            this.recordList.set(i, this.recordList.get(i - 1));
+            i--;
+        }
+        this.recordList.set(pos, rec);
+    }
 
     public GameMode getGameMode() {
         return gameMode;
@@ -44,6 +55,12 @@ public class Ranking {
     public void addRecord(Record record){
         if (recordList.size() < 10){
             recordList.add(record);
+        }
+    }
+    
+    public void addRecordAtPos(int pos, Record record){
+        if (recordList.size() < 10){
+            recordList.add(pos, record);
         }
     }
     
