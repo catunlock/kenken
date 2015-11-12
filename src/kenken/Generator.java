@@ -32,7 +32,7 @@ public class Generator {
     private void swapRow(int i, int j) {
         int tmp;
         for (int k = 0; k < board.size(); k++) {
-            tmp = board[i][k].c;
+            tmp = board.getCell(i,k).getSolutionValue();
             board[i][k].c = board[j][k].c;
             board[j][k].c = tmp;
         }

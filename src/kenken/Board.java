@@ -20,7 +20,7 @@ public class Board {
         for (int i = 0; i < size; ++i){
             board.add(new ArrayList<Cell>(size));
             for (int j = 0; j < size; ++j) {
-                board.get(i).add(new Cell());
+                board.get(i).add(new Cell(i,j,true));
             }
         }
     }
@@ -38,7 +38,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int f = 0; f < board.size(); ++f) {
             for (int c = 0; c < board.size(); ++c) {
-                sb.append(board.get(f).get(c).getValue());
+                sb.append(board.get(f).get(c).getSolutionValue());
             }
             sb.append('\n');
         }
