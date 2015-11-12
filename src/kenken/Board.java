@@ -45,5 +45,9 @@ public class Board {
         return sb.toString();
     }
     
+    public static Board toBoard(String b){
+        return null;
+    }
+    
     
 }
