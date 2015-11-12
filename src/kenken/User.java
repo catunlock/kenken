@@ -96,4 +96,30 @@ public class User implements Serializable{
     public void deleteBoard(int pos){
         createdBoards.remove(pos);
     }
+    
+    public ArrayList<String> userToString(){
+        ArrayList<String> arr = new ArrayList();
+        arr.add(this.username);
+        arr.add(this.password);
+        arr.add(Integer.toString(this.solvedGames));
+        arr.add(Integer.toString(this.startedGames));
+        arr.add(Long.toString(this.totalTimePlayed.getSeconds()));
+        arr.add(Integer.toString(this.totalCreatedBoards));
+        for (Board b : this.createdBoards){
+            arr.add(b.toString());
+        }
+        return arr;
+    }
+    
+    public static User stringToUser(ArrayList<String> arr){
+        User user = new User(arr.get(0), arr.get(1));
+        user.solvedGames = Integer.parseInt(arr.get(2));
+        user.startedGames = Integer.parseInt(arr.get(3));
+        Duration time = Duration.ZERO;
+        user.totalTimePlayed = time.plusSeconds(Long.parseLong(arr.get(4)));
+        for(int i = 5; i < arr.size(); i++){
+            user.addBoard(Board.toBoard(arr.get(i)));
+        }
+        return user;
+    }
 }
