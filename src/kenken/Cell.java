@@ -10,5 +10,27 @@ package kenken;
  * @author Marc Ferré Monné
  */
 public class Cell {
+    private int value;
+    private int region;
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getRegion() {
+        return region;
+    }
+
+    public void setRegion(int region) {
+        this.region = region;
+    }
     
+    public Cell() {
+        value = 0;
+        region = 0;
+    }
 }
