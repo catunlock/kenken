@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Ranking {
     
-    private enum GameMode{Normal, TimeAttack};
+    public enum GameMode{Normal, TimeAttack};
     
     private String boardName;
     private ArrayList<Record> recordList;
@@ -22,6 +22,7 @@ public class Ranking {
     public Ranking(String boardName, GameMode gameMode) {
         this.boardName = boardName;
         this.gameMode = gameMode;
+        this.recordList = new ArrayList(0);
     }
 
     public String getBoardName() {
@@ -41,7 +42,9 @@ public class Ranking {
     }
     
     public void addRecord(Record record){
-        recordList.add(record);
+        if (recordList.size() < 10){
+            recordList.add(record);
+        }
     }
     
     public ArrayList<String> rankingToString(){
@@ -57,7 +60,7 @@ public class Ranking {
     
     public static Ranking stringToRanking(ArrayList<String> arr){
         Ranking ranking = new Ranking(arr.get(0), GameMode.valueOf(arr.get(arr.size() - 1)));
-        for(int i = 1; i < arr.size() - 2; i++){
+        for(int i = 1; i < arr.size() - 1; i += 2){
             //long time = Long.parseLong(arr.get(i + 1));
             Record temp = new Record(arr.get(i), Long.parseLong(arr.get(i + 1)));
             ranking.addRecord(temp);
