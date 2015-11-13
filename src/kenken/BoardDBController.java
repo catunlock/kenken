@@ -54,7 +54,7 @@ public class BoardDBController {
         else{
             /* info de tablero contiene: nombre tablero, persona que lo ha creado, dificultad, tamX, tamY */
             ArrayList<String> infoBoard = new ArrayList<String>();
-            infoBoard.add(String.valueOf(newBoard.getId()));
+            infoBoard.add(newBoard.getBoardName());
             infoBoard.add(newBoard.getUsername());
             infoBoard.add(newBoard.getDifficulty());
             infoBoard.add(String.valueOf(newBoard.getSizeX()));
@@ -75,7 +75,7 @@ public class BoardDBController {
     
     /*  Pre: boardName != NULL
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
-             sha eliminal de la base de dades el board amb id idBoard, o bé 
+             sha eliminat de la base de dades el board amb id idBoard, o bé 
              si sha produït alguna excepció.
     Return:
          0 = board eliminat correctament
