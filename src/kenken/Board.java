@@ -25,10 +25,10 @@ public class Board {
     private String username;
     private Date creationDate;
 
-    public Board(int sizeX, int sizeY, int id) {
+    public Board(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.id = id;
+        this.id = 0;
     }
 
     public int getId() {
@@ -74,11 +74,11 @@ public class Board {
     public void setId(int id) {
         this.id = id;
     }
-/*
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty.toString();
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
-*/
+
     public void setSizeX(int sizeX) {
         this.sizeX = sizeX;
     }
