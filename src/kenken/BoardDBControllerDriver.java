@@ -21,7 +21,12 @@ public class BoardDBControllerDriver {
         board.setBoardName("prueba");
         board.setDifficulty("chungo");
         board.setUsername("manolo");
-        test.createBoard(board);
+        //System.out.println(test.createBoard(board));
+        //System.out.println(test.deleteBoard("prueba"));
+        Board cargada = test.loadBoard("prueba4");
+        System.out.println(cargada.getBoardName());
+        System.out.println(cargada.getUsername());
+        System.out.println(cargada.getDifficulty());
         
         
         /*Scanner sc = new Scanner(System.in);
