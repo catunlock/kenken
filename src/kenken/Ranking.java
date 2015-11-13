@@ -63,7 +63,7 @@ public class Ranking {
             recordList.add(pos, record);
         }
     }
-    
+    /*
     public ArrayList<String> rankingToString(){
         ArrayList<String> arr = new ArrayList();
         arr.add(this.boardName);
@@ -84,5 +84,6 @@ public class Ranking {
         }
         return ranking;
     }
+    */
     
 }
