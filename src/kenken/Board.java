@@ -19,16 +19,22 @@ public class Board {
     private String difficulty;
     private int sizeX;
     private int sizeY;
-    private ArrayList<ArrayList<Cell>> cells;
-    private ArrayList<Region> regions;
     private String boardName;
     private String username;
     private Date creationDate;
+    private ArrayList<ArrayList<Cell>> cells;
+    private ArrayList<Region> regions;
+    
 
     public Board(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.id = 0;
+    }
+
+    public Board()
+    {
+        
     }
 
     public int getId() {

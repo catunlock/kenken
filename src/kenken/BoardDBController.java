@@ -6,9 +6,11 @@
 package kenken;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -103,7 +105,30 @@ public class BoardDBController {
         }
         return result;
     }
-                        
+    /*
+    public Board loadBoard(String nameBoard) throws FileNotFoundException, IOException{
+        
+        FileInputStream fis;
+        Board b = null;
+        String path = getPath(String.valueOf(nameBoard));
+        String pathFisica = path+ExtensionFisica;
+        String pathInfo = path+ExtensionInfo;
+        
+        try {
+            fis = new FileInputStream(pathInfo);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<String> informacio = null;
+            informacio = (ArrayList) ois.readObject();
+            b.setDifficulty(informacio.get(1));
+            b.setSizeX(Integer.parseInt(informacio.get(2)));
+            b.setSizeY(Integer.parseInt(informacio.get(3)));
+            fis.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b;
+    }
+        */                
     private String getPath(Board board){
         return getPath(String.valueOf(board.getId()));
     }

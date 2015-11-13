@@ -5,6 +5,8 @@
  */
 package kenken;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pol+Gerard
@@ -24,11 +26,10 @@ public class Game {
         this.mode = mode;
     }
     
-    public int setBoard(String id){
+    public int setBoard(String boardName){
         BoardDBController bdbc = new BoardDBController();
         ArrayList<String> taulerS = new ArrayList<String>();
-        Board tauler = new Board();
-        tauler.
+        bdbc.loadBoard(boardName);
     }
     
     public long getTime()

@@ -15,8 +15,7 @@ import java.util.ArrayList;
 public class GameController {
     
     public Board newGame(String id){
-        kenken.BoardDBController bdbc = new BoardDBController();
-        Board b = new Board();
+        BoardDBController bdbc = new BoardDBController();
         b = bdbc.loadBoard(id);
         return b;
     }
