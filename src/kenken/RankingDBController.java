@@ -25,7 +25,7 @@ public class RankingDBController {
     private static final String Directory = "Rankings/";
     private static final String Extension = ".rank";
     
-    public int createRanking(ArrayList<String> newRanking){
+    public int createRanking(Ranking newRanking){
         int result = 1;
         String filepath = getPath(newRanking);
         
@@ -40,7 +40,7 @@ public class RankingDBController {
     }
     
     
-    public int modifyRanking(ArrayList<String> ranking){
+    public int modifyRanking(Ranking ranking){
         int result = -2;
         
         if (exists(ranking)){
@@ -51,7 +51,7 @@ public class RankingDBController {
 	return result;
     }
     
-    /*
+    
     public int deleteRanking(String boardName){
         int result = -3;
         
@@ -69,17 +69,17 @@ public class RankingDBController {
         
         return result;
     }
-    */
     
-    public ArrayList<String> getRanking(String boardName) throws FileNotFoundException, IOException{
+    
+    public Ranking getRanking(String boardName) throws FileNotFoundException, IOException{
         
         FileInputStream fis;
-        ArrayList<String> ranking = null;
+        Ranking ranking = null;
         
         try {
             fis = new FileInputStream(getPath(boardName));
             ObjectInputStream ois = new ObjectInputStream(fis);
-            ranking = (ArrayList) ois.readObject();
+            ranking = (Ranking) ois.readObject();
             fis.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,23 +87,23 @@ public class RankingDBController {
         return ranking;
     }
     
-    private String getPath(ArrayList<String> ranking) {
-        return getPath(ranking.get(0));
+    private String getPath(Ranking ranking) {
+        return getPath(ranking.getBoardName());
     }
     
     private String getPath(String boardName) {
         return Directory+boardName+Extension;
     }
     
-    private boolean exists(ArrayList<String> ranking) {
-        return exists(ranking.get(0));
+    private boolean exists(Ranking ranking) {
+        return exists(ranking.getBoardName());
     }
     
     private boolean exists(String boardName) {
         return (new File(getPath(boardName)).isFile());
     }
     
-    public int writeRanking(ArrayList<String> ranking, String filepath){
+    public int writeRanking(Ranking ranking, String filepath){
         int result = -2;
         
         FileOutputStream fos;
