@@ -6,7 +6,6 @@
 package kenken;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -21,14 +20,13 @@ public class RankingController {
     public int createRanking(String boardName, Ranking.GameMode gameMode){
         RankingDBController rkDBC = new RankingDBController();
         Ranking newRanking = new Ranking(boardName, gameMode);
-        int result = rkDBC.createRanking(newRanking.rankingToString());
+        int result = rkDBC.createRanking(newRanking);
         return result;
     }
     
     public Ranking getRanking(String boardName) throws IOException{
         RankingDBController rkDBC = new RankingDBController();
-        ArrayList<String> arr = rkDBC.getRanking(boardName);
-        Ranking ranking = Ranking.stringToRanking(arr);
+        Ranking ranking = rkDBC.getRanking(boardName);
         return ranking;
     }
     
@@ -46,8 +44,7 @@ public class RankingController {
                 }
             }
         }
-        ArrayList<String> modRank = ranking.rankingToString();
-        int result = rkDBC.modifyRanking(modRank);
+        int result = rkDBC.modifyRanking(ranking);
         return result;
     }
     
