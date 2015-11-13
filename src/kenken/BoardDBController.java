@@ -36,7 +36,6 @@ public class BoardDBController {
             -1 = board existent
             -2 = error intern
     */
-    
     public int createBoard(Board newBoard){
         int result = 0;
         int resultInfo = 0;
@@ -65,6 +64,8 @@ public class BoardDBController {
             resultObj = writeBoardObj(newBoard, pathFisica);
             
             //comprobar errores
+            System.out.println("resultInfo: " + resultInfo);
+            System.out.println("resultObj: " + resultObj);      
             if (resultInfo == -2 || resultObj == -2){
                 result = -2;
             }
@@ -82,10 +83,10 @@ public class BoardDBController {
         -1 = board no existent
         -2 = error intern
     */
-    public int deleteBoard(int idBoard){
+    public int deleteBoard(String boardName){
         
-        int result = -2;
-        String path = getPath(String.valueOf(idBoard));
+        int result;
+        String path = getPath(boardName);
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
         
@@ -105,36 +106,40 @@ public class BoardDBController {
         }
         return result;
     }
-    /*
+    
     public Board loadBoard(String nameBoard) throws FileNotFoundException, IOException{
         
         FileInputStream fis;
         Board b = null;
-        String path = getPath(String.valueOf(nameBoard));
+        String path = getPath(nameBoard);
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
         
         try {
             fis = new FileInputStream(pathInfo);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<String> informacio = null;
-            informacio = (ArrayList) ois.readObject();
-            b.setDifficulty(informacio.get(1));
-            b.setSizeX(Integer.parseInt(informacio.get(2)));
-            b.setSizeY(Integer.parseInt(informacio.get(3)));
+            //ArrayList<String> informacio = null;
+            ArrayList<String> informacio = (ArrayList)ois.readObject();
+            String name = informacio.get(1);
+            String user = informacio.get(2);
+            String difficulty = informacio.get(3);
+            int x = Integer.parseInt(informacio.get(4));
+            int y = Integer.parseInt(informacio.get(5));
+            b = new Board(x,y);
+            b.setDifficulty(difficulty);
             fis.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return b;
     }
-        */                
+           
     private String getPath(Board board){
-        return getPath(String.valueOf(board.getId()));
+        return getPath(board.getBoardName());
     }
     
-    private String getPath(String boardId){
-        return Directory+boardId;
+    private String getPath(String boardName){
+        return Directory+boardName;
     }
 
     private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
@@ -169,8 +174,10 @@ public class BoardDBController {
             result = 0;
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("FileNotFoundException");
             result = -2;
         } catch (IOException ex) {
+            System.out.println("IOException");
             result = -2;
         }
                 
