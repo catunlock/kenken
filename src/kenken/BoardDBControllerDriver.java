@@ -23,11 +23,18 @@ public class BoardDBControllerDriver {
         board.setUsername("manolo");
         //System.out.println(test.createBoard(board));
         //System.out.println(test.deleteBoard("prueba"));
-        Board cargada = test.loadBoard("prueba4");
-        System.out.println(cargada.getBoardName());
-        System.out.println(cargada.getUsername());
-        System.out.println(cargada.getDifficulty());
-        
+        Board cargada = test.loadBoard("prueba");
+        if (cargada != null){
+            System.out.println("Board Name: " + cargada.getBoardName());
+            System.out.println("Usuari Board: " + cargada.getUsername());
+            System.out.println("Dificultat: " + cargada.getDifficulty());
+            System.out.println("Size X: " + cargada.getSizeX());
+            System.out.println("Size Y: " + cargada.getSizeY());
+        }
+        else{
+            System.out.println("No existeix aquesta Board");
+        }
+
         
         /*Scanner sc = new Scanner(System.in);
         
