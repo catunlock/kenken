@@ -115,21 +115,26 @@ public class BoardDBController {
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
         
-        try {
-            fis = new FileInputStream(pathInfo);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            //ArrayList<String> informacio = null;
-            ArrayList<String> informacio = (ArrayList)ois.readObject();
-            String name = informacio.get(1);
-            String user = informacio.get(2);
-            String difficulty = informacio.get(3);
-            int x = Integer.parseInt(informacio.get(4));
-            int y = Integer.parseInt(informacio.get(5));
-            b = new Board(x,y);
-            b.setDifficulty(difficulty);
-            fis.close();
-        } catch (ClassNotFoundException ex) {
-            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        if ( (new File(pathFisica).isFile()) && (new File(pathInfo).isFile())){
+            try {
+                fis = new FileInputStream(pathInfo);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                //ArrayList<String> informacio = null;
+                ArrayList<String> informacio = (ArrayList)ois.readObject();
+                //String name = informacio.get(1);
+                String user = informacio.get(1);
+                String difficulty = informacio.get(2);
+                //System.out.println(name);
+                int x = Integer.parseInt(informacio.get(3));
+                int y = Integer.parseInt(informacio.get(4));
+                b = new Board(x,y);
+                b.setDifficulty(difficulty);
+                b.setBoardName(nameBoard);
+                b.setUsername(user);
+                fis.close();
+            } catch (ClassNotFoundException ex) {
+                //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return b;
     }
