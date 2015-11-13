@@ -7,7 +7,7 @@ package kenken;
 
 /**
  *
- * @author pol
+ * @author pol+Gerard
  */
 public class Game {
     
@@ -16,11 +16,19 @@ public class Game {
     private long time;
     private Mode mode;
     private Board board;
+    private User user;
 
     public Game(Mode mode)
     {
         time = System.nanoTime();
         this.mode = mode;
+    }
+    
+    public int setBoard(String id){
+        BoardDBController bdbc = new BoardDBController();
+        ArrayList<String> taulerS = new ArrayList<String>();
+        Board tauler = new Board();
+        tauler.
     }
     
     public long getTime()
@@ -36,5 +44,10 @@ public class Game {
     public Board getBoard()
     {
         return board;
+    }
+    
+    public int saveGame(){
+        GameController gc = new GameController();
+        return gc.saveGame(this, user.getUsername());
     }
 }
