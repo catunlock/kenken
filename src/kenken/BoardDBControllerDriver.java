@@ -17,7 +17,10 @@ public class BoardDBControllerDriver {
     {
         BoardDBController test = new BoardDBController();
         
-        Board board = new Board(5,5,1);
+        Board board = new Board(5,5);
+        board.setBoardName("prueba");
+        board.setDifficulty("chungo");
+        board.setUsername("manolo");
         test.createBoard(board);
         
         
