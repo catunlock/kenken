@@ -28,7 +28,7 @@ public class BoardDBController {
     
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
-             sha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
+             s'ha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
         Return:
              0 = board creada correctament
             -1 = board existent
