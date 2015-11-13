@@ -14,31 +14,36 @@ import java.util.List;
  * @author xaloc
  */
 public class Board {
-    ArrayList<ArrayList<Cell>> board = new ArrayList<ArrayList<Cell>>();
+    Cell[][] board;
     
     public Board(int size) {
+
+        board = new Cell[size][size];
         for (int i = 0; i < size; ++i){
-            board.add(new ArrayList<Cell>(size));
             for (int j = 0; j < size; ++j) {
-                board.get(i).add(new Cell(i,j,true));
+                board[i][j] = new Cell(i,j,true);
             }
         }
     }
     
     public Cell getCell(int x, int y) {
-        return board.get(x).get(y);
+        return board[x][y];
     }
     
     public int size() {
-        return board.size();
+        return board.length;
+    }
+    
+    public void setCell(int x, int y, Cell c) {
+        board[x][y] = c;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int f = 0; f < board.size(); ++f) {
-            for (int c = 0; c < board.size(); ++c) {
-                sb.append(board.get(f).get(c).getSolutionValue());
+        for (int f = 0; f < board.length; ++f) {
+            for (int c = 0; c < board.length; ++c) {
+                sb.append(board[f][c].getSolutionValue());
             }
             sb.append('\n');
         }

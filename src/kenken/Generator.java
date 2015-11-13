@@ -17,41 +17,41 @@ public class Generator {
     
     public Board generate(int size) {
         board = new Board(size);
-        rand = new Random();
+        rand = new Random(System.nanoTime());
         
         for(int f = 0; f < board.size(); f++) {
             for (int c = 0; c < board.size(); c++) {
                 int v = ((f+c)%board.size()) + 1;
                 Cell ce = board.getCell(f, c);
-                ce.setValue(v);
+                ce.setSolutionValue(v);
             }
         }
         
         shuffleRows();
         shuffleColumns();
-        makeRegions();
-        
-        System.out.println(board);
+        //makeRegions();
         
         return board;
     }
     
     
     private void swapRow(int i, int j) {
-        int tmp;
         for (int k = 0; k < board.size(); k++) {
-            tmp = board.getCell(i,k).getSolutionValue();
-            board.getCell(i,k).setSolutionValue(board.getCell(j,k).getSolutionValue());
-            board.getCell(j,k).setSolutionValue(tmp);
+            Cell c1 = board.getCell(i,k);
+            Cell c2 = board.getCell(j,k);
+            
+            board.setCell(j, k, c1);
+            board.setCell(i, k, c2);
         }
     }
  
     private void swapColumn(int i, int j) {
-        int tmp;
         for (int k = 0; k < board.size(); k++) {
-            tmp = board.getCell(k,i).getSolutionValue();
-            board.getCell(k,i).setSolutionValue(board.getCell(k,j).getSolutionValue());
-            board.getCell(k,j).setSolutionValue(tmp);
+            Cell c1 = board.getCell(k,i);
+            Cell c2 = board.getCell(k,j);
+            
+            board.setCell(k, j, c1);
+            board.setCell(k, i, c2);
         }
     }
  
@@ -68,38 +68,8 @@ public class Generator {
         swapColumn(i, s);
       }
     }
+/*    
     
-     Color::Code colorRegion(int region) {
-    switch (region) {
-    case 1:
-      return Color::FG_LIGHT_GREEN;
-    case 2:
-      return Color::FG_LIGHT_GRAY;
-    case 3:
-      return Color::FG_LIGHT_CYAN;
-    case 4:
-      return Color::FG_LIGHT_RED;
-    case 5:
-      return Color::FG_LIGHT_YELLOW;
-    case 6:
-      return Color::FG_LIGHT_BLUE;
-    case 7:
-      return Color::FG_LIGHT_MAGENTA;
-    }
-    return Color::FG_DEFAULT;
-  }
- 
-    void print() {
-      Color::Modifier def(Color::FG_DEFAULT);
-
-      for (auto f : board) {
-        for (auto c : f) {
-          Color::Modifier color(colorRegion(c.region));
-          cout << color << c.c << " " << def;
-        }
-        cout << endl;
-      }
-    }
 
     struct Pos {
       int f;
@@ -212,10 +182,13 @@ public class Generator {
         }
         region++;
       }
-    }
+    }*/
     
     public static void main(String[] args) {
         Generator g = new Generator();
-        g.generate(4);
+        Board b = g.generate(4);
+        System.out.print(kenken.color.Color.FG_GREEN);
+        System.out.println(b);
+        System.out.print(kenken.color.Color.FG_DEFAULT);
     }
 }
