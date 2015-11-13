@@ -17,18 +17,18 @@ public class RecordDriver {
         int opt;
         Record record = new Record("Pepe", 40);
         System.out.println("Per defecte hem creat un record amb el nom de jugador 'Pepe' i amb un temps de 40 segons");
+        System.out.println("Escull una de les seguents opcions:");
+        System.out.println("1. Crea un Record nou.");
+        System.out.println("2. Obtenir el nom del jugador del Record.");
+        System.out.println("3. Obtenir el Temps obtingut per al Record.");
+        System.out.println("-1. Sortir.");
         while((opt = scan.nextInt()) != -1){
-            System.out.println("Escull una de les seguents opcions:");
-            System.out.println("1. Crea un Record nou.");
-            System.out.println("2. Obtenir el nom del jugador del Record.");
-            System.out.println("3. Obtenir el Temps obtingut per al Record.");
-            System.out.println("-1. Sortir.");
             switch(opt){
                 case 1:
                     System.out.print("Introdueix el nom del Jugador: ");
-                    String nomJugador = scan.nextLine();
+                    String nomJugador = scan.next();
                     System.out.print("Introdueix el Temps del Jugador: ");
-                    String temps = scan.nextLine();
+                    String temps = scan.next();
                     record = new Record(nomJugador, Long.parseLong(temps));
                     break;
                 case 2:
@@ -41,6 +41,13 @@ public class RecordDriver {
                     System.out.println("Si us plau, introdueix un número vàlid.");
                     break;
             }
+            System.out.println("--------------------------");
+            System.out.println("Escull una de les seguents opcions:");
+            System.out.println("1. Crea un Record nou.");
+            System.out.println("2. Obtenir el nom del jugador del Record.");
+            System.out.println("3. Obtenir el Temps obtingut per al Record.");
+            System.out.println("-1. Sortir.");
+            System.out.println("--------------------------");
         }
         
     }
