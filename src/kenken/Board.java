@@ -19,16 +19,22 @@ public class Board {
     private String difficulty;
     private int sizeX;
     private int sizeY;
-    private ArrayList<ArrayList<Cell>> cells;
-    private ArrayList<Region> regions;
     private String boardName;
     private String username;
     private Date creationDate;
+    private ArrayList<ArrayList<Cell>> cells;
+    private ArrayList<Region> regions;
+    
 
-    public Board(int sizeX, int sizeY, int id) {
+    public Board(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.id = id;
+        this.id = 0;
+    }
+
+    public Board()
+    {
+        
     }
 
     public int getId() {
@@ -75,8 +81,8 @@ public class Board {
         this.id = id;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty.toString();
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void setSizeX(int sizeX) {
@@ -105,6 +111,15 @@ public class Board {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    /* FUNCION NO OFICIAL DE LA ESPECIFICACION COMPARTIDA*/
+    public int size() {
+        return cells.size();
+    }
+    
+    /* FUNCION NO OFICIAL DE LA ESPECIFICACION COMPARTIDA*/
+    public void setCell() {
     }
 
 }

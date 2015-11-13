@@ -5,25 +5,29 @@
  */
 package kenken;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
+import java.util.Stack;
+import kenken.color.BoardColorator;
 
 /**
  *
  * @author 1182347
  */
 public class Generator {
-    Board board;
+    BoardKenken board;
     Random rand;
     
-    public Board generate(int size) {
-        board = new Board(size);
-        rand = new Random();
+    public BoardKenken generate(int size) {
+        board = new BoardKenken(size);
+        rand = new Random(System.nanoTime());
         
         for(int f = 0; f < board.size(); f++) {
             for (int c = 0; c < board.size(); c++) {
                 int v = ((f+c)%board.size()) + 1;
                 Cell ce = board.getCell(f, c);
-                ce.setValue(v);
+                ce.setSolutionValue(v);
             }
         }
         
@@ -31,27 +35,27 @@ public class Generator {
         shuffleColumns();
         makeRegions();
         
-        System.out.println(board);
-        
         return board;
     }
     
     
     private void swapRow(int i, int j) {
-        int tmp;
         for (int k = 0; k < board.size(); k++) {
-            tmp = board.getCell(i,k).getSolutionValue();
-            board.getCell(i,k).setSolutionValue(board.getCell(j,k).getSolutionValue());
-            board.getCell(j,k).setSolutionValue(tmp);
+            Cell c1 = board.getCell(i,k);
+            Cell c2 = board.getCell(j,k);
+            
+            board.setCell(j, k, c1);
+            board.setCell(i, k, c2);
         }
     }
  
     private void swapColumn(int i, int j) {
-        int tmp;
         for (int k = 0; k < board.size(); k++) {
-            tmp = board.getCell(k,i).getSolutionValue();
-            board.getCell(k,i).setSolutionValue(board.getCell(k,j).getSolutionValue());
-            board.getCell(k,j).setSolutionValue(tmp);
+            Cell c1 = board.getCell(k,i);
+            Cell c2 = board.getCell(k,j);
+            
+            board.setCell(k, j, c1);
+            board.setCell(k, i, c2);
         }
     }
  
@@ -69,146 +73,126 @@ public class Generator {
       }
     }
     
-     Color::Code colorRegion(int region) {
-    switch (region) {
-    case 1:
-      return Color::FG_LIGHT_GREEN;
-    case 2:
-      return Color::FG_LIGHT_GRAY;
-    case 3:
-      return Color::FG_LIGHT_CYAN;
-    case 4:
-      return Color::FG_LIGHT_RED;
-    case 5:
-      return Color::FG_LIGHT_YELLOW;
-    case 6:
-      return Color::FG_LIGHT_BLUE;
-    case 7:
-      return Color::FG_LIGHT_MAGENTA;
-    }
-    return Color::FG_DEFAULT;
-  }
- 
-    void print() {
-      Color::Modifier def(Color::FG_DEFAULT);
-
-      for (auto f : board) {
-        for (auto c : f) {
-          Color::Modifier color(colorRegion(c.region));
-          cout << color << c.c << " " << def;
+    private class Pos {
+        public int f = 0;
+        public int c = 0;
+        public Pos() {}
+        public Pos(int f, int c) {
+            this.f = f;
+            this.c = c;
         }
-        cout << endl;
-      }
+
+        @Override
+        public String toString() {
+            return "Pos{" + "f=" + f + ", c=" + c + '}';
+        }
+        //inline bool operator==(const Pos &r) { return f == r.f and c == r.c; }
     }
-
-    struct Pos {
-      int f;
-      int c;
-      Pos() : f(0), c(0) {}
-      Pos(int f, int c) : f(f), c(c) {}
-      void print() { cout << "{" << f << "," << c << "}"; };
-      inline bool operator==(const Pos &r) { return f == r.f and c == r.c; }
-    };
-
-    // Probabilidades de
+ 
     int randRegionSize() {
-      int r = rand() % 100;
+      int r = rand.nextInt(100);
 
       if (r < 20) {
         return 1;
       }
-      if (r >= 20 and r < 60) {
+      if (r >= 20 && r < 60) {
         return 2;
       }
-      if (r >= 60 and r < 90) {
+      if (r >= 60 && r < 90) {
         return 3;
       }
       if (r >= 90) {
         return 4;
       }
-
-      throw runtime_error("Hay algun numero que falla.");
       return -2;
     }
-
-    void shuffleVectorPos(vector<Pos> &v) {
-      for (size_t i = v.size() - 1; i > 0; i--) {
-        int s = rand() % (i + 1);
-        Pos tmp = v[i];
-        v[i] = v[s];
-        v[s] = tmp;
-      }
-    }
-
-    void genAllPositions(list<Pos> &s) {
-
-      vector<Pos> v(board.size() * board.size());
-
-      for (int f = 0; f < board.size(); f++) {
-        for (int c = 0; c < board[0].size(); c++) {
-          v[(f * board.size()) + c] = Pos(f, c);
+    
+    void shuffleVectorPos(ArrayList<Pos> v) {
+        for (int i = v.size() - 1; i > 0; i--) {
+            int s = rand.nextInt(i + 1);
+            Pos tmp = v.get(i);
+            v.set(i, v.get(s));
+            v.set(s, tmp);
         }
-      }
+    }
+    
+    LinkedList<Pos> genAllPositions() {
 
-      shuffleVectorPos(v);
+        LinkedList<Pos> s = new LinkedList<Pos>();
+        ArrayList<Pos> v = new ArrayList(board.size() * board.size());
 
-      for (int i = 0; i < v.size(); ++i) {
-        s.push_back(v[i]);
-        v[i].print();
-      }
-      cout << endl << endl;
+        for (int f = 0; f < board.size(); f++) {
+            for (int c = 0; c < board.size(); c++) {
+                v.set((f * board.size()) + c, new Pos(f, c));
+            }
+        }
+
+        shuffleVectorPos(v);
+
+        for (int i = 0; i < v.size(); ++i) {
+            s.add(v.get(i));
+
+            System.out.println(v.get(i));
+        }
+        System.out.println();
+        System.out.println();
+        
+        return s;
     }
 
     void makeRegions() {
-      vector<vector<bool>> empilat(board.size(),
-                                   vector<bool>(board.size(), false));
-
-      list<Pos> allPositions;
-      genAllPositions(allPositions);
+      boolean[][] empilat = new boolean[board.size()][board.size()];
+      
+      for (int i = 0; i < board.size(); i++){
+          for (int j = 0; j < board.size(); j++){
+              empilat[i][j] = false;
+          }
+      }
+      
+      LinkedList<Pos> allPositions = genAllPositions();
 
       int ff[] = {0, 1, 0, -1};
       int cc[] = {1, 0, -1, 0};
 
-      stack<Pos> s;
-      s.push(allPositions.front());
-      allPositions.pop_front();
-
+      Stack<Pos> s = new Stack<Pos>();
+      
+      s.push(allPositions.removeFirst());
+      
       int region = 1;
 
-      while (not allPositions.empty()) {
+      while (! allPositions.isEmpty()) {
         int maxRegionSize = randRegionSize();
-        cout << "Region de: " << maxRegionSize << endl;
+        System.out.println("Region de: " + maxRegionSize);
+
         int regionSize = 0;
 
-        while (not s.empty() and regionSize < maxRegionSize) {
-          Pos p = s.top();
-          s.pop();
+        while (! s.isEmpty() && regionSize < maxRegionSize) {
+            Pos p = s.firstElement();
+            s.pop();
 
-          cout << "{" << p.f << "," << p.c << "}";
-          board[p.f][p.c].region = region;
-          regionSize++;
+            System.out.println(p);
 
-          list<Pos>::iterator it =
-              find(allPositions.begin(), allPositions.end(), p);
-          if (it != allPositions.end())
-            allPositions.erase(it);
-          else {
-            std::cout << "\nElement not found in myvector: ";
-            p.print();
-            cout << endl;
-          }
+            Cell cell = board.getCell(p.f, p.c);
+            cell.setRegion(region);
+            board.setCell(p.f, p.c, cell);
 
-          // Dos intentos de ir en direcciones diferentes.
-          for (int i = 0; i < 4; ++i) {
-            int dir = rand() % 4;
-            Pos pn(p.f + ff[dir], p.c + cc[dir]);
+            regionSize++;
 
-            if (pn.f >= 0 and pn.f < board.size() and pn.c >= 0 and
-                pn.c < board[0].size() and not empilat[pn.f][pn.c]) {
-              s.push(pn);
-              empilat[pn.f][pn.c] = true;
+            if (! allPositions.remove(p)){
+                System.out.println("\nElement not found in myvector: " + p);
             }
-          }
+
+            // "i" intentos de ir en direcciones diferentes.
+            for (int i = 0; i < 4; ++i) {
+                int dir = rand.nextInt(4);
+                Pos pn = new Pos(p.f + ff[dir], p.c + cc[dir]);
+
+                if (pn.f >= 0 && pn.f < board.size() && pn.c >= 0 &&
+                    pn.c < board.size() && ! empilat[pn.f][pn.c]) {
+                    s.push(pn);
+                    empilat[pn.f][pn.c] = true;
+                }
+            }
         }
         region++;
       }
@@ -216,6 +200,7 @@ public class Generator {
     
     public static void main(String[] args) {
         Generator g = new Generator();
-        g.generate(4);
+        BoardKenken b = g.generate(4);
+        BoardColorator.print(b);
     }
 }

@@ -21,6 +21,19 @@ public class Cell {
     final private boolean original;
     private Set<Integer> setPossibleValues;
     
+    /* ATRIBUTO NO OFICIAL DE LA ESPECIFICACION*/
+    private int region = 0;
+
+    /*METODO NO OFICIAL DE LA ESPECIFICACION*/
+    public int getRegion() {
+        return region;
+    }
+
+    /*METODO NO OFICIAL DE LA REGION*/
+    public void setRegion(int region) {
+        this.region = region;
+    }
+    
 
     /*  Pre: x i y han de respectar la mesura del Board i solution ha de ser un valor entre 1 i n
 ** Post: retornarà una instancia nova de Cell amb els parametres rebuts, notes
