@@ -96,7 +96,7 @@ public class User implements Serializable{
     public void deleteBoard(int pos){
         createdBoards.remove(pos);
     }
-    
+    /*
     public ArrayList<String> userToString(){
         ArrayList<String> arr = new ArrayList();
         arr.add(this.username);
@@ -122,4 +122,5 @@ public class User implements Serializable{
         }
         return user;
     }
+    */
 }
