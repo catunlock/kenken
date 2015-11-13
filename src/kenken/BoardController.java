@@ -11,7 +11,11 @@ package kenken;
  */
 public class BoardController {
     
-    public Board
+    public BoardController(){
+        
+    }
+    
+    
     
     
 }
