@@ -42,7 +42,8 @@ public class BoardDBController {
         int resultObj = 0;
         String ubicacio = getPath(newBoard);
                 
-                /* tamaño tablero, persona que lo ha creado, */
+        /* info del tauler:
+            Nom, User, */
         
         String pathFisica = ubicacio+ExtensionFisica;
         String pathInfo = ubicacio+ExtensionInfo;
@@ -86,6 +87,7 @@ public class BoardDBController {
     public int deleteBoard(String boardName){
         
         int result;
+        //trobar el path
         String path = getPath(boardName);
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
@@ -96,6 +98,7 @@ public class BoardDBController {
         }
         else{
             try{
+                //eliminem els arxius
                 Files.delete(FileSystems.getDefault().getPath(pathFisica));
                 Files.delete(FileSystems.getDefault().getPath(pathInfo));
                 result = 0;
@@ -111,20 +114,19 @@ public class BoardDBController {
         
         FileInputStream fis;
         Board b = null;
+        //generar el posible path
         String path = getPath(nameBoard);
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
         
+        //nomes intentarem carregar si existeix el arxiu
         if ( (new File(pathFisica).isFile()) && (new File(pathInfo).isFile())){
             try {
                 fis = new FileInputStream(pathInfo);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                //ArrayList<String> informacio = null;
                 ArrayList<String> informacio = (ArrayList)ois.readObject();
-                //String name = informacio.get(1);
                 String user = informacio.get(1);
                 String difficulty = informacio.get(2);
-                //System.out.println(name);
                 int x = Integer.parseInt(informacio.get(3));
                 int y = Integer.parseInt(informacio.get(4));
                 b = new Board(x,y);
