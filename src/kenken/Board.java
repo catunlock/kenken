@@ -1,58 +1,119 @@
+package kenken;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  *
- * @author xaloc
+ * @author JosÃ© Luis ExpÃ³sito Robles
  */
 public class Board {
-    Cell[][] board;
-    
-    public Board(int size) {
 
-        board = new Cell[size][size];
-        for (int i = 0; i < size; ++i){
-            for (int j = 0; j < size; ++j) {
-                board[i][j] = new Cell(i,j,true);
-            }
-        }
+    private int id;
+    private String difficulty;
+    private int sizeX;
+    private int sizeY;
+    private ArrayList<ArrayList<Cell>> cells;
+    private ArrayList<Region> regions;
+    private String boardName;
+    private String username;
+    private Date creationDate;
+
+    public Board(int sizeX, int sizeY, int id) {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.id = id;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDifficulty() {
+        return new String(difficulty);
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public ArrayList<ArrayList<Cell>> getCells() {
+        return new ArrayList<ArrayList<Cell>>(cells);
+    }
+
+    public ArrayList<Region> getRegions() {
+        return new ArrayList<Region>(regions);
+    }
+
+    public String getBoardName() {
+        return new String(boardName);
+    }
+
+    public String getUsername() {
+        return new String(username);
+    }
+
+    public Date getCreationDate() {
+        return (Date) creationDate.clone();
+    }
+
     public Cell getCell(int x, int y) {
-        return board[x][y];
-    }
-    
-    public int size() {
-        return board.length;
-    }
-    
-    public void setCell(int x, int y, Cell c) {
-        board[x][y] = c;
+        return cells.get(x).get(y);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int f = 0; f < board.length; ++f) {
-            for (int c = 0; c < board.length; ++c) {
-                sb.append(board[f][c].getSolutionValue());
-            }
-            sb.append('\n');
-        }
-        return sb.toString();
+    public void setId(int id) {
+        this.id = id;
+    }
+/*
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty.toString();
+    }
+*/
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
+    }
+
+    public void setCells(ArrayList<ArrayList<Cell>> cells) {
+        this.cells = cells;
+    }
+
+    public void setRegions(ArrayList<Region> regions) {
+        this.regions = regions;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /* FUNCION NO OFICIAL DE LA ESPECIFICACION COMPARTIDA*/
+    public int size() {
+        return cells.size();
     }
     
-    public static Board toBoard(String b){
-        return null;
+    /* FUNCION NO OFICIAL DE LA ESPECIFICACION COMPARTIDA*/
+    public void setCell() {
     }
-    
-    
+
 }
