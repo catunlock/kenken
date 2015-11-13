@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +28,7 @@ public class BoardDBController {
     
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
-             s’ha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
+             sha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
         Return:
              0 = board creada correctament
             -1 = board existent
@@ -66,6 +68,39 @@ public class BoardDBController {
             }
         }
 
+        return result;
+    }
+    
+    /*  Pre: boardName != NULL
+    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
+             sha eliminal de la base de dades el board amb id idBoard, o bé 
+             si sha produït alguna excepció.
+    Return:
+         0 = board eliminat correctament
+        -1 = board no existent
+        -2 = error intern
+    */
+    public int deleteBoard(int idBoard){
+        
+        int result = -2;
+        String path = getPath(String.valueOf(idBoard));
+        String pathFisica = path+ExtensionFisica;
+        String pathInfo = path+ExtensionInfo;
+        
+        //si no existeix el Board
+        if ( !(new File(pathFisica).isFile()) || !(new File(pathInfo).isFile())){
+            result = -1;
+        }
+        else{
+            try{
+                Files.delete(FileSystems.getDefault().getPath(pathFisica));
+                Files.delete(FileSystems.getDefault().getPath(pathInfo));
+                result = 0;
+            }
+            catch (IOException ex){
+                result = -3;
+            }
+        }
         return result;
     }
                         
