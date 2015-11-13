@@ -5,8 +5,7 @@
  */
 package kenken;
 
-import java.time.Duration;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -14,17 +13,35 @@ import java.util.ArrayList;
  */
 public class RecordDriver {
     public static void main (String[] args){
-        Record testRecord = new Record("Marc", 60);
-        ArrayList<String> test = testRecord.recordToString();
-        int size = test.size();
-        for (int i = 0; i < size; i++){
-            System.out.println(test.get(i));
+        Scanner scan = new Scanner(System.in);
+        int opt;
+        Record record = new Record("Pepe", 40);
+        System.out.println("Per defecte hem creat un record amb el nom de jugador 'Pepe' i amb un temps de 40 segons");
+        while((opt = scan.nextInt()) != -1){
+            System.out.println("Escull una de les seguents opcions:");
+            System.out.println("1. Crea un Record nou.");
+            System.out.println("2. Obtenir el nom del jugador del Record.");
+            System.out.println("3. Obtenir el Temps obtingut per al Record.");
+            System.out.println("-1. Sortir.");
+            switch(opt){
+                case 1:
+                    System.out.print("Introdueix el nom del Jugador: ");
+                    String nomJugador = scan.nextLine();
+                    System.out.print("Introdueix el Temps del Jugador: ");
+                    String temps = scan.nextLine();
+                    record = new Record(nomJugador, Long.parseLong(temps));
+                    break;
+                case 2:
+                    System.out.println(record.getNamePlayer());
+                    break;
+                case 3:
+                    System.out.println(record.getTime().getSeconds());
+                    break;
+                default:
+                    System.out.println("Si us plau, introdueix un número vàlid.");
+                    break;
+            }
         }
-        System.out.println("Actualment llegit del vector de Strings.");
-        testRecord = Record.stringToRecord(test);
-        System.out.println(testRecord.getNamePlayer());
-        System.out.println(testRecord.getTime().getSeconds());
-        System.out.println("Actualment llegit de l'objecte Record.");
         
     }
 }
