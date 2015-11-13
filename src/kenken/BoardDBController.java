@@ -9,7 +9,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,14 +50,14 @@ public class BoardDBController {
         else{
             /* info de tablero contiene: nombre tablero, persona que lo ha creado, dificultad, tamX, tamY */
             ArrayList<String> infoBoard = new ArrayList<String>();
-            infoBoard.add(newBoard.getBoardName());
+            infoBoard.add(String.valueOf(newBoard.getId()));
             infoBoard.add(newBoard.getUsername());
             infoBoard.add(newBoard.getDifficulty());
             infoBoard.add(String.valueOf(newBoard.getSizeX()));
             infoBoard.add(String.valueOf(newBoard.getSizeY()));
             
             //crear el fichero de info y fisico
-            resultInfo = writeBoardInfo(newBoard.getBoardName(), infoBoard, pathInfo);
+            resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);
             
             //comprobar errores
@@ -67,33 +70,51 @@ public class BoardDBController {
     }
                         
     private String getPath(Board board){
-        return getPath(board.getBoardName());
+        return getPath(String.valueOf(board.getId()));
     }
     
-    private String getPath(String boardName){
-        return Directory+boardName;
+    private String getPath(String boardId){
+        return Directory+boardId;
     }
 
-    private int writeBoardInfo(String boardName, ArrayList<String> infoBoard, String infoPath) {
-        int result = -2;
+    private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
+        int result;
         
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(infoPath);
-            
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(infoBoard);
+            fos.close();            
             result = 0;
         } catch (FileNotFoundException ex) {
-            
+            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            result = -2;
         } catch (IOException ex) {
-            
+            result = -2;
         }
-        
-        
+                
         return result;
     }
 
-    private int writeBoardObj(Board newBoard, String fisica) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private int writeBoardObj(Board newBoard, String pathFisica) {
+        int result;
+        
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(pathFisica);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(newBoard);
+            fos.close();            
+            result = 0;
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            result = -2;
+        } catch (IOException ex) {
+            result = -2;
+        }
+                
+        return result;
     }
     
 }
