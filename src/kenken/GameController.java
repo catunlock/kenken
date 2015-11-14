@@ -14,22 +14,16 @@ import java.util.ArrayList;
  */
 public class GameController {
     
-    public Board newGame(String id){
+    public Board newGame(String boardName){
+        Board b = null;
         BoardDBController bdbc = new BoardDBController();
-        b = bdbc.loadBoard(id);
+        b = bdbc.loadBoard(boardName);
         return b;
     }
     
     public int saveGame(Game game, String username){
-        ArrayList<String> joc = new ArrayList<String>();
-        long time = game.getTime();
-        String temps = String.valueOf(time);
-        joc.add(temps);
-        joc.add(game.getMode().toString());
-        joc.add(game.getBoard().size().toString());
         GameDBController gdbc = new GameDBController();
-        int error = gdbc.saveGame(game, username);
-        return error;
+        return gdbc.saveGame(game, username);
     }
     
     public Game loadGame(String username, String id) throws IOException {

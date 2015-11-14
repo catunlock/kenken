@@ -25,8 +25,8 @@ public class Game {
     {
         this.time = Duration.ZERO;
         this.mode = mode;
+        this.user = null;
         this.board = null;
-        this.user = null;      
     }
     
     public void generateBoard(){
@@ -34,14 +34,15 @@ public class Game {
     }
     
     public int setBoard(String boardName){
-        BoardDBController bDBc = new BoardDBController();
-        //ArrayList<String> taulerS = new ArrayList<String>();
-        this.board = bdbc.loadBoard(boardName);
+        GameController gc = new GameController();
+        this.board = gc.newGame(boardName);
+        if (this.board == null) return -1;
+        else return 0;
     }
     
     public long getTime()
     {
-        return System.nanoTime() - time;
+        return System.nanoTime() - time.toNanos();
     }
     
     public Mode getMode()

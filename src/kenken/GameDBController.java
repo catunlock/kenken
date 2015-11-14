@@ -30,8 +30,8 @@ public class GameDBController {
     public int saveGame(Game game, String username){
         int result;
         Board b = game.getBoard();
-        String id = b.getId();
-        String filepath = getPath(id, username);
+        String boardName = b.getBoardName();
+        String filepath = getPath(boardName, username);
         
         if (new File(filepath).isFile()){
             result = -1;
