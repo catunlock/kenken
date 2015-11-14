@@ -32,20 +32,7 @@ public class Game {
         this.user = null;
         this.board = null;
     }
-    
-    public void generateBoard(int size, String userName, String boardName, String dificultat){
-        
-        /* Generar una board de tamaño X, con userName, boardName, y dificultat */
-        
-        //comprovar antes de nada si podemos crear dicho board
-        BoardController bc = new BoardController();
-        bc.existsBoard(boardName);
-        
-        //si no existe el boardName, proceder a crearla
-        board.setBoardName(boardName);
-        
-    }
-    
+      
     /*
     Pre: cert
     Post: s'ha inicialitzat al game una board de nom "boardName" i retorna
