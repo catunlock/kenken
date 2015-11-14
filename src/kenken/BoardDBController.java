@@ -151,7 +151,8 @@ public class BoardDBController {
     private String getPath(String boardName){
         return Directory+boardName;
     }
-
+    
+    /* Escriu la informacio de board a l'arxiu <nombard>.inf al path demanat */
     private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
         int result;
         
@@ -172,7 +173,8 @@ public class BoardDBController {
                 
         return result;
     }
-
+    
+    /* Escriu el objecte board al path demanat */
     private int writeBoardObj(Board newBoard, String pathFisica) {
         int result;
         
