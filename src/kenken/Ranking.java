@@ -32,6 +32,10 @@ public class Ranking {
     public ArrayList<Record> getRecordList() {
         return recordList;
     }
+    
+    public int getRecordListSize(){
+        return this.recordList.size();
+    }
     /*
     Pre: pos ha de ser una posició existent del Ranking.
     */
@@ -55,17 +59,25 @@ public class Ranking {
     }
     
     public void addRecord(Record record){
-        for(int i = 0; i < this.recordList.size(); i++){
-            if (this.getRecordByPos(i).getTime().getSeconds() < record.getTime().getSeconds()){
-                if (this.getRecordList().size() == 10){
-                    this.setRecordByPos(i, record);
-                    break;
-                }
-                else if (this.getRecordList().size() < 10){
-                    this.addRecordAtPos(i, record);
-                    break;
+        if (this.recordList.size() == 0) this.recordList.add(record);
+        else{
+            int i;
+            boolean added = false;
+            for(i = 0; i < this.recordList.size(); i++){
+                if (this.getRecordByPos(i).getTime().getSeconds() > record.getTime().getSeconds()){
+                    if (this.getRecordList().size() == 10){
+                        this.setRecordByPos(i, record);
+                        added = true;
+                        break;
+                    }
+                    else if (this.getRecordList().size() < 10){
+                        this.addRecordAtPos(i, record);
+                        added = true;
+                        break;
+                    }
                 }
             }
+            if (!added && this.recordList.size() != 10) this.recordList.add(record);
         }
     }
     

@@ -27,12 +27,18 @@ public class GameDBController {
     private static final String Directory = "Games/";
     private static final String Extension = ".obj";
     
-    public int saveGame(Game game, String username){
+    /*
+    Pre: cert
+    Post: s'ha guardat a la DB un game al que s'estava jugant una board amb nom
+    boardName i la qual l'estava jugant el jugador username i retorna
+    0 si s'ha guardat amb èxit
+    -1 si ja existeix
+    -2 si hi ha errors interns
+    */
+    public int saveGame(Game game, String boardName, String username){
         int result;
-        Board b = game.getBoard();
-        String id = b.getId();
-        String filepath = getPath(id, username);
-        
+        String filepath = getPath(boardName, username);
+        System.out.println(filepath);
         if (new File(filepath).isFile()){
             result = -1;
         }
@@ -43,26 +49,45 @@ public class GameDBController {
         return result;
     }
     
-    public Game loadGame(String username, String boardid) throws FileNotFoundException, IOException{
+    /*
+    Pre: cert
+    Post: es retorna el game el qual estava jugant l'user username i la taula
+    boardName que s'estava jugant
+    */
+    public Game loadGame(String username, String boardName){
         
         FileInputStream fis;
         Game game = null;
         
         try {
-            fis = new FileInputStream(getPath(boardid, username));
+            fis = new FileInputStream(getPath(boardName, username));
             ObjectInputStream ois = new ObjectInputStream(fis);
             game = (Game) ois.readObject();
             fis.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return game;
     }
     
+    /*
+    Pre: cert
+    Post: obté el path del fitxer que es vol guardar o carregar
+    */
     private String getPath(String id, String username) {
         return Directory+id+username+Extension;
     }
     
+    /*
+    Pre: cert
+    Post: es guarda a la DB el game i retorna:
+    0 si s'ha fet amb èxit
+    -2 si hi ha errors interns
+    */
     private int writeGame(Game game, String filepath) {
         int result;
         

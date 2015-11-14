@@ -20,8 +20,11 @@ public class RankingDriver {
         System.out.println("Escull una de les seguents opcions:");
         System.out.println("1. Crea un Ranking nou.");
         System.out.println("2. Obtenir el Record segons una posició existent donada[0..9]");
-        System.out.println("3. Afegeix un Record al Ranking.");
-        System.out.println("4. Obtenir el mode del joc del Ranking.");
+        System.out.println("3. Obtenir tot el Ranking.");
+        System.out.println("4. Afegeix un Record al Ranking.");
+        System.out.println("5. Obtenir el mode del joc del Ranking.");
+        System.out.println("6. Obtenir el nom del Tauler associat al Ranking.");
+        System.out.println("7. Obtenir quants records té el Ranking.");
         System.out.println("-1. Sortir.");
         while((opt = scan.nextInt()) != -1){
             switch(opt){
@@ -37,20 +40,37 @@ public class RankingDriver {
                     System.out.println(ranking.getRecordByPos(pos).getNamePlayer());
                     break;
                 case 3:
-                    Record record = new Record("Pepe", 60);
-                    ranking.addRecord(record);
+                    int posicio;
+                    for(int i = 0; i < ranking.getRecordListSize(); i++){
+                        posicio = i + 1;
+                        System.out.println(posicio + ". Jugador: " + ranking.getRecordByPos(i).getNamePlayer() + " Temps tardat: " + ranking.getRecordByPos(i).getTime().getSeconds() );
+                    }
                     break;
                 case 4:
+                    Record record = new Record(scan.next(), scan.nextLong());
+                    ranking.addRecord(record);
+                    break;
+                case 5:
                     System.out.println(ranking.getGameMode());
+                    break;
+                case 6:
+                    System.out.println(ranking.getBoardName());
+                    break;
+                case 7:
+                    System.out.println(ranking.getRecordListSize());
+                    break;
                 default:
                     System.out.println("Si us plau, introdueix un número vàlid.");
                     break;
             }
             System.out.println("--------------------------");
-            System.out.println("Escull una de les seguents opcions:");
-            System.out.println("1. Crea un Record nou.");
-            System.out.println("2. Obtenir el nom del jugador del Record.");
-            System.out.println("3. Obtenir el Temps obtingut per al Record.");
+            System.out.println("1. Crea un Ranking nou.");
+            System.out.println("2. Obtenir el Record segons una posició existent donada[0..9]");
+            System.out.println("3. Obtenir tot el Ranking.");
+            System.out.println("4. Afegeix un Record al Ranking.");
+            System.out.println("5. Obtenir el mode del joc del Ranking.");
+            System.out.println("6. Obtenir el nom del Tauler associat al Ranking.");
+            System.out.println("7. Obtenir quants records té el Ranking.");
             System.out.println("-1. Sortir.");
             System.out.println("--------------------------");
         }

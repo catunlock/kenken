@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author marc.ferre.monne
+ * @author Marc Ferré Monné
  */
 public class User implements Serializable{
     
@@ -28,71 +28,139 @@ public class User implements Serializable{
         this.password = password;
         totalTimePlayed = Duration.ZERO;
     }
-
+    
+    /*
+    Pre: Cert
+    Post: Retorna el username de l'usuari.
+    */
     public String getUsername() {
         return username;
     }
-
+    
+    /*
+    Pre: username != null
+    Post: El username de l'usuari es modificat pel parametre username.
+    */
     public void setUsername(String username) {
         this.username = username;
     }
-
+    
+    /*
+    Pre: Cert
+    Post: Ens retorna el password de l'usuari.
+    */
     public String getPassword() {
         return password;
     }
-
+    
+    /*
+    Pre: password != null
+    Post: Ens modifica el password de l'usuari actual amb el parametre password.
+    */
     public void setPassword(String password) {
         this.password = password;
     }
     
+    /*
+    Pre: Cert
+    Post: Ens retorna el nombre de jocs solucionats.
+    */
     public int getSolvedGames(){
         return solvedGames;
     }
     
+    /*
+    Pre: Cert
+    Post: Ens retorna la quantitat de jocs comencats.
+    */
     public int getStartedGames(){
         return startedGames;
     }
     
+    /*
+    Pre: Cert.
+    Post: Ens retorna l'objecte Duration totalTimePlayed que emmagatzema el temps jugat.
+    */
     public Duration getTotalTimePlayed(){
         return totalTimePlayed;
     }
     
+    /*
+    Pre: Cert
+    Post: Ens retorna la quantitat de taulers creat per l'usuari.
+    */
     public int getTotalCreatedBoards(){
         return totalCreatedBoards;
     }
     
+    /*
+    Pre: Cert
+    Post: Ens retorna la ArrayList<Board> que conte els Boards creats per l'usuari.
+    */
     public ArrayList<Board> getCreatedBoards(){
         return createdBoards;
     }
     
+    /*
+    Pre: 0 >= pos < this.createdBoards.size()
+    Post: Ens retorna la Board la qual esta a la posicio pos de createdBoard
+    */
     public Board getCreatedBoard(int pos){
         return createdBoards.get(pos);
     }
     
+    /*
+    Pre: Cert
+    Post: Ens retorna els taulers que tenim creats actualment.
+    */
     public int getActualCreatedBoard(){
         return createdBoards.size();
     }
     
+    /*
+    Pre: Cert
+    Post: Incrementa en 1 els jocs solucionats de l'usuari.
+    */
     public void incrementSolvedGames(){
         solvedGames++;
     }
     
+    /*
+    Pre: Cert
+    Post: Incrementa en 1 els jocs comencats de l'usuari.
+    */
     public void incrementStartedGames(){
         startedGames++;
     }
     
+    /*
+    Pre: time != null
+    Post: Suma el temps actual jugat amb el parametre time.
+    */
     public void incrementTotalTimePlayed(Duration time){
         totalTimePlayed = totalTimePlayed.plus(time);
     }
     
+    /*
+    Pre: Cert
+    Post: Incrementa en 1 els taulers creats de l'usuari.
+    */
     public void incrementTotalCreatedBoards(){
         totalCreatedBoards++;
     }
     
+    /*
+    Pre: newBoard != null
+    Post: Afegeix un nou Tauler al createdBoard de l'usuari.
+    */
     public void addBoard(Board newBoard){
         createdBoards.add(newBoard);
     }
     
+    /*
+    Pre: 0 >= pos < createdBoards.size()
+    Post: Esborra el tauler de la posicio passada per parametre.
+    */
     public void deleteBoard(int pos){
         createdBoards.remove(pos);
     }

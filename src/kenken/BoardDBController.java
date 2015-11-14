@@ -28,6 +28,14 @@ public class BoardDBController {
     private static final String ExtensionFisica = ".brd";
     private static final String ExtensionInfo = ".inf";
     
+    
+    public boolean exists(String boardName){
+        String path = getPath(boardName);
+        String pathInfo = path+ExtensionInfo;
+        return new File(pathInfo).isFile();
+    }
+       
+    
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
              s'ha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
@@ -103,13 +111,17 @@ public class BoardDBController {
                 result = 0;
             }
             catch (IOException ex){
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
                 result = -2;
             }
         }
         return result;
     }
     
-    public Board loadBoard(String nameBoard) throws FileNotFoundException, IOException{
+    /*  Pre: boardName != NULL
+    ** Post: Retorna el board seleccionat, si b = NULL, el board no existeix
+    */
+    public Board loadBoard(String nameBoard){
         
         FileInputStream fis;
         Board b = null;
@@ -119,22 +131,22 @@ public class BoardDBController {
         String pathInfo = path+ExtensionInfo;
         
         //nomes intentarem carregar si existeix el arxiu
-        if ( (new File(pathFisica).isFile()) && (new File(pathInfo).isFile())){
+        if ( (new File(pathInfo).isFile()) ){
             try {
-                fis = new FileInputStream(pathInfo);
+                fis = new FileInputStream(pathFisica);
+                System.out.println(pathFisica);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                ArrayList<String> informacio = (ArrayList)ois.readObject();
-                String user = informacio.get(1);
-                String difficulty = informacio.get(2);
-                int x = Integer.parseInt(informacio.get(3));
-                int y = Integer.parseInt(informacio.get(4));
-                b = new Board(x,y);
-                b.setDifficulty(difficulty);
-                b.setBoardName(nameBoard);
-                b.setUsername(user);
+                b = (Board) ois.readObject();
                 fis.close();
             } catch (ClassNotFoundException ex) {
-                //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (IOException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
             }
         }
         return b;
@@ -147,7 +159,8 @@ public class BoardDBController {
     private String getPath(String boardName){
         return Directory+boardName;
     }
-
+    
+    /* Escriu la informacio de board a l'arxiu <nombard>.inf al path demanat */
     private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
         int result;
         
@@ -159,15 +172,17 @@ public class BoardDBController {
             fos.close();            
             result = 0;
         } catch (FileNotFoundException ex) {
-            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         } catch (IOException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         }
                 
         return result;
     }
-
+    
+    /* Escriu el objecte board al path demanat */
     private int writeBoardObj(Board newBoard, String pathFisica) {
         int result;
         
@@ -178,12 +193,11 @@ public class BoardDBController {
             oos.writeObject(newBoard);
             fos.close();            
             result = 0;
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("FileNotFoundException");
+        }catch (FileNotFoundException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
-        } catch (IOException ex) {
-            System.out.println("IOException");
+        }catch (IOException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         }
                 
