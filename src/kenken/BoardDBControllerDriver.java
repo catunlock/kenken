@@ -26,6 +26,7 @@ public class BoardDBControllerDriver {
         System.out.println("1. Crear nova Board a la DB --> 0: creat correctament, -1: ja existent, -2: error intern");
         System.out.println("2. Eliminar Board de la DB --> 0: correcte, -1: Board no existeix, -2: error intern");
         System.out.println("3. Carregar Board de la DB i mostrar informació");
+        System.out.println("4. Comprovar si una taula existeix");
         System.out.println("-1. Exit");
         System.out.println("-----------------------------------------------");
         
@@ -89,6 +90,16 @@ public class BoardDBControllerDriver {
                         System.out.println("User del tauler carregat: " + b.getUsername());
                         System.out.println("Dificultat del tauler carregat: " + b.getDifficulty());
                         System.out.println("Mida del tauler carregat: " + b.getSizeX());
+                    }
+                    break;
+                case 4:
+                    System.out.println("Introdueix nom de taula a comprovar:");
+                    boardName = sc.next();
+                    boolean resultc = test.exists(boardName);
+                    if (resultc == true){
+                        System.out.println("Taula existent");
+                    }else{
+                        System.out.println("Taula no existent");
                     }
                     break;
             }
