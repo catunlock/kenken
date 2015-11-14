@@ -113,7 +113,7 @@ public class BoardDBController {
     /*  Pre: boardName != NULL
     ** Post: Retorna el board seleccionat, si b = NULL, el board no existeix
     */
-    public Board loadBoard(String nameBoard) throws FileNotFoundException, IOException{
+    public Board loadBoard(String nameBoard){
         
         FileInputStream fis;
         Board b = null;
@@ -132,6 +132,13 @@ public class BoardDBController {
                 fis.close();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (IOException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
             }
         }
         return b;
