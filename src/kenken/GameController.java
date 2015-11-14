@@ -14,17 +14,34 @@ import java.util.ArrayList;
  */
 public class GameController {
     
+    /*
+    Pre: cert
+    Post: es retorna una board per començar un nou joc
+    si retorna null hi ha hagut algun error en la càrrega
+    */
     public Board newGame(String boardName){
         kenken.BoardDBController bdbc = new kenken.BoardDBController();
         Board b = bdbc.loadBoard(boardName);
         return b;
     }
     
+    /*
+    Pre: cert
+    Post: es guarda a la DB el game actual i retorna
+    0 si s'ha guardat amb èxit
+    -1 si ja existeix
+    -2 si hi ha errors interns
+    */
     public int saveGame(Game game, String username){
         GameDBController gdbc = new GameDBController();
-        return gdbc.saveGame(game, username);
+        return gdbc.saveGame(game, game.getBoard().getBoardName(), username);
     }
     
+    /*
+    Pre: cert
+    Post: es retorna el game el qual estava jugant l'user username i la taula id
+    que s'estava jugant
+    */
     public Game loadGame(String username, String id) throws IOException {
         GameDBController gdbc = new GameDBController();
         return gdbc.loadGame(username, id);

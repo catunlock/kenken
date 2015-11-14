@@ -6,6 +6,8 @@
 package kenken;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -37,23 +39,11 @@ public class GameDBControllerDriver {
             //enter = sc.next();
             switch(option){
                 case 1:
-                    System.out.println("Introdueix mode de joc:");
-                    String m = sc.next();
+                    System.out.println("Introdueix nom de jugadr:");
+                    userName = sc.next();
                     System.out.println("Introdueix nom de tauler:");
                     boardName = sc.next();
-                    System.out.println("Introdueix tamany tauler:");
-                    int x = sc.nextInt();
-                    //enter = sc.next();
-                    System.out.println("Introdueix usuari de tauler:");
-                    String userBoard = sc.next();
-                    System.out.println("Introdueix dificultat de tauler:");
-                    String difficulty = sc.next();
-                    Board board = new Board(x,x);
-                    board.setBoardName(boardName);
-                    board.setDifficulty(difficulty);
-                    board.setUsername(userBoard);
-                    Game g = new Game(m);
-                    result = test.saveGame(null, userName)
+                    result = test.saveGame(null, boardName, userName);
                     if (result == 0){
                         System.out.println("Tauler creat correctament");
                     }
@@ -65,33 +55,11 @@ public class GameDBControllerDriver {
                     }
                     break;
                 case 2:
-                    System.out.println("Introdueix nom de tauler a eliminar:");
+                    System.out.println("Introdueix nom de jugador:");
+                    userName = sc.next();
+                    System.out.println("Introdueix nom de board:");
                     boardName = sc.next();
-                    //boardName = boardName.replaceAll("(\\r|\\n)", "");
-                    result = test.deleteBoard(boardName);
-                    if (result == 0){
-                        System.out.println("Tauler eliminat correctament");
-                    }
-                    else if (result == -1){
-                        System.out.println("Nom de tauler inexistent");
-                    }
-                    else{
-                        System.out.println("Error intern");
-                    }
-                    break;
-                case 3:
-                    System.out.println("Introdueix nom de tauler a carregar:");
-                    boardName = sc.next();
-                    Board b = test.loadBoard(boardName);
-                    if(b == null){
-                        System.out.println("Board no existeix.");
-                    }
-                    else{
-                        System.out.println("Nom tauler carregat: " + b.getBoardName());
-                        System.out.println("User del tauler carregat: " + b.getUsername());
-                        System.out.println("Dificultat del tauler carregat: " + b.getDifficulty());
-                        System.out.println("Mida del tauler carregat: " + b.getSizeX());
-                    }
+                    Game g = test.loadGame(userName, boardName);
                     break;
             }
         }
