@@ -109,6 +109,9 @@ public class BoardDBController {
         return result;
     }
     
+    /*  Pre: boardName != NULL
+    ** Post: Retorna el board seleccionat, si b = NULL, el board no existeix
+    */
     public Board loadBoard(String nameBoard) throws FileNotFoundException, IOException{
         
         FileInputStream fis;
