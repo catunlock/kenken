@@ -1,5 +1,6 @@
 package kenken;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author JosÃ© Luis ExpÃ³sito Robles
  */
-public class Board {
+public class Board implements Serializable{
 
     private int id;
     private String difficulty;
