@@ -5,6 +5,7 @@
  */
 package kenken;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 /**
@@ -15,21 +16,27 @@ public class Game {
     
     enum Mode{normal,TimeAttack};
     
-    private long time;
+    private Duration time;
     private Mode mode;
     private Board board;
     private User user;
 
     public Game(Mode mode)
     {
-        time = System.nanoTime();
+        this.time = Duration.ZERO;
         this.mode = mode;
+        this.board = null;
+        this.user = null;      
+    }
+    
+    public void generateBoard(){
+        
     }
     
     public int setBoard(String boardName){
-        BoardDBController bdbc = new BoardDBController();
-        ArrayList<String> taulerS = new ArrayList<String>();
-        bdbc.loadBoard(boardName);
+        BoardDBController bDBc = new BoardDBController();
+        //ArrayList<String> taulerS = new ArrayList<String>();
+        this.board = bdbc.loadBoard(boardName);
     }
     
     public long getTime()
