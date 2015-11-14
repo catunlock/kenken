@@ -123,7 +123,7 @@ public class Generator {
 
         for (int f = 0; f < board.size(); f++) {
             for (int c = 0; c < board.size(); c++) {
-                v.set((f * board.size()) + c, new Pos(f, c));
+                v.add(new Pos(f, c));
             }
         }
 
@@ -154,13 +154,12 @@ public class Generator {
       int ff[] = {0, 1, 0, -1};
       int cc[] = {1, 0, -1, 0};
 
-      Stack<Pos> s = new Stack<Pos>();
-      
-      s.push(allPositions.removeFirst());
-      
       int region = 1;
 
       while (! allPositions.isEmpty()) {
+        Stack<Pos> s = new Stack<Pos>();
+        s.push(allPositions.removeFirst());  
+          
         int maxRegionSize = randRegionSize();
         System.out.println("Region de: " + maxRegionSize);
 
@@ -177,7 +176,7 @@ public class Generator {
             board.setCell(p.f, p.c, cell);
 
             regionSize++;
-
+            
             if (! allPositions.remove(p)){
                 System.out.println("\nElement not found in myvector: " + p);
             }
