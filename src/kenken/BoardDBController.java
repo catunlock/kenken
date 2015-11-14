@@ -28,6 +28,14 @@ public class BoardDBController {
     private static final String ExtensionFisica = ".brd";
     private static final String ExtensionInfo = ".inf";
     
+    
+    public boolean exists(String boardName){
+        String path = getPath(boardName);
+        String pathInfo = path+ExtensionInfo;
+        return new File(pathInfo).isFile();
+    }
+       
+    
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
              s'ha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
