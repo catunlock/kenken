@@ -27,6 +27,7 @@ public class User implements Serializable{
         this.username = username;
         this.password = password;
         totalTimePlayed = Duration.ZERO;
+        this.createdBoards = new ArrayList(0);
     }
     
     /*
