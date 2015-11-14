@@ -103,6 +103,7 @@ public class BoardDBController {
                 result = 0;
             }
             catch (IOException ex){
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
                 result = -2;
             }
         }
@@ -122,22 +123,15 @@ public class BoardDBController {
         String pathInfo = path+ExtensionInfo;
         
         //nomes intentarem carregar si existeix el arxiu
-        if ( (new File(pathFisica).isFile()) && (new File(pathInfo).isFile())){
+        if ( (new File(pathInfo).isFile()) ){
             try {
-                fis = new FileInputStream(pathInfo);
+                fis = new FileInputStream(pathFisica);
+                System.out.println(pathFisica);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                ArrayList<String> informacio = (ArrayList)ois.readObject();
-                String user = informacio.get(1);
-                String difficulty = informacio.get(2);
-                int x = Integer.parseInt(informacio.get(3));
-                int y = Integer.parseInt(informacio.get(4));
-                b = new Board(x,y);
-                b.setDifficulty(difficulty);
-                b.setBoardName(nameBoard);
-                b.setUsername(user);
+                b = (Board) ois.readObject();
                 fis.close();
             } catch (ClassNotFoundException ex) {
-                //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return b;
@@ -162,9 +156,10 @@ public class BoardDBController {
             fos.close();            
             result = 0;
         } catch (FileNotFoundException ex) {
-            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         } catch (IOException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         }
                 
@@ -181,12 +176,11 @@ public class BoardDBController {
             oos.writeObject(newBoard);
             fos.close();            
             result = 0;
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("FileNotFoundException");
+        }catch (FileNotFoundException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
-        } catch (IOException ex) {
-            System.out.println("IOException");
+        }catch (IOException ex) {
+            Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
             result = -2;
         }
                 
