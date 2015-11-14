@@ -66,7 +66,7 @@ public class GameController {
     Post: es retorna el game el qual estava jugant l'user username i la taula id
     que s'estava jugant
     */
-    public Game loadGame(String username, String id) throws IOException {
+    public Game loadGame(String username, String id){
         GameDBController gdbc = new GameDBController();
         return gdbc.loadGame(username, id);
     }
