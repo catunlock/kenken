@@ -19,7 +19,6 @@ public class BoardController {
         
     }
     
-    
     /* Pre: board != null
        Post: retorna 0 si s'ha importat correctament, -1 si ja existeix la board, -2 error intern 
     */
@@ -34,13 +33,11 @@ public class BoardController {
         return bDBc.loadBoard(boardName);
     }
     /*
-    
-    importBoard()
-    exportBoard()
-    
+       Pre: boardName != null
+       Post: retorna true si el nom de taula ja existeix, false altrament
     */
-    
-    
-    
+    public boolean existsBoard(String boardName){
+        return bDBc.exists(boardName);
+    }   
     
 }
