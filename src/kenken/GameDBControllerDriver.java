@@ -60,6 +60,8 @@ public class GameDBControllerDriver {
                     System.out.println("Introdueix nom de board:");
                     boardName = sc.next();
                     Game g = test.loadGame(userName, boardName);
+                    if (g == null) System.out.println("La partida no existeix.");
+                    else System.out.println("Partida recuperada correctament.");
                     break;
             }
         }
