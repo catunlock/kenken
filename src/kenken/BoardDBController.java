@@ -77,26 +77,25 @@ public class BoardDBController {
     
     /*  Pre: boardName != NULL
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
-             sha eliminat de la base de dades el board amb id idBoard, o bé 
+             sha eliminat de la base de dades el board amb nom boardName, o bé 
              si sha produït alguna excepció.
     Return:
          0 = board eliminat correctament
         -1 = board no existent
         -2 = error intern
     */
-    public int deleteBoard(String boardName){
+    public int deleteBoard(String boardName) {
         
         int result;
         //trobar el path
         String path = getPath(boardName);
         String pathFisica = path+ExtensionFisica;
         String pathInfo = path+ExtensionInfo;
-        
+        boolean Fisica = new File(pathFisica).isFile();
         //si no existeix el Board
-        if ( !(new File(pathFisica).isFile()) || !(new File(pathInfo).isFile())){
+        if(!(Fisica)){
             result = -1;
-        }
-        else{
+        }else{
             try{
                 //eliminem els arxius
                 Files.delete(FileSystems.getDefault().getPath(pathFisica));
@@ -104,7 +103,7 @@ public class BoardDBController {
                 result = 0;
             }
             catch (IOException ex){
-                result = -3;
+                result = -2;
             }
         }
         return result;
