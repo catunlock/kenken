@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Gerard
+ * @author Pol+Gerard
  */
 public class Game {
     
