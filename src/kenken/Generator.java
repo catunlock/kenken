@@ -139,7 +139,7 @@ public class Generator {
             
             while (!allPositions.isEmpty()) {
                 Pos p = allPositions.remove();
-                if (board.getCell(p.f, p.c).getRegion() == 0) {
+                if (board.getCell(p.f, p.c).getRegion() == 0 && ! empilat[p.f][p.c]) {
                     System.out.println("Start point of region: " + p);
                     makeRegion(p);
                 }else {
@@ -165,6 +165,7 @@ public class Generator {
             while(! s.isEmpty()) {
                 Pos p = s.pop();
                 setCellRegion(p, region);
+                System.out.print(p + ", ");
 
                 Stack<Pos> directions = genAllDirections();
                 while (! directions.isEmpty() && actualSize < regionSize) {
@@ -173,7 +174,8 @@ public class Generator {
                     Pos pn = new Pos(p.f + dir.f, p.c + dir.c);
 
                     if (pn.f >= 0 && pn.f < board.size() && pn.c >= 0 &&
-                        pn.c < board.size() && ! empilat[pn.f][pn.c]) 
+                        pn.c < board.size() && ! empilat[pn.f][pn.c] &&
+                            board.getCell(pn.f, pn.c).getRegion() == 0) 
                     {
                         s.push(pn);
                         empilat[pn.f][pn.c] = true;
@@ -182,6 +184,7 @@ public class Generator {
                 }
             }
             region++;
+            System.out.println();
         }
         
         private void shuffleVectorPos(ArrayList<Pos> v) {
