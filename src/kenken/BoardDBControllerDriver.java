@@ -65,7 +65,7 @@ public class BoardDBControllerDriver {
                 case 2:
                     System.out.println("Introdueix nom de tauler a eliminar:");
                     boardName = sc.nextLine();
-                    boardName = boardName.replaceAll("(\\r|\\n)", "");
+                    //boardName = boardName.replaceAll("(\\r|\\n)", "");
                     result = test.deleteBoard(boardName);
                     if (result == 0){
                         System.out.println("Tauler eliminat correctament");
