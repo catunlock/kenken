@@ -22,7 +22,6 @@ public class Region implements Serializable{
     
     enum OperationType{Add, Subtract, Multiply, Divide, None};
     
-    private Cell cell;
     private ArrayList<Cell> cellList;
     private OperationType operationType;
     private int result;
@@ -35,9 +34,7 @@ public class Region implements Serializable{
         this.valid = valid;
     }
 
-    public Cell getCell() {
-        return cell;
-    }
+    
 
     public ArrayList<Cell> getCellList() {
         return cellList;
@@ -53,10 +50,6 @@ public class Region implements Serializable{
 
     public boolean isValid() {
         return valid;
-    }
-
-    public void setCell(Cell cell) {
-        this.cell = cell;
     }
 
     public void setCellList(ArrayList<Cell> cellList) {
