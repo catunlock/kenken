@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author GERARD
+ * @author GERARD+pol
  */
 public class GameController {
     
@@ -23,6 +23,26 @@ public class GameController {
         kenken.BoardDBController bdbc = new kenken.BoardDBController();
         Board b = bdbc.loadBoard(boardName);
         return b;
+    }
+    
+    public Board generateBoard(int size, String userName, String boardName, String dificultat){
+        
+        Board newBoard = null;
+        
+        //comprovar antes de nada si podemos crear dicho board
+        BoardController bc = new BoardController();
+        if (!(bc.existsBoard(boardName))){
+
+            /* Generar una board de tamaño X, con userName, boardName, y dificultat */
+            newBoard = new Board(size,size);
+            newBoard.setBoardName(boardName);
+            newBoard.setUsername(userName);
+            newBoard.setDifficulty(dificultat);
+
+            //AHORA SE TENDRIA QUE DAR CAÑA AL GENERADOR Y METER TODO EL ARRAYLIST DE CELLS
+        }
+        
+        return newBoard;
     }
     
     /*
