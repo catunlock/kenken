@@ -60,29 +60,6 @@ public class UserDBControllerDriver {
                     test.modifyUser(usuari2,user);
                     break;                    
                 case 3:
-                    /*System.out.println("Introdueix el nou nom d'usuari:");
-                    user = sc.nextLine();
-                    test.setUsername(user);*/
-                    break;
-                case 4:
-                    /*System.out.println("Introdueix la nova contrasenya:");
-                    pass = sc.nextLine();
-                    test.setPassword(pass);*/
-                    break;            
-                case 5:
-                    /*test.incrementSolvedGames();*/
-                    break;
-                case 6:
-                    //test.incrementStartedGames();
-                    break;
-                case 7:
-                    //test.incrementTotalCreatedBoards();
-                    break;
-                case 8:
-                    /*System.out.println("Introdueix els segons a incrementar:");
-                    long segons = sc.nextLong();
-                    Duration temps = Duration.ofSeconds(segons);
-                    test.incrementTotalTimePlayed(temps);*/
                     break;
             }
         }
