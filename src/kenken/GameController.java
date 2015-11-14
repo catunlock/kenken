@@ -17,7 +17,6 @@ public class GameController {
     public Board newGame(String boardName){
         Board b = null;
         BoardDBController bdbc = new BoardDBController();
-        b = bdbc.loadBoard(boardName);
         return b;
     }
     
