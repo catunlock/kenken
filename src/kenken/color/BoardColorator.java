@@ -42,7 +42,7 @@ public class BoardColorator {
                 
                 Color color = colorByRegion(cell.getRegion());
                 
-                System.out.print(color + String.valueOf(cell.getSolutionValue()) + Color.FG_DEFAULT + " ");
+                System.out.print(color + String.valueOf(cell.getSolutionValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
             }
             System.out.println();
         }
