@@ -43,7 +43,7 @@ public class GameDBController {
         return result;
     }
     
-    public Game loadGame(String username, String boardid) throws FileNotFoundException, IOException{
+    public Game loadGame(String username, String boardid){
         
         FileInputStream fis;
         Game game = null;
@@ -55,6 +55,10 @@ public class GameDBController {
             fis.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return game;
     }

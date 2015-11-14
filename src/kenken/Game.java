@@ -21,10 +21,10 @@ public class Game {
     private Board board;
     private User user;
 
-    public Game(Mode mode)
+    public Game(String mode)
     {
         this.time = Duration.ZERO;
-        this.mode = mode;
+        this.mode = Mode.valueOf(mode);
         this.user = null;
         this.board = null;
     }
