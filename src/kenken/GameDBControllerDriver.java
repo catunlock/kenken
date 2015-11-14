@@ -36,19 +36,18 @@ public class GameDBControllerDriver {
         String userName;
         
         while((option = sc.nextInt()) != -1) {
-            //enter = sc.next();
             switch(option){
                 case 1:
-                    System.out.println("Introdueix nom de jugadr:");
+                    System.out.println("Introdueix nom de jugador:");
                     userName = sc.next();
                     System.out.println("Introdueix nom de tauler:");
                     boardName = sc.next();
                     result = test.saveGame(null, boardName, userName);
                     if (result == 0){
-                        System.out.println("Tauler creat correctament");
+                        System.out.println("Game creat correctament");
                     }
                     else if (result == -1){
-                        System.out.println("Nom de tauler ja existent");
+                        System.out.println("Nom de game ja existent");
                     }
                     else{
                         System.out.println("Error intern");

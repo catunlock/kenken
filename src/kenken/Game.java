@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Game implements Serializable{
     
-    enum Mode{normal,TimeAttack};
+    enum Mode{Normal,TimeAttack};
     
     private Duration time;
     private Mode mode;
