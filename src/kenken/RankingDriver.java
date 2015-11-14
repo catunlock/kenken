@@ -47,7 +47,11 @@ public class RankingDriver {
                     }
                     break;
                 case 4:
-                    Record record = new Record(scan.next(), scan.nextLong());
+                    System.out.print("Introdueix el nom del Record: ");
+                    String nomPlayer = scan.next();
+                    System.out.print("Introdueix el temps (en segons) del Record: ");
+                    long temps = scan.nextLong();
+                    Record record = new Record(nomPlayer, temps);
                     ranking.addRecord(record);
                     break;
                 case 5:
