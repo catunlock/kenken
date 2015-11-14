@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 public class GameDBController {
     
     private static final String Extension = ".gam";
+    private static String Directory = "Games/";
     
     /*
     Pre: cert
@@ -86,8 +87,8 @@ public class GameDBController {
     Pre: cert
     Post: obté el path del fitxer que es vol guardar o carregar
     */
-    private String getPath(String id, String username) {
-        return id+username+Extension;
+    private String getPath(String boardname, String username) {
+        return Directory+username+boardname+Extension;
     }
     
     /*
