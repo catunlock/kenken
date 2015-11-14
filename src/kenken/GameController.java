@@ -25,26 +25,11 @@ public class GameController {
         return b;
     }
     
-    public Board generateBoard(int size, String userName, String boardName, String dificultat){
-        
-        Board newBoard = null;
-        
-        //comprovar antes de nada si podemos crear dicho board
-        BoardController bc = new BoardController();
-        if (!(bc.existsBoard(boardName))){
-            
-            Generator generador = new Generator();
-            /* Generar una board de tamaño X, con userName, boardName, y dificultat */
-            newBoard = new Board(size,size);
-            newBoard.setBoardName(boardName);
-            newBoard.setUsername(userName);
-            newBoard.setDifficulty(dificultat);
-
-            //AHORA SE TENDRIA QUE DAR CAÑA AL GENERADOR Y METER TODO EL ARRAYLIST DE CELLS
-            
-            /* Guardar el board */
-            bc.importBoard(newBoard);
-        }
+    public Board generateBoard(int size, String dificultat){
+    
+        Generator generador = new Generator();
+        /*Board newBoard = generador.generate(size);
+        newBoard.setDifficulty(dificultat);*/ 
         
         return newBoard;
     }
@@ -66,9 +51,9 @@ public class GameController {
     Post: es retorna el game el qual estava jugant l'user username i la taula id
     que s'estava jugant
     */
-    public Game loadGame(String username, String id) throws IOException {
+    public Game loadGame(String userName, String boardName){
         GameDBController gdbc = new GameDBController();
-        return gdbc.loadGame(username, id);
+        return gdbc.loadGame(userName, boardName);
     }
     
 }

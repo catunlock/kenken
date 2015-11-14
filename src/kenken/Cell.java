@@ -1,5 +1,6 @@
 package kenken;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author busvar
  */
-public class Cell {
+public class Cell implements Serializable{
 
     final private int posX;
     final private int posY;

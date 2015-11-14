@@ -5,16 +5,17 @@
  */
 package kenken;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 
 /**
  *
- * @author Gerard
+ * @author Pol+Gerard
  */
-public class Game {
+public class Game implements Serializable{
     
-    enum Mode{normal,TimeAttack};
+    enum Mode{Normal,TimeAttack};
     
     private Duration time;
     private Mode mode;
@@ -83,5 +84,25 @@ public class Game {
     public int saveGame(){
         GameController gc = new GameController();
         return gc.saveGame(this, user.getUsername());
+    }
+    
+    /*
+    Pre: cert
+    Post: carrega un joc guardat
+    retorna 0 si es carrega correctament
+    retorna -1 si no existeix la partida guardada
+    retorna -2 si hi han errors interns
+    retorna -3 si l'usuari no està loguejat
+    */
+    public int loadGame(String userName, String boardName){
+        if (userName == null) return -3;
+        else {
+            GameController gc = new GameController();
+            Game g = gc.loadGame(userName, boardName);
+            time.plusNanos(g.getTime());
+            mode = Mode.valueOf(g.getMode());
+            //UserController uc = new UserController();
+            return 0;
+        }
     }
 }

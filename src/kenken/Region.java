@@ -5,15 +5,20 @@
  */
 package kenken;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Marc Ferré Monné
  */
-public class Region {
+public class Region implements Serializable{
     
-   
+   /*
+    Posible modificación: en vez de tener que modificar las Cells aquí y en el
+    Board, se puede poner aquí una especie de ArrayList de posiciones, para que
+    solo se tenga que consultar la posición.
+    */
     
     enum OperationType{Add, Subtract, Multiply, Divide, None};
     

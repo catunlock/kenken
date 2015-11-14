@@ -25,9 +25,9 @@ public class UserDriver {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Introdueix nom d'usuari:");
-        String user = sc.nextLine();
+        String user = sc.next();
         System.out.println("Introdueix contrasenya:");
-        String pass = sc.nextLine();
+        String pass = sc.next();
         User test = new User(user,pass);
         
         System.out.println("-----------------------------------------------");
@@ -60,16 +60,16 @@ public class UserDriver {
                     System.out.println("Started Games:" + test.getStartedGames());
                     System.out.println("Total Time Played:" + test.getTotalTimePlayed());
                     System.out.println("Total Created Boards:" + test.getTotalCreatedBoards());
-                    //System.out.println("Actual Created Boards:" + test.getActualCreatedBoard());
+                    System.out.println("Actual Created Boards:" + test.getActualCreatedBoard());
                     break;                    
                 case 3:
                     System.out.println("Introdueix el nou nom d'usuari:");
-                    user = sc.nextLine();
+                    user = sc.next();
                     test.setUsername(user);
                     break;
                 case 4:
                     System.out.println("Introdueix la nova contrasenya:");
-                    pass = sc.nextLine();
+                    pass = sc.next();
                     test.setPassword(pass);
                     break;            
                 case 5:

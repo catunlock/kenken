@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import kenken.dominio;
@@ -24,8 +25,8 @@ import java.util.logging.Logger;
  */
 public class GameDBController {
     
-    private static final String Directory = "Games/";
-    private static final String Extension = ".obj";
+    private static final String Extension = ".gam";
+    private static String Directory = "Games/";
     
     /*
     Pre: cert
@@ -58,28 +59,36 @@ public class GameDBController {
         
         FileInputStream fis;
         Game game = null;
-        
-        try {
+        String filepath = getPath(boardName, username);
+        if (new File(filepath).exists()){
+            try {
             fis = new FileInputStream(getPath(boardName, username));
             ObjectInputStream ois = new ObjectInputStream(fis);
             game = (Game) ois.readObject();
             fis.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         } catch (IOException ex) {
             Logger.getLogger(GameDBController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         return game;
+        }
+        else {
+            return null;
+        }
     }
     
     /*
     Pre: cert
     Post: obté el path del fitxer que es vol guardar o carregar
     */
-    private String getPath(String id, String username) {
-        return Directory+id+username+Extension;
+    private String getPath(String boardname, String username) {
+        return Directory+username+boardname+Extension;
     }
     
     /*
