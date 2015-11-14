@@ -25,26 +25,24 @@ public class GameController {
         return b;
     }
     
-    public Board generateBoard(int size, String userName, String boardName, String dificultat){
+    public Board generateBoard(int size, String dificultat){
         
-        Board newBoard = null;
+        Board newBoard = new Board(size,size);
         
         //comprovar antes de nada si podemos crear dicho board
-        BoardController bc = new BoardController();
-        if (!(bc.existsBoard(boardName))){
-            
-            Generator generador = new Generator();
-            /* Generar una board de tamaño X, con userName, boardName, y dificultat */
-            newBoard = new Board(size,size);
-            newBoard.setBoardName(boardName);
-            newBoard.setUsername(userName);
-            newBoard.setDifficulty(dificultat);
+        
+        Generator generador = new Generator();
+        /* Generar una board de tamaño X, con userName, boardName, y dificultat */
+        
+        newBoard.setBoardName(boardName);
+        newBoard.setUsername(userName);
+        newBoard.setDifficulty(dificultat);
 
             //AHORA SE TENDRIA QUE DAR CAÑA AL GENERADOR Y METER TODO EL ARRAYLIST DE CELLS
             
             /* Guardar el board */
-            bc.importBoard(newBoard);
-        }
+            //bc.importBoard(newBoard);
+        
         
         return newBoard;
     }
