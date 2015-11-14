@@ -32,18 +32,7 @@ public class RankingController {
     
     public int modifyRanking(Ranking ranking, Record record){
         RankingDBController rkDBC = new RankingDBController();
-        for(int i = 0; i < ranking.getRecordList().size(); i++){
-            if (ranking.getRecordByPos(i).getTime().getSeconds() < record.getTime().getSeconds()){
-                if (ranking.getRecordList().size() == 10){
-                    ranking.setRecordByPos(i, record);
-                    break;
-                }
-                else if (ranking.getRecordList().size() < 10){
-                    ranking.addRecordAtPos(i, record);
-                    break;
-                }
-            }
-        }
+        ranking.addRecord(record);
         int result = rkDBC.modifyRanking(ranking);
         return result;
     }
