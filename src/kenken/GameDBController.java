@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import kenken.dominio;
@@ -38,7 +39,7 @@ public class GameDBController {
     */
     public int saveGame(Game game, String username, String nompartida){
         int result;
-        String filepath = getPath(boardName, username);
+        String filepath = getPath(nompartida, username);
         System.out.println(filepath);
         if (new File(filepath).isFile()){
             result = -1;
@@ -55,14 +56,14 @@ public class GameDBController {
     Post: es retorna el game el qual estava jugant l'user username i la taula
     boardName que s'estava jugant
     */
-    public Game loadGame(String username, String boardName){
+    public Game loadGame(String username, String nompartida){
         
         FileInputStream fis;
         Game game = null;
-        String filepath = getPath(boardName, username);
+        String filepath = getPath(nompartida, username);
         if (new File(filepath).exists()){
             try {
-            fis = new FileInputStream(getPath(boardName, username));
+            fis = new FileInputStream(getPath(nompartida, username));
             ObjectInputStream ois = new ObjectInputStream(fis);
             game = (Game) ois.readObject();
             fis.close();
@@ -85,11 +86,30 @@ public class GameDBController {
     
     /*
     Pre: cert
+    Post: retorna un ArrayList amb els noms de totes les partides guardades de
+    l'usuari username
+    */
+    public ArrayList<String> getSavedGames(String username){
+        ArrayList<String> results = new ArrayList<>();
+        File[] files = new File(username+"/"+Directory).listFiles();
+        //If this pathname does not denote a directory, then listFiles() returns null.
+        for (File file : files) {
+            if (file.isFile()) {
+                results.add(file.getName());
+            }
+        }
+        return results;
+    }
+    
+    /*
+    Pre: cert
     Post: obté el path del fitxer que es vol guardar o carregar
     */
-    private String getPath(String boardname, String username) {
-        return Directory+username+boardname+Extension;
+    private String getPath(String nompartida, String username) {
+        return username+"/"+Directory+nompartida+Extension;
     }
+    
+    
     
     /*
     Pre: cert
