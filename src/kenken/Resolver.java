@@ -82,6 +82,7 @@ public class Resolver {
         
         b.setRegions(regions);
         
+        BoardColorator.print(b);
         
         Resolver r = new Resolver();
         if (r.resolve(b)) {

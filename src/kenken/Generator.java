@@ -131,7 +131,7 @@ public class Generator {
                     System.out.println("Start point of region: " + p);
                     ArrayList<Cell> cells = makeRegion(p);
                     
-                    Region r = setOperationAndResult(cells);
+                    Region r = constructRegion(region, cells);
                     regions.add(r);
                 }else {
                     System.out.println("Skipping start point: " + p);
@@ -163,7 +163,7 @@ public class Generator {
             }
         }
         
-        private Region setOperationAndResult(ArrayList<Cell> cells) {
+        private Region constructRegion(int id, ArrayList<Cell> cells) {
             Region.OperationType op = randOperation(cells);
             
             Region result = null;
@@ -191,7 +191,7 @@ public class Generator {
                     }
                 }
                 
-                result = new Region(cells, op, resultValue, false);
+                result = new Region(id, cells, op, resultValue, false);
             }
             return result;
         }
