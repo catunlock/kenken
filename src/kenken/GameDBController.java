@@ -36,7 +36,7 @@ public class GameDBController {
     -1 si ja existeix
     -2 si hi ha errors interns
     */
-    public int saveGame(Game game, String boardName, String username){
+    public int saveGame(Game game, String username, String nompartida){
         int result;
         String filepath = getPath(boardName, username);
         System.out.println(filepath);

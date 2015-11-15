@@ -48,9 +48,9 @@ public class GameController {
     -1 si ja existeix
     -2 si hi ha errors interns
     */
-    public int saveGame(Game game, String username){
+    public int saveGame(Game game, String username, String nompartida){
         GameDBController gdbc = new GameDBController();
-        return gdbc.saveGame(game, game.getBoard().getBoardName(), username);
+        return gdbc.saveGame(game, username, nompartida);
     }
     
     /*
