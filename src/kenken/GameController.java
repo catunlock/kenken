@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class GameController {
     
+    GameDBController gdbc = new GameDBController();
+    
     /*
     Pre: cert
     Post: es retorna una board per començar un nou joc
@@ -51,12 +53,16 @@ public class GameController {
     -2 si hi ha errors interns
     */
     public int saveGame(Game game, String username, String nompartida){
-        GameDBController gdbc = new GameDBController();
         return gdbc.saveGame(game, username, nompartida);
     }
     
+    /*
+    Pre: username != null
+    Post: retorna una llista de strings amb les partides guardades del jugador
+    */
+    
     public ArrayList<String> getSavedGames(String username){
-        return gdbc.getSavedGames(String username);     
+        return gdbc.getSavedGames(String username);
     }
     
     /*
@@ -65,7 +71,6 @@ public class GameController {
     que s'estava jugant
     */
     public Game loadGame(String username, String nompartida){
-        GameDBController gdbc = new GameDBController();
         return gdbc.loadGame(username, nompartida);
     }
     
