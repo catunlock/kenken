@@ -55,6 +55,9 @@ public class RankingDBControllerDriver {
                     System.out.println("Introdueix el nom del tauler asociat: ");
                     String nom1 = scan.next();
                     Ranking rankingGet = test.getRanking(nom1);
+                    if (rankingGet == null) {
+                        System.out.println("Aquest board no existeix.");
+                    }
                     break;
                 case 4:
                     System.out.println("Introdueix el nom del tauler asociat: ");
