@@ -23,7 +23,9 @@ public class UserDriver {
     public static void main(String[] args) throws IOException
     {
         Scanner sc = new Scanner(System.in);
-        
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("--- Per tal de poder provar aquesta classe, necessitem crear un nou Usuari ---");
+        System.out.println("------------------------------------------------------------------------------");
         System.out.println("Introdueix nom d'usuari:");
         String user = sc.next();
         System.out.println("Introdueix contrasenya:");
@@ -31,9 +33,7 @@ public class UserDriver {
         User test = new User(user,pass);
         
         System.out.println("-----------------------------------------------");
-        System.out.println("Probando getUsername");
-        System.out.println("-----------------------------------------------");
-        System.out.println("Introduce un numero para ejecutar la operacion:");
+        System.out.println("Introdueix un número d'operació:");
         System.out.println("-----------------------------------------------"); 
         System.out.println("1. Mostrar usuari y contrasenya");
         System.out.println("2. Mostrar SolvedGames, StartedGames, TotalTimePlayed, TotalCreatedBoards y ActualCreatedBoards");
@@ -43,6 +43,9 @@ public class UserDriver {
         System.out.println("6. Incrementar StartedGames");
         System.out.println("7. Incrementar TotalCreatedBoards");
         System.out.println("8. Incrementar TotalTimePlayed");
+        System.out.println("9. Afegir una board a l'usuari");
+        System.out.println("10. Llistar informacio de taulers de l'usuari");
+        System.out.println("11. Eliminar una board del usuari");
         System.out.println("-1. Exit");
         System.out.println("-----------------------------------------------");
         
@@ -86,6 +89,8 @@ public class UserDriver {
                     long segons = sc.nextLong();
                     Duration temps = Duration.ofSeconds(segons);
                     test.incrementTotalTimePlayed(temps);
+                case 9:
+                    
             }
         }
 
