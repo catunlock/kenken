@@ -55,14 +55,18 @@ public class GameController {
         return gdbc.saveGame(game, username, nompartida);
     }
     
+    public ArrayList<String> getSavedGames(String username){
+        return gdbc.getSavedGames(String username);     
+    }
+    
     /*
     Pre: cert
     Post: es retorna el game el qual estava jugant l'user username i la taula id
     que s'estava jugant
     */
-    public Game loadGame(String userName, String boardName){
+    public Game loadGame(String username, String nompartida){
         GameDBController gdbc = new GameDBController();
-        return gdbc.loadGame(userName, boardName);
+        return gdbc.loadGame(username, nompartida);
     }
     
 }
