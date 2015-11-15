@@ -29,7 +29,7 @@ public class KenKen {
     public static void main(String[] args) {
         // TODO code application logic here
         DirectoryCreator dc = new DirectoryCreator();
-        dc.create();
+        dc.createInitial();
         UserController uc = new UserController();
         Scanner sc = new Scanner(System.in);
         int optionuser;
