@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * @author xaloc
  */
 public class Board {
+    private String name;
+    private String username;
+    private String difficulty;
     Cell[][] board;
     private ArrayList<Region> regions;
     
@@ -22,6 +25,18 @@ public class Board {
                 board[i][j] = new Cell(i,j,true);
             }
         }
+    }
+    
+    public String getBoardName(){
+        return name;
+    }
+    
+    public String getDifficulty(){
+        return difficulty;
+    }
+    
+    public String getUserName(){
+        return username;
     }
     
     public Cell getCell(int x, int y) {
