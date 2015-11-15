@@ -6,8 +6,9 @@
 package kenken.color;
 
 import kenken.Board;
-import kenken.BoardKenken;
+import kenken.Board;
 import kenken.Cell;
+import kenken.Region;
 
 /**
  *
@@ -34,7 +35,7 @@ public class BoardColorator {
         return Color.FG_DEFAULT;
     }
 
-    public static void print(BoardKenken board) {
+    public static void print(Board board) {
       
         for (int f = 0; f < board.size(); ++f) {
             for (int c = 0; c < board.size(); ++c) {
@@ -45,6 +46,19 @@ public class BoardColorator {
                 System.out.print(color + String.valueOf(cell.getSolutionValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
             }
             System.out.println();
+        }
+    }
+    
+    public static void printRegions(Board board) {
+        int i = 1;
+        for (Region r : board.getRegions()) {
+            System.out.println("Region " + i + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
+            System.out.print("\tValues: ");
+            for (Cell c : r.getCellList()) {
+                System.out.print(c.getSolutionValue() + " ");
+            }
+            System.out.println();
+            ++i;
         }
     }
 }

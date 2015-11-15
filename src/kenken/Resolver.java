@@ -14,8 +14,24 @@ import kenken.color.BoardColorator;
  */
 public class Resolver {
     
-    public boolean resolve(BoardKenken b) {
+    Board board = null;
+    
+    public void backtrack() {
+        
+        
+        for (int f = 0; f < board.size(); f++) {
+            for (int c = 0; c < board.size(); c++) {
+                for (int v = 0; v < board.size(); ++v){
+                    
+                }
+            }
+        }
+    }
+    
+    public boolean resolve(Board b) {
         boolean result = false;
+        
+        
         
         
         
@@ -23,7 +39,7 @@ public class Resolver {
     }
     
     public static void main(String[] args) {
-        BoardKenken b = new BoardKenken(4);
+        Board b = new Board(4);
         
         ArrayList<Cell> aCells = new ArrayList<Cell>(3);
         
@@ -83,6 +99,7 @@ public class Resolver {
         b.setRegions(regions);
         
         BoardColorator.print(b);
+        BoardColorator.printRegions(b);
         
         Resolver r = new Resolver();
         if (r.resolve(b)) {

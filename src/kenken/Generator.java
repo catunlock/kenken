@@ -18,11 +18,11 @@ import kenken.color.BoardColorator;
  * @author 1182347
  */
 public class Generator {
-    BoardKenken board;
+    Board board;
     Random rand;
     
-    public BoardKenken generate(int size) {
-        board = new BoardKenken(size);
+    public Board generate(int size) {
+        board = new Board(size);
         rand = new Random(System.nanoTime());
         
         for(int f = 0; f < board.size(); f++) {
@@ -297,18 +297,9 @@ public class Generator {
    
     public static void main(String[] args) {
         Generator g = new Generator();
-        BoardKenken b = g.generate(4);
+        Board b = g.generate(4);
         BoardColorator.print(b);
         
-        int i = 1;
-        for (Region r : b.getRegions()) {
-            System.out.println("Region " + i + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
-            System.out.print("\tValues: ");
-            for (Cell c : r.getCellList()) {
-                System.out.print(c.getSolutionValue() + " ");
-            }
-            System.out.println();
-            ++i;
-        }
+        BoardColorator.printRegions(b);
     }
 }

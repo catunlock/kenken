@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author xaloc
  */
-public class BoardKenken {
+public class Board {
     Cell[][] board;
     private ArrayList<Region> regions;
     
-    public BoardKenken(int size) {
+    public Board(int size) {
         board = new Cell[size][size];
         for (int i = 0; i < size; ++i){
             for (int j = 0; j < size; ++j) {
@@ -56,7 +56,7 @@ public class BoardKenken {
         return new ArrayList<Region>(regions);
     }
     
-    public static BoardKenken toBoard(String b){
+    public static Board toBoard(String b){
         return null;
     }
 }
