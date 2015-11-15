@@ -71,18 +71,22 @@ public class RankingDBController {
     }
     
     
-    public Ranking getRanking(String boardName) throws FileNotFoundException, IOException{
+    public Ranking getRanking(String boardName) {
         
         FileInputStream fis;
         Ranking ranking = null;
         
-        try {
-            fis = new FileInputStream(getPath(boardName));
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ranking = (Ranking) ois.readObject();
-            fis.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        if (exists(boardName)){
+            try {
+                fis = new FileInputStream(getPath(boardName));
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ranking = (Ranking) ois.readObject();
+                fis.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex){
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return ranking;
     }
