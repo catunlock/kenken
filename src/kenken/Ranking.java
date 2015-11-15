@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author marc
+ * @author Marc Ferré Monné
  */
 public class Ranking {
     
