@@ -46,11 +46,8 @@ public class BoardDBControllerDriver {
                     //enter = sc.next();
                     System.out.println("Introdueix usuari de tauler:");
                     String userBoard = sc.next();
-                    System.out.println("Introdueix dificultat de tauler:");
-                    String difficulty = sc.next();
                     Board board = new Board(x);
                     board.setBoardName(boardName);
-                    board.setDifficulty(difficulty);
                     board.setUsername(userBoard);
                     result = test.createBoard(board);
                     if (result == 0){
@@ -88,7 +85,6 @@ public class BoardDBControllerDriver {
                     else{
                         System.out.println("Nom tauler carregat: " + b.getBoardName());
                         System.out.println("User del tauler carregat: " + b.getUsername());
-                        System.out.println("Dificultat del tauler carregat: " + b.getDifficulty());
                         System.out.println("Mida del tauler carregat: " + b.size());
                     }
                     break;

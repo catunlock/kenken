@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Board {
     private String name;
     private String username;
-    private String difficulty;
     Cell[][] board;
     private ArrayList<Region> regions;
     
@@ -30,21 +29,13 @@ public class Board {
     public String getBoardName(){
         return name;
     }
-    
-    public String getDifficulty(){
-        return difficulty;
-    }
-    
+      
     public String getUsername(){
         return username;
     }
     
     public void setBoardName(String boardname){
         this.name = boardname;
-    }
-    
-    public void setDifficulty(String difficulty){
-        this.difficulty = difficulty;
     }
     
     public void setUsername(String username){

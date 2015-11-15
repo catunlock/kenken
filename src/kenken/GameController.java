@@ -25,15 +25,22 @@ public class GameController {
         return b;
     }
     
-    public Board generateBoard(int size, String dificultat){
+    /*
+    Pre: 3 <= size => 9, dificultat != null
+    Post: retorna una board generada amb el kenken de size = size
+    */
     
+    public Board generateBoard(int size){
         Generator generador = new Generator();
-        /*Board newBoard = generador.generate(size);
-        newBoard.setDifficulty(dificultat);*/ 
-        
-        return newBoard;
+        Board generated = generador.generate(size);
+        return generated;
     }
     
+    /*
+    public Board createBoard(int size, String boardname){
+        
+    }
+    */
     /*
     Pre: cert
     Post: es guarda a la DB el game actual i retorna
