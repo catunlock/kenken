@@ -25,6 +25,8 @@ public class KenKen {
     
     public static void main(String[] args) {
         // TODO code application logic here
+        DirectoryCreator dc = new DirectoryCreator();
+        dc.create();
         System.out.println("Starting Bitches KenKen...");
         KenKen k = new KenKen();        
     }
