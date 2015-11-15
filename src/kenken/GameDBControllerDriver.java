@@ -44,7 +44,7 @@ public class GameDBControllerDriver {
                     userName = sc.next();
                     System.out.println("Introdueix nom de tauler:");
                     boardName = sc.next();
-                    result = test.saveGame(null, boardName, userName);
+                    result = test.saveGame(null, userName, boardName);
                     if (result == 0){
                         System.out.println("Game creat correctament");
                     }

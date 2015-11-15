@@ -61,7 +61,7 @@ public class GameController {
     Post: retorna una llista de strings amb les partides guardades del jugador
     */
     public ArrayList<String> getSavedGames(String username){
-        return gdbc.getSavedGames(String username);
+        return gdbc.getSavedGames(username);
     }
     
     /*

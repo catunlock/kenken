@@ -59,7 +59,7 @@ public class GameDBController {
     public Game loadGame(String username, String nompartida){
         
         FileInputStream fis;
-        Game game = null;
+        Game game;
         String filepath = getPath(nompartida, username);
         if (new File(filepath).exists()){
             try {
