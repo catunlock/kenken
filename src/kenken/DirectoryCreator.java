@@ -15,7 +15,15 @@ public class DirectoryCreator {
     
     public DirectoryCreator(){}
     
-    public void create(){
+    public void createUser(String username){
+        File newuser = new File("Users/"+username+"/");
+        if (newuser.exists()){
+            
+        }
+        else newuser.mkdir();
+    }
+    
+    public void createInitial(){
         File dirusers = new File("Users/");
         if (dirusers.exists()){
             
