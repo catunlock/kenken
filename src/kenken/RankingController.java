@@ -37,5 +37,10 @@ public class RankingController {
         return result;
     }
     
+    public int deleteRanking(String boardName){
+        RankingDBController rkDBC = new RankingDBController();
+        return rkDBC.deleteRanking(boardName);
+    }
+    
     
 }

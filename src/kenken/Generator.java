@@ -36,7 +36,7 @@ public class Generator {
         shuffleRows();
         shuffleColumns();
         RegionMaker rm = new RegionMaker();
-        rm.makeRegions();
+        board.setRegions(rm.makeRegions());
         
         return board;
     }
@@ -74,21 +74,6 @@ public class Generator {
         int s = rand.nextInt(i + 1);
         swapColumn(i, s);
       }
-    }
-
-    private boolean searchAndDestroy(LinkedList<Pos> allPositions, Pos pos) {
-        boolean result = false;
-        Iterator<Pos> it = allPositions.iterator();
-        
-        while(it.hasNext()) {
-            Pos p = it.next();
-            if (p.f == pos.f && p.c == pos.c) {
-                it.remove();
-                result = true;
-            }
-        }
-        
-        return result;
     }
 
     private class Pos {
@@ -132,39 +117,107 @@ public class Generator {
         LinkedList<Pos> allPositions;
         int region;
         
-        public void makeRegions() {
+        public ArrayList<Region> makeRegions() {
             empilat = new boolean[board.size()][board.size()];
             allPositions = genAllPositions();
             region = 1;
             
+            ArrayList<Region> regions = new ArrayList<>();
+            
             while (!allPositions.isEmpty()) {
                 Pos p = allPositions.remove();
-                if (board.getCell(p.f, p.c).getRegion() == 0 && ! empilat[p.f][p.c]) {
+                if (board.getCell(p.f, p.c).getRegion() == 0 && ! empilat[p.f][p.c]) 
+                {
                     System.out.println("Start point of region: " + p);
-                    makeRegion(p);
+                    ArrayList<Cell> cells = makeRegion(p);
+                    
+                    Region r = constructRegion(region, cells);
+                    regions.add(r);
                 }else {
                     System.out.println("Skipping start point: " + p);
                 }
             }
+            
+            return regions;
         }
         
+        private Region.OperationType randOperation(ArrayList<Cell> cells) {
+            if (cells.size() == 1) {
+                return Region.OperationType.None;
+            }
+            else if (cells.size() == 2) {
+                int n = rand.nextInt(100);
+                if (n < 50) {
+                    return Region.OperationType.Subtract;
+                }else {
+                    return Region.OperationType.Divide;
+                }
+            }
+            else{
+                int n = rand.nextInt(100);
+                if (n < 50) {
+                    return Region.OperationType.Multiply;
+                }else {
+                    return Region.OperationType.Add;
+                }
+            }
+        }
+        
+        private Region constructRegion(int id, ArrayList<Cell> cells) {
+            Region.OperationType op = randOperation(cells);
+            
+            Region result = null;
+            Iterator<Cell> it = cells.iterator();
+            
+            if(it.hasNext()){
+                int resultValue = it.next().getSolutionValue();
+                
+                while (it.hasNext()) {
+                    Cell c = it.next();
+
+                    switch(op) {
+                        case Add:
+                            resultValue += c.getSolutionValue();
+                            break;
+                        case Subtract:
+                            resultValue -= c.getSolutionValue();
+                            break;
+                        case Multiply:
+                            resultValue *= c.getSolutionValue();
+                            break;
+                        case Divide:
+                            resultValue /= c.getSolutionValue();
+                            break;                    
+                    }
+                }
+                
+                result = new Region(id, cells, op, resultValue, false);
+            }
+            return result;
+        }
+                
         private void setCellRegion(Pos p, int region) {
             Cell c = board.getCell(p.f, p.c);
             c.setRegion(region);
             board.setCell(p.f, p.c, c);
         }
         
-        private void makeRegion(Pos pos) {
-            int regionSize = randRegionSize();
+        private ArrayList<Cell> makeRegion(Pos pos) {
+            //int regionSize = randRegionSize();
+            int regionSize = max(1,rand.nextInt(board.size() -1));
             int actualSize = 0;
             
+            ArrayList<Cell> cells = new ArrayList<>();
 
             Stack<Pos> s = new Stack<>();
             s.push(pos);
 
             while(! s.isEmpty()) {
                 Pos p = s.pop();
+                
                 setCellRegion(p, region);
+                cells.add(board.getCell(p.f, p.c));
+                
                 System.out.print(p + ", ");
 
                 Stack<Pos> directions = genAllDirections();
@@ -185,6 +238,8 @@ public class Generator {
             }
             region++;
             System.out.println();
+            
+            return cells;
         }
         
         private void shuffleVectorPos(ArrayList<Pos> v) {
@@ -244,5 +299,16 @@ public class Generator {
         Generator g = new Generator();
         BoardKenken b = g.generate(4);
         BoardColorator.print(b);
+        
+        int i = 1;
+        for (Region r : b.getRegions()) {
+            System.out.println("Region " + i + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
+            System.out.print("\tValues: ");
+            for (Cell c : r.getCellList()) {
+                System.out.print(c.getSolutionValue() + " ");
+            }
+            System.out.println();
+            ++i;
+        }
     }
 }

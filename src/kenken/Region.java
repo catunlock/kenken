@@ -7,6 +7,7 @@ package kenken;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -22,22 +23,21 @@ public class Region implements Serializable{
     
     enum OperationType{Add, Subtract, Multiply, Divide, None};
     
-    private Cell cell;
     private ArrayList<Cell> cellList;
     private OperationType operationType;
     private int result;
     private boolean valid;
+    private int id;
 
-    public Region(ArrayList<Cell> cellList, OperationType operationType, int result, boolean valid) {
-        this.cellList = cellList;
+    public Region(int id, ArrayList<Cell> cellList, OperationType operationType, int result, boolean valid) {
         this.operationType = operationType;
         this.result = result;
         this.valid = valid;
+        this.id = id;
+        setCellList(cellList);
     }
 
-    public Cell getCell() {
-        return cell;
-    }
+    
 
     public ArrayList<Cell> getCellList() {
         return cellList;
@@ -55,12 +55,12 @@ public class Region implements Serializable{
         return valid;
     }
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
-    }
-
     public void setCellList(ArrayList<Cell> cellList) {
         this.cellList = cellList;
+        Iterator<Cell> it = this.cellList.iterator();
+        while(it.hasNext()) {
+            it.next().setRegion(id);
+        }
     }
 
     public void setOperationType(OperationType operationType) {
