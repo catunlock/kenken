@@ -5,12 +5,15 @@
  */
 package kenken;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author xaloc
  */
 public class BoardKenken {
     Cell[][] board;
+    private ArrayList<Region> regions;
     
     public BoardKenken(int size) {
         board = new Cell[size][size];
@@ -43,6 +46,14 @@ public class BoardKenken {
             sb.append('\n');
         }
         return sb.toString();
+    }
+    
+    public void setRegions(ArrayList<Region> regions) {
+        this.regions = regions;
+    }
+    
+    public ArrayList<Region> getRegions() {
+        return new ArrayList<Region>(regions);
     }
     
     public static BoardKenken toBoard(String b){
