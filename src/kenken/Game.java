@@ -40,11 +40,14 @@ public class Game implements Serializable{
     0 si s'ha inicialitzat amb èxit
     -1 si no s'ha carregat cap board
     */
-    public int setBoard(String boardName){
+    /*public int setBoard(String boardName){
         GameController gc = new GameController();
         this.board = gc.newGame(boardName);
         if (this.board == null) return -1;
         else return 0;
+    }*/
+    public void setBoard(Board board){
+        this.board = board;
     }
     
     /*
@@ -81,10 +84,10 @@ public class Game implements Serializable{
     -1 si ja existeix
     -2 si hi ha errors interns
     */
-    public int saveGame(){
+    /*public int saveGame(){
         GameController gc = new GameController();
         return gc.saveGame(this, user.getUsername());
-    }
+    }*/
     
     /*
     Pre: cert
