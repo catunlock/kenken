@@ -142,7 +142,7 @@ public class UserDBController {
     }
     
     private String getPath(String username) {
-        return Directory+username+Extension;
+        return Directory+username+"/"+username+Extension;
     }
     
     private boolean exists(User user) {

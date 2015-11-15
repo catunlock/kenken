@@ -106,7 +106,7 @@ public class GameDBController {
     Post: obté el path del fitxer que es vol guardar o carregar
     */
     private String getPath(String nompartida, String username) {
-        return username+"/"+Directory+nompartida+Extension;
+        return "Users/"+username+"/"+Directory+nompartida+Extension;
     }
     
     
