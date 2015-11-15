@@ -39,6 +39,18 @@ public class Board {
         return username;
     }
     
+    public void setBoardName(String boardname){
+        this.name = boardname;
+    }
+    
+    public void setDifficulty(String difficulty){
+        this.difficulty = difficulty;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
     public Cell getCell(int x, int y) {
         return board[x][y];
     }
