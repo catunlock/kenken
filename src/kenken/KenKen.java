@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package kenken;
+
+import java.util.Scanner;
+
 /**
  *
  * @author SuNLoCK
@@ -17,18 +20,57 @@ public class KenKen {
     
     
     
-    public KenKen() {
+    /*public KenKen() {
         Generator gen = new Generator();
         Board b = gen.generate(4);
         System.out.println("Board: " + b);
-    }
+    }*/
     
     public static void main(String[] args) {
         // TODO code application logic here
         DirectoryCreator dc = new DirectoryCreator();
         dc.create();
-        System.out.println("Starting Bitches KenKen...");
-        KenKen k = new KenKen();        
+        UserController uc = new UserController();
+        Scanner sc = new Scanner(System.in);
+        int optionuser;
+        int error = -1;
+        String nom;
+        String pass;
+        System.out.println("Vols registrar un usuari, fer login, o jugar com a convidat?");
+        System.out.println("1. Registrar");
+        System.out.println("2. Login");
+        System.out.println("3. Jugar com a convidat");
+        optionuser = sc.nextInt();
+        switch(optionuser){
+            case 1:
+                error = -1;
+                while (error == -1){
+                    System.out.print("Nom de l'usuari:");
+                    nom = sc.next();
+                    System.out.print("Password de l'usuari:");
+                    pass = sc.next();
+                    error = uc.createUser(nom,pass);
+                    if (error == -1) System.out.println("Ja hi ha un usuari amb aquest nom");
+                }
+                break;
+            case 2:
+                error = -1;
+                while (error == -1 || error == -2){
+                    System.out.print("Nom de l'usuari:");
+                    nom = sc.next();
+                    System.out.print("Password de l'usuari:");
+                    pass = sc.next();
+                    error = uc.login(nom, pass);
+                    if (error == -1) System.out.println("Nom d'usuari incorrecte");
+                    else if (error == -2) System.out.println("Password incorrecte");
+                }
+                break;
+            case 3:
+                break;
+        }
+        
+        //System.out.println("Starting Bitches KenKen...");
+        //KenKen k = new KenKen();        
     }
     
 }
