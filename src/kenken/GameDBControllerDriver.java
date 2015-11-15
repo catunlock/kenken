@@ -7,6 +7,7 @@ package kenken;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class GameDBControllerDriver {
         System.out.println("-----------------------------------------------"); 
         System.out.println("1. Guardar un game a la DB --> 0: guardat correctament, -1: ja existent");
         System.out.println("2. Carregar un game de la DB --> 0: correcte, -1: el game no existeix");
+        System.out.println("3. Mostrar llista de partides guardades a la DB");
         System.out.println("-1. Exit");
         System.out.println("-----------------------------------------------");
         
@@ -62,6 +64,12 @@ public class GameDBControllerDriver {
                     if (g == null) System.out.println("La partida no existeix.");
                     else System.out.println("Partida recuperada correctament.");
                     break;
+                case 3:
+                    System.out.println("Introdueix nom de jugador:");
+                    userName = sc.next();
+                    ArrayList<String> llista = null;
+                    llista = test.getSavedGames(userName);
+                    System.out.println(llista);
             }
         }
     }   
