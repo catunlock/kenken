@@ -19,11 +19,13 @@ public class GameController {
     Post: es retorna una board per començar un nou joc
     si retorna null hi ha hagut algun error en la càrrega
     */
-    public Board newGame(String boardName){
+    /*public Board newGame(String boardName){
         kenken.BoardDBController bdbc = new kenken.BoardDBController();
         Board b = bdbc.loadBoard(boardName);
         return b;
-    }
+    }*/
+    
+    
     
     /*
     Pre: 3 <= size => 9, dificultat != null
