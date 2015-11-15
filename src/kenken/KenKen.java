@@ -149,7 +149,9 @@ public class KenKen {
                         case 4:
                             System.out.print("Nom de la Board de la que es vol veure el ranking:");
                             nom = sc.next();
-                            System.out.println(rc.getRanking(nom).getRecordList());
+                            Ranking rk = rc.getRanking(nom);
+                            if (rk == null) System.out.println("Aquest ranking encara no eisteix!");
+                            else System.out.println(rc.getRanking(nom).getRecordList());
                             break;
                         case 5:
                             salir = true;
@@ -222,7 +224,9 @@ public class KenKen {
                         case 2:
                             System.out.print("Nom de la Board de la que es vol veure el ranking:");
                             nom = sc.next();
-                            System.out.println(rc.getRanking(nom).getRecordList());
+                            Ranking rk = rc.getRanking(nom);
+                            if (rk == null) System.out.println("Aquest ranking encara no eisteix!");
+                            else System.out.println(rc.getRanking(nom).getRecordList());
                             break;
                         case 3:
                             salir = true;
