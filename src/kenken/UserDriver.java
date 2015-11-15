@@ -89,8 +89,31 @@ public class UserDriver {
                     long segons = sc.nextLong();
                     Duration temps = Duration.ofSeconds(segons);
                     test.incrementTotalTimePlayed(temps);
+                    break;
                 case 9:
-                    
+                    System.out.println("Introdueix nom del board:");
+                    String boardname = sc.next();
+                    System.out.println("Introdueix el tamany:");
+                    int size = sc.nextInt();
+                    Board b = new Board(size);
+                    b.setUsername(test.getUsername());
+                    b.setBoardName(boardname);
+                    test.addBoard(b);
+                    break;
+                case 10:
+                    System.out.println("-- Taulers de l'usuari -- ");
+                    ArrayList<Board> boards = test.getCreatedBoards();
+                    for(int i=0; i < boards.size(); i++) {
+                        System.out.println("-- Tauler " + i + " -- ");
+                        System.out.println("Nom tauler: " + boards.get(i).getBoardName());
+                        System.out.println("Usuari: " + boards.get(i).getUsername());
+                        System.out.println("Mida: " + boards.get(i).size());
+                    }
+                    break;
+                case 11:
+                    System.out.println("Introdueix posicio del board a eliminar:");
+                    int pos = sc.nextInt();
+                    test.deleteBoard(pos);
             }
         }
 
