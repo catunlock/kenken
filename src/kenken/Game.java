@@ -52,6 +52,22 @@ public class Game implements Serializable{
     
     /*
     Pre: cert
+    Post: this.user = user
+    */
+    public void setUser(User user){
+        this.user = user;
+    }
+    
+    /*
+    Pre: time >= 0
+    Post: this.time = this.time + time (en segons)
+    */
+    public void setTime(int time){
+        this.time.plusSeconds(time);
+    }
+    
+    /*
+    Pre: cert
     Post: es retorna un temps (imagino que temps de joc pero no ho se)
     */
     public long getTime()
