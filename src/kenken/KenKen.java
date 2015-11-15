@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author SuNLoCK
+ * @author Gerard
  * 
  */
 public class KenKen {
