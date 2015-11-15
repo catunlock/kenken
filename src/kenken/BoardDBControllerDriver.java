@@ -36,7 +36,6 @@ public class BoardDBControllerDriver {
         String enter;
         
         while((option = sc.nextInt()) != -1) {
-            //enter = sc.next();
             switch(option){
                 case 1:
                     System.out.println("Introdueix nom de tauler:");

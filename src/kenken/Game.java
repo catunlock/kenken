@@ -92,36 +92,4 @@ public class Game implements Serializable{
     {
         return board;
     }
-    
-    /*
-    Pre: cert
-    Post: es guarda a la DB el game actual i retorna
-    0 si s'ha guardat amb èxit
-    -1 si ja existeix
-    -2 si hi ha errors interns
-    */
-    /*public int saveGame(){
-        GameController gc = new GameController();
-        return gc.saveGame(this, user.getUsername());
-    }*/
-    
-    /*
-    Pre: cert
-    Post: carrega un joc guardat
-    retorna 0 si es carrega correctament
-    retorna -1 si no existeix la partida guardada
-    retorna -2 si hi han errors interns
-    retorna -3 si l'usuari no està loguejat
-    */
-    public int loadGame(String userName, String boardName){
-        if (userName == null) return -3;
-        else {
-            GameController gc = new GameController();
-            Game g = gc.loadGame(userName, boardName);
-            time.plusNanos(g.getTime());
-            mode = Mode.valueOf(g.getMode());
-            //UserController uc = new UserController();
-            return 0;
-        }
-    }
 }
