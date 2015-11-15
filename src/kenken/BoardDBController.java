@@ -65,8 +65,7 @@ public class BoardDBController {
             infoBoard.add(newBoard.getBoardName());
             infoBoard.add(newBoard.getUsername());
             infoBoard.add(newBoard.getDifficulty());
-            infoBoard.add(String.valueOf(newBoard.getSizeX()));
-            infoBoard.add(String.valueOf(newBoard.getSizeY()));
+            infoBoard.add(String.valueOf(newBoard.size()));
             
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);

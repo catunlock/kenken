@@ -35,7 +35,7 @@ public class Board {
         return difficulty;
     }
     
-    public String getUserName(){
+    public String getUsername(){
         return username;
     }
     
