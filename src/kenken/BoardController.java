@@ -29,7 +29,7 @@ public class BoardController {
     /* Pre: boardName != null
        Post: retorna la board amb nom boardName, si no existeix, retorna null
     */
-    public Board exportBoard(String boardName) throws IOException{
+    public Board exportBoard(String boardName){
         return bDBc.loadBoard(boardName);
     }
     /*
