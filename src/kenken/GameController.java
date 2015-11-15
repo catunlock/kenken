@@ -26,9 +26,7 @@ public class GameController {
         Board b = bdbc.loadBoard(boardName);
         return b;
     }*/
-    
-    
-    
+ 
     /*
     Pre: 3 <= size => 9, dificultat != null
     Post: retorna una board generada amb el kenken de size = size

@@ -113,24 +113,26 @@ public class UserDBController {
     /*
     Pre: username != NULL
     Post: Retorna un User amb els atributs de l'usuari a la base de dades amb 
-    nom username.
+    nom username, si no existeix el usuari, retorna null
     */
     public User getUser(String username){
         
         FileInputStream fis;
         User user = null;
         
-        try {
-            fis = new FileInputStream(getPath(username));
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            user = (User) ois.readObject();
-            fis.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+        if (exists(username)){
+            try {
+                fis = new FileInputStream(getPath(username));
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                user = (User) ois.readObject();
+                fis.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return user;
     }
@@ -150,6 +152,7 @@ public class UserDBController {
     private boolean exists(String username) {
         return (new File(getPath(username)).isFile());
     }
+    
     
     private int writeUser(User user, String filepath) {
         int result = -2;
