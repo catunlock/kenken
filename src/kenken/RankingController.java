@@ -24,7 +24,7 @@ public class RankingController {
         return result;
     }
     
-    public Ranking getRanking(String boardName) throws IOException{
+    public Ranking getRanking(String boardName){
         RankingDBController rkDBC = new RankingDBController();
         Ranking ranking = rkDBC.getRanking(boardName);
         return ranking;
