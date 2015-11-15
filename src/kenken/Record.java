@@ -5,6 +5,7 @@
  */
 package kenken;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Marc Ferré Monné
  */
-public class Record {
+public class Record implements Serializable{
     
     private String namePlayer;
     private Duration time;
