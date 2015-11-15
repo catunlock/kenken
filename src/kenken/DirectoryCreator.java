@@ -15,12 +15,17 @@ public class DirectoryCreator {
     
     public DirectoryCreator(){}
     
-    public void createUser(String username){
+    public int createUser(String username){
         File newuser = new File("Users/"+username+"/");
+        File usergames = new File("Users/"+username+"/Games/");
         if (newuser.exists()){
-            
+            return -1;
         }
-        else newuser.mkdir();
+        else {
+            newuser.mkdir();
+            usergames.mkdir();
+            return 0;
+        }
     }
     
     public void createInitial(){
@@ -37,6 +42,13 @@ public class DirectoryCreator {
         }
         else {
             dirboards.mkdir();
+        }
+        File dirranking = new File("Rankings/");
+        if (dirboards.exists()){
+            
+        }
+        else {
+            dirranking.mkdir();
         }
     }
 }
