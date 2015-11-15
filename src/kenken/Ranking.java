@@ -5,13 +5,14 @@
  */
 package kenken;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Marc Ferré Monné
  */
-public class Ranking {
+public class Ranking implements Serializable{
     
     public enum GameMode{Normal, TimeAttack};
     
