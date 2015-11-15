@@ -17,17 +17,6 @@ public class GameController {
     GameDBController gdbc = new GameDBController();
     
     /*
-    Pre: cert
-    Post: es retorna una board per començar un nou joc
-    si retorna null hi ha hagut algun error en la càrrega
-    */
-    /*public Board newGame(String boardName){
-        kenken.BoardDBController bdbc = new kenken.BoardDBController();
-        Board b = bdbc.loadBoard(boardName);
-        return b;
-    }*/
- 
-    /*
     Pre: 3 <= size => 9, dificultat != null
     Post: retorna una board generada amb el kenken de size = size
     */
@@ -43,6 +32,7 @@ public class GameController {
         
     }
     */
+    
     /*
     Pre: cert
     Post: es guarda a la DB el game actual i retorna
