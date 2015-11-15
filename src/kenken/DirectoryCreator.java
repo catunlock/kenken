@@ -44,7 +44,7 @@ public class DirectoryCreator {
             dirboards.mkdir();
         }
         File dirranking = new File("Rankings/");
-        if (dirboards.exists()){
+        if (dirranking.exists()){
             
         }
         else {
