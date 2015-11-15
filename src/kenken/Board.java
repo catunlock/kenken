@@ -5,13 +5,14 @@
  */
 package kenken;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author xaloc
  */
-public class Board {
+public class Board implements Serializable{
     private String name;
     private String username;
     Cell[][] board;
