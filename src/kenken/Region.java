@@ -30,11 +30,11 @@ public class Region implements Serializable{
     private int id;
 
     public Region(int id, ArrayList<Cell> cellList, OperationType operationType, int result, boolean valid) {
-        this.cellList = cellList;
         this.operationType = operationType;
         this.result = result;
         this.valid = valid;
         this.id = id;
+        setCellList(cellList);
     }
 
     
