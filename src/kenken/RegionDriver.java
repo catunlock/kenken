@@ -29,7 +29,7 @@ public class RegionDriver {
         System.out.println("-1. Sortir.");
         System.out.println("---------------");
         
-        Region region = new Region(1, new ArrayList<Cell>(), Region.OperationType.None, 3, false);
+        Region region = new Region(1, new ArrayList<CellKenken>(), Region.OperationType.None, 3, false);
         
         int opt = 0;
         while ((opt = scan.nextInt()) != -1){
