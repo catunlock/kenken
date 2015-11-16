@@ -36,6 +36,7 @@ public class RankingDriver {
                     ranking = new Ranking(nomTauler, Ranking.GameMode.valueOf(modeJoc));
                     break;
                 case 2:
+                    System.out.println("Introudeix alguna posicio existent del ranking:");
                     int pos = scan.nextInt();
                     System.out.println(ranking.getRecordByPos(pos).getNamePlayer());
                     break;
