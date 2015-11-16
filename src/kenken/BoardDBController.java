@@ -169,7 +169,10 @@ public class BoardDBController {
     
     /* 
     Pre: infoBoard != null, infoPath es un path de un arxiu encara no existent
-    Post: Escriu la informacio de board a l'arxiu <nombard>.inf al path demanat 
+    Post: Escriu la informacio de board a l'arxiu <nomboard>.inf al path demanat
+        Return:
+            0:  Informacio de board guardada correctament
+            -2: Error intern
     */
     private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
         int result;
@@ -192,7 +195,13 @@ public class BoardDBController {
         return result;
     }
     
-    /* Escriu el objecte board al path demanat */
+     /* 
+    Pre: newBoard != null, pathFisica es un path de un arxiu encara no existent
+    Post: Escriu la informacio de board a l'arxiu <nomboard>.brd al path demanat
+        Return:
+            0:  Board guardada correctament
+            -2: Error intern
+    */
     private int writeBoardObj(Board newBoard, String pathFisica) {
         int result;
         
