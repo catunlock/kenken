@@ -142,8 +142,6 @@ public class Cell implements Serializable{
     }
 
     public void setSolutionValue(int newVal) {
-        if (this.solutionValue == -1) {
             this.solutionValue = newVal;
-        }
     }
 }
