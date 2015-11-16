@@ -11,7 +11,6 @@ package kenken.domain.classes;
  */
 public class CellKenken extends Cell{
     
-    /* ATRIBUTO NO OFICIAL DE LA ESPECIFICACION*/
     private int region = 0;
 
     public CellKenken(int posX, int posY, boolean original, int solution) {
