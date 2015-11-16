@@ -5,7 +5,15 @@
  */
 package kenken;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import static java.lang.Integer.min;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 import java.util.ArrayList;
+import java.util.Iterator;
 import kenken.color.BoardColorator;
 
 /**
@@ -17,6 +25,8 @@ public class Resolver {
     Board board = null;
     private ArrayList<ArrayList<Boolean>> numerosFila;
     private ArrayList<ArrayList<Boolean>> numerosColumna;
+    
+    private ArrayList<ArrayList<Boolean>> untouchables;
     
     public void escriure(Board b) {
 	if (b.size() > 0) {
@@ -44,19 +54,65 @@ public class Resolver {
         return r;
     }
     
-    private boolean checkSolution() {
+    private boolean checkRegion(Region r) {
+        Region.OperationType op = r.getOperationType();
+            
         boolean result = false;
-        
-        
-        
+        Iterator<Cell> it = r.getCellList().iterator();
+
+        if(it.hasNext()){
+            int resultValue = it.next().getSolutionValue();
+
+            while (it.hasNext()) {
+                Cell c = it.next();
+
+                switch(op) {
+                    case Add:
+                        resultValue += c.getSolutionValue();
+                        break;
+                    case Subtract:
+                        resultValue = abs(resultValue - c.getSolutionValue());
+                        break;
+                    case Multiply:
+                        resultValue *= c.getSolutionValue();
+                        break;
+                    case Divide:
+                        resultValue = max(resultValue,c.getSolutionValue())/ min(resultValue,c.getSolutionValue());
+                        break;                    
+                }
+                
+            }
+            if (resultValue == r.getResult()) {
+                    result = true;
+            }
+        }
         return result;
+    }
+    
+    private boolean checkSolution() {
+        ArrayList<Region> regions = board.getRegions();
+        
+        boolean correct = true;
+        int i = 0;
+        while (correct && i < regions.size()) {
+            correct = checkRegion(regions.get(i));
+            ++i;
+        }
+        
+        return correct;
     }
     
     public void backtrack(Pos p) {
         
         if (p.f == board.size() && p.c == 0) { 
-            BoardColorator.print(board);
-            System.out.println();
+            if (checkSolution()) {
+                BoardColorator.print(board);
+                System.out.println();
+            }
+            //escriure(board);
+        }
+        else if (untouchables.get(p.f).get(p.c)) {
+            backtrack(nextCell(p));
         }
         else {
             for (int i = 0; i < board.size(); ++i) {
@@ -74,8 +130,10 @@ public class Resolver {
 
                 }
             }
-        }
+	}
     }
+
+    
 
     
     public boolean resolve(Board b) {
@@ -85,13 +143,28 @@ public class Resolver {
         
         numerosFila = new ArrayList<>();
         numerosColumna = new ArrayList<>();
+        untouchables = new ArrayList<>();
         
         for (int i = 0; i < board.size(); ++i) {
             numerosFila.add(new ArrayList<>());
             numerosColumna.add(new ArrayList<>());
+            untouchables.add(new ArrayList<>());
+            
             for (int j = 0; j < board.size(); ++j) {
                 numerosFila.get(i).add(false);
                 numerosColumna.get(i).add(false);
+                untouchables.get(i).add(false);
+            }
+        }
+        
+        
+        for (Region r : b.getRegions()) {
+            if (r.getOperationType() == Region.OperationType.None) {
+                Cell c = r.getCellList().get(0);
+                untouchables.get(c.getPosX()).set(c.getPosY(), true);
+                
+                numerosFila.get(c.getPosX()).set(c.getSolutionValue() -1, true);
+                numerosColumna.get(c.getPosY()).set(c.getSolutionValue() -1, true);
             }
         }
         
@@ -100,7 +173,12 @@ public class Resolver {
         return result;
     }
     
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        /*File file = new File("output2.log"); 
+        PrintStream printStream = new PrintStream(new FileOutputStream(file)); 
+        System.setOut(printStream);*/
+        
         Board b = new Board(4);
         
         ArrayList<Cell> aCells = new ArrayList<>(3);
@@ -141,22 +219,26 @@ public class Resolver {
         
         Region re = new Region(5,eCells, Region.OperationType.Subtract, 1, false);
         
-        ArrayList<Cell> fCells = new ArrayList<>(3);
+        ArrayList<Cell> fCells = new ArrayList<>(1);
+        Cell fCell1 = b.getCell(3,2);
+        fCell1.setSolutionValue(3);
+        fCells.add(fCell1);
+        Region rf = new Region(7,fCells, Region.OperationType.None, 3, false);
         
-        fCells.add(b.getCell(3,2));
-        fCells.add(b.getCell(2,3));
-        fCells.add(b.getCell(3,3));
+        ArrayList<Cell> gCells = new ArrayList<>(1);
+        gCells.add(b.getCell(2,3));
+        gCells.add(b.getCell(3,3));
+        Region rg = new Region(6, gCells, Region.OperationType.Multiply, 6, false);        
         
-        Region rf = new Region(6,fCells, Region.OperationType.Multiply, 18, false);
         
-        ArrayList<Region> regions = new ArrayList<>(6);
-        
+        ArrayList<Region> regions = new ArrayList<>(7);
         regions.add(ra);
         regions.add(rb);
         regions.add(rc);
         regions.add(rd);
         regions.add(re);
         regions.add(rf);
+        regions.add(rg);
         
         b.setRegions(regions);
         
