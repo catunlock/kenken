@@ -28,7 +28,7 @@ public class Generator {
         for(int f = 0; f < board.size(); f++) {
             for (int c = 0; c < board.size(); c++) {
                 int v = ((f+c)%board.size()) + 1;
-                Cell ce = board.getCell(f, c);
+                CellKenken ce = board.getCell(f, c);
                 ce.setSolutionValue(v);
             }
         }
@@ -44,8 +44,8 @@ public class Generator {
     
     private void swapRow(int i, int j) {
         for (int k = 0; k < board.size(); k++) {
-            Cell c1 = board.getCell(i,k);
-            Cell c2 = board.getCell(j,k);
+            CellKenken c1 = board.getCell(i,k);
+            CellKenken c2 = board.getCell(j,k);
             
             board.setCell(j, k, c1);
             board.setCell(i, k, c2);
@@ -54,8 +54,8 @@ public class Generator {
  
     private void swapColumn(int i, int j) {
         for (int k = 0; k < board.size(); k++) {
-            Cell c1 = board.getCell(k,i);
-            Cell c2 = board.getCell(k,j);
+            CellKenken c1 = board.getCell(k,i);
+            CellKenken c2 = board.getCell(k,j);
             
             board.setCell(k, j, c1);
             board.setCell(k, i, c2);
@@ -129,7 +129,7 @@ public class Generator {
                 if (board.getCell(p.f, p.c).getRegion() == 0 && ! empilat[p.f][p.c]) 
                 {
                     System.out.println("Start point of region: " + p);
-                    ArrayList<Cell> cells = makeRegion(p);
+                    ArrayList<CellKenken> cells = makeRegion(p);
                     
                     Region r = constructRegion(region, cells);
                     regions.add(r);
@@ -141,7 +141,7 @@ public class Generator {
             return regions;
         }
         
-        private Region.OperationType randOperation(ArrayList<Cell> cells) {
+        private Region.OperationType randOperation(ArrayList<CellKenken> cells) {
             if (cells.size() == 1) {
                 return Region.OperationType.None;
             }
@@ -163,11 +163,11 @@ public class Generator {
             }
         }
         
-        private Region constructRegion(int id, ArrayList<Cell> cells) {
+        private Region constructRegion(int id, ArrayList<CellKenken> cells) {
             Region.OperationType op = randOperation(cells);
             
             Region result = null;
-            Iterator<Cell> it = cells.iterator();
+            Iterator<CellKenken> it = cells.iterator();
             
             if(it.hasNext()){
                 int resultValue = it.next().getSolutionValue();
@@ -197,17 +197,17 @@ public class Generator {
         }
                 
         private void setCellRegion(Pos p, int region) {
-            Cell c = board.getCell(p.f, p.c);
+            CellKenken c = board.getCell(p.f, p.c);
             c.setRegion(region);
             board.setCell(p.f, p.c, c);
         }
         
-        private ArrayList<Cell> makeRegion(Pos pos) {
+        private ArrayList<CellKenken> makeRegion(Pos pos) {
             //int regionSize = randRegionSize();
             int regionSize = max(1,rand.nextInt(board.size() -1));
             int actualSize = 0;
             
-            ArrayList<Cell> cells = new ArrayList<>();
+            ArrayList<CellKenken> cells = new ArrayList<>();
 
             Stack<Pos> s = new Stack<>();
             s.push(pos);
