@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken.persistence.drivers;
+package kenken.persistance.drivers;
 
 import kenken.persistance.controllers.UserDBController;
 import kenken.domain.classes.User;
