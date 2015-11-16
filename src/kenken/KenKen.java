@@ -58,11 +58,10 @@ public class KenKen {
                         nom = sc.next();
                         System.out.print("Password de l'usuari:");
                         pass = sc.next();
-                        if (dc.createUser(nom) == -1) {
+                        if (uc.createUser(nom, pass) == -1) {
                             System.out.println("Ja hi ha un usuari amb aquest nom");
                         }
                         else {
-                            uc.createUser(nom,pass);
                             error = uc.login(nom, pass);
                         }
                         break;

@@ -91,7 +91,7 @@ public class GameDBController {
     */
     public ArrayList<String> getSavedGames(String username){
         ArrayList<String> results = new ArrayList<>();
-        File[] files = new File(username+"/"+Directory).listFiles();
+        File[] files = new File("Users/"+username+"/"+Directory).listFiles();
         if (files == null) return null;
         else {
             //If this pathname does not denote a directory, then listFiles() returns null.

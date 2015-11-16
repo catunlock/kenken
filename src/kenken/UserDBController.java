@@ -41,11 +41,12 @@ public class UserDBController {
     public int createUser(User newUser){
         int result = 1;
         String filepath = getPath(newUser);
-        
+        DirectoryCreator dc = new DirectoryCreator();
         if (new File(filepath).isFile()){
             result = -1;
         }
         else {
+            dc.createUser(newUser.getUsername());
             result = writeUser(newUser, filepath);
         }
        
