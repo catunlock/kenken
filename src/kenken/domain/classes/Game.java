@@ -21,7 +21,6 @@ public class Game implements Serializable{
     private Mode mode;
     private Board board;
     private User user;
-    private String username;
 
     /*
     Pre: mode = "normal" o "TimeAttack"
@@ -74,9 +73,9 @@ public class Game implements Serializable{
     Pre: cert
     Post: es retorna un temps (imagino que temps de joc pero no ho se)
     */
-    public String getUser()
+    public User getUser()
     {
-        return username;
+        return user;
     }
     
     /*

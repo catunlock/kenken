@@ -63,9 +63,9 @@ public class GameDriver {
                     testGame.addTime(temps);
                     break;
                 case 2:
-                    System.out.println("Usuari: " + testGame.getUser());
+                    System.out.println("Usuari: " + testGame.getUser().getUsername());
                     System.out.println("Mode: " + testGame.getMode());
-                    System.out.println("Temps: " + testGame.getTime()); 
+                    System.out.println("Temps: " + testGame.getTime().getSeconds()); 
                     System.out.println("Board size: " + testGame.getBoard().size());
                     break;                    
             }

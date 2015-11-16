@@ -63,7 +63,7 @@ public class UserDriver {
                 case 2:
                     System.out.println("Solved Games:" + test.getSolvedGames());
                     System.out.println("Started Games:" + test.getStartedGames());
-                    System.out.println("Total Time Played:" + test.getTotalTimePlayed());
+                    System.out.println("Total Time Played:" + test.getTotalTimePlayed().getSeconds());
                     System.out.println("Total Created Boards:" + test.getTotalCreatedBoards());
                     System.out.println("Actual Created Boards:" + test.getActualCreatedBoard());
                     break;                    
