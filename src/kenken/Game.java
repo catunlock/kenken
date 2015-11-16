@@ -54,7 +54,7 @@ public class Game implements Serializable{
     }
     
     /*
-    Pre: time >= 0
+    Pre: temps != null
     Post: this.time = this.time + time (en segons)
     */
     public void addTime(Duration temps){
