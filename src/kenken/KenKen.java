@@ -5,6 +5,15 @@
  */
 package kenken;
 
+import kenken.persistance.controllers.DirectoryCreator;
+import kenken.domain.algorithms.Generator;
+import kenken.domain.classes.Ranking;
+import kenken.domain.classes.Game;
+import kenken.domain.classes.Board;
+import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.GameController;
+import kenken.domain.controllers.RankingController;
+import kenken.domain.controllers.BoardController;
 import java.util.Scanner;
 
 /**

@@ -5,11 +5,11 @@
  */
 package kenken.color;
 
-import kenken.Board;
-import kenken.Board;
-import kenken.Cell;
-import kenken.CellKenken;
-import kenken.Region;
+import kenken.domain.classes.Board;
+import kenken.domain.classes.Board;
+import kenken.domain.classes.Cell;
+import kenken.domain.classes.CellKenken;
+import kenken.domain.classes.Region;
 
 /**
  *
