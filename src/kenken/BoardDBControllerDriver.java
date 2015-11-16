@@ -33,7 +33,6 @@ public class BoardDBControllerDriver {
         Integer option;
         String boardName;
         int result;
-        String enter;
         
         while((option = sc.nextInt()) != -1) {
             switch(option){
@@ -62,7 +61,6 @@ public class BoardDBControllerDriver {
                 case 2:
                     System.out.println("Introdueix nom de tauler a eliminar:");
                     boardName = sc.next();
-                    //boardName = boardName.replaceAll("(\\r|\\n)", "");
                     result = test.deleteBoard(boardName);
                     if (result == 0){
                         System.out.println("Tauler eliminat correctament");

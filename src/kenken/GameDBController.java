@@ -91,14 +91,17 @@ public class GameDBController {
     */
     public ArrayList<String> getSavedGames(String username){
         ArrayList<String> results = new ArrayList<>();
-        File[] files = new File(username+"/"+Directory).listFiles();
-        //If this pathname does not denote a directory, then listFiles() returns null.
-        for (File file : files) {
-            if (file.isFile()) {
-                results.add(file.getName());
+        File[] files = new File("Users/"+username+"/"+Directory).listFiles();
+        if (files == null) return null;
+        else {
+            //If this pathname does not denote a directory, then listFiles() returns null.
+            for (File file : files) {
+                if (file.isFile()) {
+                    results.add(file.getName());
+                }
             }
+            return results;
         }
-        return results;
     }
     
     /*

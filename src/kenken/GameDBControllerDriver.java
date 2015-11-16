@@ -42,9 +42,10 @@ public class GameDBControllerDriver {
                 case 1:
                     System.out.println("Introdueix nom de jugador:");
                     userName = sc.next();
-                    System.out.println("Introdueix nom de tauler:");
+                    System.out.println("Introdueix nom de partida:");
                     boardName = sc.next();
-                    result = test.saveGame(null, userName, boardName);
+                    Game save = new Game("Normal");
+                    result = test.saveGame(save, userName, boardName);
                     if (result == 0){
                         System.out.println("Game creat correctament");
                     }
@@ -58,7 +59,7 @@ public class GameDBControllerDriver {
                 case 2:
                     System.out.println("Introdueix nom de jugador:");
                     userName = sc.next();
-                    System.out.println("Introdueix nom de board:");
+                    System.out.println("Introdueix nom de partida:");
                     boardName = sc.next();
                     Game g = test.loadGame(userName, boardName);
                     if (g == null) System.out.println("La partida no existeix.");

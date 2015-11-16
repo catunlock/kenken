@@ -116,8 +116,9 @@ public class BoardDBController {
         return result;
     }
     
-    /*  Pre: boardName != NULL
-    ** Post: Retorna el board seleccionat, si b = NULL, el board no existeix
+    /*  
+    Pre: boardName != NULL
+    Post: Retorna el board seleccionat, si b = NULL, el board no existeix
     */
     public Board loadBoard(String nameBoard){
         
@@ -149,16 +150,30 @@ public class BoardDBController {
         }
         return b;
     }
-           
+    
+    /* 
+    Pre: board != null
+    Post: retorna un string amb el path en el que hauria de guardarse el board
+    */
     private String getPath(Board board){
         return getPath(board.getBoardName());
     }
     
+    /* 
+    Pre: boardName != null
+    Post: retorna un string amb el path en el que hauria de guardarse el board tenint en compte el directori
+    */
     private String getPath(String boardName){
         return Directory+boardName;
     }
     
-    /* Escriu la informacio de board a l'arxiu <nombard>.inf al path demanat */
+    /* 
+    Pre: infoBoard != null, infoPath es un path de un arxiu encara no existent
+    Post: Escriu la informacio de board a l'arxiu <nomboard>.inf al path demanat
+        Return:
+            0:  Informacio de board guardada correctament
+            -2: Error intern
+    */
     private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
         int result;
         
@@ -180,7 +195,13 @@ public class BoardDBController {
         return result;
     }
     
-    /* Escriu el objecte board al path demanat */
+     /* 
+    Pre: newBoard != null, pathFisica es un path de un arxiu encara no existent
+    Post: Escriu la informacio de board a l'arxiu <nomboard>.brd al path demanat
+        Return:
+            0:  Board guardada correctament
+            -2: Error intern
+    */
     private int writeBoardObj(Board newBoard, String pathFisica) {
         int result;
         
