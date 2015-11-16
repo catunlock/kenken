@@ -40,12 +40,6 @@ public class Game implements Serializable{
     0 si s'ha inicialitzat amb èxit
     -1 si no s'ha carregat cap board
     */
-    /*public int setBoard(String boardName){
-        GameController gc = new GameController();
-        this.board = gc.newGame(boardName);
-        if (this.board == null) return -1;
-        else return 0;
-    }*/
     public void setBoard(Board board){
         this.board = board;
     }
@@ -62,7 +56,7 @@ public class Game implements Serializable{
     Pre: time >= 0
     Post: this.time = this.time + time (en segons)
     */
-    public void setTime(int time){
+    public void addTime(int time){
         this.time.plusSeconds(time);
     }
     
@@ -70,9 +64,9 @@ public class Game implements Serializable{
     Pre: cert
     Post: es retorna un temps (imagino que temps de joc pero no ho se)
     */
-    public long getTime()
+    public Duration getTime()
     {
-        return System.nanoTime() - time.toNanos();
+        return time;
     }
     
     /*
