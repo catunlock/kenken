@@ -15,14 +15,14 @@ import java.util.ArrayList;
 public class Board implements Serializable{
     private String name;
     private String username;
-    Cell[][] board;
+    CellKenken[][] board;
     private ArrayList<Region> regions;
     
     public Board(int size) {
-        board = new Cell[size][size];
+        board = new CellKenken[size][size];
         for (int i = 0; i < size; ++i){
             for (int j = 0; j < size; ++j) {
-                board[i][j] = new Cell(i,j,true);
+                board[i][j] = new CellKenken(i,j,true);
             }
         }
     }
@@ -43,7 +43,7 @@ public class Board implements Serializable{
         this.username = username;
     }
     
-    public Cell getCell(int x, int y) {
+    public CellKenken getCell(int x, int y) {
         return board[x][y];
     }
     
@@ -51,7 +51,7 @@ public class Board implements Serializable{
         return board.length;
     }
     
-    public void setCell(int x, int y, Cell c) {
+    public void setCell(int x, int y, CellKenken c) {
         board[x][y] = c;
     }
 

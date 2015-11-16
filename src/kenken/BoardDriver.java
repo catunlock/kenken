@@ -67,8 +67,8 @@ public class BoardDriver {
                     System.out.println("Introdueix si la Cell és original (1 = sí, 2 = no):");
                     if (sc.nextInt() == 1) original = true;
                     else original = false;
-                    Cell c;
-                    c = new Cell(posX, posY, original, solution);
+                    CellKenken c;
+                    c = new CellKenken(posX, posY, original, solution);
                     test.setCell(posX, posY, c);
                     break;
                 case 6:

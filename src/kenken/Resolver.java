@@ -58,13 +58,13 @@ public class Resolver {
         Region.OperationType op = r.getOperationType();
             
         boolean result = false;
-        Iterator<Cell> it = r.getCellList().iterator();
+        Iterator<CellKenken> it = r.getCellList().iterator();
 
         if(it.hasNext()){
             int resultValue = it.next().getSolutionValue();
 
             while (it.hasNext()) {
-                Cell c = it.next();
+                CellKenken c = it.next();
 
                 switch(op) {
                     case Add:
@@ -160,7 +160,7 @@ public class Resolver {
         
         for (Region r : b.getRegions()) {
             if (r.getOperationType() == Region.OperationType.None) {
-                Cell c = r.getCellList().get(0);
+                CellKenken c = r.getCellList().get(0);
                 untouchables.get(c.getPosX()).set(c.getPosY(), true);
                 
                 numerosFila.get(c.getPosX()).set(c.getSolutionValue() -1, true);
@@ -181,7 +181,7 @@ public class Resolver {
         
         Board b = new Board(4);
         
-        ArrayList<Cell> aCells = new ArrayList<>(3);
+        ArrayList<CellKenken> aCells = new ArrayList<>(3);
         
         aCells.add(b.getCell(0,0));
         aCells.add(b.getCell(0,1));
@@ -189,7 +189,7 @@ public class Resolver {
         
         Region ra = new Region(1,aCells, Region.OperationType.Multiply, 6, false);
         
-        ArrayList<Cell> bCells = new ArrayList<>(3);
+        ArrayList<CellKenken> bCells = new ArrayList<>(3);
         
         bCells.add(b.getCell(0,2));
         bCells.add(b.getCell(0,3));
@@ -197,14 +197,14 @@ public class Resolver {
         
         Region rb = new Region(2,bCells, Region.OperationType.Add, 9, false);
         
-        ArrayList<Cell> cCells = new ArrayList<>(2);
+        ArrayList<CellKenken> cCells = new ArrayList<>(2);
         
         cCells.add(b.getCell(2,0));
         cCells.add(b.getCell(3,0));
         
         Region rc = new Region(3,cCells, Region.OperationType.Divide, 2, false);
         
-        ArrayList<Cell> dCells = new ArrayList<>(3);
+        ArrayList<CellKenken> dCells = new ArrayList<>(3);
         
         dCells.add(b.getCell(1,1));
         dCells.add(b.getCell(2,1));
@@ -212,20 +212,20 @@ public class Resolver {
         
         Region rd = new Region(4,dCells, Region.OperationType.Multiply, 12, false);
         
-        ArrayList<Cell> eCells = new ArrayList<>(2);
+        ArrayList<CellKenken> eCells = new ArrayList<>(2);
         
         eCells.add(b.getCell(1,2));
         eCells.add(b.getCell(2,2));
         
         Region re = new Region(5,eCells, Region.OperationType.Subtract, 1, false);
         
-        ArrayList<Cell> fCells = new ArrayList<>(1);
-        Cell fCell1 = b.getCell(3,2);
+        ArrayList<CellKenken> fCells = new ArrayList<>(1);
+        CellKenken fCell1 = b.getCell(3,2);
         fCell1.setSolutionValue(3);
         fCells.add(fCell1);
         Region rf = new Region(7,fCells, Region.OperationType.None, 3, false);
         
-        ArrayList<Cell> gCells = new ArrayList<>(1);
+        ArrayList<CellKenken> gCells = new ArrayList<>(1);
         gCells.add(b.getCell(2,3));
         gCells.add(b.getCell(3,3));
         Region rg = new Region(6, gCells, Region.OperationType.Multiply, 6, false);        

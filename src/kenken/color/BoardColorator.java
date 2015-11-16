@@ -8,6 +8,7 @@ package kenken.color;
 import kenken.Board;
 import kenken.Board;
 import kenken.Cell;
+import kenken.CellKenken;
 import kenken.Region;
 
 /**
@@ -39,7 +40,7 @@ public class BoardColorator {
       
         for (int f = 0; f < board.size(); ++f) {
             for (int c = 0; c < board.size(); ++c) {
-                Cell cell = board.getCell(f, c);
+                CellKenken cell = board.getCell(f, c);
                 
                 Color color = colorByRegion(cell.getRegion());
                 
@@ -54,7 +55,7 @@ public class BoardColorator {
         for (Region r : board.getRegions()) {
             System.out.println("Region " + i + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
             System.out.print("\tValues: ");
-            for (Cell c : r.getCellList()) {
+            for (CellKenken c : r.getCellList()) {
                 System.out.print(c.getSolutionValue() + " ");
             }
             System.out.println();
