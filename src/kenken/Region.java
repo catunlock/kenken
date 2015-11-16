@@ -29,6 +29,7 @@ public class Region implements Serializable{
     private boolean valid;
     private int id;
 
+
     public Region(int id, ArrayList<CellKenken> cellList, OperationType operationType, int result, boolean valid) {
         this.operationType = operationType;
         this.result = result;
@@ -37,7 +38,10 @@ public class Region implements Serializable{
         setCellList(cellList);
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
 
     public ArrayList<CellKenken> getCellList() {
         return cellList;

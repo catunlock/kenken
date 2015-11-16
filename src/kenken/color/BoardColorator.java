@@ -51,15 +51,13 @@ public class BoardColorator {
     }
     
     public static void printRegions(Board board) {
-        int i = 1;
         for (Region r : board.getRegions()) {
-            System.out.println("Region " + i + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
+            System.out.println("Region " + r.getId() + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
             System.out.print("\tValues: ");
             for (CellKenken c : r.getCellList()) {
                 System.out.print(c.getSolutionValue() + " ");
             }
             System.out.println();
-            ++i;
         }
     }
 }

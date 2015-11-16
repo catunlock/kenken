@@ -5,7 +5,9 @@
  */
 package kenken;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -146,11 +148,15 @@ public class Generator {
                 return Region.OperationType.None;
             }
             else if (cells.size() == 2) {
-                int n = rand.nextInt(100);
-                if (n < 50) {
-                    return Region.OperationType.Subtract;
-                }else {
+                int a = cells.get(0).getSolutionValue();
+                int b = cells.get(1).getSolutionValue();
+                
+                double r1 = Math.max((double)a,(double)b)/ Math.min((double)a,(double)b);
+                int r2 = Math.max(a,b)/ Math.min(a,b);
+                if (r1 == r2){
                     return Region.OperationType.Divide;
+                } else {
+                    return Region.OperationType.Subtract;
                 }
             }
             else{
@@ -180,13 +186,13 @@ public class Generator {
                             resultValue += c.getSolutionValue();
                             break;
                         case Subtract:
-                            resultValue -= c.getSolutionValue();
+                            resultValue = abs(resultValue - c.getSolutionValue());
                             break;
                         case Multiply:
                             resultValue *= c.getSolutionValue();
                             break;
                         case Divide:
-                            resultValue /= c.getSolutionValue();
+                            resultValue = max(resultValue,c.getSolutionValue())/ Math.min(resultValue,c.getSolutionValue());
                             break;                    
                     }
                 }
