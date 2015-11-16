@@ -89,11 +89,11 @@ public class KenKen {
                 int mainoptionlogged;
                 error = -1;
                 while (error != 0 && !salir){
-                    System.out.println("Vols jugar, continuar una partida, generar un kenken o veure els rànkings?");
+                    System.out.println("Vols jugar, continuar una partida, generar un kenken o veure els rankings?");
                     System.out.println("1. Jugar");
                     System.out.println("2. Continuar partida");
                     System.out.println("3. Generar");
-                    System.out.println("4. Veure rànkings");
+                    System.out.println("4. Veure rankings");
                     System.out.println("5. Sortir");
                     mainoptionlogged = sc.nextInt();
                     switch(mainoptionlogged){
@@ -133,7 +133,7 @@ public class KenKen {
                             else  error = 0;
                             break;
                         case 3:
-                            System.out.print("Introdueix grandària de la board que vols generar: ");
+                            System.out.print("Introdueix grandaria de la board que vols generar: ");
                             int size = sc.nextInt();
                             Board genb;
                             genb = gen.generate(size);
@@ -165,9 +165,9 @@ public class KenKen {
                 int mainoptionnotlogged;
                 error = -1;
                 while (error != 0 && !salir){
-                    System.out.println("Vols jugar o veure els rànkings?");
+                    System.out.println("Vols jugar o veure els rankings?");
                     System.out.println("1. Jugar");
-                    System.out.println("2. Veure rànkings");
+                    System.out.println("2. Veure rankings");
                     System.out.println("3. Sortir");
                     mainoptionnotlogged = sc.nextInt();
                     switch(mainoptionnotlogged){
@@ -201,7 +201,7 @@ public class KenKen {
                                 }
                             }
                             else if(optiongameguest == 2){
-                                System.out.print("Introdueix grandària de la board que vols generar: ");
+                                System.out.print("Introdueix grandaria de la board que vols generar: ");
                                 int size = sc.nextInt();
                                 Board genb;
                                 genb = gen.generate(size);
