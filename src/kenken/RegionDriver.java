@@ -61,7 +61,17 @@ public class RegionDriver {
                 default:
                     System.out.println("introdueix un nombre valid si us plau.");
                     break;
+                
             }
+            System.out.println("Escull una opcio: ");
+            System.out.println("1. Consulta el tipus d'operacio de la regio.");
+            System.out.println("2. Consulta el resultat que hauria de donar al realitzar les operacions.");
+            System.out.println("3. Comprova si els nombres de dins la regio operats donen el resultat.");
+            System.out.println("4. Modifica el tipus d'operacio [None, Add, Subtract, Multiply, Divide].");
+            System.out.println("5. Modifica el resultat de la regio.");
+            System.out.println("6. Modifica si es valid la combinacio.");
+            System.out.println("-1. Sortir.");
+            System.out.println("---------------");
         }
     }
 }
