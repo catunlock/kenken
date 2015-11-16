@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Pol+Gerard
+ * @author Pol
  */
 public class Game implements Serializable{
     
@@ -21,6 +21,7 @@ public class Game implements Serializable{
     private Mode mode;
     private Board board;
     private User user;
+    private String username;
 
     /*
     Pre: mode = "normal" o "TimeAttack"
@@ -56,8 +57,8 @@ public class Game implements Serializable{
     Pre: time >= 0
     Post: this.time = this.time + time (en segons)
     */
-    public void addTime(int time){
-        this.time.plusSeconds(time);
+    public void addTime(Duration temps){
+        time = time.plus(temps);
     }
     
     /*
@@ -67,6 +68,15 @@ public class Game implements Serializable{
     public Duration getTime()
     {
         return time;
+    }
+    
+    /*
+    Pre: cert
+    Post: es retorna un temps (imagino que temps de joc pero no ho se)
+    */
+    public String getUser()
+    {
+        return username;
     }
     
     /*

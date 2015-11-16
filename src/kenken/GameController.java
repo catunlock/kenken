@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author GERARD+pol
+ * @author GERARD
  */
 public class GameController {
     
