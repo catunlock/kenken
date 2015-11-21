@@ -190,7 +190,9 @@ public class RegisterWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        this.dispose(); //closes the window--cannot be recovered
+        MainMenuWindow mmw = new MainMenuWindow();
+        mmw.setVisible(true); //shows it
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
