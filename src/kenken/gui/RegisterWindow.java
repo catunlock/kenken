@@ -89,6 +89,14 @@ public class RegisterWindow extends javax.swing.JFrame {
                 txtVerifyPasswordActionPerformed(evt);
             }
         });
+        txtVerifyPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtVerifyPasswordKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVerifyPasswordKeyReleased(evt);
+            }
+        });
 
         lblErrores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblErrores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -190,12 +198,20 @@ public class RegisterWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void txtVerifyPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVerifyPasswordActionPerformed
-       if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
+  
+    }//GEN-LAST:event_txtVerifyPasswordActionPerformed
+
+    private void txtVerifyPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVerifyPasswordKeyPressed
+
+    }//GEN-LAST:event_txtVerifyPasswordKeyPressed
+
+    private void txtVerifyPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVerifyPasswordKeyReleased
+        if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
            txtVerifyPassword.setBackground(Color.GREEN);
        }else{
-           txtVerifyPassword.setBackground(Color.RED);
-       }
-    }//GEN-LAST:event_txtVerifyPasswordActionPerformed
+           txtVerifyPassword.setBackground(Color.red);
+       }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVerifyPasswordKeyReleased
 
     /**
      * @param args the command line arguments
