@@ -90,6 +90,9 @@ public class RegisterWindow extends javax.swing.JFrame {
             }
         });
 
+        lblErrores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblErrores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,8 +114,9 @@ public class RegisterWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(143, 143, 143)
-                                .addComponent(lblErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(159, 159, 159)
+                                .addComponent(lblErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblUsername)
@@ -146,10 +150,13 @@ public class RegisterWindow extends javax.swing.JFrame {
                     .addComponent(txtVerifyPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(lblErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33))
         );
 
@@ -157,17 +164,20 @@ public class RegisterWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
+        
+        if("".equals(txtUsername.getText())){
+            lblErrores.setText("Please enter an username.");
+        }else if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
            int result = uc.createUser(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
            if (result == -1){
-               lblErrores.setText("Name user already exists.");
+               lblErrores.setText("Username " + txtUsername.getText() + " already in use.");
            }else if (result == -2){
                lblErrores.setText("Internal Error.");
            }else{
-               lblErrores.setText("User " + txtUsername.getText() + " created.");
+               lblErrores.setText("User " + txtUsername.getText() + " created!.");
            }
         }else{
-             lblErrores.setText("Passwords not equal.");
+             lblErrores.setText("Passwords are not equal.");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
