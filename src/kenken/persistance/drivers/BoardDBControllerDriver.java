@@ -8,6 +8,7 @@ package kenken.persistance.drivers;
 import kenken.persistance.controllers.BoardDBController;
 import kenken.domain.classes.Board;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -29,6 +30,7 @@ public class BoardDBControllerDriver {
         System.out.println("2. Eliminar Board de la DB --> 0: correcte, -1: Board no existeix, -2: error intern");
         System.out.println("3. Carregar Board de la DB i mostrar informació");
         System.out.println("4. Comprovar si una taula existeix");
+        System.out.println("5. Llistar nom tots boards");
         System.out.println("-1. Exit");
         System.out.println("-----------------------------------------------");
         
@@ -95,6 +97,12 @@ public class BoardDBControllerDriver {
                         System.out.println("Taula existent");
                     }else{
                         System.out.println("Taula no existent");
+                    }
+                    break;
+                case 5:
+                    ArrayList<String> boards = test.getBoardnames();
+                    for(int i=0;i<boards.size();i++){
+                        System.out.println(boards.get(i));
                     }
                     break;
             }

@@ -35,7 +35,16 @@ public class BoardDBController {
         String pathInfo = path+ExtensionInfo;
         return new File(pathInfo).isFile();
     }
-       
+    
+    public ArrayList<String> getBoardnames(){
+        ArrayList<String> boards = new ArrayList<>();
+        File f = new File(Directory);
+        File[] ficheros = f.listFiles();
+        for (int x=0;x<ficheros.length;x++){
+            boards.add(ficheros[x].getName());
+        }
+        return boards;
+    }
     
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
@@ -62,7 +71,7 @@ public class BoardDBController {
         }
         else{
             /* info de tablero contiene: nombre tablero, persona que lo ha creado, dificultad, tamX, tamY */
-            ArrayList<String> infoBoard = new ArrayList<String>();
+            ArrayList<String> infoBoard = new ArrayList<>();
             infoBoard.add(newBoard.getBoardName());
             infoBoard.add(newBoard.getUsername());
             infoBoard.add(String.valueOf(newBoard.size()));
