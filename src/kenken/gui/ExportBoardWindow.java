@@ -175,7 +175,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-        lblShowCreador.setText(evt.);
+       // lblShowCreador.setText(evt.);
     }//GEN-LAST:event_lstBoardsValueChanged
     
     //private ArrayList<Board> boards = 

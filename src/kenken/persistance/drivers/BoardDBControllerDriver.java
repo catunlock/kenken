@@ -112,7 +112,7 @@ public class BoardDBControllerDriver {
                     for (BoardInfo infoBoard : infoBoards){
                         System.out.println("Nom taula: " + infoBoard.getName());
                         System.out.println("Nom creador: " + infoBoard.getCreator());
-                        System.out.println("Tamanmy: " + (infoBoard.getSize()));
+                        System.out.println("Tamany: " + (infoBoard.getSize()));
                     }
             }
         }
