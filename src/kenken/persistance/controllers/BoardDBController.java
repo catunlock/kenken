@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import kenken.domain.classes.BoardInfo;
 
 /**
  *
@@ -25,20 +26,21 @@ import java.util.logging.Logger;
  */
 public class BoardDBController {
     
-    private static final String Directory = "Boards/";
+    private static final String DirectoryBoards  = "Boards/brd/";
+    private static final String DirectoryInfo = "Boards/info/";
     private static final String ExtensionFisica = ".brd";
     private static final String ExtensionInfo = ".inf";
     
     
     public boolean exists(String boardName){
-        String path = getPath(boardName);
+        String path = getPathInfo(boardName);
         String pathInfo = path+ExtensionInfo;
         return new File(pathInfo).isFile();
     }
     
     public ArrayList<String> getBoardnames(){
         ArrayList<String> boards = new ArrayList<>();
-        File f = new File(Directory);
+        File f = new File(DirectoryBoards);
         File[] ficheros = f.listFiles();
         for (int x=0;x<ficheros.length;x++){
             boards.add(ficheros[x].getName());
@@ -58,24 +60,26 @@ public class BoardDBController {
         int result = 0;
         int resultInfo = 0;
         int resultObj = 0;
-        String ubicacio = getPath(newBoard);
-                
-        /* info del tauler:
-            Nom, User, */
-        
-        String pathFisica = ubicacio+ExtensionFisica;
-        String pathInfo = ubicacio+ExtensionInfo;
+        String pathBrd = getPathBoard(newBoard);
+        String pathInf = getPathInfo(newBoard);
+        String pathFisica = pathBrd+ExtensionFisica;
+        String pathInfo = pathInf+ExtensionInfo;
         
         if (new File(pathInfo).isFile() || new File(pathFisica).isFile()) {
             result = -1;
         }
         else{
             /* info de tablero contiene: nombre tablero, persona que lo ha creado, dificultad, tamX, tamY */
-            ArrayList<String> infoBoard = new ArrayList<>();
+            /*ArrayList<String> infoBoard = new ArrayList<>();
             infoBoard.add(newBoard.getBoardName());
             infoBoard.add(newBoard.getUsername());
             infoBoard.add(String.valueOf(newBoard.size()));
+            */
             
+            BoardInfo infoBoard = new BoardInfo();
+            infoBoard.setName(newBoard.getBoardName());
+            infoBoard.setSize(String.valueOf(newBoard.size()));
+            infoBoard.setCreator(newBoard.getUsername());
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);
@@ -104,9 +108,10 @@ public class BoardDBController {
         
         int result;
         //trobar el path
-        String path = getPath(boardName);
-        String pathFisica = path+ExtensionFisica;
-        String pathInfo = path+ExtensionInfo;
+        String pathBrd = getPathBoard(boardName);
+        String pathInf = getPathInfo(boardName);
+        String pathFisica = pathBrd+ExtensionFisica;
+        String pathInfo = pathInf+ExtensionInfo;
         boolean Fisica = new File(pathFisica).isFile();
         //si no existeix el Board
         if(!(Fisica)){
@@ -130,20 +135,20 @@ public class BoardDBController {
     Pre: boardName != NULL
     Post: Retorna el board seleccionat, si b = NULL, el board no existeix
     */
-    public Board loadBoard(String nameBoard){
+    public Board loadBoard(String boardName){
         
         FileInputStream fis;
         Board b = null;
         //generar el posible path
-        String path = getPath(nameBoard);
-        String pathFisica = path+ExtensionFisica;
-        String pathInfo = path+ExtensionInfo;
+        String pathBrd = getPathBoard(boardName);
+        String pathInf = getPathInfo(boardName);
+        String pathFisica = pathBrd+ExtensionFisica;
+        String pathInfo = pathInf+ExtensionInfo;
         
         //nomes intentarem carregar si existeix el arxiu
         if ( (new File(pathInfo).isFile()) ){
             try {
                 fis = new FileInputStream(pathFisica);
-                System.out.println(pathFisica);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 b = (Board) ois.readObject();
                 fis.close();
@@ -161,20 +166,61 @@ public class BoardDBController {
         return b;
     }
     
+    public ArrayList<BoardInfo> getBoardsInfo(){
+        ArrayList<BoardInfo> boards = new ArrayList<>();
+        
+        File f = new File("Boards/info");
+        File[] ficheros = f.listFiles();
+        for (int x=0;x<ficheros.length;x++){
+            FileInputStream fis = null;
+            BoardInfo boardInfo = null;
+            try {
+                fis = new FileInputStream("Boards/info/"+ficheros[x].getName());
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                
+                try {
+                    boardInfo = (BoardInfo) ois.readObject();
+                    boards.add(boardInfo);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                }               
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    fis.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return boards;
+    }
+    
     /* 
     Pre: board != null
     Post: retorna un string amb el path en el que hauria de guardarse el board
     */
-    private String getPath(Board board){
-        return getPath(board.getBoardName());
+    private String getPathBoard(Board board){
+        return getPathBoard(board.getBoardName());
+    }
+    
+    private String getPathInfo(Board board){
+        return getPathInfo(board.getBoardName());
     }
     
     /* 
     Pre: boardName != null
     Post: retorna un string amb el path en el que hauria de guardarse el board tenint en compte el directori
     */
-    private String getPath(String boardName){
-        return Directory+boardName;
+    private String getPathBoard(String boardName){
+        return DirectoryBoards+boardName;
+    }
+    
+    private String getPathInfo(String boardName){
+        return DirectoryInfo+boardName;
     }
     
     /* 
@@ -184,7 +230,7 @@ public class BoardDBController {
             0:  Informacio de board guardada correctament
             -2: Error intern
     */
-    private int writeBoardInfo(ArrayList<String> infoBoard, String infoPath) {
+    private int writeBoardInfo(BoardInfo infoBoard, String infoPath) {
         int result;
         
         FileOutputStream fos;

@@ -10,6 +10,7 @@ import kenken.domain.classes.Board;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import kenken.domain.classes.BoardInfo;
 
 /**
  *
@@ -31,6 +32,7 @@ public class BoardDBControllerDriver {
         System.out.println("3. Carregar Board de la DB i mostrar informació");
         System.out.println("4. Comprovar si una taula existeix");
         System.out.println("5. Llistar nom tots boards");
+        System.out.println("6. Llistar informacio de totes les taules");
         System.out.println("-1. Exit");
         System.out.println("-----------------------------------------------");
         
@@ -105,6 +107,13 @@ public class BoardDBControllerDriver {
                         System.out.println(boards.get(i));
                     }
                     break;
+                case 6:
+                    ArrayList<BoardInfo> infoBoards = test.getBoardsInfo();
+                    for (BoardInfo infoBoard : infoBoards){
+                        System.out.println("Nom taula: " + infoBoard.getName());
+                        System.out.println("Nom creador: " + infoBoard.getCreator());
+                        System.out.println("Tamanmy: " + (infoBoard.getSize()));
+                    }
             }
         }
     }   

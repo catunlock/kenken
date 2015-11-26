@@ -42,6 +42,10 @@ public class DirectoryCreator {
         }
         else {
             dirboards.mkdir();
+            File dirinfo = new File("Boards/info");
+            File dirobj = new File("Boards/brd");
+            dirinfo.mkdir();
+            dirobj.mkdir();
         }
         File dirranking = new File("Rankings/");
         if (dirranking.exists()){
