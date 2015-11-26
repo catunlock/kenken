@@ -8,6 +8,7 @@ package kenken.domain.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import kenken.domain.classes.Board;
+import kenken.domain.classes.BoardInfo;
 import kenken.persistance.controllers.BoardDBController;
 
 /**
@@ -20,6 +21,10 @@ public class BoardController {
     
     public BoardController(){
         
+    }
+    
+    public ArrayList<BoardInfo> getBoardsInfo(){
+        return bDBc.getBoardsInfo();
     }
     
     public ArrayList<String> getBoardnames() {

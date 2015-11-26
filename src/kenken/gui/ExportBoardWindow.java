@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import kenken.domain.classes.Board;
+import kenken.domain.classes.BoardInfo;
+import kenken.domain.controllers.BoardController;
 
 /**
  *
@@ -19,7 +21,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
 
     private DefaultListModel listModel;
     
-    private ArrayList<Board> arrayBoard = new ArrayList<>();
+    private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
      
     /**
      * Creates new form ExportBoardWindow
@@ -27,15 +29,13 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     public ExportBoardWindow() {
         initComponents();
         listModel = new DefaultListModel();
-   
-        File folder = new File("Boards");
-        File[] listBrds = folder.listFiles();
+        BoardController bC = new BoardController();
+        infoBoard = bC.getBoardsInfo();
 
-        for (int i = 0; i < listBrds.length; i++) {
-            if (listBrds[i].isFile()) {
-                modelo.addElement(listBrds[i].getName());
-            }
+        for(BoardInfo bInf : infoBoard){
+            listModel.addElement(bInf);
         }
+        lstBoards.setModel(listModel);
     }
     
     /**
@@ -94,7 +94,6 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         scrllBoards.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lstBoards.setFont(new java.awt.Font("Flubber", 0, 24));
-        lstBoards.setModel(modelo);
         lstBoards.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstBoardsValueChanged(evt);
@@ -125,8 +124,8 @@ public class ExportBoardWindow extends javax.swing.JFrame {
                         .addGap(294, 294, 294)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115)
+                        .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +174,9 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-       // lblShowCreador.setText(evt.);
+        BoardInfo bi = (BoardInfo) evt.getSource();
+        lblShowCreador.setText(bi.getCreator());
+        lblShowTamany.setText(bi.getSize());
     }//GEN-LAST:event_lstBoardsValueChanged
     
     //private ArrayList<Board> boards = 
