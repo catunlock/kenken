@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken.domain.controllers;
+package kenken.domain.drivers;
 
 import kenken.domain.classes.User;
 import kenken.domain.classes.Board;
