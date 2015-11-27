@@ -5,10 +5,17 @@
  */
 package kenken.gui;
 
+import java.awt.Component;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
 import kenken.domain.controllers.BoardController;
@@ -22,6 +29,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     private DefaultListModel listModel;
     
     private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
+    private Component modalToComponent;
      
     /**
      * Creates new form ExportBoardWindow
@@ -81,6 +89,11 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         btnExport.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnExport.setText("EXPORT");
         btnExport.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportMouseClicked(evt);
+            }
+        });
         btnExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportActionPerformed(evt);
@@ -192,6 +205,28 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         lblShowCreador.setText(bi.getCreador());
         lblShowTamany.setText(bi.getSize());
     }//GEN-LAST:event_lstBoardsValueChanged
+
+    private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if(file !=null){
+                 /*guardamos el archivo y le damos el formato directamente,
+                  * si queremos que se guarde en formato doc lo definimos como .doc*/
+                  FileWriter  save;
+                try {
+                    save = new FileWriter("prueba.txt");  
+                    save.write("Hola");
+                    save.close();
+                }catch (IOException ex) {
+                    Logger.getLogger(ExportBoardWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null,
+                       "El archivo se a guardado Exitosamente",
+                           "Información",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnExportMouseClicked
     
     //private ArrayList<Board> boards = 
     
