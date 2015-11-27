@@ -208,14 +208,17 @@ public class ExportBoardWindow extends javax.swing.JFrame {
 
     private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File("fileToSave.txt"));
         if (fileChooser.showSaveDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
+            
             if(file !=null){
                  /*guardamos el archivo y le damos el formato directamente,
                   * si queremos que se guarde en formato doc lo definimos como .doc*/
-                  FileWriter  save;
+ 
+                FileWriter  save;
                 try {
-                    save = new FileWriter("prueba.txt");  
+                    save = new FileWriter(file);
                     save.write("Hola");
                     save.close();
                 }catch (IOException ex) {
