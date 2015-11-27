@@ -11,7 +11,7 @@ package kenken.gui;
  */
 public class PanelOne extends javax.swing.JPanel {
 
-    MainWindow mw;
+    private MainWindow mw;
     /**
      * Creates new form PanelOne
      * @param mw

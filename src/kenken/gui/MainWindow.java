@@ -38,9 +38,17 @@ package kenken.gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import kenken.domain.controllers.BoardController;
+import kenken.domain.controllers.GameController;
+import kenken.domain.controllers.RankingController;
 
 public class MainWindow {
     JPanel cards; //a panel that uses CardLayout
+    
+    BoardController bc = new BoardController();
+    GameController gc = new GameController();
+    RankingController rc = new RankingController();
+    UserController uc = new UserController();
     
     enum Panels {
         PANELONE,
