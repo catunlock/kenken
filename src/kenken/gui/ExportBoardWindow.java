@@ -39,9 +39,10 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         listModel = new DefaultListModel();
         BoardController bC = new BoardController();
         infoBoard = bC.getBoardsInfo();
-
-        for(BoardInfo bInf : infoBoard){
-            listModel.addElement(bInf.getName());
+        if (infoBoard != null){
+            for(BoardInfo bInf : infoBoard){
+                listModel.addElement(bInf.getName());
+            }
         }
         lstBoards.setModel(listModel);
     }
@@ -208,7 +209,8 @@ public class ExportBoardWindow extends javax.swing.JFrame {
 
     private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setSelectedFile(new File("fileToSave.txt"));
+        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+        fileChooser.setSelectedFile(new File(bi.getName()+".brd"));
         if (fileChooser.showSaveDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             
