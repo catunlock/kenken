@@ -76,10 +76,7 @@ public class BoardDBController {
             infoBoard.add(String.valueOf(newBoard.size()));
             */
             
-            BoardInfo infoBoard = new BoardInfo();
-            infoBoard.setName(newBoard.getBoardName());
-            infoBoard.setSize(String.valueOf(newBoard.size()));
-            infoBoard.setCreator(newBoard.getUsername());
+            BoardInfo infoBoard = new BoardInfo(newBoard.getBoardName(),String.valueOf(newBoard.size()),newBoard.getUsername());
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);

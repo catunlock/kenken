@@ -33,7 +33,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         infoBoard = bC.getBoardsInfo();
 
         for(BoardInfo bInf : infoBoard){
-            listModel.addElement(bInf);
+            listModel.addElement(bInf.getName());
         }
         lstBoards.setModel(listModel);
     }
@@ -174,8 +174,8 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportActionPerformed
 
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-        BoardInfo bi = (BoardInfo) evt.getSource();
-        lblShowCreador.setText(bi.getCreator());
+        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+        lblShowCreador.setText(bi.getCreador());
         lblShowTamany.setText(bi.getSize());
     }//GEN-LAST:event_lstBoardsValueChanged
     
