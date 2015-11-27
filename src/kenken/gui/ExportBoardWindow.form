@@ -41,29 +41,31 @@
                       <Component id="lblExport" min="-2" pref="367" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
-                      <Component id="btnExport" min="-2" pref="144" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="294" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="158" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="scrllBoards" min="-2" pref="425" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCreador" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
-                          <Component id="lblTamany" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="scrllBoards" min="-2" pref="330" max="-2" attributes="0"/>
+                          <Component id="btnExport" min="-2" pref="144" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblCreador" min="-2" pref="84" max="-2" attributes="0"/>
+                          <Component id="lblTamany" min="-2" pref="84" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblShowCreador" min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="lblShowTamany" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="lblShowCreador" min="-2" pref="159" max="-2" attributes="0"/>
+                          <Component id="lblShowTamany" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" pref="158" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,25 +74,27 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="lblExport" min="-2" pref="67" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="scrllBoards" min="-2" pref="180" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCreador" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblShowCreador" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblCreador" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblShowCreador" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTamany" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="lblShowTamany" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblTamany" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="lblShowTamany" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace pref="54" max="32767" attributes="0"/>
               <Component id="btnExport" min="-2" pref="57" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" pref="39" max="-2" attributes="0"/>
@@ -105,7 +109,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Flubber" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Select Board:"/>
+        <Property name="text" type="java.lang.String" value="Info:"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor Por defecto"/>
         </Property>
@@ -184,17 +188,44 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblCreador">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Creador"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Flubber" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Creador:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTamany">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tamany"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Flubber" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Tamany:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblShowCreador">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Flubber" size="18" style="0"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblShowTamany">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Flubber" size="18" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Flubber" size="24" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Select Board:"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
