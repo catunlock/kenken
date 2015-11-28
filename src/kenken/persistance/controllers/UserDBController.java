@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,9 +32,9 @@ public class UserDBController {
     private static final String Extension = ".obj";
     
     /* Pre:  cert
-    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
+    ** Post: Retorna un int el qual, segons el valor que tingui, indicara que
              s’ha creat a la base de dades un nou usuari amb valors newUser, 
-             o bé que hi ha hagut alguna excepció.
+             o be que hi ha hagut alguna excepcio.
         Return:
              0 = usuari creat correctament
             -1 = usuari existent
@@ -43,22 +44,22 @@ public class UserDBController {
         int result = 1;
         String filepath = getPath(newUser);
         DirectoryCreator dc = new DirectoryCreator();
-        if (new File(filepath).isFile()){
+        if (new File(filepath).isDirectory()){
             result = -1;
         }
         else {
             dc.createUser(newUser.getUsername());
-            result = writeUser(newUser, filepath);
+            result = writeUser(newUser, filepath+"/user.obj");
         }
        
         return result;
     }
     
     /*  Pre: user != NULL
-    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
-       s’ha modificat a la base de dades l’usuari que, abans de la modificació, 
-       tenia com a nom oldname, i se li ha donat uns nous valors user amb èxit, 
-       o bé indicarà si hi ha hagut alguna excepció.
+    ** Post: Retorna un int el qual, segons el valor que tingui, indicara si 
+       s’ha modificat a la base de dades l’usuari que, abans de la modificacio, 
+       tenia com a nom oldname, i se li ha donat uns nous valors user amb exit, 
+       o be indicara si hi ha hagut alguna excepcio.
     Return:
         0 = usuari modificat correctament
         -1 = usuari inexistent
@@ -66,32 +67,45 @@ public class UserDBController {
     */
     public int modifyUser(User user, String oldName){
         int result = -2;
-        
-        if (oldName != null && ! exists(user)) {
-            if (deleteUser(oldName) == 0){
-                result = writeUser(user, getPath(user));
+        try{
+            if (oldName != null && ! exists(user)) {
+                Path oldpath = FileSystems.getDefault().getPath(Directory+oldName);
+                Path newPath = FileSystems.getDefault().getPath(Directory+user.getUsername());
+                Files.move(oldpath, newPath);
+                Path path = FileSystems.getDefault().getPath(Directory+user.getUsername()+"/user.obj");
+                Files.delete(path);
+                result = writeUser(user, getPath(user)+"/user.obj");
             }
-        }
-        else if (oldName == null){
-            if (exists(user)) {
-                result = writeUser(user, getPath(user));
+            else if (oldName == null){
+                if (exists(user)) {
+                    Path path = FileSystems.getDefault().getPath(Directory+user.getUsername()+"/user.obj");
+                    Files.delete(path);
+                    result = writeUser(user, getPath(user)+"/user.obj");
+                }
+                else {
+                    result = -1;
+                }
             }
-            else {
-                result = -1;
+            else if (exists(user)){
+                result = -3;
             }
         } 
+        catch (IOException ex) {
+            Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
+            result = -2;
+        }    
             
         return result;
     }
     
     /*  Pre: username != NULL
-    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
-             s’ha eliminal de la base de dades l’usuari amb nom username, o bé 
-             si s’ha produït alguna excepció.
+    ** Post: Retorna un int el qual, segons el valor que tingui, indicara si 
+             s’ha eliminal de la base de dades l’usuari amb nom username, o be 
+             si s’ha produit alguna excepcio.
     Return:
          0 = usuari eliminat correctament
         -1 = usuari no existent
-        -2= s’està intentant eliminar un usuari que no és el loguejat
+        -2= s’esta intentant eliminar un usuari que no es el loguejat
         -3 = error intern
     */
     public int deleteUser(String username){
@@ -100,13 +114,9 @@ public class UserDBController {
         if(!exists(username)){
             result = -1;
         }else {
-            try {
-                Files.delete(FileSystems.getDefault().getPath(getPath(username)));
-                result = 0;
-            } catch (IOException ex) {
-                Logger.getLogger(UserDBController.class.getName()).log(Level.SEVERE, null, ex);
-                result = -3;
-            }
+            File dir = new File(Directory+username);
+            deleteFolder(dir);
+            result = 0;
         }
         
         return result;
@@ -124,7 +134,7 @@ public class UserDBController {
         
         if (exists(username)){
             try {
-                fis = new FileInputStream(getPath(username));
+                fis = new FileInputStream(getPath(username)+"/user.obj");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 user = (User) ois.readObject();
                 fis.close();
@@ -144,7 +154,7 @@ public class UserDBController {
     }
     
     private String getPath(String username) {
-        return Directory+username+"/"+username+Extension;
+        return Directory+username;
     }
     
     private boolean exists(User user) {
@@ -152,7 +162,7 @@ public class UserDBController {
     }
     
     private boolean exists(String username) {
-        return (new File(getPath(username)).isFile());
+        return (new File(getPath(username)).isDirectory());
     }
     
     
@@ -175,5 +185,19 @@ public class UserDBController {
         }        
         
         return result;
+    }
+    
+        public static void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if(files!=null) { //some JVMs return null for empty dirs
+            for(File f: files) {
+                if(f.isDirectory()) {
+                    deleteFolder(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        folder.delete();
     }
 }

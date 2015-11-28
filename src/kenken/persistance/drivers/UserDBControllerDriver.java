@@ -54,25 +54,47 @@ public class UserDBControllerDriver {
                     System.out.println("Nom usuari a modificar:");
                     user = sc.next();
                     User usuari2 = test.getUser(user);
-                    if (usuari2 == null) System.out.println(-1);
+                    if (usuari2 == null) System.out.println("No existeix aquest usuari");
                     else{
                         System.out.println("Nou nom de l'usuari a modificar:");
                         usuari2.setUsername(sc.next());
                         System.out.println("Nova contrasenya:");
                         usuari2.setPassword(sc.next());
-                        test.modifyUser(usuari2,user);
+                        int result = test.modifyUser(usuari2,user);
+                        if (result == 0){
+                            System.out.println("Usuari actualitzat correctament");
+                        }
+                        else if (result == -1) {
+                            System.out.println("No existeix l'usuari");
+                        }
+                        else if (result == -2) {
+                            System.out.println("Errors interns");
+                        }
+                        else if (result == -3){
+                            System.out.println("Ja hi ha un usuari amb aquest nom");
+                        }
                     }
                     break;                    
                 case 3:
                     System.out.println("Nom usuari a eliminar:");
                     user = sc.next();
-                    test.deleteUser(user);
+                    if (test.deleteUser(user) == -1) {
+                        System.out.println("No existeix aquest usuari.");
+                    }
+                    else {
+                        System.out.println("Usuari eliminat amb èxit.");
+                    }
                     break;
                 case 4:
                     System.out.println("Nom d'usuari amb el que es vol treballar:");
                     usernow = test.getUser(sc.next());
-                    System.out.println(usernow.getUsername());
-                    System.out.println(usernow.getPassword());
+                    if (usernow == null) {
+                        System.out.println("No existeix aquest usuari");
+                    }
+                    else {
+                        System.out.println(usernow.getUsername());
+                        System.out.println(usernow.getPassword());
+                    }
             }
         }
     }

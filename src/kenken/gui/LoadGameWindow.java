@@ -16,6 +16,8 @@ public class LoadGameWindow extends javax.swing.JFrame {
      */
     public LoadGameWindow() {
         initComponents();
+        //aquí se necesita que algo vaya al controlador de vistas y le diga que
+        //recupere el user logueado y sus games
     }
 
     /**
@@ -123,7 +125,9 @@ public class LoadGameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        MainMenuWindow mmw = new MainMenuWindow();
+        mmw.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed

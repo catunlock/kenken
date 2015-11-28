@@ -127,7 +127,9 @@ public class CreateBoardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        this.dispose(); 
+        MainMenuWindow mmw = new MainMenuWindow();
+        mmw.setVisible(true); 
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
