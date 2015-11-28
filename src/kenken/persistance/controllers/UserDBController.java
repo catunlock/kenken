@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 public class UserDBController {
    
     private static final String Directory = "Users/";
-    private static final String Extension = ".obj";
     
     /* Pre:  cert
     ** Post: Retorna un int el qual, segons el valor que tingui, indicara que
