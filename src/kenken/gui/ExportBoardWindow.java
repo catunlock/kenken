@@ -7,8 +7,10 @@ package kenken.gui;
 
 import java.awt.Component;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
 import kenken.domain.controllers.BoardController;
+import kenken.persistance.controllers.BoardDBController;
 
 /**
  *
@@ -30,12 +33,14 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     
     private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
     private Component modalToComponent;
+    private BoardDBController bDBc;
      
     /**
      * Creates new form ExportBoardWindow
      */
     public ExportBoardWindow() {
         initComponents();
+        bDBc = new BoardDBController();
         listModel = new DefaultListModel();
         BoardController bC = new BoardController();
         infoBoard = bC.getBoardsInfo();
@@ -218,11 +223,13 @@ public class ExportBoardWindow extends javax.swing.JFrame {
                  /*guardamos el archivo y le damos el formato directamente,
                   * si queremos que se guarde en formato doc lo definimos como .doc*/
  
-                FileWriter  save;
+                FileOutputStream fos;
                 try {
-                    save = new FileWriter(file);
-                    save.write("Hola");
-                    save.close();
+                    Board newBoard = bDBc.loadBoard(bi.getName());
+                    fos = new FileOutputStream(file);
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(newBoard);
+                    fos.close(); 
                 }catch (IOException ex) {
                     Logger.getLogger(ExportBoardWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
