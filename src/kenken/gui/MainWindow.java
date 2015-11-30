@@ -71,8 +71,9 @@ public class MainWindow {
     enum Panels {
         PANELONE,
         PANELTWO,
-        CreateBoardWindow,
-        ExportBoardWindow;
+        CreateBoardPanel,
+        ExportBoardPanel,
+        MainMenuPanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -98,12 +99,14 @@ public class MainWindow {
         //Create the "cards".
         CreateBoardPanel cbw = new CreateBoardPanel(this);
         ExportBoardPanel ebp = new ExportBoardPanel(this);
-        
+        MainMenuPanel mmp = new MainMenuPanel(this);
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(cbw, Panels.CreateBoardWindow.name());
-        cards.add(ebp, Panels.ExportBoardWindow.name());
+        
+        cards.add(mmp, Panels.MainMenuPanel.name());
+        cards.add(cbw, Panels.CreateBoardPanel.name());
+        cards.add(ebp, Panels.ExportBoardPanel.name());
         
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);

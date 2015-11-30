@@ -9,13 +9,16 @@ package kenken.gui;
  *
  * @author asus
  */
-public class MainMenuWindow extends javax.swing.JFrame {
+public class MainMenuPanel extends javax.swing.JPanel {
 
+    
+    private MainWindow mw;
     /**
-     * Creates new form MainMenuWindow
+     * Creates new form MainMenuPanel
      */
-    public MainMenuWindow() {
+    public MainMenuPanel(MainWindow mw) {
         initComponents();
+        this.mw = mw;
     }
 
     /**
@@ -27,9 +30,13 @@ public class MainMenuWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnExportBoard = new javax.swing.JButton();
         btnNewGame = new javax.swing.JButton();
+        btnImportBoard = new javax.swing.JButton();
         btnCreateBoard = new javax.swing.JButton();
+        btnShowRanking = new javax.swing.JButton();
         lblStatistics = new javax.swing.JLabel();
+        btnLogOut = new javax.swing.JButton();
         pnlStatistics = new javax.swing.JPanel();
         lblPlayedTime = new javax.swing.JLabel();
         lblCreatedGames = new javax.swing.JLabel();
@@ -37,12 +44,14 @@ public class MainMenuWindow extends javax.swing.JFrame {
         lblMainMenu = new javax.swing.JLabel();
         btnLoadGame = new javax.swing.JButton();
         btnOptions = new javax.swing.JButton();
-        btnExportBoard = new javax.swing.JButton();
-        btnImportBoard = new javax.swing.JButton();
-        btnShowRanking = new javax.swing.JButton();
-        btnLogOut = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnExportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        btnExportBoard.setText("Export Board");
+        btnExportBoard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExportBoardMouseClicked(evt);
+            }
+        });
 
         btnNewGame.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnNewGame.setText("New Game");
@@ -52,11 +61,30 @@ public class MainMenuWindow extends javax.swing.JFrame {
             }
         });
 
+        btnImportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        btnImportBoard.setText("Import Board");
+
         btnCreateBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnCreateBoard.setText("Create Board");
+        btnCreateBoard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCreateBoardMouseClicked(evt);
+            }
+        });
+
+        btnShowRanking.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        btnShowRanking.setText("Show Ranking");
+        btnShowRanking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowRankingActionPerformed(evt);
+            }
+        });
 
         lblStatistics.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblStatistics.setText("User Statistics:");
+
+        btnLogOut.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        btnLogOut.setText("Logout");
 
         lblPlayedTime.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblPlayedTime.setText("Total Time Played: ");
@@ -101,30 +129,8 @@ public class MainMenuWindow extends javax.swing.JFrame {
         btnOptions.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnOptions.setText("Options");
 
-        btnExportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnExportBoard.setText("Export Board");
-        btnExportBoard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExportBoardMouseClicked(evt);
-            }
-        });
-
-        btnImportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnImportBoard.setText("Import Board");
-
-        btnShowRanking.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnShowRanking.setText("Show Ranking");
-        btnShowRanking.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowRankingActionPerformed(evt);
-            }
-        });
-
-        btnLogOut.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnLogOut.setText("Logout");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -147,7 +153,7 @@ public class MainMenuWindow extends javax.swing.JFrame {
                                 .addComponent(btnShowRanking)
                                 .addGap(110, 110, 110))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(174, Short.MAX_VALUE)
+                        .addContainerGap(73, Short.MAX_VALUE)
                         .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(61, 61, 61))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -186,8 +192,6 @@ public class MainMenuWindow extends javax.swing.JFrame {
                     .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
@@ -199,43 +203,13 @@ public class MainMenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
     private void btnExportBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportBoardMouseClicked
-        
+        mw.setPanel(MainWindow.Panels.ExportBoardPanel);
     }//GEN-LAST:event_btnExportBoardMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenuWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenuWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenuWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenuWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnCreateBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateBoardMouseClicked
+        mw.setPanel(MainWindow.Panels.CreateBoardPanel);
+    }//GEN-LAST:event_btnCreateBoardMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenuWindow().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateBoard;

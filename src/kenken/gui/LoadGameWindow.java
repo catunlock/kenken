@@ -125,9 +125,7 @@ public class LoadGameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.dispose();
-        MainMenuWindow mmw = new MainMenuWindow();
-        mmw.setVisible(true);
+
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
