@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package kenken.gui;
+import oldwindows.MainMenuWindow;
 import java.awt.Color;
 import java.util.Arrays;
 import kenken.domain.controllers.UserController;
