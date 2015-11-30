@@ -8,42 +8,39 @@ package kenken.gui;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
-import kenken.domain.controllers.BoardController;
-import kenken.persistance.controllers.BoardDBController;
 
 /**
  *
- * @author asus
+ * @author SuNLoCK
  */
-public class ExportBoardWindow extends javax.swing.JFrame {
-
+public class ExportBoardPanel extends javax.swing.JPanel {
     private DefaultListModel listModel;
     
     private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
     private Component modalToComponent;
-    private BoardController bc;
-     
+        
+    private MainWindow mw;
     /**
-     * Creates new form ExportBoardWindow
+     * Creates new form ExportBoardPanel
      */
-    public ExportBoardWindow() {
+    public ExportBoardPanel(MainWindow mw) {
         initComponents();
-        bc = new BoardController();
+        
+         this.mw = mw;
+        
         listModel = new DefaultListModel();
-        BoardController bC = new BoardController();
-        infoBoard = bC.getBoardsInfo();
+        
+        infoBoard = mw.getBoardController().getBoardsInfo();
         if (infoBoard != null){
             for(BoardInfo bInf : infoBoard){
                 listModel.addElement(bInf.getName());
@@ -51,7 +48,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         }
         lstBoards.setModel(listModel);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +58,8 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        lblShowTamany = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnExport = new javax.swing.JButton();
@@ -72,12 +70,12 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         lblCreador = new javax.swing.JLabel();
         lblTamany = new javax.swing.JLabel();
         lblShowCreador = new javax.swing.JLabel();
-        lblShowTamany = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
-        jLabel3.setText("jLabel3");
+        lblShowTamany.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel4.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        jLabel4.setText("Select Board:");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         jLabel2.setText("Info:");
@@ -129,14 +127,8 @@ public class ExportBoardWindow extends javax.swing.JFrame {
 
         lblShowCreador.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
 
-        lblShowTamany.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        jLabel4.setText("Select Board:");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -188,19 +180,46 @@ public class ExportBoardWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.CreateBoardWindow);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+        fileChooser.setSelectedFile(new File(bi.getName()+".brd"));
+        if (fileChooser.showSaveDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+
+            if(file !=null){
+                /*guardamos el archivo y le damos el formato directamente,
+                * si queremos que se guarde en formato doc lo definimos como .doc*/
+
+                FileOutputStream fos;
+                try {
+                    Board newBoard = mw.getBoardController().exportBoard(bi.getName());
+                    fos = new FileOutputStream(file);
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(newBoard);
+                    fos.close();
+                }catch (IOException ex) {
+                    Logger.getLogger(ExportBoardPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null,
+                    "El archivo se a guardado Exitosamente",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnExportMouseClicked
 
     private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
         // TODO add your handling code here:
@@ -212,77 +231,11 @@ public class ExportBoardWindow extends javax.swing.JFrame {
         lblShowTamany.setText(bi.getSize());
     }//GEN-LAST:event_lstBoardsValueChanged
 
-    private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
-        fileChooser.setSelectedFile(new File(bi.getName()+".brd"));
-        if (fileChooser.showSaveDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            
-            if(file !=null){
-                 /*guardamos el archivo y le damos el formato directamente,
-                  * si queremos que se guarde en formato doc lo definimos como .doc*/
- 
-                FileOutputStream fos;
-                try {
-                    Board newBoard = bc.exportBoard(bi.getName());
-                    fos = new FileOutputStream(file);
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(newBoard);
-                    fos.close(); 
-                }catch (IOException ex) {
-                    Logger.getLogger(ExportBoardWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                JOptionPane.showMessageDialog(null,
-                       "El archivo se a guardado Exitosamente",
-                           "Información",JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_btnExportMouseClicked
-    
-    //private ArrayList<Board> boards = 
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExportBoardWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExportBoardWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExportBoardWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExportBoardWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ExportBoardWindow().setVisible(true);
-            }
-        });
-        
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnExport;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblCreador;
     private javax.swing.JLabel lblExport;

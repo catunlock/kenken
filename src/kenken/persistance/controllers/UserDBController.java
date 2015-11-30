@@ -43,6 +43,7 @@ public class UserDBController {
         int result = 1;
         String filepath = getPath(newUser);
         DirectoryCreator dc = new DirectoryCreator();
+        
         if (new File(filepath).isDirectory()){
             result = -1;
         }
@@ -70,9 +71,12 @@ public class UserDBController {
             if (oldName != null && ! exists(user)) {
                 Path oldpath = FileSystems.getDefault().getPath(Directory+oldName);
                 Path newPath = FileSystems.getDefault().getPath(Directory+user.getUsername());
+                
                 Files.move(oldpath, newPath);
-                Path path = FileSystems.getDefault().getPath(Directory+user.getUsername()+"/user.obj");
-                Files.delete(path);
+                
+                Path oldUserFile = FileSystems.getDefault().getPath(newPath + "/user.obj");
+                Files.delete(oldUserFile);
+                
                 result = writeUser(user, getPath(user)+"/user.obj");
             }
             else if (oldName == null){
@@ -186,7 +190,7 @@ public class UserDBController {
         return result;
     }
     
-        public static void deleteFolder(File folder) {
+    public static void deleteFolder(File folder) {
         File[] files = folder.listFiles();
         if(files!=null) { //some JVMs return null for empty dirs
             for(File f: files) {

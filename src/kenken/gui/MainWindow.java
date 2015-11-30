@@ -41,18 +41,38 @@ import javax.swing.*;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.GameController;
 import kenken.domain.controllers.RankingController;
+import kenken.domain.controllers.UserController;
 
 public class MainWindow {
     JPanel cards; //a panel that uses CardLayout
     
-    BoardController bc = new BoardController();
-    GameController gc = new GameController();
-    RankingController rc = new RankingController();
-    UserController uc = new UserController();
+    private BoardController bc = new BoardController();
+    private GameController gc = new GameController();
+    private RankingController rc = new RankingController();
+    private UserController uc = new UserController();
+
+    public BoardController getBoardController() {
+        return bc;
+    }
+
+    public GameController getGameController() {
+        return gc;
+    }
+
+    public RankingController getRankingController() {
+        return rc;
+    }
+
+    public UserController getUserController() {
+        return uc;
+    }
+    
     
     enum Panels {
         PANELONE,
-        PANELTWO;
+        PANELTWO,
+        CreateBoardWindow,
+        ExportBoardWindow;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -76,14 +96,14 @@ public class MainWindow {
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
         
         //Create the "cards".
-        PanelOne card1 = new PanelOne(this);
-        PanelTwo card2 = new PanelTwo(this);
+        CreateBoardPanel cbw = new CreateBoardPanel(this);
+        ExportBoardPanel ebp = new ExportBoardPanel(this);
         
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card1, Panels.PANELONE.name());
-        cards.add(card2, Panels.PANELTWO.name());
+        cards.add(cbw, Panels.CreateBoardWindow.name());
+        cards.add(ebp, Panels.ExportBoardWindow.name());
         
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
