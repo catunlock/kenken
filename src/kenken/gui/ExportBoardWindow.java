@@ -33,14 +33,14 @@ public class ExportBoardWindow extends javax.swing.JFrame {
     
     private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
     private Component modalToComponent;
-    private BoardDBController bDBc;
+    private BoardController bc;
      
     /**
      * Creates new form ExportBoardWindow
      */
     public ExportBoardWindow() {
         initComponents();
-        bDBc = new BoardDBController();
+        bc = new BoardController();
         listModel = new DefaultListModel();
         BoardController bC = new BoardController();
         infoBoard = bC.getBoardsInfo();
@@ -225,7 +225,7 @@ public class ExportBoardWindow extends javax.swing.JFrame {
  
                 FileOutputStream fos;
                 try {
-                    Board newBoard = bDBc.loadBoard(bi.getName());
+                    Board newBoard = bc.exportBoard(bi.getName());
                     fos = new FileOutputStream(file);
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     oos.writeObject(newBoard);
