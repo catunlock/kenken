@@ -5,6 +5,8 @@
  */
 package kenken.gui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marc
@@ -29,64 +31,64 @@ public class PlayPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton11 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        btnMusic = new javax.swing.JButton();
+        lblTime = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+        btnSurrender = new javax.swing.JButton();
+        btnSaveGame = new javax.swing.JButton();
+        btnHint = new javax.swing.JButton();
+        lblHint = new javax.swing.JLabel();
 
-        jButton11.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jButton11.setText("MUSIC ON/OFF");
-        jButton11.setToolTipText("");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnMusic.setText("MUSIC ON/OFF");
+        btnMusic.setToolTipText("");
+        btnMusic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnMusicActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Flubber", 1, 36)); // NOI18N
-        jLabel1.setText("00:00:00");
+        lblTime.setFont(new java.awt.Font("Flubber", 1, 36)); // NOI18N
+        lblTime.setText("00:00:00");
 
-        jButton5.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jButton5.setText("EXIT");
-        jButton5.setToolTipText("");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnExit.setText("EXIT");
+        btnExit.setToolTipText("");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jButton6.setText("SURRENDER");
-        jButton6.setToolTipText("");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnSurrender.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnSurrender.setText("SURRENDER");
+        btnSurrender.setToolTipText("");
+        btnSurrender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnSurrenderActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jButton7.setText("SAVE GAME");
-        jButton7.setToolTipText("");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveGame.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnSaveGame.setText("SAVE GAME");
+        btnSaveGame.setToolTipText("");
+        btnSaveGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnSaveGameActionPerformed(evt);
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jButton8.setText("HINT");
-        jButton8.setToolTipText("");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnHint.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnHint.setText("HINT");
+        btnHint.setToolTipText("");
+        btnHint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnHintActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        jLabel2.setText("Hints remaining: 3");
+        lblHint.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        lblHint.setText("Hints remaining: 3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,20 +98,20 @@ public class PlayPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(btnSaveGame)
                         .addGap(178, 178, 178)
-                        .addComponent(jButton6)
+                        .addComponent(btnSurrender)
                         .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHint, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(lblHint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addComponent(jButton11)
+                        .addComponent(btnMusic)
                         .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
@@ -119,49 +121,50 @@ public class PlayPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnHint, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHint)
+                            .addComponent(btnMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btnMusicActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (n == 0) mw.setPanel(MainWindow.Panels.MainMenuPanel);
+    }//GEN-LAST:event_btnExitActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnSurrenderActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnSaveGameActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHintActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnHintActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnHint;
+    private javax.swing.JButton btnMusic;
+    private javax.swing.JButton btnSaveGame;
+    private javax.swing.JButton btnSurrender;
+    private javax.swing.JLabel lblHint;
+    private javax.swing.JLabel lblTime;
     // End of variables declaration//GEN-END:variables
 }
