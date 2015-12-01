@@ -75,7 +75,8 @@ public class MainWindow {
         ExportBoardPanel,
         MainMenuPanel,
         EndGamePanel,
-        GenerateBoardPanel;
+        GenerateBoardPanel,
+        NewGamePanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -104,6 +105,7 @@ public class MainWindow {
         MainMenuPanel mmp = new MainMenuPanel(this);
         EndGamePanel egp = new EndGamePanel(this);
         GenerateBoardPanel gbp = new GenerateBoardPanel(this);
+        NewGamePanel ngp = new NewGamePanel(this);
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
@@ -113,6 +115,7 @@ public class MainWindow {
         cards.add(ebp, Panels.ExportBoardPanel.name());
         cards.add(egp, Panels.EndGamePanel.name());
         cards.add(gbp, Panels.GenerateBoardPanel.name());
+        cards.add(ngp, Panels.NewGamePanel.name());
         
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
