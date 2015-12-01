@@ -77,7 +77,9 @@ public class MainWindow {
         ExportBoardPanel,
         MainMenuPanel,
         EndGamePanel,
-        GenerateBoardPanel;
+        GenerateBoardPanel,
+        NewGamePanel,
+        PlayPanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;

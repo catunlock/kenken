@@ -200,7 +200,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnShowRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRankingActionPerformed
