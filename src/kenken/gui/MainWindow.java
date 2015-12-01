@@ -79,7 +79,9 @@ public class MainWindow {
         EndGamePanel,
         GenerateBoardPanel,
         NewGamePanel,
-        PlayPanel;
+        PlayPanel,
+        LoadBoardPanel,
+        LoadGamePanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -110,6 +112,8 @@ public class MainWindow {
         panels.put("GenerateBoardPanel", new GenerateBoardPanel(this));
         panels.put("NewGamePanel", new NewGamePanel(this));
         panels.put("PlayPanel", new PlayPanel(this));
+        panels.put("LoadBoardPanel", new LoadBoardPanel(this));
+        panels.put("LoadGamePanel", new LoadGamePanel(this));
     }
     
     private void addPanelsToCardPanel() {
