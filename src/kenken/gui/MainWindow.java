@@ -37,6 +37,8 @@ package kenken.gui;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Hashtable;
+import java.util.Map.Entry;
 import javax.swing.*;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.GameController;
@@ -46,11 +48,13 @@ import kenken.domain.controllers.UserController;
 public class MainWindow {
     JPanel cards; //a panel that uses CardLayout
     
+    Hashtable<String, JPanel> panels = new Hashtable<>();
+    
     private BoardController bc = new BoardController();
     private GameController gc = new GameController();
     private RankingController rc = new RankingController();
     private UserController uc = new UserController();
-
+    
     public BoardController getBoardController() {
         return bc;
     }
@@ -69,8 +73,6 @@ public class MainWindow {
     
     
     enum Panels {
-        PANELONE,
-        PANELTWO,
         CreateBoardPanel,
         ExportBoardPanel,
         MainMenuPanel,
@@ -94,25 +96,36 @@ public class MainWindow {
         cl.show(cards, p.name());
     }
     
+    public JPanel getPanel(Panels p) {
+        return panels.get(p.name());
+    }
+    
+    private void createPanels() {
+        panels.put("CreateBoardPanel", new CreateBoardPanel(this));
+        panels.put("ExportBoardPanel", new ExportBoardPanel(this));
+        panels.put("MainMenuPanel", new MainMenuPanel(this));
+        panels.put("EndGamePanel", new EndGamePanel(this));
+        panels.put("GenerateBoardPanel", new GenerateBoardPanel(this));
+    }
+    
+    private void addPanelsToCardPanel() {
+        for(Entry<String, JPanel> e : panels.entrySet()) {
+            cards.add(e.getKey(), e.getValue());
+        }
+    }
+    
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
         
         //Create the "cards".
-        CreateBoardPanel cbw = new CreateBoardPanel(this);
-        ExportBoardPanel ebp = new ExportBoardPanel(this);
-        MainMenuPanel mmp = new MainMenuPanel(this);
-        EndGamePanel egp = new EndGamePanel(this);
-        GenerateBoardPanel gbp = new GenerateBoardPanel(this);
+        createPanels();
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         
-        cards.add(mmp, Panels.MainMenuPanel.name());
-        cards.add(cbw, Panels.CreateBoardPanel.name());
-        cards.add(ebp, Panels.ExportBoardPanel.name());
-        cards.add(egp, Panels.EndGamePanel.name());
-        cards.add(gbp, Panels.GenerateBoardPanel.name());
+        // Add the panels to the panel with de cardlayout.
+        addPanelsToCardPanel();
         
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
