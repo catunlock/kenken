@@ -87,7 +87,7 @@ public class Ranking implements Serializable{
             recordList.add(pos, record);
         }
     }
-    /*
+    
     public ArrayList<String> rankingToString(){
         ArrayList<String> arr = new ArrayList();
         arr.add(this.boardName);
@@ -108,6 +108,6 @@ public class Ranking implements Serializable{
         }
         return ranking;
     }
-    */
+    
     
 }
