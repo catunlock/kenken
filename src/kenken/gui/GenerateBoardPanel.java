@@ -116,11 +116,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnPlayActionPerformed
 
 
