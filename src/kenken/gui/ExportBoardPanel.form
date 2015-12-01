@@ -23,10 +23,6 @@
                       <Component id="btnBack" min="-2" pref="102" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
-                      <Component id="lblExport" min="-2" pref="367" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="scrllBoards" alignment="1" min="-2" pref="330" max="-2" attributes="0"/>
@@ -42,6 +38,10 @@
                           <Component id="lblShowCreador" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                           <Component id="lblShowTamany" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                      <Component id="lblExport" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="59" max="32767" attributes="0"/>
