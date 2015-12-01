@@ -85,6 +85,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
         btnLogOut.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnLogOut.setText("Logout");
+        btnLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogOutMouseClicked(evt);
+            }
+        });
 
         lblPlayedTime.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblPlayedTime.setText("Total Time Played: ");
@@ -209,6 +214,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private void btnCreateBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateBoardMouseClicked
         mw.setPanel(MainWindow.Panels.CreateBoardPanel);
     }//GEN-LAST:event_btnCreateBoardMouseClicked
+
+    private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
+        mw.setPanel(MainWindow.Panels.EndGamePanel);
+    }//GEN-LAST:event_btnLogOutMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
