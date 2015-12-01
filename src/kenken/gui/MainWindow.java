@@ -108,6 +108,8 @@ public class MainWindow {
         panels.put("MainMenuPanel", new MainMenuPanel(this));
         panels.put("EndGamePanel", new EndGamePanel(this));
         panels.put("GenerateBoardPanel", new GenerateBoardPanel(this));
+        panels.put("NewGamePanel", new NewGamePanel(this));
+        panels.put("PlayPanel", new PlayPanel(this));
     }
     
     private void addPanelsToCardPanel() {
