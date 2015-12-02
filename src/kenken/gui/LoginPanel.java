@@ -176,6 +176,7 @@ public class LoginPanel extends javax.swing.JPanel {
         else if (errcode == -3) {
             lblErrorMessage.setText("Servei no disponible.");
         }else {
+            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUser.getText());
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
