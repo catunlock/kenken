@@ -38,7 +38,7 @@ public class BoardPanel extends JPanel implements ActionListener{
     public BoardPanel() {
         setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
         infoCells = new ArrayList<>(nColumns);
-        
+        /*
         for (int i = 0; i < nColumns; ++i) {
             infoCells.add(new ArrayList<>(nColumns));
             
@@ -46,9 +46,10 @@ public class BoardPanel extends JPanel implements ActionListener{
                 InfoCell ic = new InfoCell();
                 ic.value = String.valueOf(i);
                 ic.result = ic.value;
-                infoCells.get(i).set(j, ic);
+                //infoCells.get(i).add(ic);
             }
         }
+                */
     }
 
     private void drawColums(Graphics2D g2d) {
