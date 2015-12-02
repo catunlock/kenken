@@ -20,7 +20,7 @@ public class RankingDBControllerDriver {
     public static void main(String[] args) throws IOException{
         RankingController test = new RankingController();
         Scanner scan = new Scanner(System.in);
-        Ranking testRanking = new Ranking("Tauler", Ranking.GameMode.Normal);
+        Ranking testRanking = new Ranking("Manolo", Ranking.GameMode.Normal);
         
         System.out.println("-----------------------------------------------");
         System.out.println("Provant RankingDBController");

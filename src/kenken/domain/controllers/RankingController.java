@@ -6,6 +6,7 @@
 package kenken.domain.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import kenken.domain.classes.Ranking;
 import kenken.persistance.controllers.RankingDBController;
 import kenken.domain.classes.Record;
@@ -16,32 +17,34 @@ import kenken.domain.classes.Record;
  */
 public class RankingController {
     
+    RankingDBController rkDBC = new RankingDBController();
+    
     public RankingController(){
         
     }
     
     public int createRanking(String boardName, Ranking.GameMode gameMode){
-        RankingDBController rkDBC = new RankingDBController();
         Ranking newRanking = new Ranking(boardName, gameMode);
         int result = rkDBC.createRanking(newRanking);
         return result;
     }
     
     public Ranking getRanking(String boardName){
-        RankingDBController rkDBC = new RankingDBController();
         Ranking ranking = rkDBC.getRanking(boardName);
         return ranking;
     }
     
+    public ArrayList<String> getStringRanking(String boardName){
+        return rkDBC.getRanking(boardName).rankingToString();
+    }
+    
     public int modifyRanking(Ranking ranking, Record record){
-        RankingDBController rkDBC = new RankingDBController();
         ranking.addRecord(record);
         int result = rkDBC.modifyRanking(ranking);
         return result;
     }
     
     public int deleteRanking(String boardName){
-        RankingDBController rkDBC = new RankingDBController();
         return rkDBC.deleteRanking(boardName);
     }
     
