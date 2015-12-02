@@ -130,6 +130,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
         btnLoadGame.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnLoadGame.setText("Load Game");
+        btnLoadGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadGameActionPerformed(evt);
+            }
+        });
 
         btnOptions.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnOptions.setText("Options");
@@ -218,6 +223,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
         mw.setPanel(MainWindow.Panels.EndGamePanel);
     }//GEN-LAST:event_btnLogOutMouseClicked
+
+    private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
+        mw.setPanel(MainWindow.Panels.LoadGamePanel);
+    }//GEN-LAST:event_btnLoadGameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
