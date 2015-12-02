@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken.gui;
+package oldwindows;
 
 import kenken.domain.controllers.UserController;
 

@@ -75,6 +75,11 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnBack.setText("BACK");
+        btnBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBackMouseClicked(evt);
+            }
+        });
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -192,9 +197,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        //this.dispose(); //closes the window--cannot be recovered
-        //MainMenuWindow mmw = new MainMenuWindow();
-        //mmw.setVisible(true); //shows it
+
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtVerifyPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVerifyPasswordActionPerformed
@@ -212,6 +215,10 @@ public class RegisterPanel extends javax.swing.JPanel {
             txtVerifyPassword.setBackground(Color.red);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_txtVerifyPasswordKeyReleased
+
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+       mw.setPanel(MainWindow.Panels.LoginPanel);
+    }//GEN-LAST:event_btnBackMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

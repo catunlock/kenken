@@ -5,6 +5,8 @@
  */
 package kenken.gui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author asus
@@ -221,9 +223,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateBoardMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
-        EndGamePanel egp = (EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel);
-        egp.setBoardPlayed("");
-        mw.setPanel(MainWindow.Panels.EndGamePanel);
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (n == 0) {
+            mw.setPanel(MainWindow.Panels.LoginPanel);
+        }
     }//GEN-LAST:event_btnLogOutMouseClicked
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
