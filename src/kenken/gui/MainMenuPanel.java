@@ -221,6 +221,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateBoardMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
+        EndGamePanel egp = (EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel);
+        egp.setBoardPlayed("");
         mw.setPanel(MainWindow.Panels.EndGamePanel);
     }//GEN-LAST:event_btnLogOutMouseClicked
 
