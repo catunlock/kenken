@@ -81,7 +81,9 @@ public class MainWindow {
         NewGamePanel,
         PlayPanel,
         LoadBoardPanel,
-        LoadGamePanel;
+        LoadGamePanel,
+        RankingPanel,
+        RegisterPanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -114,6 +116,8 @@ public class MainWindow {
         panels.put("PlayPanel", new PlayPanel(this));
         panels.put("LoadBoardPanel", new LoadBoardPanel(this));
         panels.put("LoadGamePanel", new LoadGamePanel(this));
+        panels.put("RankingPanel", new RankingPanel(this));
+        panels.put("RegisterPanel", new RegisterPanel(this));
     }
     
     private void addPanelsToCardPanel() {
