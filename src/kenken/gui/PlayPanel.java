@@ -63,6 +63,11 @@ public class PlayPanel extends javax.swing.JPanel {
         btnSurrender.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnSurrender.setText("SURRENDER");
         btnSurrender.setToolTipText("");
+        btnSurrender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSurrenderMouseClicked(evt);
+            }
+        });
         btnSurrender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSurrenderActionPerformed(evt);
@@ -156,6 +161,10 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHintActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHintActionPerformed
+
+    private void btnSurrenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSurrenderMouseClicked
+       mw.setPanel(MainWindow.Panels.EndGamePanel);
+    }//GEN-LAST:event_btnSurrenderMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

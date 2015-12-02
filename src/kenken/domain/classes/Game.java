@@ -33,7 +33,23 @@ public class Game implements Serializable{
         this.user = null;
         this.board = null;
     }
-      
+     
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(time.toString());
+        sb.append(mode);
+        sb.append(board.getBoardName());
+        sb.append(user.getUsername());
+        sb.append('\n');
+        return sb.toString();
+    }
+    /*
+    public Game stringToGame(){
+        
+    }
+    */
+    
     /*
     Pre: cert
     Post: s'ha inicialitzat al game una board de nom "boardName" i retorna
