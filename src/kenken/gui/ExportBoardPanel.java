@@ -36,7 +36,7 @@ public class ExportBoardPanel extends javax.swing.JPanel {
     public ExportBoardPanel(MainWindow mw) {
         initComponents();
         
-         this.mw = mw;
+        this.mw = mw;
         
         listModel = new DefaultListModel();
         

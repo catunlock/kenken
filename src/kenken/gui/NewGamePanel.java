@@ -117,7 +117,7 @@ public class NewGamePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateBoardActionPerformed
 
     private void btnLoadBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadBoardActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.LoadBoardPanel);
     }//GEN-LAST:event_btnLoadBoardActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

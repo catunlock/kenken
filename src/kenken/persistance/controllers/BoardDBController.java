@@ -40,12 +40,40 @@ public class BoardDBController {
     
     public ArrayList<String> getBoardnames(){
         ArrayList<String> boards = new ArrayList<>();
-        File f = new File(DirectoryBoards);
+        File f = new File(DirectoryInfo);
         File[] ficheros = f.listFiles();
         for (int x=0;x<ficheros.length;x++){
             boards.add(ficheros[x].getName());
         }
         return boards;
+    }
+    
+    /*
+    Pre: boardname es nom de tauler existent a la DB
+    Post: retorna la informacio del board en format string    
+    */
+    public ArrayList<String> getBoardInfoString(String boardname){
+        ArrayList<String> info = new ArrayList<>();
+        String path = getPathInfo(boardname);
+        String pathInfo = path+ExtensionInfo;
+        try{
+            FileInputStream fis = new FileInputStream(path);   
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            BoardInfo boardInfo = (BoardInfo) ois.readObject();
+            info.add(boardInfo.getCreador());
+            info.add(boardInfo.getSize());
+            fis.close();
+        }catch (ClassNotFoundException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            } catch (IOException ex) {
+                Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        return info;
     }
     
     /* Pre:  cert
@@ -69,12 +97,6 @@ public class BoardDBController {
             result = -1;
         }
         else{
-            /* info de tablero contiene: nombre tablero, persona que lo ha creado, dificultad, tamX, tamY */
-            /*ArrayList<String> infoBoard = new ArrayList<>();
-            infoBoard.add(newBoard.getBoardName());
-            infoBoard.add(newBoard.getUsername());
-            infoBoard.add(String.valueOf(newBoard.size()));
-            */
             
             BoardInfo infoBoard = new BoardInfo(newBoard.getBoardName(),newBoard.getUsername(),String.valueOf(newBoard.size()));
             //crear el fichero de info y fisico

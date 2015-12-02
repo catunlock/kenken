@@ -27,6 +27,10 @@ public class BoardController {
         return bDBc.getBoardsInfo();
     }
     
+    public ArrayList<String> getBoardInfoString(String boardname){
+        return bDBc.getBoardInfoString(boardname);
+    }
+    
     public ArrayList<String> getBoardnames() {
         return bDBc.getBoardnames();
     }
