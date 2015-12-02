@@ -49,7 +49,7 @@ public class EndGamePanel extends javax.swing.JPanel {
         lblRankStats.setText("Rank stats for this Board:");
 
         lblCongrats.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        lblCongrats.setText("Congratulations ! You had succeed !");
+        lblCongrats.setText("Congratulations ! You have succeed !");
 
         btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnBack.setText("Menu");
