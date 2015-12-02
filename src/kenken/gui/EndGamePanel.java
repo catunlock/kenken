@@ -15,6 +15,7 @@ public class EndGamePanel extends javax.swing.JPanel {
     
     private DefaultTableModel tableModel;
     private MainWindow mw;
+    private String boardPlayed;
     /**
      * Creates new form EndGamePanel
      * @param mw
@@ -25,10 +26,13 @@ public class EndGamePanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) tblRanking.getModel();
         //mw.getRankingController();
         //mw.getGameController().
-        tableModel.addRow(new Object[]{"Hola","Que tal"});   
+        tableModel.addRow(new Object[]{"Hola","Que tal"});
+        lblBoardName.setText(boardPlayed);
     }
     
-    
+    public void setBoardPlayed(String boardPlayed){
+        this.boardPlayed = boardPlayed;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,14 +43,14 @@ public class EndGamePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRankStats = new javax.swing.JLabel();
+        lblBoardName = new javax.swing.JLabel();
         lblCongrats = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRanking = new javax.swing.JTable();
+        lblRankStats = new javax.swing.JLabel();
 
-        lblRankStats.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        lblRankStats.setText("Rank stats for this Board:");
+        lblBoardName.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
 
         lblCongrats.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblCongrats.setText("Congratulations ! You have succeed !");
@@ -84,6 +88,9 @@ public class EndGamePanel extends javax.swing.JPanel {
             tblRanking.getColumnModel().getColumn(1).setPreferredWidth(100);
         }
 
+        lblRankStats.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblRankStats.setText("Rank stats for Board");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,25 +103,36 @@ public class EndGamePanel extends javax.swing.JPanel {
                             .addGap(316, 316, 316)
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(228, 228, 228)
-                            .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addGap(179, 179, 179)
                             .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(217, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(189, 189, 189)
+                    .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(372, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
+                .addComponent(lblBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(104, 104, 104)
+                    .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(421, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,6 +144,7 @@ public class EndGamePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBoardName;
     private javax.swing.JLabel lblCongrats;
     private javax.swing.JLabel lblRankStats;
     private javax.swing.JTable tblRanking;
