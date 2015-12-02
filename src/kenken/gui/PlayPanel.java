@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class PlayPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
+
     /**
      * Creates new form PlayPanel
      */
@@ -38,6 +39,7 @@ public class PlayPanel extends javax.swing.JPanel {
         btnSaveGame = new javax.swing.JButton();
         btnHint = new javax.swing.JButton();
         lblHint = new javax.swing.JLabel();
+        boardPanel1 = new kenken.gui.BoardPanel();
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnMusic.setText("MUSIC ON/OFF");
@@ -95,11 +97,22 @@ public class PlayPanel extends javax.swing.JPanel {
         lblHint.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblHint.setText("Hints remaining: 3");
 
+        javax.swing.GroupLayout boardPanel1Layout = new javax.swing.GroupLayout(boardPanel1);
+        boardPanel1.setLayout(boardPanel1Layout);
+        boardPanel1Layout.setHorizontalGroup(
+            boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 418, Short.MAX_VALUE)
+        );
+        boardPanel1Layout.setVerticalGroup(
+            boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 417, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -118,6 +131,10 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addGap(67, 67, 67)
                         .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +149,9 @@ public class PlayPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,6 +188,7 @@ public class PlayPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private kenken.gui.BoardPanel boardPanel1;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHint;
     private javax.swing.JButton btnMusic;
