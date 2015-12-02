@@ -163,7 +163,8 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHintActionPerformed
 
     private void btnSurrenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSurrenderMouseClicked
-       mw.setPanel(MainWindow.Panels.EndGamePanel);
+        ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed("Manolito");
+        mw.setPanel(MainWindow.Panels.EndGamePanel);
     }//GEN-LAST:event_btnSurrenderMouseClicked
 
 

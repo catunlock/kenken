@@ -52,7 +52,7 @@
               <Component id="btnOptions" min="-2" pref="160" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLogOut" min="-2" pref="160" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +61,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="lblMainMenu" min="-2" pref="76" max="-2" attributes="0"/>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblStatistics" min="-2" max="-2" attributes="0"/>
@@ -82,12 +82,12 @@
                       <Component id="btnExportBoard" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnOptions" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="btnLogOut" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="btnOptions" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

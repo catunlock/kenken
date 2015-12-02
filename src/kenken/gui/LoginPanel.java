@@ -23,6 +23,12 @@ public class LoginPanel extends javax.swing.JPanel {
         this.mw = mw;
     }
 
+    public void clearTxt(){
+        lblErrorMessage.setText("");
+        txtUser.setText("");
+        txtPassword.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

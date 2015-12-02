@@ -26,12 +26,12 @@ public class EndGamePanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) tblRanking.getModel();
         //mw.getRankingController();
         //mw.getGameController().
-        tableModel.addRow(new Object[]{"Hola","Que tal"});
-        lblBoardName.setText(boardPlayed);
+        tableModel.addRow(new Object[]{"Hola","Que tal"});     
     }
     
     public void setBoardPlayed(String boardPlayed){
         this.boardPlayed = boardPlayed;
+        lblBoardName.setText(boardPlayed);
     }
 
     /**
