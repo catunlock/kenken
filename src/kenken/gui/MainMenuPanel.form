@@ -172,15 +172,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="lblResolvedGames" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCreatedGames" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblResolvedBoards" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCreatedBoards" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPlayedTime" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblTimePlayedTarget" pref="99" max="32767" attributes="0"/>
-                      <Component id="lblGamesResolved" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblGamesCreatedTarget" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblBoardsResolvedTarget" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblBoardsCreatedTarget" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="74" max="32767" attributes="0"/>
               </Group>
@@ -196,13 +196,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCreatedGames" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblGamesCreatedTarget" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCreatedBoards" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBoardsCreatedTarget" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblResolvedGames" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblGamesResolved" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblResolvedBoards" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBoardsResolvedTarget" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
@@ -218,20 +218,20 @@
             <Property name="text" type="java.lang.String" value="Total Time Played: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblCreatedGames">
+        <Component class="javax.swing.JLabel" name="lblCreatedBoards">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Flubber" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Games created: "/>
+            <Property name="text" type="java.lang.String" value="Boards created: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblResolvedGames">
+        <Component class="javax.swing.JLabel" name="lblResolvedBoards">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Flubber" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Games resolved:"/>
+            <Property name="text" type="java.lang.String" value="Boards resolved:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTimePlayedTarget">
@@ -242,7 +242,7 @@
             <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblGamesCreatedTarget">
+        <Component class="javax.swing.JLabel" name="lblBoardsCreatedTarget">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
@@ -250,7 +250,7 @@
             <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblGamesResolved">
+        <Component class="javax.swing.JLabel" name="lblBoardsResolvedTarget">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
