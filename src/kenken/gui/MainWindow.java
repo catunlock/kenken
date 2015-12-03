@@ -158,7 +158,7 @@ public class MainWindow {
         //Create and set up the content pane.
         MainWindow demo = new MainWindow();
         demo.addComponentToPane(frame.getContentPane());
-        demo.setPanel(Panels.LoginPanel);
+        demo.setPanel(Panels.PlayPanel);
         
         //Display the window.
         frame.pack();
