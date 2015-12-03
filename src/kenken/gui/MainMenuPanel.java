@@ -28,12 +28,17 @@ public class MainMenuPanel extends javax.swing.JPanel {
     public MainMenuPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        
+        this.uc = this.mw.getUserController();
     }
 
     public void setUser(String username){
         this.user = username;
-        lblMainMenu.setText(lblMainMenu.getText() + user);
+        lblMainMenu.setText("Welcome, " + user);
+        User temp = this.uc.getUser(username);
+        lblBoardsCreatedTarget.setText(String.valueOf(temp.getActualCreatedBoard()));
+        lblBoardsResolvedTarget.setText(String.valueOf(temp.getSolvedGames()));
+        long timePlayed = temp.getTotalTimePlayed().getSeconds();
+        lblTimePlayedTarget.setText(String.valueOf(timePlayed + " seconds."));
     }
     
     /**
