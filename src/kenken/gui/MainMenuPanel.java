@@ -16,6 +16,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     
     private MainWindow mw;
     private String user;    
+    private ArrayList<String> userInfo;
     /**
      * Creates new form MainMenuPanel
      */
@@ -49,6 +50,9 @@ public class MainMenuPanel extends javax.swing.JPanel {
         lblPlayedTime = new javax.swing.JLabel();
         lblCreatedGames = new javax.swing.JLabel();
         lblResolvedGames = new javax.swing.JLabel();
+        lblTimePlayedTarget = new javax.swing.JLabel();
+        lblGamesCreatedTarget = new javax.swing.JLabel();
+        lblGamesResolved = new javax.swing.JLabel();
         lblMainMenu = new javax.swing.JLabel();
         btnLoadGame = new javax.swing.JButton();
         btnOptions = new javax.swing.JButton();
@@ -108,6 +112,15 @@ public class MainMenuPanel extends javax.swing.JPanel {
         lblResolvedGames.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblResolvedGames.setText("Games resolved:");
 
+        lblTimePlayedTarget.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTimePlayedTarget.setText("-");
+
+        lblGamesCreatedTarget.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblGamesCreatedTarget.setText("-");
+
+        lblGamesResolved.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblGamesResolved.setText("-");
+
         javax.swing.GroupLayout pnlStatisticsLayout = new javax.swing.GroupLayout(pnlStatistics);
         pnlStatistics.setLayout(pnlStatisticsLayout);
         pnlStatisticsLayout.setHorizontalGroup(
@@ -118,17 +131,28 @@ public class MainMenuPanel extends javax.swing.JPanel {
                     .addComponent(lblResolvedGames)
                     .addComponent(lblCreatedGames)
                     .addComponent(lblPlayedTime))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(pnlStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTimePlayedTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(lblGamesResolved, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblGamesCreatedTarget, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         pnlStatisticsLayout.setVerticalGroup(
             pnlStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlStatisticsLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(lblPlayedTime)
+                .addGroup(pnlStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPlayedTime)
+                    .addComponent(lblTimePlayedTarget))
                 .addGap(18, 18, 18)
-                .addComponent(lblCreatedGames)
+                .addGroup(pnlStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCreatedGames)
+                    .addComponent(lblGamesCreatedTarget))
                 .addGap(18, 18, 18)
-                .addComponent(lblResolvedGames)
+                .addGroup(pnlStatisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblResolvedGames)
+                    .addComponent(lblGamesResolved))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -251,10 +275,13 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnOptions;
     private javax.swing.JButton btnShowRanking;
     private javax.swing.JLabel lblCreatedGames;
+    private javax.swing.JLabel lblGamesCreatedTarget;
+    private javax.swing.JLabel lblGamesResolved;
     private javax.swing.JLabel lblMainMenu;
     private javax.swing.JLabel lblPlayedTime;
     private javax.swing.JLabel lblResolvedGames;
     private javax.swing.JLabel lblStatistics;
+    private javax.swing.JLabel lblTimePlayedTarget;
     private javax.swing.JPanel pnlStatistics;
     // End of variables declaration//GEN-END:variables
 }
