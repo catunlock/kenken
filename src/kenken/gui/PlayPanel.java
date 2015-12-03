@@ -5,7 +5,11 @@
  */
 package kenken.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,6 +18,7 @@ import javax.swing.JOptionPane;
 public class PlayPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
+    Timer t;
 
     /**
      * Creates new form PlayPanel
@@ -21,6 +26,8 @@ public class PlayPanel extends javax.swing.JPanel {
     public PlayPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        t = new Timer(1000, updateClockAction);
+        t.start();
     }
 
     /**
@@ -128,8 +135,8 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addComponent(lblHint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(btnMusic)
-                        .addGap(67, 67, 67)
-                        .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(189, 189, 189)
@@ -185,7 +192,19 @@ public class PlayPanel extends javax.swing.JPanel {
         ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed("Manolito");
         mw.setPanel(MainWindow.Panels.EndGamePanel);
     }//GEN-LAST:event_btnSurrenderMouseClicked
-
+    
+    
+    ActionListener updateClockAction = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Assumes clock is a custom component
+            lblTime.setText(String.valueOf(System.currentTimeMillis())); 
+            // OR
+            // Assumes clock is a JLabel
+            //lblTime.setText(new Date().toString()); 
+        }
+    };
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private kenken.gui.BoardPanel boardPanel1;
