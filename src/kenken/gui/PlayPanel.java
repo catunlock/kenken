@@ -19,7 +19,9 @@ public class PlayPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
     Timer t;
-
+    //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
+    //cuando se produzca el evento suba un segundo al Duration, y que sea éste
+    //el que aparezca en pantalla en el lblTime
     /**
      * Creates new form PlayPanel
      */
