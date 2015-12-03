@@ -76,7 +76,7 @@ public class UserController {
     */
     public int updateUser() {
         UserDBController db = new UserDBController();
-        int error = db.modifyUser(loggedUser,loggedUser.getUsername());
+        int error = db.modifyUser(loggedUser,null);
         return error;
     }
 
@@ -95,7 +95,6 @@ public class UserController {
         UserDBController db = new UserDBController();
         return db.getUser(username);
     }
-    
     /* Pre: Previament s’ha fet login correctament i password i newName no són nuls.
     ** Post: Retorna un enter que indica en quin estat ha acabat l’operació. 
     **	  Si retorna 0 vol dir que l’operació ha finalitzat correctament, en aquest
@@ -131,7 +130,7 @@ public class UserController {
         UserDBController db = new UserDBController();
         if (!oldPassword.equals(loggedUser.getPassword())) return -1;
         loggedUser.setPassword(newPassword);
-        int error = db.modifyUser(loggedUser,loggedUser.getUsername());
+        int error = db.modifyUser(loggedUser,null);
         if (error != 0) {
             loggedUser.setPassword(oldPassword);
             return -2;
