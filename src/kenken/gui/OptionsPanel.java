@@ -5,6 +5,7 @@
  */
 package kenken.gui;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import kenken.domain.controllers.*;
 
@@ -25,6 +26,7 @@ public class OptionsPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
         this.uc = uc;
+        txtPassword.setText("");
     }
 
     /**
@@ -39,6 +41,8 @@ public class OptionsPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnDeleteUser = new javax.swing.JButton();
         btnMusic = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+        lblLabel = new javax.swing.JLabel();
 
         btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnBack.setText("BACK");
@@ -52,7 +56,6 @@ public class OptionsPanel extends javax.swing.JPanel {
         btnDeleteUser.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnDeleteUser.setText("Delete this user");
         btnDeleteUser.setToolTipText("");
-        btnDeleteUser.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnDeleteUser.setMaximumSize(new java.awt.Dimension(159, 35));
         btnDeleteUser.setMinimumSize(new java.awt.Dimension(159, 35));
         btnDeleteUser.setPreferredSize(new java.awt.Dimension(159, 35));
@@ -65,7 +68,6 @@ public class OptionsPanel extends javax.swing.JPanel {
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnMusic.setText("Music on");
         btnMusic.setToolTipText("");
-        btnMusic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnMusic.setMaximumSize(new java.awt.Dimension(159, 35));
         btnMusic.setMinimumSize(new java.awt.Dimension(159, 35));
         btnMusic.setPreferredSize(new java.awt.Dimension(159, 35));
@@ -74,6 +76,15 @@ public class OptionsPanel extends javax.swing.JPanel {
                 btnMusicActionPerformed(evt);
             }
         });
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        lblLabel.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblLabel.setText("Type your password here");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,18 +97,24 @@ public class OptionsPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(238, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(239, 239, 239))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(137, 137, 137)
+                .addContainerGap()
+                .addComponent(lblLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -111,11 +128,15 @@ public class OptionsPanel extends javax.swing.JPanel {
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
-            String pass = JOptionPane.showInputDialog("Please type your password");
+            String pass = Arrays.toString(txtPassword.getPassword());
             int error = uc.deleteUser(pass);
-            if (error == 0) mw.setPanel(MainWindow.Panels.LoginPanel);
+            if (error == 0) {
+                ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+                mw.setPanel(MainWindow.Panels.LoginPanel);
+            }
             else {
                 JOptionPane.showMessageDialog(this, "Wrong password, unable to delete this user.");
+                txtPassword.setText("");
             }
         }
     }//GEN-LAST:event_btnDeleteUserActionPerformed
@@ -124,10 +145,16 @@ public class OptionsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMusicActionPerformed
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnMusic;
+    private javax.swing.JLabel lblLabel;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
