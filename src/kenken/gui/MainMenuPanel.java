@@ -181,6 +181,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
         btnOptions.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnOptions.setText("Options");
+        btnOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOptionsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -274,6 +279,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
         mw.setPanel(MainWindow.Panels.LoadGamePanel);
     }//GEN-LAST:event_btnLoadGameActionPerformed
+
+    private void btnOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOptionsActionPerformed
+        mw.setPanel(MainWindow.Panels.OptionsPanel);
+    }//GEN-LAST:event_btnOptionsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
