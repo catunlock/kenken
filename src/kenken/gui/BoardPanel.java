@@ -28,6 +28,8 @@ public class BoardPanel extends JPanel implements ActionListener{
     private final int BORDER_SIZE = 4;
     private final int FONT_SIZE_VALUE = 58;
     private final int FONT_SIZE_OPERATION = 18;
+    private final int padHor;
+    private final int padVer;
     private final Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
     private final Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
     
@@ -37,12 +39,17 @@ public class BoardPanel extends JPanel implements ActionListener{
         public String operation = "+";
         public String result = "0";
         public String value = "4";
+        public boolean borderHoritzontal = false;
+        public boolean borderVertical = false;
     }
 
     ArrayList<ArrayList<InfoCell>> infoCells;
     
     public BoardPanel() 
     {
+        padHor = WIDTH / nColumns;
+        padVer = HEIGHT / nColumns;
+        
         setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
         infoCells = new ArrayList<>(nColumns);
         
@@ -94,11 +101,7 @@ public class BoardPanel extends JPanel implements ActionListener{
     }
     
     private void drawCells(Graphics2D g2d) 
-    {
-    	int padHor = WIDTH / nColumns;
-    	int padVer = HEIGHT / nColumns;
-    	
-    	
+    {   	
         for (int i = 0; i < nColumns; ++i) {
             for (int j = 0; j < nColumns; ++j) {
                 InfoCell ic = infoCells.get(i).get(j);
@@ -107,6 +110,41 @@ public class BoardPanel extends JPanel implements ActionListener{
             }
         }
     }
+    
+    private void drawBorderVertical(Graphics g2d, int row, int column) {
+    	int y = row*padVer;
+    	int x = column*padHor;
+    	
+   	for (int i = x-(BORDER_SIZE/2) ; i < x+(BORDER_SIZE/2); ++i) {
+    		g2d.drawLine(i , y, i, y+padVer);
+    	}
+    }
+    
+    private void drawBorderHoritzontal(Graphics g2d, int row, int column) {
+    	int y = row*padVer;
+    	int x = column*padHor;
+    	
+   	for (int i = y-(BORDER_SIZE/2) ; i < y+(BORDER_SIZE/2); ++i) {
+    		g2d.drawLine(x , i, x+padHor, i);
+    	}
+    }
+    
+    public void setOperation(int row, int column, String op, int resultValue) {
+        InfoCell ic = infoCells.get(row).get(column);
+        ic.operation = op;
+        ic.result = String.valueOf(resultValue);
+    }
+    
+    public void setVerticalBorder(int row, int column, boolean b) {
+        InfoCell ic = infoCells.get(row).get(column);
+        ic.borderVertical = b;
+    }
+    
+    public void setHoritzontalBorder(int row, int column, boolean b) {
+        InfoCell ic = infoCells.get(row).get(column);
+        ic.borderHoritzontal = b;
+    }
+    
     
     private void doDrawing(Graphics g) {
 
@@ -121,6 +159,11 @@ public class BoardPanel extends JPanel implements ActionListener{
         	g2d.drawRect(0 + i , 0 + i, WIDTH - i*2, HEIGHT-1 - i*2);
         }
         
+        g2d.setPaint(Color.black);
+        drawBorderVertical(g2d, 0, 1);
+        drawBorderHoritzontal(g2d,3,1);
+        
+        g2d.setPaint(Color.black);
         drawColums(g2d);
         drawRows(g2d);
         
