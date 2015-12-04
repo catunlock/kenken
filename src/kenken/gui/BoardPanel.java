@@ -36,8 +36,8 @@ public class BoardPanel extends JPanel implements ActionListener{
     private int nColumns = 4;
     
     private class InfoCell {
-        public String operation = "+";
-        public String result = "0";
+        public String operation;
+        public String result;
         public String value = "4";
         public boolean borderHoritzontal = false;
         public boolean borderVertical = false;
@@ -66,7 +66,8 @@ public class BoardPanel extends JPanel implements ActionListener{
                 infoCells.get(i).add(ic);
             }
         }
-                
+        
+        this.setOperation(0, 0, "+", 0);
     }
 
     private void drawColums(Graphics2D g2d) {
@@ -85,14 +86,15 @@ public class BoardPanel extends JPanel implements ActionListener{
     
     private void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
     {
-    	g2d.setFont(fontOperation);
-    	int posOperationY = (int) (posY + FONT_SIZE_OPERATION);
-    	int posOperationX = (int) (posX + FONT_SIZE_OPERATION/2);
-    	g2d.drawString(ic.operation, posOperationX, posOperationY);
-    	    	
-    	int posResultX = (int) (posOperationX + FONT_SIZE_OPERATION/1.5);
-    	g2d.drawString(ic.result, posResultX, posOperationY);
-    	
+        if (ic.operation != null && ic.result != null) {
+            g2d.setFont(fontOperation);
+            int posOperationY = (int) (posY + FONT_SIZE_OPERATION);
+            int posOperationX = (int) (posX + FONT_SIZE_OPERATION/2);
+            g2d.drawString(ic.operation, posOperationX, posOperationY);
+
+            int posResultX = (int) (posOperationX + FONT_SIZE_OPERATION/1.5);
+            g2d.drawString(ic.result, posResultX, posOperationY);
+        }
     	
     	g2d.setFont(fontValue);
     	int posValueY = posY + (HEIGHT/nColumns/2) + FONT_SIZE_VALUE/3;
