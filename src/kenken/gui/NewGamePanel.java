@@ -113,7 +113,7 @@ public class NewGamePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerateBoardActionPerformed
 
     private void btnCreateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBoardActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.CreateBoardPanel);
     }//GEN-LAST:event_btnCreateBoardActionPerformed
 
     private void btnLoadBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadBoardActionPerformed
