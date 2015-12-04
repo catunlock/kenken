@@ -108,6 +108,7 @@ public class MainWindow {
     }
     
     private void createPanels() {
+        panels.put("LoginPanel", new LoginPanel(this));
         panels.put("CreateBoardPanel", new CreateBoardPanel(this));
         panels.put("ExportBoardPanel", new ExportBoardPanel(this));
         panels.put("MainMenuPanel", new MainMenuPanel(this));
@@ -119,7 +120,7 @@ public class MainWindow {
         panels.put("LoadGamePanel", new LoadGamePanel(this));
         panels.put("RankingPanel", new RankingPanel(this));
         panels.put("RegisterPanel", new RegisterPanel(this));
-        panels.put("LoginPanel", new LoginPanel(this));
+        
     }
     
     private void addPanelsToCardPanel() {
@@ -158,7 +159,7 @@ public class MainWindow {
         //Create and set up the content pane.
         MainWindow demo = new MainWindow();
         demo.addComponentToPane(frame.getContentPane());
-        demo.setPanel(Panels.PlayPanel);
+        demo.setPanel(Panels.LoginPanel);
         
         //Display the window.
         frame.pack();
