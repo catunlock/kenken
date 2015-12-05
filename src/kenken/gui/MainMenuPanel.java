@@ -273,7 +273,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnShowRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRankingActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.ChooseRankingPanel);
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
     private void btnExportBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportBoardMouseClicked
