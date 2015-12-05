@@ -7,7 +7,10 @@ package kenken.gui;
 
 import java.awt.Component;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -305,7 +308,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
         if (fileChoose.showOpenDialog(modalToComponent) == JFileChooser.APPROVE_OPTION){
             File file = fileChoose.getSelectedFile();
             if (file != null){
-                
+                int res = bc.importBoard(file);
+                if (res == 0) JOptionPane.showMessageDialog(modalToComponent, "The Board has been imported.");
+                else if (res == -1) JOptionPane.showMessageDialog(modalToComponent, "The Board it was already in the database.");
+                else JOptionPane.showMessageDialog(modalToComponent, "There was an internal error.");
             }
         }
     }//GEN-LAST:event_btnImportBoardActionPerformed
