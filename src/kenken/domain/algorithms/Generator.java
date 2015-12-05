@@ -18,18 +18,36 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Stack;
 import kenken.color.BoardColorator;
+import kenken.domain.classes.Pos;
 
 /**
  *
  * @author 1182347
  */
 public class Generator {
-    Board board;
-    Random rand;
+    private Board board;
+    private Random rand;
     
-    public Board generate(int size) {
+    /*
+    Factores de probabilidad: si los factores de probabilidad valen 1 la dificultad
+    es la original, digamos media. Si el factor es > 1, aumenta la dificultad.
+    Si el factor es < 1 && > 0 disminuye la dificultad.
+    */
+      
+    // Factor de probabilidad el tamaño de las regiones (que se distribuira como
+    // una normal).
+    private float pfRegionSize;
+    
+    // Factor de probabilidad que modifica si las operaciones son de multiplicar
+    // o sumar i si las regiones de una sola casilla se muestra el valor al 
+    // usuario o no.
+    private float pfOperationType;
+    
+    public Board generate(int size, float pfRegionSize, float pfOperationType, long seed) {
         board = new Board(size);
-        rand = new Random(System.nanoTime());
+        rand = new Random(seed);
+        this.pfRegionSize = pfRegionSize;
+        this.pfOperationType = pfOperationType;
         
         for(int f = 0; f < board.size(); f++) {
             for (int c = 0; c < board.size(); c++) {
@@ -68,56 +86,21 @@ public class Generator {
         }
     }
  
-    void shuffleRows() {
+    private void shuffleRows() {
       for (int i = board.size() - 1; i > 0; i--) {
         int s = rand.nextInt(i + 1);
         swapRow(i, s);
       }
     }
  
-    void shuffleColumns() {
+    private void shuffleColumns() {
       for (int i = board.size() - 1; i > 0; i--) {
         int s = rand.nextInt(i + 1);
         swapColumn(i, s);
       }
     }
 
-    private class Pos {
-        public int f = 0;
-        public int c = 0;
-        public Pos() {}
-        public Pos(int f, int c) {
-            this.f = f;
-            this.c = c;
-        }
-
-        @Override
-        public String toString() {
-            return "Pos{" + "f=" + f + ", c=" + c + '}';
-        }
-        //inline bool operator==(const Pos &r) { return f == r.f and c == r.c; }
-    }
- 
-    int randRegionSize() {
-      int r = rand.nextInt(100);
-
-      if (r < 20) {
-        return 1;
-      }
-      if (r >= 20 && r < 60) {
-        return 2;
-      }
-      if (r >= 60 && r < 90) {
-        return 3;
-      }
-      if (r >= 90) {
-        return 4;
-      }
-      return -2;
-    }
-    
-    
-    
+   
     class RegionMaker{
         private boolean[][] empilat;
         LinkedList<Pos> allPositions;
@@ -149,6 +132,12 @@ public class Generator {
         
         private Region.OperationType randOperation(ArrayList<CellKenken> cells) {
             if (cells.size() == 1) {
+                float n = rand.nextInt(100) * pfOperationType;
+                if (n < 50) {
+                    cells.get(0).setVisible(true);
+                } else {
+                    cells.get(0).setVisible(false);
+                }
                 return Region.OperationType.None;
             }
             else if (cells.size() == 2) {
@@ -163,12 +152,12 @@ public class Generator {
                     return Region.OperationType.Subtract;
                 }
             }
-            else{
-                int n = rand.nextInt(100);
+            else {
+                float n = rand.nextInt(100) * pfOperationType;
                 if (n < 50) {
-                    return Region.OperationType.Multiply;
-                }else {
                     return Region.OperationType.Add;
+                }else {
+                    return Region.OperationType.Multiply;
                 }
             }
         }
@@ -212,9 +201,14 @@ public class Generator {
             board.setCell(p.f, p.c, c);
         }
         
+        
+        private int randRegionSize(int size, int sd) {
+            return max(1, rand.nextInt(board.size() -1));
+        }
+        
         private ArrayList<CellKenken> makeRegion(Pos pos) {
-            //int regionSize = randRegionSize();
-            int regionSize = max(1,rand.nextInt(board.size() -1));
+            
+            int regionSize = randRegionSize(board.size(), 1);
             int actualSize = 0;
             
             ArrayList<CellKenken> cells = new ArrayList<>();
@@ -307,7 +301,12 @@ public class Generator {
    
     public static void main(String[] args) {
         Generator g = new Generator();
-        Board b = g.generate(4);
+        
+        float pfRegionSize = 1.5f;
+        float pfOperation = 0.5f;
+        long seed = 123456;
+        
+        Board b = g.generate(4, pfRegionSize, pfOperation, seed);
         BoardColorator.print(b);
         
         BoardColorator.printRegions(b);

@@ -12,6 +12,15 @@ package kenken.domain.classes;
 public class CellKenken extends Cell{
     
     private int region = 0;
+    private boolean visible = false;
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
 
     public CellKenken(int posX, int posY, boolean original, int solution) {
         super(posX, posY, original, solution);
