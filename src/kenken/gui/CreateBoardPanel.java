@@ -28,30 +28,13 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         txtBoardName = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         lblSize = new javax.swing.JLabel();
         cmbSize = new javax.swing.JComboBox();
         lblCreateBoard = new javax.swing.JLabel();
         lblBoardName = new javax.swing.JLabel();
-        btnBack1 = new javax.swing.JButton();
-
-        btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnBack.setText("BACK");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        btnBack = new javax.swing.JButton();
 
         txtBoardName.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
 
@@ -81,12 +64,12 @@ public class CreateBoardPanel extends javax.swing.JPanel {
         lblBoardName.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblBoardName.setText("Board Name:");
 
-        btnBack1.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnBack1.setText("BACK");
-        btnBack1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnBack.setText("BACK");
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack1ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -100,9 +83,6 @@ public class CreateBoardPanel extends javax.swing.JPanel {
                         .addGap(196, 196, 196)
                         .addComponent(lblCreateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,7 +93,10 @@ public class CreateBoardPanel extends javax.swing.JPanel {
                             .addComponent(txtBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(btnBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -132,14 +115,13 @@ public class CreateBoardPanel extends javax.swing.JPanel {
                 .addGap(51, 51, 51)
                 .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(btnBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        mw.setPanel(MainWindow.Panels.ExportBoardPanel);
+        mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
@@ -147,26 +129,14 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbSizeActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+        mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        mw.setPanel(MainWindow.Panels.ExportBoardPanel);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
-        // TODO add your handling code here:
-        mw.setPanel(MainWindow.Panels.MainMenuPanel);
-    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox cmbSize;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBoardName;
     private javax.swing.JLabel lblCreateBoard;
     private javax.swing.JLabel lblSize;
