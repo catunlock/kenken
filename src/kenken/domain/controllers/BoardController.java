@@ -5,8 +5,14 @@
  */
 package kenken.domain.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
 import kenken.persistance.controllers.BoardDBController;
@@ -38,7 +44,17 @@ public class BoardController {
     /* Pre: board != null
        Post: retorna 0 si s'ha importat correctament, -1 si ja existeix la board, -2 error intern 
     */
-    public int importBoard(Board board) {
+    public int importBoard(File file) {
+        Board board;
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            board = (Board) ois.readObject(); 
+        } catch (IOException | ClassNotFoundException e) {
+            Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, e);
+            return -2;
+        }
+          
         return bDBc.createBoard(board);    
     }
     
