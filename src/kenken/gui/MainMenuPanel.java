@@ -5,9 +5,14 @@
  */
 package kenken.gui;
 
+import java.awt.Component;
+import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import kenken.domain.classes.User;
+import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.UserController;
 
 /**
@@ -20,6 +25,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private MainWindow mw;
     private String user;
     private UserController uc;
+    private Component modalToComponent;
+    private BoardController bc;
     
     /**
      * Creates new form MainMenuPanel
@@ -29,6 +36,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
         this.uc = this.mw.getUserController();
+        this.bc = this.mw.getBoardController();
     }
 
     public void setUser(String username){
@@ -86,6 +94,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
         btnImportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnImportBoard.setText("Import Board");
+        btnImportBoard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportBoardActionPerformed(evt);
+            }
+        });
 
         btnCreateBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnCreateBoard.setText("Create Board");
@@ -283,6 +296,19 @@ public class MainMenuPanel extends javax.swing.JPanel {
     private void btnOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOptionsActionPerformed
         mw.setPanel(MainWindow.Panels.OptionsPanel);
     }//GEN-LAST:event_btnOptionsActionPerformed
+
+    private void btnImportBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportBoardActionPerformed
+        JFileChooser fileChoose = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".brd", "brd");
+        fileChoose.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChoose.setFileFilter(filter);
+        if (fileChoose.showOpenDialog(modalToComponent) == JFileChooser.APPROVE_OPTION){
+            File file = fileChoose.getSelectedFile();
+            if (file != null){
+                
+            }
+        }
+    }//GEN-LAST:event_btnImportBoardActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
