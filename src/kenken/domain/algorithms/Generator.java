@@ -202,14 +202,20 @@ public class Generator {
         }
         
         
-        private int randRegionSize(int size, int sd) {
-            return max(1, rand.nextInt(board.size() -1));
+        private int randRegionSize() {
+
+            int r = abs(rand.nextInt(board.size()-2)) +2;
+
+            r *= pfRegionSize;
+            System.out.println("Me ha dado el random: " + r);
+
+            return (int) max(1, min(r, board.size() - 1) );
         }
         
         private ArrayList<CellKenken> makeRegion(Pos pos) {
             
-            int regionSize = randRegionSize(board.size(), 1);
-            int actualSize = 0;
+            int regionSize = randRegionSize();
+            int actualSize = 1;
             
             ArrayList<CellKenken> cells = new ArrayList<>();
 
@@ -298,17 +304,20 @@ public class Generator {
             return s;
         }
     }
-   
+
+    
+    
     public static void main(String[] args) {
         Generator g = new Generator();
         
-        float pfRegionSize = 1.5f;
+        float pfRegionSize = 0.6f;
         float pfOperation = 0.5f;
-        long seed = 123456;
+        long seed = 162;
         
-        Board b = g.generate(4, pfRegionSize, pfOperation, seed);
+        Board b = g.generate(7, pfRegionSize, pfOperation, System.nanoTime());
         BoardColorator.print(b);
         
         BoardColorator.printRegions(b);
     }
+    
 }
