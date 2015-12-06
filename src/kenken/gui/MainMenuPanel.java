@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import kenken.domain.classes.User;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.UserController;
+import kenken.persistance.controllers.RankingDBController;
 
 /**
  *
@@ -51,6 +52,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
         long timePlayed = temp.getTotalTimePlayed().getSeconds();
         lblTimePlayedTarget.setText(String.valueOf(timePlayed + " seconds."));
     }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -273,6 +276,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnShowRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRankingActionPerformed
+        ((ChooseRankingPanel) mw.getPanel(MainWindow.Panels.ChooseRankingPanel)).setRankingList();
         mw.setPanel(MainWindow.Panels.ChooseRankingPanel);
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
