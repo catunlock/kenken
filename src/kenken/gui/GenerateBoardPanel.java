@@ -20,8 +20,12 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         this.mw = mw;
     }
     
-    private static int[] selectDifficult(){
-        int res[] = {};
+    private static float selectDifficult(String diff){
+        float res;
+        if ("Easy".equals(diff)) res = 0.7f;
+        else if ("Medium".equals(diff)) res = 1.2f;
+        else if ("Hard".equals(diff)) res = 1.7f;
+        else res = 2;
         return res;
     }
 
@@ -141,6 +145,7 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         String cont = (String) cmbbSize.getSelectedItem();
         int size = Integer.parseInt(cont);
+        float diff = selectDifficult(cmbDifficult.getSelectedItem().toString());
         //mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnPlayActionPerformed
 
