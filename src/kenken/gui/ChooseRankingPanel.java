@@ -7,7 +7,6 @@ package kenken.gui;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import kenken.domain.controllers.RankingController;
 import kenken.persistance.controllers.RankingDBController;
 
@@ -130,7 +129,9 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        // TODO add your handling code here:
+        String select = (String) lstRanking.getSelectedValue();
+        ((RankingPanel) mw.getPanel(MainWindow.Panels.RankingPanel)).setRecordsList(select);
+        mw.setPanel(MainWindow.Panels.RankingPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 
 
