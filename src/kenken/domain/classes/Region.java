@@ -6,6 +6,9 @@
 package kenken.domain.classes;
 
 import java.io.Serializable;
+import static java.lang.Integer.min;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -56,9 +59,40 @@ public class Region implements Serializable{
     }
 
     public boolean isValid() {
-        return valid;
-    }
+        Region.OperationType op = this.getOperationType();
+            
+        boolean result = false;
+        Iterator<CellKenken> it = this.getCellList().iterator();
 
+        if(it.hasNext()){
+            int resultValue = it.next().getSolutionValue();
+
+            while (it.hasNext()) {
+                CellKenken c = it.next();
+
+                switch(op) {
+                    case Add:
+                        resultValue += c.getSolutionValue();
+                        break;
+                    case Subtract:
+                        resultValue = abs(resultValue - c.getSolutionValue());
+                        break;
+                    case Multiply:
+                        resultValue *= c.getSolutionValue();
+                        break;
+                    case Divide:
+                        resultValue = max(resultValue,c.getSolutionValue())/ min(resultValue,c.getSolutionValue());
+                        break;                    
+                }
+                
+            }
+            if (resultValue == this.getResult()) {
+                    result = true;
+            }
+        }
+        return result;
+    }
+    
     public void setCellList(ArrayList<CellKenken> cellList) {
         this.cellList = cellList;
         Iterator<CellKenken> it = this.cellList.iterator();

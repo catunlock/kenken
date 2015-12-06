@@ -58,58 +58,10 @@ public class Resolver {
         return r;
     }
     
-    private boolean checkRegion(Region r) {
-        Region.OperationType op = r.getOperationType();
-            
-        boolean result = false;
-        Iterator<CellKenken> it = r.getCellList().iterator();
-
-        if(it.hasNext()){
-            int resultValue = it.next().getSolutionValue();
-
-            while (it.hasNext()) {
-                CellKenken c = it.next();
-
-                switch(op) {
-                    case Add:
-                        resultValue += c.getSolutionValue();
-                        break;
-                    case Subtract:
-                        resultValue = abs(resultValue - c.getSolutionValue());
-                        break;
-                    case Multiply:
-                        resultValue *= c.getSolutionValue();
-                        break;
-                    case Divide:
-                        resultValue = max(resultValue,c.getSolutionValue())/ min(resultValue,c.getSolutionValue());
-                        break;                    
-                }
-                
-            }
-            if (resultValue == r.getResult()) {
-                    result = true;
-            }
-        }
-        return result;
-    }
-    
-    private boolean checkSolution() {
-        ArrayList<Region> regions = board.getRegions();
-        
-        boolean correct = true;
-        int i = 0;
-        while (correct && i < regions.size()) {
-            correct = checkRegion(regions.get(i));
-            ++i;
-        }
-        
-        return correct;
-    }
-    
     public void backtrack(Pos p) {
         
         if (p.f == board.size() && p.c == 0) { 
-            if (checkSolution()) {
+            if (board.isResolved()) {
                 BoardColorator.print(board);
                 System.out.println();
             }

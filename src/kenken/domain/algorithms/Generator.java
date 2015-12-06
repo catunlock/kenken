@@ -310,11 +310,11 @@ public class Generator {
     public static void main(String[] args) {
         Generator g = new Generator();
         
-        float pfRegionSize = 0.6f;
-        float pfOperation = 0.5f;
+        float pfRegionSize = 2f;
+        float pfOperation = 2f;
         long seed = 162;
         
-        Board b = g.generate(7, pfRegionSize, pfOperation, System.nanoTime());
+        Board b = g.generate(9, pfRegionSize, pfOperation, System.nanoTime());
         BoardColorator.print(b);
         
         BoardColorator.printRegions(b);
