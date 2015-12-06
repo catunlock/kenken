@@ -34,6 +34,12 @@ public class RankingController {
         return ranking;
     }
     
+    public ArrayList<String> showRanking(String boardName){
+        Ranking ranking = rkDBC.getRanking(boardName);
+        ArrayList<String> res = ranking.rankingToString();
+        return res;
+    }
+    
     public ArrayList<String> getStringRanking(String boardName){
         return rkDBC.getRanking(boardName).rankingToString();
     }
