@@ -5,6 +5,10 @@
  */
 package kenken.gui;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import kenken.domain.controllers.RankingController;
+
 /**
  *
  * @author Marc
@@ -12,12 +16,25 @@ package kenken.gui;
 public class RankingPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
+    private RankingController rc;
+    private DefaultTableModel dtm;
     /**
      * Creates new form RankingPanel
      */
     public RankingPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        this.rc = this.mw.getRankingController();
+        this.dtm = (DefaultTableModel) tblRanking.getModel();
+    }
+    
+    public void setRecordsList(String boardname){
+        ArrayList<String> show = rc.showRanking(boardname);
+        show.remove(0);
+        for(int i = 0; i < show.size(); i += 2){
+            String[] row = {show.get(i), show.get(i + 1)};
+            this.dtm.addRow(row);
+        }
     }
 
     /**
@@ -31,8 +48,8 @@ public class RankingPanel extends javax.swing.JPanel {
 
         lblRanking = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        scrpnlRanking = new javax.swing.JScrollPane();
-        txtRanking = new javax.swing.JTextArea();
+        scrllRanking = new javax.swing.JScrollPane();
+        tblRanking = new javax.swing.JTable();
 
         lblRanking.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
         lblRanking.setText("BEST SCORES ALL TIME");
@@ -46,11 +63,38 @@ public class RankingPanel extends javax.swing.JPanel {
             }
         });
 
-        txtRanking.setColumns(20);
-        txtRanking.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        txtRanking.setRows(5);
-        txtRanking.setText("USER\t\tSCORE\n\nMANOLO\t\t2139802813\nPEPITO\t\t123908132\nJUANETE\t\t9823843\nMARC\t\t100\nALBERTO\t\t2");
-        scrpnlRanking.setViewportView(txtRanking);
+        tblRanking.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblRanking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Player", "Record"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblRanking.getTableHeader().setReorderingAllowed(false);
+        scrllRanking.setViewportView(tblRanking);
+        if (tblRanking.getColumnModel().getColumnCount() > 0) {
+            tblRanking.getColumnModel().getColumn(0).setResizable(false);
+            tblRanking.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,21 +106,22 @@ public class RankingPanel extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(scrpnlRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(lblRanking)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 103, Short.MAX_VALUE)
+                .addComponent(scrllRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lblRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(scrpnlRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(scrllRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -90,7 +135,7 @@ public class RankingPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel lblRanking;
-    private javax.swing.JScrollPane scrpnlRanking;
-    private javax.swing.JTextArea txtRanking;
+    private javax.swing.JScrollPane scrllRanking;
+    private javax.swing.JTable tblRanking;
     // End of variables declaration//GEN-END:variables
 }
