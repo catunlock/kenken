@@ -40,6 +40,18 @@ public class RankingDBController {
         return result;
     }
     
+    public static ArrayList<String> getRankingBoardnames(){
+        ArrayList<String> res = new ArrayList<>();
+        String temp = "";
+        File f = new File(Directory);
+        File[] fs = f.listFiles();
+        for(File f1 : fs){
+            temp = f1.getName();
+            temp = temp.replace(Directory, "");
+            res.add(temp.replace(Extension, ""));
+        }
+        return res;
+    }
     
     public int modifyRanking(Ranking ranking){
         int result = -2;
@@ -129,5 +141,7 @@ public class RankingDBController {
         }
         return result;
     }
+    
+    
     
 }

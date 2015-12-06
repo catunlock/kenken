@@ -85,7 +85,8 @@ public class MainWindow {
         RankingPanel,
         RegisterPanel,
         LoginPanel,
-        OptionsPanel;
+        OptionsPanel,
+        ChooseRankingPanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -122,6 +123,7 @@ public class MainWindow {
         panels.put("RankingPanel", new RankingPanel(this));
         panels.put("RegisterPanel", new RegisterPanel(this));
         panels.put("OptionsPanel", new OptionsPanel(this, uc));
+        panels.put("ChooseRankingPanel", new ChooseRankingPanel(this));
         
     }
     

@@ -142,7 +142,8 @@ public class OptionsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
     private void btnMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicActionPerformed
-        // TODO add your handling code here:
+        if (btnMusic.getText() == "Music on") btnMusic.setText("Music off");
+        else btnMusic.setText("Music on");
     }//GEN-LAST:event_btnMusicActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
