@@ -5,13 +5,19 @@
  */
 package kenken.gui;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 import kenken.domain.controllers.RankingController;
+import kenken.persistance.controllers.RankingDBController;
 
 /**
  *
  * @author Marc
  */
 public class ChooseRankingPanel extends javax.swing.JPanel {
+    
+    private DefaultListModel listmodel;
     
     private MainWindow mw;
     private RankingController rc;
@@ -23,6 +29,15 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
         this.rc = this.mw.getRankingController();
+    }
+    
+    public void setRankingList(){
+        ArrayList<String> rankList = RankingDBController.getRankingBoardnames();
+        this.listmodel = new DefaultListModel();
+        for(String s : rankList){
+            listmodel.addElement(s);
+        }
+        lstRanking.setModel(listmodel);
     }
 
     /**
@@ -50,11 +65,6 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
         });
 
         lstRanking.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lstRanking.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Ranking1", "Ranking2", "Ranking3", "Ranking4" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         lstRanking.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lstRanking.setName(""); // NOI18N
         scrlRanking.setViewportView(lstRanking);
