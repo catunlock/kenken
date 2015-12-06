@@ -130,6 +130,7 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         String select = (String) lstRanking.getSelectedValue();
+        ((RankingPanel) mw.getPanel(MainWindow.Panels.RankingPanel)).clearRecordsList();
         ((RankingPanel) mw.getPanel(MainWindow.Panels.RankingPanel)).setRecordsList(select);
         mw.setPanel(MainWindow.Panels.RankingPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
