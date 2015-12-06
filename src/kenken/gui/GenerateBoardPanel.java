@@ -19,6 +19,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
     }
+    
+    private static int[] selectDifficult(){
+        int res[] = {};
+        return res;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +41,8 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnPlay = new javax.swing.JButton();
         lblGenerateBoard = new javax.swing.JLabel();
+        lblDifficult = new javax.swing.JLabel();
+        cmbDifficult = new javax.swing.JComboBox();
 
         lblGameMode.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblGameMode.setText("Game Mode:");
@@ -68,6 +75,12 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         lblGenerateBoard.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
         lblGenerateBoard.setText("GENERATE BOARD");
 
+        lblDifficult.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblDifficult.setText("Difficult:");
+
+        cmbDifficult.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cmbDifficult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Easy", "Medium", "Hard", "Insane" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,20 +91,22 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
                         .addGap(31, 31, 31)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
+                        .addGap(160, 160, 160)
+                        .addComponent(lblGenerateBoard))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
                         .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(221, 221, 221)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbbGameMode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(lblGenerateBoard)))
+                            .addComponent(cmbbSize, 0, 166, Short.MAX_VALUE)
+                            .addComponent(cmbDifficult, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,9 +122,13 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblDifficult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbDifficult))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -120,15 +139,19 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        mw.setPanel(MainWindow.Panels.PlayPanel);
+        String cont = (String) cmbbSize.getSelectedItem();
+        int size = Integer.parseInt(cont);
+        //mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnPlayActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnPlay;
+    private javax.swing.JComboBox cmbDifficult;
     private javax.swing.JComboBox cmbbGameMode;
     private javax.swing.JComboBox cmbbSize;
+    private javax.swing.JLabel lblDifficult;
     private javax.swing.JLabel lblGameMode;
     private javax.swing.JLabel lblGenerateBoard;
     private javax.swing.JLabel lblSize;
