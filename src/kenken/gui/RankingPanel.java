@@ -30,10 +30,17 @@ public class RankingPanel extends javax.swing.JPanel {
     
     public void setRecordsList(String boardname){
         ArrayList<String> show = rc.showRanking(boardname);
+        show.remove(show.size() - 1);
         show.remove(0);
         for(int i = 0; i < show.size(); i += 2){
             String[] row = {show.get(i), show.get(i + 1)};
             this.dtm.addRow(row);
+        }
+    }
+    public void clearRecordsList(){
+        int size = tblRanking.getRowCount();
+        for (int i = 0; i < size; i++){
+            this.dtm.removeRow(0);
         }
     }
 
@@ -63,19 +70,10 @@ public class RankingPanel extends javax.swing.JPanel {
             }
         });
 
-        tblRanking.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblRanking.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tblRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Player", "Record"
@@ -89,6 +87,9 @@ public class RankingPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblRanking.setRowHeight(30);
+        tblRanking.setShowHorizontalLines(false);
+        tblRanking.setShowVerticalLines(false);
         tblRanking.getTableHeader().setReorderingAllowed(false);
         scrllRanking.setViewportView(tblRanking);
         if (tblRanking.getColumnModel().getColumnCount() > 0) {
@@ -120,15 +121,15 @@ public class RankingPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(lblRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(scrllRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addComponent(scrllRanking, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.ChooseRankingPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
