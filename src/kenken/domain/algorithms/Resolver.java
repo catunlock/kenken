@@ -26,24 +26,87 @@ import kenken.color.BoardColorator;
  */
 public class Resolver {
     
-    Board board = null;
-    private ArrayList<ArrayList<Boolean>> numerosFila;
-    private ArrayList<ArrayList<Boolean>> numerosColumna;
-    
-    private ArrayList<ArrayList<Boolean>> untouchables;
-    
-    public void escriure(Board b) {
-	if (b.size() > 0) {
-            for (int i = 0; i < b.size(); ++i) {
-                for (int j = 0; j < b.size(); ++j) {
-                    System.out.print(b.getCell(i, j).getSolutionValue() + " ");
+    private class UsedValues {
+        private ArrayList<ArrayList<Boolean>> numerosFila;
+        private ArrayList<ArrayList<Boolean>> numerosColumna;
+        
+        public UsedValues() {
+            numerosFila = new ArrayList<>();
+            numerosColumna = new ArrayList<>();
+            
+            for (int i = 0; i < board.size(); ++i) {
+                numerosFila.add(new ArrayList<>());
+                numerosColumna.add(new ArrayList<>());
+           
+                for (int j = 0; j < board.size(); ++j) {
+                    numerosFila.get(i).add(false);
+                    numerosColumna.get(i).add(false);
+            
                 }
-                System.out.println();
             }
-	}
+        }
+    
+        public void set(int f, int c, int number) {
+            numerosFila.get(f).set(number, true);
+            numerosColumna.get(c).set(number, true);
+        }
+        
+        public void unset(int f, int c, int number) {
+            numerosFila.get(f).set(number, false);
+            numerosColumna.get(c).set(number, false);
+        }
+        
+        public boolean isNotUsed(int f, int c, int number) {
+            return ! numerosFila.get(f).get(number) && ! numerosColumna.get(c).get(number);
+        }
     }
     
-    private Pos nextCell(Pos pos) {
+    private class Untouchables {
+        private ArrayList<ArrayList<Boolean>> untouchables;
+        
+        public Untouchables() {
+            untouchables = new ArrayList<>();
+        
+            for (int i = 0; i < board.size(); ++i) {
+                untouchables.add(new ArrayList<>());
+
+                for (int j = 0; j < board.size(); ++j) {
+                    untouchables.get(i).add(false);
+                }
+            }
+        }
+        
+        public void set(int f, int c) {
+            untouchables.get(f).set(c, true);
+        }
+        
+        public void unset(int f, int c) {
+            untouchables.get(f).set(c, false);
+        }
+        
+        public boolean isUntouchable(int f, int c) {
+            return untouchables.get(f).get(c);
+        }
+        
+    }
+    
+    private Untouchables untouchables;
+    private UsedValues usedValues;
+    private Board board = null;
+    
+    public void escriure(Board b) {
+		if (b.size() > 0) {
+	            for (int i = 0; i < b.size(); ++i) {
+	                for (int j = 0; j < b.size(); ++j) {
+	                    System.out.print(b.getCell(i, j).getSolutionValue() + " ");
+	                }
+	                System.out.println();
+	            }
+		}
+    }
+    
+    
+    private Pos nextPos(Pos pos) {
 
         Pos r = new Pos(pos);
         
@@ -67,23 +130,20 @@ public class Resolver {
             }
             //escriure(board);
         }
-        else if (untouchables.get(p.f).get(p.c)) {
-            backtrack(nextCell(p));
+        else if (untouchables.isUntouchable(p.f,p.c)) {
+            backtrack(nextPos(p));
         }
         else {
             for (int i = 0; i < board.size(); ++i) {
-                if (! numerosFila.get(p.f).get(i) && ! numerosColumna.get(p.c).get(i)) 
+                if (usedValues.isNotUsed(p.f, p.c, i)) 
                 {    
                     board.getCell(p.f, p.c).setSolutionValue(i+1);
-                                        
-                    numerosFila.get(p.f).set(i, true);
-                    numerosColumna.get(p.c).set(i, true);
+                    
+                    usedValues.set(p.f, p.c, i);
 
-                    backtrack(nextCell(p));
+                    backtrack(nextPos(p));
 
-                    numerosFila.get(p.f).set(i, false);
-                    numerosColumna.get(p.c).set(i, false);
-
+                    usedValues.unset(p.f, p.c, i);
                 }
             }
 	}
@@ -96,31 +156,14 @@ public class Resolver {
         boolean result = false;
         
         board = b;
-        
-        numerosFila = new ArrayList<>();
-        numerosColumna = new ArrayList<>();
-        untouchables = new ArrayList<>();
-        
-        for (int i = 0; i < board.size(); ++i) {
-            numerosFila.add(new ArrayList<>());
-            numerosColumna.add(new ArrayList<>());
-            untouchables.add(new ArrayList<>());
-            
-            for (int j = 0; j < board.size(); ++j) {
-                numerosFila.get(i).add(false);
-                numerosColumna.get(i).add(false);
-                untouchables.get(i).add(false);
-            }
-        }
-        
-        
+        usedValues = new UsedValues();
+        untouchables = new Untouchables();
+
         for (Region r : b.getRegions()) {
             if (r.getOperationType() == Region.OperationType.None) {
                 CellKenken c = r.getCellList().get(0);
-                untouchables.get(c.getPosX()).set(c.getPosY(), true);
-                
-                numerosFila.get(c.getPosX()).set(c.getSolutionValue() -1, true);
-                numerosColumna.get(c.getPosY()).set(c.getSolutionValue() -1, true);
+                untouchables.set(c.getPosX(),c.getPosY());
+                usedValues.set(c.getPosX(), c.getPosY(), c.getSolutionValue()-1);
             }
         }
         
