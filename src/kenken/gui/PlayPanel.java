@@ -31,13 +31,18 @@ public class PlayPanel extends javax.swing.JPanel {
      */
     public PlayPanel(MainWindow mw) {
         initComponents();
-        this.mw = mw;
+        this.mw = mw;     
+    }
+
+    public void initTime(){
         time = Duration.ZERO;
         timer = new Timer(1000,updateClockAction);
         timer.setRepeats(true);
+        segundos = 0;
+        minutos = 0;
+        horas = 0;
         timer.start();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
