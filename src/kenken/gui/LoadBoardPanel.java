@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import kenken.domain.classes.BoardInfo;
 
 /**
@@ -16,8 +17,8 @@ import kenken.domain.classes.BoardInfo;
 public class LoadBoardPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    private DefaultListModel listLoad;
-    private ArrayList<String> boardnames;
+    private DefaultListModel listModel;
+    private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
     /**
      * Creates new form LoadBoardPanel
      * @param mw
@@ -25,18 +26,23 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     public LoadBoardPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        listLoad = new DefaultListModel();
         
-        boardnames = mw.getBoardController().getBoardnames();
-        if (boardnames != null){
-            for(String bname : boardnames){
-                System.out.println(bname);
-                listLoad.addElement(bname);
-            }
-        }
-        lstBoards.setModel(listLoad);
+        updateList();
+        
     }
 
+    
+    public void updateList(){
+        listModel = new DefaultListModel();
+        
+        infoBoard = mw.getBoardController().getBoardsInfo();
+        if (infoBoard != null){
+            for(BoardInfo bInf : infoBoard){
+                listModel.addElement(bInf.getName());
+            }
+        }
+        lstBoards.setModel(listModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,11 +190,26 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete " + bi.getName() + " board?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (n == 0) {
+            //eliminar la board
+            int result = mw.getBoardController().deleteBoard(bi.getName());
+            if (result == 0){
+                JOptionPane.showMessageDialog(null,
+                    "Board deleted.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+                updateList();
+            }else{
+                JOptionPane.showMessageDialog(null,
+                    "Internal Error",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -196,9 +217,9 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-        ArrayList<String> bInfo = mw.getBoardController().getBoardInfoString(boardnames.get(lstBoards.getSelectedIndex()));
-        lblShowCreador.setText(bInfo.get(0));
-        lblShowTamany.setText(bInfo.get(1));
+        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+        lblShowCreador.setText(bi.getCreador());
+        lblShowTamany.setText(bi.getSize());
     }//GEN-LAST:event_lstBoardsValueChanged
 
 

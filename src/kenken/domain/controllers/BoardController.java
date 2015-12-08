@@ -47,14 +47,14 @@ public class BoardController {
     public int importBoard(File file) {
         Board board;
         try {
-            FileInputStream fis = new FileInputStream(file);
+            FileInputStream fis = new FileInputStream(file.getPath());
             ObjectInputStream ois = new ObjectInputStream(fis);
-            board = (Board) ois.readObject(); 
+            board = (Board) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, e);
             return -2;
         }
-          
+        System.out.println(board.getBoardName());
         return bDBc.createBoard(board);    
     }
     
@@ -70,6 +70,10 @@ public class BoardController {
     */
     public boolean existsBoard(String boardName){
         return bDBc.exists(boardName);
-    }   
+    }
+    
+    public int deleteBoard(String boardname){
+        return bDBc.deleteBoard(boardname);
+    }
     
 }

@@ -7,9 +7,12 @@ package kenken.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.time.Duration;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import sun.audio.*;
 
 /**
  *
@@ -18,7 +21,14 @@ import javax.swing.Timer;
 public class PlayPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    Timer t;
+    private Duration time;
+    private String a;
+    private Timer timer;
+    private int segundos, minutos, horas;
+    AudioPlayer ap = AudioPlayer.player;
+    InputStream in;
+    AudioStream audio;
+    boolean musicOn = true;
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -27,11 +37,26 @@ public class PlayPanel extends javax.swing.JPanel {
      */
     public PlayPanel(MainWindow mw) {
         initComponents();
-        this.mw = mw;
-        t = new Timer(1000, updateClockAction);
-        t.start();
+        this.mw = mw;     
+        timer = new Timer(1000,updateClockAction);
+        timer.setRepeats(true);
     }
 
+    public void initTime(){
+        time = Duration.ZERO;
+        segundos = 0;
+        minutos = 0;
+        horas = 0;
+        timer.restart();
+        try {
+            in = new FileInputStream("Robocraft Theme.wav");
+            audio = new AudioStream(in);
+            ap.start(audio);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,12 +195,22 @@ public class PlayPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicActionPerformed
-        // TODO add your handling code here:
+        if (musicOn) {
+            ap.stop(audio);
+            musicOn = false;
+        }
+        else {
+            ap.start(audio);
+            musicOn = true;
+        }
     }//GEN-LAST:event_btnMusicActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) mw.setPanel(MainWindow.Panels.MainMenuPanel);
+        lblTime.setText("00:00:00");
+        timer.stop();
+        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
@@ -193,13 +228,35 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnSurrenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSurrenderMouseClicked
         ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed("Manolito");
         mw.setPanel(MainWindow.Panels.EndGamePanel);
+        lblTime.setText("00:00:00");
+        timer.stop();
     }//GEN-LAST:event_btnSurrenderMouseClicked
     
     
-    ActionListener updateClockAction = new ActionListener() {
+    
+    
+    private ActionListener updateClockAction = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Assumes clock is a custom component
-            lblTime.setText(String.valueOf(System.currentTimeMillis())); 
+            ++segundos;
+            if (segundos == 60) {
+                ++minutos;
+                segundos = 0;
+                if (minutos == 60){
+                    ++horas;
+                    minutos = 0;
+                }
+            }
+            String horstr, minstr, segstr;
+            if (horas < 10) horstr = "0" + Integer.toString(horas);
+            else horstr = Integer.toString(horas);
+            if (minutos < 10) minstr = "0" + Integer.toString(minutos);
+            else minstr = Integer.toString(minutos);
+            if (segundos < 10) segstr = "0" + Integer.toString(segundos);
+            else segstr = Integer.toString(segundos);
+            String timestring = horstr + ":" + minstr + ":" + segstr;
+            lblTime.setText(timestring);
+            timer.restart();
             // OR
             // Assumes clock is a JLabel
             //lblTime.setText(new Date().toString()); 
