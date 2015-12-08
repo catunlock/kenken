@@ -66,7 +66,7 @@ public class OptionsPanel extends javax.swing.JPanel {
         });
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnMusic.setText("Music on");
+        btnMusic.setText("Music on/off");
         btnMusic.setToolTipText("");
         btnMusic.setMaximumSize(new java.awt.Dimension(159, 35));
         btnMusic.setMinimumSize(new java.awt.Dimension(159, 35));
@@ -142,8 +142,7 @@ public class OptionsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
     private void btnMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicActionPerformed
-        if (btnMusic.getText() == "Music on") btnMusic.setText("Music off");
-        else btnMusic.setText("Music on");
+        //Apaga la música
     }//GEN-LAST:event_btnMusicActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
