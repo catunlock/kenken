@@ -13,7 +13,7 @@ import java.util.Iterator;
  *
  * @author xaloc
  */
-public class Board implements Serializable , Iterable<CellKenken> {
+public class Board implements Serializable {
     private String name;
     private String username;
     CellKenken[][] board;
@@ -94,27 +94,27 @@ public class Board implements Serializable , Iterable<CellKenken> {
         return correct;
     }
 
-    @Override
+    
+    
     public Iterator<CellKenken> iterator() {
         Iterator<CellKenken> it = new Iterator<CellKenken>() {
+            
+            private int nRegion = 0;
+            private int nCell = 0;
+            private boolean next = true;
 
-            int nRegion = 0;
-            int nCell = 0;
-            boolean next = true;
-            
-            int numberOfRegions = regions.size();
-            int numberOfCellsInRegion = (numberOfRegions > 0)? regions.get(nRegion).getCellList().size() : 0;
-            
+            private int numberOfRegions = regions.size();;
+            private int numberOfCellsInRegion = (numberOfRegions > 0)? regions.get(nRegion).getCellList().size() : 0;
+
             @Override
             public boolean hasNext() {
-                // Last Cell
                 return next && numberOfCellsInRegion > 0;
             }
 
             @Override
             public CellKenken next() {
                 CellKenken c = regions.get(nRegion).getCellList().get(nCell);
-                
+
                 if (nCell < numberOfCellsInRegion - 1) {
                     nCell++;
                 }
@@ -126,7 +126,7 @@ public class Board implements Serializable , Iterable<CellKenken> {
                 else {
                     next = false;
                 }
-                
+
                 return c;
             }
 
@@ -136,6 +136,18 @@ public class Board implements Serializable , Iterable<CellKenken> {
             }
         };
         return it;
+    }
+    
+    public ArrayList<CellKenken> getAllCellsOrderedByRegion() {
+        ArrayList<CellKenken> r = new ArrayList<>(size()*size());
+        
+        Iterator<CellKenken> it = this.iterator();
+        
+        while(it.hasNext()) {
+            r.add(it.next());
+        }
+        
+        return r;
     }
     
     public static void main(String[] args) {
@@ -203,12 +215,10 @@ public class Board implements Serializable , Iterable<CellKenken> {
         b.setRegions(regions);
         
         
-        Iterator<CellKenken> it = b.iterator();
+        ArrayList<CellKenken> cellsRegion = b.getAllCellsOrderedByRegion();
         
-        while(it.hasNext()) {
-            CellKenken c = it.next();
-            
-            System.out.println("Region: " + c.getRegion() + " " + c.getPosX() + " " + c.getPosY());
+        for (CellKenken c : cellsRegion) {
+            System.out.println("Region: " + c.getRegion() + ", POS: " + c.getPosX() + " " + c.getPosY());
         }
     }
 }

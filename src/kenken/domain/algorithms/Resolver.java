@@ -93,6 +93,7 @@ public class Resolver {
     private Untouchables untouchables;
     private UsedValues usedValues;
     private Board board = null;
+    private ArrayList<CellKenken> cellsByRegion;
     
     public void escriure(Board b) {
 		if (b.size() > 0) {
@@ -106,44 +107,33 @@ public class Resolver {
     }
     
     
-    private Pos nextPos(Pos pos) {
-
-        Pos r = new Pos(pos);
+    public void backtrack(int i) {
         
-        if (r.c < board.size()-1) {
-                r.c++;
-        }
-        else {
-                r.c = 0;
-                r.f++;
-        }
-        
-        return r;
-    }
-    
-    public void backtrack(Pos p) {
-        
-        if (p.f == board.size() && p.c == 0) { 
+        if (i >= cellsByRegion.size()) { 
             if (board.isResolved()) {
                 BoardColorator.print(board);
                 System.out.println();
             }
             //escriure(board);
         }
-        else if (untouchables.isUntouchable(p.f,p.c)) {
-            backtrack(nextPos(p));
+        else if (untouchables.isUntouchable(cellsByRegion.get(i).getPosX(),
+                cellsByRegion.get(i).getPosY())) {
+            backtrack(i+1);
         }
         else {
-            for (int i = 0; i < board.size(); ++i) {
-                if (usedValues.isNotUsed(p.f, p.c, i)) 
+            int f = cellsByRegion.get(i).getPosX();
+            int c = cellsByRegion.get(i).getPosY();
+            
+            for (int j = 0; j < board.size(); ++j) {
+                if (usedValues.isNotUsed(f, c, j)) 
                 {    
-                    board.getCell(p.f, p.c).setSolutionValue(i+1);
+                    board.getCell(f, c).setSolutionValue(j+1);
                     
-                    usedValues.set(p.f, p.c, i);
+                    usedValues.set(f, c, j);
 
-                    backtrack(nextPos(p));
+                    backtrack(i+1);
 
-                    usedValues.unset(p.f, p.c, i);
+                    usedValues.unset(f, c, j);
                 }
             }
 	}
@@ -167,7 +157,9 @@ public class Resolver {
             }
         }
         
-        backtrack(new Pos(0,0));
+        cellsByRegion = b.getAllCellsOrderedByRegion();
+        
+        backtrack(0);
         
         return result;
     }
