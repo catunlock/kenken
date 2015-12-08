@@ -49,7 +49,7 @@ public class PlayPanel extends javax.swing.JPanel {
         horas = 0;
         timer.restart();
         try {
-            in = new FileInputStream("RobocraftTheme.wav");
+            in = new FileInputStream("Robocraft Theme.wav");
             audio = new AudioStream(in);
             ap.start(audio);
         }
