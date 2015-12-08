@@ -70,6 +70,10 @@ public class BoardController {
     */
     public boolean existsBoard(String boardName){
         return bDBc.exists(boardName);
-    }   
+    }
+    
+    public int deleteBoard(String boardname){
+        return bDBc.deleteBoard(boardname);
+    }
     
 }
