@@ -49,12 +49,12 @@ public class BoardController {
         try {
             FileInputStream fis = new FileInputStream(file.getPath());
             ObjectInputStream ois = new ObjectInputStream(fis);
-            board = (Board) ois.readObject(); 
+            board = (Board) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, e);
             return -2;
         }
-          
+        System.out.println(board.getBoardName());
         return bDBc.createBoard(board);    
     }
     
