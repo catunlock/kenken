@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Duration;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -18,7 +19,19 @@ import javax.swing.Timer;
 public class PlayPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    Timer t;
+    private Duration time;
+    private String a;
+    Timer timer = new Timer (1000, new ActionListener ()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                time.plusSeconds(1);
+                //time.
+                lblTime.setText(String.valueOf(time.getSeconds()));
+                
+                //timer.restart();
+            }
+        });
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -28,8 +41,9 @@ public class PlayPanel extends javax.swing.JPanel {
     public PlayPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        t = new Timer(1000, updateClockAction);
-        t.start();
+        time = Duration.ZERO;
+        timer.setRepeats(true);
+        timer.start();
     }
 
     /**
@@ -196,15 +210,19 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSurrenderMouseClicked
     
     
-    ActionListener updateClockAction = new ActionListener() {
+    
+    /*
+    private ActionListener updateClockAction = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Assumes clock is a custom component
-            lblTime.setText(String.valueOf(System.currentTimeMillis())); 
+            lblTime.setText("00:"+time.getSeconds());
+            time.plusSeconds(1);
+            t.restart();
             // OR
             // Assumes clock is a JLabel
             //lblTime.setText(new Date().toString()); 
         }
-    };
+    };*/
     
     
 
