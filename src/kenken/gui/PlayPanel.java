@@ -21,17 +21,8 @@ public class PlayPanel extends javax.swing.JPanel {
     private MainWindow mw;
     private Duration time;
     private String a;
-    Timer timer = new Timer (1000, new ActionListener ()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                time.plusSeconds(1);
-                //time.
-                lblTime.setText(String.valueOf(time.getSeconds()));
-                
-                //timer.restart();
-            }
-        });
+    private Timer timer;
+    private int segundos, minutos, horas;
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -42,6 +33,7 @@ public class PlayPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
         time = Duration.ZERO;
+        timer = new Timer(1000,updateClockAction);
         timer.setRepeats(true);
         timer.start();
     }
@@ -211,18 +203,34 @@ public class PlayPanel extends javax.swing.JPanel {
     
     
     
-    /*
+    
     private ActionListener updateClockAction = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Assumes clock is a custom component
-            lblTime.setText("00:"+time.getSeconds());
-            time.plusSeconds(1);
-            t.restart();
+            ++segundos;
+            if (segundos == 60) {
+                ++minutos;
+                segundos = 0;
+                if (minutos == 60){
+                    ++horas;
+                    minutos = 0;
+                }
+            }
+            String horstr, minstr, segstr;
+            if (horas < 10) horstr = "0" + Integer.toString(horas);
+            else horstr = Integer.toString(horas);
+            if (minutos < 10) minstr = "0" + Integer.toString(minutos);
+            else minstr = Integer.toString(minutos);
+            if (segundos < 10) segstr = "0" + Integer.toString(segundos);
+            else segstr = Integer.toString(segundos);
+            String timestring = horstr + ":" + minstr + ":" + segstr;
+            lblTime.setText(timestring);
+            timer.restart();
             // OR
             // Assumes clock is a JLabel
             //lblTime.setText(new Date().toString()); 
         }
-    };*/
+    };
     
     
 
