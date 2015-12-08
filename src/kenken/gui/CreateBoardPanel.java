@@ -121,6 +121,7 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnCreateActionPerformed
 
