@@ -7,10 +7,12 @@ package kenken.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.time.Duration;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import sun.audio.*;
 
 /**
  *
@@ -23,6 +25,10 @@ public class PlayPanel extends javax.swing.JPanel {
     private String a;
     private Timer timer;
     private int segundos, minutos, horas;
+    AudioPlayer ap = AudioPlayer.player;
+    InputStream in;
+    AudioStream audio;
+    boolean musicOn = true;
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -42,6 +48,14 @@ public class PlayPanel extends javax.swing.JPanel {
         minutos = 0;
         horas = 0;
         timer.restart();
+        try {
+            in = new FileInputStream("RobocraftTheme.wav");
+            audio = new AudioStream(in);
+            ap.start(audio);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,7 +195,14 @@ public class PlayPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicActionPerformed
-        // TODO add your handling code here:
+        if (musicOn) {
+            ap.stop(audio);
+            musicOn = false;
+        }
+        else {
+            ap.start(audio);
+            musicOn = true;
+        }
     }//GEN-LAST:event_btnMusicActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
