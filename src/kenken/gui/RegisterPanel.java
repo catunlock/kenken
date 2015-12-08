@@ -215,11 +215,12 @@ public class RegisterPanel extends javax.swing.JPanel {
             txtVerifyPassword.setBackground(Color.GREEN);
         }else{
             txtVerifyPassword.setBackground(Color.red);
-        }        // TODO add your handling code here:
+        }        
     }//GEN-LAST:event_txtVerifyPasswordKeyReleased
 
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
-       mw.setPanel(MainWindow.Panels.LoginPanel);
+        ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+        mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackMouseClicked
 
 

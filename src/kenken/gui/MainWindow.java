@@ -163,7 +163,7 @@ public class MainWindow {
         //Create and set up the content pane.
         MainWindow demo = new MainWindow();
         demo.addComponentToPane(frame.getContentPane());
-        demo.setPanel(Panels.MainMenuPanel);
+        demo.setPanel(Panels.LoginPanel);
         
         //Display the window.
         frame.pack();

@@ -47,7 +47,7 @@ public class BoardController {
     public int importBoard(File file) {
         Board board;
         try {
-            FileInputStream fis = new FileInputStream(file);
+            FileInputStream fis = new FileInputStream(file.getPath());
             ObjectInputStream ois = new ObjectInputStream(fis);
             board = (Board) ois.readObject(); 
         } catch (IOException | ClassNotFoundException e) {
