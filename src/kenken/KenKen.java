@@ -145,7 +145,7 @@ public class KenKen {
                             System.out.print("Introdueix grandaria de la board que vols generar: ");
                             int size = sc.nextInt();
                             Board genb;
-                            genb = gen.generate(size);
+                            genb = gen.generate(size, 1, 1, System.nanoTime());
                             genb.setUsername(uc.getLoggedUser().getUsername());
                             System.out.print("Nom de la Board que acabes de crear:");
                             nom = sc.next();
@@ -213,7 +213,7 @@ public class KenKen {
                                 System.out.print("Introdueix grandaria de la board que vols generar: ");
                                 int size = sc.nextInt();
                                 Board genb;
-                                genb = gen.generate(size);
+                                genb = gen.generate(size, 1, 1, System.nanoTime());
                                 System.out.println("A quin mode vols jugar?");
                                 System.out.println("1. Normal");
                                 System.out.println("2. TimeAttack");
