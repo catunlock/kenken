@@ -25,7 +25,7 @@ import kenken.color.BoardColorator;
  * @author SuNLoCK
  */
 public class Resolver {
-    
+
     private class UsedValues {
         private ArrayList<ArrayList<Boolean>> numerosFila;
         private ArrayList<ArrayList<Boolean>> numerosColumna;
@@ -94,6 +94,7 @@ public class Resolver {
     private UsedValues usedValues;
     private Board board = null;
     private ArrayList<CellKenken> cellsByRegion;
+    private boolean trobat = false;
     
     public void escriure(Board b) {
 		if (b.size() > 0) {
@@ -106,37 +107,91 @@ public class Resolver {
 		}
     }
     
+    private boolean checkNotPass(int nRegion, int newValue) {
+        Region r = board.getRegions().get(nRegion-1);
+        
+        int value = r.getCurrentSolutionResult();
+        try {
+            switch(r.getOperationType()) {
+                case Add:
+                    value += newValue;
+                    break;
+                case Subtract:
+                    value = abs(value - newValue);
+                    break;
+                case Multiply:
+                    value *= newValue;
+                    break;
+                case Divide:
+                    value = max(value, newValue)/ min(value, newValue);
+                    break;                    
+                case None:
+                    break;
+                default:
+                    throw new AssertionError(r.getOperationType().name());
+            }
+        }catch (ArithmeticException e) {
+            
+        }
+        
+        System.out.println(value + "<=" + r.getResult());
+        return value <= r.getResult();
+    }
+    
+    private boolean isMultiple(int region, int newValue) {
+        Region r = board.getRegions().get(region);
+        
+        if (r.getOperationType() == Region.OperationType.Multiply && newValue != 1) {
+            return board.getRegions().get(region).getResult() % newValue == 0;
+        }
+        
+        if (r.getOperationType() == Region.OperationType.Divide && newValue != 1) {
+            return newValue % board.getRegions().get(region).getResult() == 0;
+        }
+        
+        return true;
+    }
     
     public void backtrack(int i) {
         
-        if (i >= cellsByRegion.size()) { 
-            if (board.isResolved()) {
-                BoardColorator.print(board);
-                System.out.println();
+        if (! trobat) {
+            if (i >= cellsByRegion.size()) { 
+                if (board.isResolved()) {
+                    BoardColorator.print(board);
+                    System.out.println();
+                    trobat = true;
+                }
+                System.out.println("Intento realizado.");
+                //escriure(board);
             }
-            //escriure(board);
-        }
-        else if (untouchables.isUntouchable(cellsByRegion.get(i).getPosX(),
-                cellsByRegion.get(i).getPosY())) {
-            backtrack(i+1);
-        }
-        else {
-            int f = cellsByRegion.get(i).getPosX();
-            int c = cellsByRegion.get(i).getPosY();
-            
-            for (int j = 0; j < board.size(); ++j) {
-                if (usedValues.isNotUsed(f, c, j)) 
-                {    
-                    board.getCell(f, c).setSolutionValue(j+1);
-                    
-                    usedValues.set(f, c, j);
+            else if (untouchables.isUntouchable(cellsByRegion.get(i).getPosX(),
+                    cellsByRegion.get(i).getPosY())) {
+                backtrack(i+1);
+            }
+            else {
+                CellKenken ck = cellsByRegion.get(i);
 
-                    backtrack(i+1);
+                int f = ck.getPosX();
+                int c = ck.getPosY();
 
-                    usedValues.unset(f, c, j);
+                for (int j = 0; j < board.size(); ++j) {
+                    boolean condA = usedValues.isNotUsed(f, c, j);
+                    boolean condB = isMultiple(ck.getRegion()-1, j+1);
+
+                    if (condA && condB) 
+                    {    
+                        Region r = board.getRegions().get(ck.getRegion()-1);
+
+                        ck.setSolutionValue(j+1);
+
+                        usedValues.set(f, c, j);
+                        backtrack(i+1);
+                        usedValues.unset(f, c, j);
+                    }
                 }
             }
-	}
+        }
+        
     }
 
     
@@ -148,6 +203,7 @@ public class Resolver {
         board = b;
         usedValues = new UsedValues();
         untouchables = new Untouchables();
+        trobat = false;
 
         for (Region r : b.getRegions()) {
             if (r.getOperationType() == Region.OperationType.None) {

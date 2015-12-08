@@ -58,38 +58,54 @@ public class Region implements Serializable{
         return result;
     }
 
-    public boolean isValid() {
+    public boolean isValid() {   
+        boolean valid = false;
+        
+        if (this.getCurrentSolutionResult() == this.getResult()) {
+                valid = true;
+        }
+       
+        return valid;
+    }
+    
+    public int getCurrentSolutionResult() {
+        int result = 0;
+        
         Region.OperationType op = this.getOperationType();
-            
-        boolean result = false;
         Iterator<CellKenken> it = this.getCellList().iterator();
 
         if(it.hasNext()){
-            int resultValue = it.next().getSolutionValue();
-
+            CellKenken c = it.next();
+            
+            if (c.getSolutionValue() != -1) {
+                result = c.getSolutionValue();
+            }
+            
             while (it.hasNext()) {
-                CellKenken c = it.next();
-
-                switch(op) {
+                c = it.next();
+                
+                if (c.getSolutionValue() != -1) {
+                    
+                    switch(op) {
                     case Add:
-                        resultValue += c.getSolutionValue();
+                        result += c.getSolutionValue();
                         break;
                     case Subtract:
-                        resultValue = abs(resultValue - c.getSolutionValue());
+                        result = abs(result - c.getSolutionValue());
                         break;
                     case Multiply:
-                        resultValue *= c.getSolutionValue();
+                        result *= c.getSolutionValue();
                         break;
                     case Divide:
-                        resultValue = max(resultValue,c.getSolutionValue())/ min(resultValue,c.getSolutionValue());
+                        result = max(result,c.getSolutionValue())/ min(result,c.getSolutionValue());
                         break;                    
+                    }
+
+                    
                 }
-                
-            }
-            if (resultValue == this.getResult()) {
-                    result = true;
             }
         }
+        
         return result;
     }
     
