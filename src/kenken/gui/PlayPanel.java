@@ -32,16 +32,16 @@ public class PlayPanel extends javax.swing.JPanel {
     public PlayPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;     
+        timer = new Timer(1000,updateClockAction);
+        timer.setRepeats(true);
     }
 
     public void initTime(){
         time = Duration.ZERO;
-        timer = new Timer(1000,updateClockAction);
-        timer.setRepeats(true);
         segundos = 0;
         minutos = 0;
         horas = 0;
-        timer.start();
+        timer.restart();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,6 +187,9 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) mw.setPanel(MainWindow.Panels.MainMenuPanel);
+        lblTime.setText("00:00:00");
+        timer.stop();
+        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
@@ -204,6 +207,8 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnSurrenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSurrenderMouseClicked
         ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed("Manolito");
         mw.setPanel(MainWindow.Panels.EndGamePanel);
+        lblTime.setText("00:00:00");
+        timer.stop();
     }//GEN-LAST:event_btnSurrenderMouseClicked
     
     
