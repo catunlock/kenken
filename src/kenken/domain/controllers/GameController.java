@@ -26,7 +26,10 @@ public class GameController {
     
     public Board generateBoard(int size){
         Generator generador = new Generator();
-        Board generated = generador.generate(size);
+                float pfRegionSize = 2f;
+        float pfOperation = 2f;
+        
+        Board generated = generador.generate(9, pfRegionSize, pfOperation, System.nanoTime());
         return generated;
     }
     

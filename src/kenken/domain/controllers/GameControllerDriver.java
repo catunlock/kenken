@@ -46,7 +46,7 @@ public class GameControllerDriver {
                     System.out.println("Introdueix mesura de la taula a generar:");
                     Generator gen = new Generator();
                     size = sc.nextInt();
-                    Board b = gen.generate(size);
+                    Board b = gen.generate(size, 1, 1, System.nanoTime());
                     break;
                 case 2:
                     System.out.println("Introdueix nom de jugador:");
