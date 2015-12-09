@@ -26,9 +26,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     public LoadBoardPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        
-        updateList();
-        
     }
 
     

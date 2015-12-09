@@ -206,7 +206,7 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMusicActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) mw.setPanel(MainWindow.Panels.MainMenuPanel);
         lblTime.setText("00:00:00");
         ap.stop(audio);
@@ -215,13 +215,6 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to surrender this game?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (n == 0) {
-            mw.setPanel(MainWindow.Panels.MainMenuPanel);
-            lblTime.setText("00:00:00");
-            ap.stop(audio);
-            timer.stop();
-        }
     }//GEN-LAST:event_btnSurrenderActionPerformed
 
     private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
