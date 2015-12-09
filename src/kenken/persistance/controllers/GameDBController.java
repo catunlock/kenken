@@ -85,6 +85,22 @@ public class GameDBController {
         }
     }
     
+    public int deleteGame(String username, String game){
+        int result = -3;
+        String filepath = "Users/"+username+"/"+Directory+game;
+        if(new File(filepath).exists()){
+            try{
+                Files.delete(FileSystems.getDefault().getPath(filepath));
+                result = 0;
+            }
+            catch(Exception e){}
+        }else {
+            result = -1;
+        }
+        
+        return result;
+    }
+    
     /*
     Pre: cert
     Post: retorna un ArrayList amb els noms de totes les partides guardades de

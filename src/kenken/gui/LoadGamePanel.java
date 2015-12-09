@@ -5,6 +5,11 @@
  */
 package kenken.gui;
 
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import kenken.domain.controllers.*;
+
 /**
  *
  * @author Marc
@@ -12,12 +17,26 @@ package kenken.gui;
 public class LoadGamePanel extends javax.swing.JPanel {
 
     private MainWindow mw;
+    private UserController uc;
+    private GameController gc;
+    ArrayList<String> games;
     /**
      * Creates new form LoadGamePanel
      */
     public LoadGamePanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+    }
+    
+    public void initPanel(){
+        uc = mw.getUserController();
+        gc = new GameController();
+        Vector gamesvec = new Vector();
+        games = gc.getSavedGames(uc);
+        for (int i = 0; i<games.size(); ++i){
+            gamesvec.addElement(games.get(i));
+        }
+        lstGames.setListData(gamesvec);
     }
 
     /**
@@ -129,7 +148,15 @@ public class LoadGamePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        String gameToDelete = (String) lstGames.getSelectedValue();
+        if (gameToDelete == null) JOptionPane.showMessageDialog(this, "Please select a game to delete", "Select a game", JOptionPane.WARNING_MESSAGE);
+        else {
+            int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this saved game?", "Delete game", JOptionPane.YES_NO_OPTION);
+            if (n == 0) {
+                gc.deleteSavedGame(uc, gameToDelete);
+                this.initPanel();
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

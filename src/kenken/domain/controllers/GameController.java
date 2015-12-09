@@ -10,6 +10,7 @@ import kenken.domain.classes.Board;
 import kenken.domain.classes.Game;
 import kenken.persistance.controllers.GameDBController;
 import kenken.domain.algorithms.Generator;
+import kenken.domain.classes.User;
 
 /**
  *
@@ -50,12 +51,23 @@ public class GameController {
         return gdbc.saveGame(game, username, nompartida);
     }
     
+    public int deleteSavedGame(UserController user, String game){
+        String username = user.getLoggedUser().getUsername();
+        return gdbc.deleteGame(username, game);
+    }
+    
     /*
     Pre: username != null
     Post: retorna una llista de strings amb les partides guardades del jugador
     */
     public ArrayList<String> getSavedGames(String username){
         return gdbc.getSavedGames(username);
+    }
+    
+    public ArrayList<String> getSavedGames(UserController uc){
+        User logged = uc.getLoggedUser();
+        String name = logged.getUsername();
+        return getSavedGames(name);
     }
     
     /*

@@ -297,7 +297,9 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLogOutMouseClicked
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
+        ((LoadGamePanel) mw.getPanel(MainWindow.Panels.LoadGamePanel)).initPanel();
         mw.setPanel(MainWindow.Panels.LoadGamePanel);
+        
     }//GEN-LAST:event_btnLoadGameActionPerformed
 
     private void btnOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOptionsActionPerformed
