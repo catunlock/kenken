@@ -199,7 +199,8 @@ public class MainMenuPanel extends javax.swing.JPanel {
         });
 
         btnOptions.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnOptions.setText("Options");
+        btnOptions.setText("Delete account");
+        btnOptions.setActionCommand("Delete account");
         btnOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOptionsActionPerformed(evt);
@@ -212,7 +213,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOptions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -281,6 +282,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
     private void btnExportBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportBoardMouseClicked
+        ((ExportBoardPanel) mw.getPanel(MainWindow.Panels.ExportBoardPanel)).updateList();
         mw.setPanel(MainWindow.Panels.ExportBoardPanel);
     }//GEN-LAST:event_btnExportBoardMouseClicked
 

@@ -37,7 +37,13 @@ public class ExportBoardPanel extends javax.swing.JPanel {
         initComponents();
         
         this.mw = mw;
-        
+    }
+
+    ExportBoardPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void updateList(){
         listModel = new DefaultListModel();
         
         infoBoard = mw.getBoardController().getBoardsInfo();
@@ -47,10 +53,6 @@ public class ExportBoardPanel extends javax.swing.JPanel {
             }
         }
         lstBoards.setModel(listModel);
-    }
-
-    ExportBoardPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
