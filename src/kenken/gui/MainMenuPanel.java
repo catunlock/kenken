@@ -281,6 +281,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
     private void btnExportBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportBoardMouseClicked
+        ((ExportBoardPanel) mw.getPanel(MainWindow.Panels.ExportBoardPanel)).updateList();
         mw.setPanel(MainWindow.Panels.ExportBoardPanel);
     }//GEN-LAST:event_btnExportBoardMouseClicked
 
