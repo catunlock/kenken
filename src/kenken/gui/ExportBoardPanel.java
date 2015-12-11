@@ -207,7 +207,7 @@ public class ExportBoardPanel extends javax.swing.JPanel {
             File file = fileChooser.getSelectedFile();
 
             if(file !=null){
-                mw.getBoardController().saveBoard(bi.getName()+".brd", file);             
+                mw.getBoardController().saveBoard(bi.getName(), file);             
                 JOptionPane.showMessageDialog(null,
                     "El archivo se a guardado Exitosamente",
                     "Información",JOptionPane.INFORMATION_MESSAGE);
