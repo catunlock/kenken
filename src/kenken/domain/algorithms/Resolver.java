@@ -19,6 +19,7 @@ import static java.lang.Math.max;
 import java.util.ArrayList;
 import java.util.Iterator;
 import kenken.color.BoardColorator;
+import kenken.persistance.controllers.BoardDBController;
 
 /**
  *
@@ -291,6 +292,11 @@ public class Resolver {
         
         BoardColorator.print(b);
         BoardColorator.printRegions(b);
+        
+        b.setBoardName("Original 4x4");
+        b.setUsername("SuNLoCK");
+        BoardDBController bdbc = new BoardDBController();
+        bdbc.createBoard(b);
         
         Resolver r = new Resolver();
         if (r.resolve(b)) {

@@ -34,16 +34,8 @@ public class BoardPanel extends JPanel implements ActionListener{
     private final Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
     
     private int nColumns = 4;
-    
-    private class InfoCell {
-        public String operation = "";
-        public String result = "";
-        public String value = "4";
-        public boolean borderHoritzontal = false;
-        public boolean borderVertical = false;
-    }
-
-    ArrayList<ArrayList<InfoCell>> infoCells;
+   
+    private ArrayList<ArrayList<InfoCell>> infoCells;
     
     public BoardPanel() 
     {
@@ -51,6 +43,7 @@ public class BoardPanel extends JPanel implements ActionListener{
         padVer = HEIGHT / nColumns;
         
         setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
+        /*
         infoCells = new ArrayList<>(nColumns);
         
         for (int i = 0; i < nColumns; ++i) 
@@ -73,6 +66,7 @@ public class BoardPanel extends JPanel implements ActionListener{
         this.setVerticalBorder(3, 1, true);
         this.setVerticalBorder(3, 2, true);
         this.setValue(0, 0, "3");
+        */
     }
 
     private void drawColums(Graphics2D g2d) {
@@ -87,6 +81,10 @@ public class BoardPanel extends JPanel implements ActionListener{
         for (int i = 0; i < nColumns; ++i) {
             g2d.drawLine(0, i*space, HEIGHT, i*space);
         }
+    }
+    
+    public void setInfoCells(ArrayList<ArrayList<InfoCell>> matrix) {
+        this.infoCells = matrix;
     }
     
     private void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
