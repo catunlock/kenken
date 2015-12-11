@@ -290,7 +290,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateBoardMouseClicked
 
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
             mw.setPanel(MainWindow.Panels.LoginPanel);
@@ -317,7 +317,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
             if (file != null){
                 int res = bc.importBoard(file);
                 if (res == 0) JOptionPane.showMessageDialog(modalToComponent, "The Board has been imported.");
-                else if (res == -1) JOptionPane.showMessageDialog(modalToComponent, "The Board it was already in the database.");
+                else if (res == -1) JOptionPane.showMessageDialog(modalToComponent, "The Board was already in the database.");
                 else JOptionPane.showMessageDialog(modalToComponent, "There was an internal error.");
             }
         }

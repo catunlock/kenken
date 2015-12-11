@@ -8,8 +8,10 @@ package kenken.domain.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +41,21 @@ public class BoardController {
     
     public ArrayList<String> getBoardnames() {
         return bDBc.getBoardnames();
+    }
+    
+    
+    public void saveBoard(String boardname, File file){
+        FileOutputStream fos;      
+        Board newBoard = exportBoard(boardname);     
+        ObjectOutputStream oos;
+        try {
+            fos = new FileOutputStream(file);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(newBoard);
+            fos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }
     
     /* Pre: board != null

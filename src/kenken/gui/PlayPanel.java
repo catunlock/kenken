@@ -194,11 +194,12 @@ public class PlayPanel extends javax.swing.JPanel {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (n == 0) mw.setPanel(MainWindow.Panels.MainMenuPanel);
-        lblTime.setText("00:00:00");
-        ap.stop(audio);
-        timer.stop();
-        
+        if (n == 0) {
+            mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            lblTime.setText("00:00:00");
+            ap.stop(audio);
+            timer.stop();
+        }
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed

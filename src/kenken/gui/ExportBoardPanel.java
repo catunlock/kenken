@@ -207,19 +207,7 @@ public class ExportBoardPanel extends javax.swing.JPanel {
             File file = fileChooser.getSelectedFile();
 
             if(file !=null){
-                /*guardamos el archivo y le damos el formato directamente,
-                * si queremos que se guarde en formato doc lo definimos como .doc*/
-
-                FileOutputStream fos;
-                try {
-                    Board newBoard = mw.getBoardController().exportBoard(bi.getName());
-                    fos = new FileOutputStream(file);
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(newBoard);
-                    fos.close();
-                }catch (IOException ex) {
-                    Logger.getLogger(ExportBoardPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                mw.getBoardController().saveBoard(bi.getName(), file);             
                 JOptionPane.showMessageDialog(null,
                     "El archivo se a guardado Exitosamente",
                     "Información",JOptionPane.INFORMATION_MESSAGE);
