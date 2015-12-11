@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -56,6 +57,10 @@ public class PlayPanel extends javax.swing.JPanel {
         catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+    
+    public void initBoard(ArrayList<ArrayList<InfoCell>> matrix) {
+        boardPanel1.setInfoCells(matrix);
     }
     /**
      * This method is called from within the constructor to initialize the form.

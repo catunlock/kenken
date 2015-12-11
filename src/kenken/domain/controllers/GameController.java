@@ -11,6 +11,7 @@ import kenken.domain.classes.Game;
 import kenken.persistance.controllers.GameDBController;
 import kenken.domain.algorithms.Generator;
 import kenken.domain.classes.User;
+import kenken.gui.InfoCell;
 
 /**
  *
@@ -19,6 +20,7 @@ import kenken.domain.classes.User;
 public class GameController {
     
     GameDBController gdbc = new GameDBController();
+    Game game;
     
     /*
     Pre: 3 <= size => 9, dificultat != null
@@ -39,6 +41,27 @@ public class GameController {
         
     }
     */
+    
+    public ArrayList<ArrayList<InfoCell>> parseBoard(Board board) {
+        ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(board.size());
+        
+        for (int f = 0; f < infoCells.size(); ++f) {
+            infoCells.add(new ArrayList<InfoCell>(board.size()));
+            for (int c = 0; c < infoCells.size(); ++c) {
+                infoCells.get(f).set(c, new InfoCell());
+            }
+        }
+        
+        for (int f = 0; f < infoCells.size(); ++f) {
+            for (int c = 1; c < infoCells.size(); ++c) {
+                if ( board.getCell(f, c-1).getRegion() != board.getCell(f, c).getRegion()) {
+                    infoCells.get(f).get(c).borderVertical = true;
+                }
+            }
+        }
+        
+        return infoCells;
+    }
     
     /*
     Pre: cert
