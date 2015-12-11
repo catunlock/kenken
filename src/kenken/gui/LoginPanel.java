@@ -191,6 +191,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         mw.setPanel(MainWindow.Panels.RegisterPanel);
+        ((RegisterPanel) mw.getPanel(MainWindow.Panels.RegisterPanel)).clearTxt();
     }//GEN-LAST:event_btnRegisterMouseClicked
 
 

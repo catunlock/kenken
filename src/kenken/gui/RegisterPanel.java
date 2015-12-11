@@ -25,6 +25,12 @@ public class RegisterPanel extends javax.swing.JPanel {
         this.mw = mw;
     }
 
+    public void clearTxt(){
+        txtVerifyPassword.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,8 +196,8 @@ public class RegisterPanel extends javax.swing.JPanel {
                 lblErrores.setText("Internal Error.");
             }else{
                 //lblErrores.setText("User " + txtUsername.getText() + " created!.");
-                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
-                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+                mw.setPanel(MainWindow.Panels.LoginPanel);
             }
         }else{
             lblErrores.setText("Passwords are not equal.");
@@ -199,7 +205,8 @@ public class RegisterPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-
+        ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+        mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtVerifyPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVerifyPasswordActionPerformed
