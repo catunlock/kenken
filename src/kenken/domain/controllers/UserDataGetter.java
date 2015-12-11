@@ -18,8 +18,12 @@ public class UserDataGetter {
         ArrayList<String> dades = new ArrayList<>(3);
         dades.add((Long.toString(user.getTotalTimePlayed().getSeconds())));
         dades.add(Integer.toString(user.getTotalCreatedBoards()));
-        int resolved = (user.getSolvedGames()/user.getStartedGames())*100;
-        dades.add(Integer.toString(resolved) + "%");
+        int userSolved, userStarted, percent;
+        userSolved = user.getSolvedGames();
+        userStarted = user.getStartedGames();
+        if (userStarted == 0) percent = 0;
+        else percent = (userSolved/userStarted)*100;
+        dades.add(Integer.toString(percent) + "%");
         return dades;
     }
 }
