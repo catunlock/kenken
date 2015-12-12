@@ -23,17 +23,18 @@ import javax.swing.Timer;
  */
 public class BoardPanel extends JPanel implements ActionListener{
     
-    private final int WIDTH = 417;
-    private final int HEIGHT = 417;
+    private final int WIDTH = 663;
+    private final int HEIGHT = 663;
     private final int BORDER_SIZE = 4;
     private final int FONT_SIZE_VALUE = 58;
-    private final int FONT_SIZE_OPERATION = 18;
-    private final Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
-    private final Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
+    private final int FONT_SIZE_OPERATION = 22;
+    private Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
+    private Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
     
     private int nColumns = 4;
     private int padHor;
     private int padVer;
+    private float fontScale = 1.0f;
    
     private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
@@ -88,6 +89,11 @@ public class BoardPanel extends JPanel implements ActionListener{
         nColumns = size;
         padHor = WIDTH / nColumns;
         padVer = HEIGHT / nColumns;
+        
+        float fontSizeOperation = FONT_SIZE_OPERATION - nColumns;
+        
+        fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
+        fontOperation = new Font("Consolas", Font.PLAIN, (int) fontSizeOperation);
     }
     
     public void setInfoCells(ArrayList<ArrayList<InfoCell>> matrix) {
@@ -99,12 +105,12 @@ public class BoardPanel extends JPanel implements ActionListener{
     {
         // Operation
         g2d.setFont(fontOperation);
-        int posOperationY = (int) (posY + FONT_SIZE_OPERATION);
-        int posOperationX = (int) (posX + FONT_SIZE_OPERATION/2);
+        int posOperationY = (int) (posY + (FONT_SIZE_OPERATION - nColumns/1.5));
+        int posOperationX = (int) (posX + ((FONT_SIZE_OPERATION- nColumns)/2));
         g2d.drawString(ic.operation, posOperationX, posOperationY);
 
         // Result
-        int posResultX = (int) (posOperationX + FONT_SIZE_OPERATION/1.5);
+        int posResultX = (int) (posOperationX + (FONT_SIZE_OPERATION - nColumns)/1.5);
         g2d.drawString(ic.result, posResultX, posOperationY);
     	
         // Value

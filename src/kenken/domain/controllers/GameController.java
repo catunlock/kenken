@@ -85,7 +85,7 @@ public class GameController {
         
         private void detectOperations() {
             Board board = game.getBoard();
-            boolean[] detectats = new boolean[board.getRegions().size()];
+            boolean[] detectats = new boolean[board.getRegions().size()+1];
             
             for (int f = 0; f < infoCells.size(); ++f) {
                 for (int c = 0; c < infoCells.size(); ++c) {

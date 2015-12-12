@@ -105,12 +105,12 @@ public class Generator {
     class RegionMaker{
         private boolean[][] empilat;
         LinkedList<Pos> allPositions;
-        int region;
+        
         
         public ArrayList<Region> makeRegions() {
             empilat = new boolean[board.size()][board.size()];
             allPositions = genAllPositions();
-            region = 1;
+            int region = 1;
             
             ArrayList<Region> regions = new ArrayList<>();
             
@@ -123,6 +123,11 @@ public class Generator {
                     
                     Region r = constructRegion(region, cells);
                     regions.add(r);
+                    
+                    for (CellKenken ck : cells) {
+                        ck.setRegion(region);
+                    }
+                    region++;
                 }else {
                     System.out.println("Skipping start point: " + p);
                 }
@@ -226,7 +231,6 @@ public class Generator {
             while(! s.isEmpty()) {
                 Pos p = s.pop();
                 
-                setCellRegion(p, region);
                 cells.add(board.getCell(p.f, p.c));
                 
                 System.out.print(p + ", ");
@@ -247,7 +251,6 @@ public class Generator {
                     }
                 }
             }
-            region++;
             System.out.println();
             
             return cells;
@@ -315,10 +318,10 @@ public class Generator {
         float pfOperation = 2f;
         long seed = 162;
         
-        Board b = g.generate(9, pfRegionSize, pfOperation, System.nanoTime());
+        Board b = g.generate(4, pfRegionSize, pfOperation, System.nanoTime());
         BoardColorator.print(b);
         
-        BoardColorator.printRegions(b);
+        //BoardColorator.printRegions(b);
     }
     
 }

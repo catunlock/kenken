@@ -44,8 +44,8 @@ public class BoardColorator {
                 
                 Color color = colorByRegion(cell.getRegion());
                 
-                //System.out.print(color + String.valueOf(cell.getSolutionValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
-                System.out.print(color + String.valueOf(cell.getSolutionValue()) + Color.FG_DEFAULT + " ");
+                System.out.print(color + String.valueOf(cell.getSolutionValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
+                //System.out.print(color + String.valueOf(cell.getSolutionValue()) + Color.FG_DEFAULT + " ");
             }
             System.out.println();
         }
@@ -56,7 +56,7 @@ public class BoardColorator {
             System.out.println("Region " + r.getId() + ": Operation: " + r.getOperationType() + " Result: " + r.getResult());
             System.out.print("\tValues: ");
             for (CellKenken c : r.getCellList()) {
-                System.out.print(c.getSolutionValue() + " ");
+                System.out.print(c.getSolutionValue() + " " );
             }
             System.out.println();
         }
