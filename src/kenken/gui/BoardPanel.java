@@ -28,12 +28,12 @@ public class BoardPanel extends JPanel implements ActionListener{
     private final int BORDER_SIZE = 4;
     private final int FONT_SIZE_VALUE = 58;
     private final int FONT_SIZE_OPERATION = 18;
-    private final int padHor;
-    private final int padVer;
     private final Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
     private final Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
     
     private int nColumns = 4;
+    private int padHor;
+    private int padVer;
    
     private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
@@ -84,7 +84,14 @@ public class BoardPanel extends JPanel implements ActionListener{
         }
     }
     
+    private void setSize(int size) {
+        nColumns = size;
+        padHor = WIDTH / nColumns;
+        padVer = HEIGHT / nColumns;
+    }
+    
     public void setInfoCells(ArrayList<ArrayList<InfoCell>> matrix) {
+        setSize(matrix.size());
         this.infoCells = matrix;
     }
     
