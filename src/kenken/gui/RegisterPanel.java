@@ -16,13 +16,15 @@ import kenken.domain.controllers.UserController;
 public class RegisterPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    private UserController uc = new UserController();
+    private UserController uc;
     /**
      * Creates new form RegisterPanel
+     * @param mw
      */
     public RegisterPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        this.uc = mw.getUserController();
     }
 
     public void clearTxt(){
@@ -50,14 +52,9 @@ public class RegisterPanel extends javax.swing.JPanel {
         txtVerifyPassword = new javax.swing.JPasswordField();
         txtPassword = new javax.swing.JPasswordField();
         lblErrores = new javax.swing.JLabel();
-        lblTittle = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
 
         txtUsername.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
 
         lblUsername.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblUsername.setText("Username:");
@@ -92,15 +89,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
 
-        txtVerifyPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVerifyPasswordActionPerformed(evt);
-            }
-        });
         txtVerifyPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtVerifyPasswordKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtVerifyPasswordKeyReleased(evt);
             }
@@ -109,8 +98,8 @@ public class RegisterPanel extends javax.swing.JPanel {
         lblErrores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblErrores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblTittle.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
-        lblTittle.setText("ALMAGEPO KENKEN");
+        lblTitle.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
+        lblTitle.setText("ALMAGEPO KENKEN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,7 +107,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 165, Short.MAX_VALUE)
-                .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(149, 149, 149))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +141,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(lblRegister)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
@@ -180,10 +169,6 @@ public class RegisterPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
 
         if("".equals(txtUsername.getText())){
@@ -210,14 +195,6 @@ public class RegisterPanel extends javax.swing.JPanel {
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtVerifyPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVerifyPasswordActionPerformed
-
-    }//GEN-LAST:event_txtVerifyPasswordActionPerformed
-
-    private void txtVerifyPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVerifyPasswordKeyPressed
-
-    }//GEN-LAST:event_txtVerifyPasswordKeyPressed
-
     private void txtVerifyPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVerifyPasswordKeyReleased
         if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
             txtVerifyPassword.setBackground(Color.GREEN);
@@ -238,7 +215,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblErrores;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRegister;
-    private javax.swing.JLabel lblTittle;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel lblVerifyPassword;
     private javax.swing.JPasswordField txtPassword;

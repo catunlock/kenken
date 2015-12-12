@@ -18,7 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="165" max="32767" attributes="0"/>
-              <Component id="lblTittle" min="-2" pref="486" max="-2" attributes="0"/>
+              <Component id="lblTitle" min="-2" pref="486" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -64,7 +64,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-              <Component id="lblTittle" min="-2" pref="60" max="-2" attributes="0"/>
+              <Component id="lblTitle" min="-2" pref="60" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="lblRegister" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -106,9 +106,6 @@
           <Font name="Flubber" size="24" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsernameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUsername">
       <Properties>
@@ -167,8 +164,6 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtVerifyPassword">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVerifyPasswordActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVerifyPasswordKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtVerifyPasswordKeyReleased"/>
       </Events>
     </Component>
@@ -182,7 +177,7 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTittle">
+    <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Flubber" size="48" style="0"/>
