@@ -122,7 +122,7 @@ public class MainWindow {
         panels.put("LoadGamePanel", new LoadGamePanel(this));
         panels.put("RankingPanel", new RankingPanel(this));
         panels.put("RegisterPanel", new RegisterPanel(this));
-        panels.put("OptionsPanel", new OptionsPanel(this, uc));
+        panels.put("OptionsPanel", new OptionsPanel(this));
         panels.put("ChooseRankingPanel", new ChooseRankingPanel(this));
         
     }

@@ -34,7 +34,7 @@ public class GameController {
         
         private ArrayList<ArrayList<InfoCell>> infoCells;
         
-        public ArrayList<ArrayList<InfoCell>> initMatrix() {
+        private ArrayList<ArrayList<InfoCell>> initMatrix() {
             int nColumns = game.getBoard().size();
             ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(nColumns);
 
@@ -51,7 +51,7 @@ public class GameController {
             return infoCells;
         }
         
-        public void detectVerticalLimits() {
+        private void detectVerticalLimits() {
             Board board = game.getBoard();
             
             for (int f = 0; f < infoCells.size(); ++f) {
@@ -68,7 +68,7 @@ public class GameController {
             }
         }
         
-        public void detectHoritzontalLimits() {
+        private void detectHoritzontalLimits() {
             Board board = game.getBoard();
             
             for (int c = 0; c < infoCells.size(); ++c) {
@@ -83,23 +83,42 @@ public class GameController {
             }
         }
         
-        public void detectOperations() {
+        private void detectOperations() {
             Board board = game.getBoard();
+            boolean[] detectats = new boolean[board.getRegions().size()];
             
-            int prevRegion = -1;
             for (int f = 0; f < infoCells.size(); ++f) {
                 for (int c = 0; c < infoCells.size(); ++c) {
                     CellKenken ck = board.getCell(f, c);
-                    int currentRegion = ck.getRegion();
+                    int currentRegion = ck.getRegion() - 1;
 
-                    if (currentRegion != prevRegion) {
-                        Region r = board.getRegions().get(ck.getRegion()-1);
-                        infoCells.get(f).get(c).operation = r.getOperationType().toString();
+                    if (! detectats[currentRegion]) {
+                        detectats[currentRegion] = true;
+                        
+                        Region r = board.getRegions().get(currentRegion);
+                        infoCells.get(f).get(c).operation = convertOperation(r.getOperationType());
                         infoCells.get(f).get(c).result = String.valueOf(r.getResult());
 
-                        prevRegion = currentRegion;
                     }
                 }
+            }
+        }
+        
+        private String convertOperation(Region.OperationType op) {
+            switch(op) {
+                case Add:
+                    return "+";
+                case Subtract:
+                    return "-";
+                case Multiply:
+                    return "*";
+                case Divide:
+                    return "/";
+                case None:
+                    return "";
+                default:
+                    throw new AssertionError(op.name());
+                
             }
         }
         

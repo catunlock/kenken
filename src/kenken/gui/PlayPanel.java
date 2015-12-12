@@ -125,7 +125,7 @@ public class PlayPanel extends javax.swing.JPanel {
         boardPanel1.setLayout(boardPanel1Layout);
         boardPanel1Layout.setHorizontalGroup(
             boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
         boardPanel1Layout.setVerticalGroup(
             boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +155,7 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addGap(24, 24, 24))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
-                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

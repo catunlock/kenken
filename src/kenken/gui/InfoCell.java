@@ -13,7 +13,7 @@ public class InfoCell {
 
     public String operation = "";
     public String result = "";
-    public String value = "4";
+    public String value = "";
     public boolean borderHoritzontal = false;
     public boolean borderVertical = false;
 }
