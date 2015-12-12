@@ -52,11 +52,6 @@ public class CreateBoardPanel extends javax.swing.JPanel {
 
         cmbSize.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         cmbSize.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3", "4", "5", "6", "7", "8", "9" }));
-        cmbSize.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSizeActionPerformed(evt);
-            }
-        });
 
         lblCreateBoard.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
         lblCreateBoard.setText("CREATE BOARD");
@@ -124,10 +119,6 @@ public class CreateBoardPanel extends javax.swing.JPanel {
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnCreateActionPerformed
-
-    private void cmbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSizeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbSizeActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);

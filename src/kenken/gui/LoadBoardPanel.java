@@ -57,8 +57,8 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         lblTamany = new javax.swing.JLabel();
         lblShowCreador = new javax.swing.JLabel();
         lblShowTamany = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblSelectBoard = new javax.swing.JLabel();
+        lblInfo = new javax.swing.JLabel();
         scrllBoards = new javax.swing.JScrollPane();
         modelo=new DefaultListModel();
         lstBoards = new javax.swing.JList();
@@ -100,13 +100,13 @@ public class LoadBoardPanel extends javax.swing.JPanel {
 
         lblShowTamany.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        jLabel4.setText("Select Board:");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblSelectBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblSelectBoard.setText("Select Board:");
+        lblSelectBoard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel2.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        jLabel2.setText("Info:");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblInfo.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblInfo.setText("Info:");
+        lblInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         scrllBoards.setToolTipText("");
         scrllBoards.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -142,7 +142,7 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                             .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblSelectBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -153,7 +153,7 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblShowCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel2))))
+                            .addComponent(lblInfo))))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,8 +163,8 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                 .addComponent(lblLoadBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(lblSelectBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInfo))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,10 +224,10 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLoad;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblCreador;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblLoadBoard;
+    private javax.swing.JLabel lblSelectBoard;
     private javax.swing.JLabel lblShowCreador;
     private javax.swing.JLabel lblShowTamany;
     private javax.swing.JLabel lblTamany;
