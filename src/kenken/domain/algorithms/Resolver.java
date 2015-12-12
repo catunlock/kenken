@@ -267,17 +267,18 @@ public class Resolver {
         
         Region re = new Region(5,eCells, Region.OperationType.Subtract, 1, false);
         
-        ArrayList<CellKenken> fCells = new ArrayList<>(1);
-        CellKenken fCell1 = b.getCell(3,2);
-        fCell1.setSolutionValue(3);
-        fCells.add(fCell1);
-        Region rf = new Region(7,fCells, Region.OperationType.None, 3, false);
+        ArrayList<CellKenken> fCells = new ArrayList<>(2);
+
+        fCells.add(b.getCell(2,3));
+        fCells.add(b.getCell(3,3));
+        
+        Region rf = new Region(6, fCells, Region.OperationType.Multiply, 6, false);        
         
         ArrayList<CellKenken> gCells = new ArrayList<>(1);
-        gCells.add(b.getCell(2,3));
-        gCells.add(b.getCell(3,3));
-        Region rg = new Region(6, gCells, Region.OperationType.Multiply, 6, false);        
-        
+        CellKenken gCell1 = b.getCell(3,2);
+        gCell1.setSolutionValue(3);
+        gCells.add(gCell1);
+        Region rg = new Region(7,gCells, Region.OperationType.None, 3, false);
         
         ArrayList<Region> regions = new ArrayList<>(7);
         regions.add(ra);

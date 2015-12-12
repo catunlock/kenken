@@ -19,6 +19,9 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     private MainWindow mw;
     private DefaultListModel listModel;
     private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
+    private String boardNameSelected;
+    private String modo = "Normal";
+    
     /**
      * Creates new form LoadBoardPanel
      * @param mw
@@ -187,7 +190,12 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
         
+        mw.getGameController().newGame(boardNameSelected, modo);
+        pp.initBoard(mw.getGameController().getInfoBoard());
+        
+        mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -217,6 +225,7 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
         lblShowCreador.setText(bi.getCreador());
         lblShowTamany.setText(bi.getSize());
+        boardNameSelected = bi.getName();
     }//GEN-LAST:event_lstBoardsValueChanged
 
 

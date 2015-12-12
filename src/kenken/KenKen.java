@@ -150,7 +150,7 @@ public class KenKen {
                             System.out.print("Nom de la Board que acabes de crear:");
                             nom = sc.next();
                             genb.setBoardName(nom);
-                            error = bc.importBoard(genb);
+                            //error = bc.importBoard(genb);
                             if (error == -1) System.out.println("Ja existeix una board amb aquest nom!");
                             else if (error == -2) System.out.print("Error intern.");
                             break;

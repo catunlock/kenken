@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
+import kenken.gui.InfoCell;
 import kenken.persistance.controllers.BoardDBController;
 
 /**
@@ -78,9 +79,15 @@ public class BoardController {
     /* Pre: boardName != null
        Post: retorna la board amb nom boardName, si no existeix, retorna null
     */
-    public Board exportBoard(String boardName){
+    public Board loadBoard(String boardName) {
         return bDBc.loadBoard(boardName);
     }
+    
+    /* TODO: WTF? */
+    public Board exportBoard(String boardName) {
+        return bDBc.loadBoard(boardName);
+    }
+    
     /*
        Pre: boardName != null
        Post: retorna true si el nom de taula ja existeix, false altrament

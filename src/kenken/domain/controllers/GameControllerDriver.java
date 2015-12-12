@@ -53,7 +53,7 @@ public class GameControllerDriver {
                     userName = sc.next();
                     System.out.println("Introdueix nom de partida:");
                     gameName = sc.next();
-                    Game g = new Game("Normal");
+                    Game g = new Game(Game.Mode.Normal, new Board(4));
                     result = test.saveGame(g, userName, gameName);
                     if (result == -1) System.out.println("Ja hi ha una partida amb aquest nom.");
                     else System.out.println("Partida guardada correctament.");
@@ -67,7 +67,7 @@ public class GameControllerDriver {
                     else System.out.println(llista);
                     break;
                 case 4:
-                    Game load = new Game("Normal");
+                    Game load = new Game(Game.Mode.Normal, new Board(4));
                     System.out.println("Introdueix nom de jugador:");
                     userName = sc.next();
                     System.out.println("Introdueix nom de partida:");

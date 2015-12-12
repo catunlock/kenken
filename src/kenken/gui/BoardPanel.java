@@ -35,7 +35,7 @@ public class BoardPanel extends JPanel implements ActionListener{
     
     private int nColumns = 4;
    
-    private ArrayList<ArrayList<InfoCell>> infoCells;
+    private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
     public BoardPanel() 
     {
@@ -43,7 +43,7 @@ public class BoardPanel extends JPanel implements ActionListener{
         padVer = HEIGHT / nColumns;
         
         setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
-        /*
+        
         infoCells = new ArrayList<>(nColumns);
         
         for (int i = 0; i < nColumns; ++i) 
@@ -58,15 +58,16 @@ public class BoardPanel extends JPanel implements ActionListener{
             }
         }
         
-        this.setOperation(0, 0, "", "3");
-        this.setHoritzontalBorder(0, 1, true);
+        this.setOperation(1, 1, "", "3");
         this.setHoritzontalBorder(1, 1, true);
-        this.setHoritzontalBorder(2, 1, true);
-        this.setVerticalBorder(3, 0, true);
-        this.setVerticalBorder(3, 1, true);
-        this.setVerticalBorder(3, 2, true);
-        this.setValue(0, 0, "3");
-        */
+        this.setVerticalBorder(1, 1, true);
+        this.setValue(1, 1, "3");
+        
+        this.setOperation(3, 3, "", "3");
+        this.setHoritzontalBorder(3, 3, true);
+        this.setVerticalBorder(3, 3, true);
+        this.setValue(3, 3, "3");
+        
     }
 
     private void drawColums(Graphics2D g2d) {
@@ -108,23 +109,26 @@ public class BoardPanel extends JPanel implements ActionListener{
     }
     
     private void drawCells(Graphics2D g2d) 
-    {   	
-        for (int i = 0; i < nColumns; ++i) {
-            for (int j = 0; j < nColumns; ++j) {
-                InfoCell ic = infoCells.get(i).get(j);
-                
-                drawCell(g2d, ic, j*padHor, i*padVer);
+    {   
+        if (infoCells.size() > 0){
+            for (int i = 0; i < nColumns; ++i) {
+                for (int j = 0; j < nColumns; ++j) {
+                    InfoCell ic = infoCells.get(i).get(j);
 
-                // Borders
-                if (ic.borderHoritzontal) {
-                    drawBorderHoritzontal(g2d, j, i);
-                }
-                
-                if (ic.borderVertical) {
-                    drawBorderVertical(g2d, j, i);
+                    drawCell(g2d, ic, j*padHor, i*padVer);
+
+                    // Borders
+                    if (ic.borderHoritzontal) {
+                        drawBorderHoritzontal(g2d, i, j);
+                    }
+
+                    if (ic.borderVertical) {
+                        drawBorderVertical(g2d, i, j);
+                    }
                 }
             }
         }
+        
     }
     
     private void drawBorderVertical(Graphics g2d, int row, int column) {

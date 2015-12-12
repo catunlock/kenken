@@ -15,23 +15,21 @@ import java.util.ArrayList;
  */
 public class Game implements Serializable{
     
-    enum Mode{Normal,TimeAttack};
+    public enum Mode{Normal,TimeAttack};
     
     private Duration time;
     private Mode mode;
     private Board board;
-    private User user;
 
     /*
     Pre: mode = "normal" o "TimeAttack"
     Post: S'ha creat un nou Game amb duració = 0 i mode de joc = mode
     */
-    public Game(String mode)
+    public Game(Mode mode, Board board)
     {
         this.time = Duration.ZERO;
-        this.mode = Mode.valueOf(mode);
-        this.user = null;
-        this.board = null;
+        this.mode = (mode);
+        this.board = board;
     }
      
     @Override
@@ -40,7 +38,6 @@ public class Game implements Serializable{
         sb.append(time.toString());
         sb.append(mode);
         sb.append(board.getBoardName());
-        sb.append(user.getUsername());
         sb.append('\n');
         return sb.toString();
     }
@@ -60,13 +57,6 @@ public class Game implements Serializable{
         this.board = board;
     }
     
-    /*
-    Pre: cert
-    Post: this.user = user
-    */
-    public void setUser(User user){
-        this.user = user;
-    }
     
     /*
     Pre: temps != null
@@ -83,15 +73,6 @@ public class Game implements Serializable{
     public Duration getTime()
     {
         return time;
-    }
-    
-    /*
-    Pre: cert
-    Post: es retorna un temps (imagino que temps de joc pero no ho se)
-    */
-    public User getUser()
-    {
-        return user;
     }
     
     /*
