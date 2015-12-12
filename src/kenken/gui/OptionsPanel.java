@@ -22,10 +22,9 @@ public class OptionsPanel extends javax.swing.JPanel {
      * @param mw
      * @param uc
      */
-    public OptionsPanel(MainWindow mw, UserController uc) {
+    public OptionsPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        this.uc = uc;
         txtPassword.setText("");
     }
 
@@ -41,7 +40,7 @@ public class OptionsPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnDeleteUser = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        lblLabel = new javax.swing.JLabel();
+        lblTypePassword = new javax.swing.JLabel();
 
         btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnBack.setText("BACK");
@@ -64,14 +63,8 @@ public class OptionsPanel extends javax.swing.JPanel {
             }
         });
 
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-
-        lblLabel.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        lblLabel.setText("Type your password here");
+        lblTypePassword.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblTypePassword.setText("Type your password here:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,16 +78,19 @@ public class OptionsPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(248, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(lblLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -106,12 +102,11 @@ public class OptionsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             String pass = Arrays.toString(txtPassword.getPassword());
             int error = uc.deleteUser(pass);
@@ -126,15 +121,11 @@ public class OptionsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDeleteUser;
-    private javax.swing.JLabel lblLabel;
+    private javax.swing.JLabel lblTypePassword;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
