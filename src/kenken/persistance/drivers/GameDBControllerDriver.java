@@ -46,7 +46,7 @@ public class GameDBControllerDriver {
                     userName = sc.next();
                     System.out.println("Introdueix nom de partida:");
                     boardName = sc.next();
-                    Game save = new Game("Normal");
+                    Game save = new Game(Game.Mode.Normal, null);
                     result = test.saveGame(save, userName, boardName);
                     if (result == 0){
                         System.out.println("Game creat correctament");

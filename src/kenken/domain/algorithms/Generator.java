@@ -62,6 +62,7 @@ public class Generator {
         RegionMaker rm = new RegionMaker();
         board.setRegions(rm.makeRegions());
         
+        BoardColorator.print(board);
         return board;
     }
     

@@ -30,14 +30,14 @@ public class GameDriver {
         while(!"Normal".equals(mode = sc.next()) && !"TimeAttack".equals(mode)){
             System.out.println("Mode incorrecte.");
         }
-        Game testGame = new Game(mode);
+        Game testGame = new Game(Game.Mode.valueOf(mode),null);
         
         System.out.println("Introdueix nom del usuari del joc");
         String user = sc.next();
         System.out.println("Introdueix contrasenya:");
         String pass = sc.next();
         User newuser = new User(user,pass);
-        testGame.setUser(newuser);
+        
         
         System.out.println("Introdueix size del Board:");
         int size = sc.nextInt();
@@ -63,7 +63,7 @@ public class GameDriver {
                     testGame.addTime(temps);
                     break;
                 case 2:
-                    System.out.println("Usuari: " + testGame.getUser().getUsername());
+                    
                     System.out.println("Mode: " + testGame.getMode());
                     System.out.println("Temps: " + testGame.getTime().getSeconds()); 
                     System.out.println("Board size: " + testGame.getBoard().size());

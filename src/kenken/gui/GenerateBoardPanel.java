@@ -18,6 +18,7 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     public GenerateBoardPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        txtSeed.setText(String.valueOf(System.nanoTime()));
     }
     
     private static float selectDifficult(String diff){
@@ -47,6 +48,15 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         lblGenerateBoard = new javax.swing.JLabel();
         lblDifficult = new javax.swing.JLabel();
         cmbDifficult = new javax.swing.JComboBox();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        sldRegionFactor = new javax.swing.JSlider();
+        txtRegionFactor = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        sldOperationFactor = new javax.swing.JSlider();
+        txtOperationFactor = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtSeed = new javax.swing.JTextField();
 
         lblGameMode.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblGameMode.setText("Game Mode:");
@@ -85,6 +95,87 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         cmbDifficult.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cmbDifficult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Easy", "Medium", "Hard", "Insane" }));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Advanced"));
+
+        jLabel1.setText("Difficult Region Size");
+
+        sldRegionFactor.setMaximum(200);
+        sldRegionFactor.setMinimum(1);
+        sldRegionFactor.setValue(100);
+        sldRegionFactor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldRegionFactorStateChanged(evt);
+            }
+        });
+
+        txtRegionFactor.setText("1.0");
+        txtRegionFactor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegionFactorActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Difficult Operation");
+
+        sldOperationFactor.setMaximum(200);
+        sldOperationFactor.setMinimum(1);
+        sldOperationFactor.setValue(100);
+        sldOperationFactor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldOperationFactorStateChanged(evt);
+            }
+        });
+
+        txtOperationFactor.setText("1.0");
+
+        jLabel3.setText("Seed");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(sldRegionFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRegionFactor))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(sldOperationFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOperationFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSeed)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtRegionFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtSeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(sldRegionFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2)
+                        .addComponent(sldOperationFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOperationFactor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,33 +183,39 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(lblGenerateBoard))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(300, 300, 300)
+                                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(228, 228, 228)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbbGameMode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbbSize, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 181, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(lblGenerateBoard))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbbGameMode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbbSize, 0, 166, Short.MAX_VALUE)
-                            .addComponent(cmbDifficult, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(193, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(lblGenerateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbbGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,8 +226,10 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblDifficult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbDifficult))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(cmbDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,11 +242,38 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        String cont = (String) cmbbSize.getSelectedItem();
-        int size = Integer.parseInt(cont);
-        float diff = selectDifficult(cmbDifficult.getSelectedItem().toString());
-        //mw.setPanel(MainWindow.Panels.PlayPanel);
+        String mode = (String) cmbbGameMode.getSelectedItem();
+        int size = Integer.parseInt((String) cmbbSize.getSelectedItem());
+        float pfRegionSize = Float.parseFloat(txtRegionFactor.getText());
+        float pfOperation = Float.parseFloat(txtOperationFactor.getText());
+        long seed = Long.parseLong(txtSeed.getText());
+        
+        
+        
+        mw.getGameController().newGameGenerateBoard(mode, size, pfRegionSize, 
+                pfOperation, seed);
+        
+        PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
+        pp.initBoard(mw.getGameController().getInfoBoard());
+        
+        mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void txtRegionFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegionFactorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegionFactorActionPerformed
+
+    private void sldRegionFactorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldRegionFactorStateChanged
+        double value = sldRegionFactor.getValue();
+        
+        txtRegionFactor.setText(String.valueOf(value/100.0));
+    }//GEN-LAST:event_sldRegionFactorStateChanged
+
+    private void sldOperationFactorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldOperationFactorStateChanged
+        double value = sldOperationFactor.getValue();
+        
+        txtOperationFactor.setText(String.valueOf(value/100.0));
+    }//GEN-LAST:event_sldOperationFactorStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,9 +282,18 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbDifficult;
     private javax.swing.JComboBox cmbbGameMode;
     private javax.swing.JComboBox cmbbSize;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDifficult;
     private javax.swing.JLabel lblGameMode;
     private javax.swing.JLabel lblGenerateBoard;
     private javax.swing.JLabel lblSize;
+    private javax.swing.JSlider sldOperationFactor;
+    private javax.swing.JSlider sldRegionFactor;
+    private javax.swing.JTextField txtOperationFactor;
+    private javax.swing.JTextField txtRegionFactor;
+    private javax.swing.JTextField txtSeed;
     // End of variables declaration//GEN-END:variables
 }

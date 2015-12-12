@@ -149,13 +149,13 @@ public class GameController {
         return new BoardParser().getInfoBoard();
     }
     
-    public Board generateBoard(int size){
+    public void newGameGenerateBoard(String mode, int size, float pfRegionSize, float pfOperation, long seed) {
         Generator generador = new Generator();
-                float pfRegionSize = 2f;
-        float pfOperation = 2f;
+               
+        Board generated = generador.generate(size, pfRegionSize, pfOperation, seed);
         
-        Board generated = generador.generate(9, pfRegionSize, pfOperation, System.nanoTime());
-        return generated;
+        game = new Game(Game.Mode.valueOf(mode), generated);
+        game.setBoard(generated);
     }
     
     /*
