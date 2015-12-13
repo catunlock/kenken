@@ -42,11 +42,14 @@ public class GameController {
             }
         }
         this.game.setBoard(b);
-        Duration time = Duration.ZERO;
-        time.withSeconds(Long.parseLong(data.get(0)));
+        Duration time = Duration.ofSeconds(Long.parseLong(data.get(0)));
         this.game.setTime(time);
         this.game.setHints(Integer.parseInt(data.get(1)));
         return saveGame(this.game, username, nompartida);
+    }
+
+    public int getTime() {
+        return (int) this.game.getTime().getSeconds();
     }
     
     /*
@@ -257,8 +260,16 @@ public class GameController {
     Post: es retorna el game el qual estava jugant l'user username i la taula id
     que s'estava jugant
     */
-    public Game loadGame(String username, String nompartida) {
-        return gdbc.loadGame(username, nompartida);
+    public ArrayList<Integer> loadGame(String username, String nompartida) {
+        this.game = gdbc.loadGame(username, nompartida);
+        int tamany = this.game.getBoard().size();
+        ArrayList<Integer> data = new ArrayList<>();
+        for (int i = 0; i < tamany; ++i){
+            for (int j = 0; j < tamany; ++j){
+                data.add(this.game.getBoard().getCell(i, j).getUserValue());
+            }
+        }
+        return data;
     }
     
 }

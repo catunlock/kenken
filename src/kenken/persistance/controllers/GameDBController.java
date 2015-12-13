@@ -63,10 +63,10 @@ public class GameDBController {
         
         FileInputStream fis;
         Game game;
-        String filepath = getPath(nompartida, username);
+        String filepath = "Users/"+username+"/"+Directory+nompartida;
         if (new File(filepath).exists()){
             try {
-            fis = new FileInputStream(getPath(nompartida, username));
+            fis = new FileInputStream(filepath);
             ObjectInputStream ois = new ObjectInputStream(fis);
             game = (Game) ois.readObject();
             fis.close();

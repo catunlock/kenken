@@ -138,7 +138,14 @@ public class LoadGamePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Integer> data = mw.getGameController().loadGame(mw.getUserController().getLoggedUser().getUsername(), (String) lstGames.getSelectedValue());
+        int time = mw.getGameController().getTime();
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).clearPanel();
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initBoard(mw.getGameController().getInfoBoard());
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setTime(time);
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setValues(data);
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
+        mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
