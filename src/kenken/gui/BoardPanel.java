@@ -306,14 +306,17 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         if (selectedCell.f != -1 && selectedCell.c != -1) {
             try {
                 int value = Integer.parseInt(String.valueOf(e.getKeyChar()));
-                InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
+                if (value > 0 && value <= nColumns) {
+                    InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
 
-                ic.value = String.valueOf(value);
+                    ic.value = String.valueOf(value);
 
-                selectedCell.f = -1;
-                selectedCell.c = -1;
+                    selectedCell.f = -1;
+                    selectedCell.c = -1;
 
-                repaint();
+                    repaint();
+                }
+                
             } catch (java.lang.NumberFormatException ex) {
                 // Si peta es que el usuario no ha introducido un numero.
             }

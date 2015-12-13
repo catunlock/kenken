@@ -20,6 +20,8 @@ public class Game implements Serializable{
     private Duration time;
     private Mode mode;
     private Board board;
+    private int hints;
+    
 
     /*
     Pre: mode = "normal" o "TimeAttack"
@@ -30,6 +32,7 @@ public class Game implements Serializable{
         this.time = Duration.ZERO;
         this.mode = (mode);
         this.board = board;
+        this.hints = 3;
     }
      
     @Override
@@ -92,4 +95,15 @@ public class Game implements Serializable{
     {
         return board;
     }
+    
+    public int getHint(Pos p) {
+        hints--;
+        return getBoard().getCell(p.f, p.c).getSolutionValue();
+    }
+
+    public int getHints() {
+        return hints;
+    }
+    
+    
 }

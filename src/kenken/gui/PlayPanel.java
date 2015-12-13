@@ -215,11 +215,20 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         Pos p = boardPanel1.getSelectedPos();
+        int hints = mw.getGameController().getHints();
         
-        if (p.f != -1 && p.c != -1) {
+        if (p.f != -1 && p.c != -1 && hints > 0) {
             int hint = mw.getGameController().getHint(p);
             boardPanel1.setHint(p, String.valueOf(hint));
+            
+            hints = mw.getGameController().getHints();
+            lblHint.setText("Hints Remaining: " + hints);
         }
+        
+        if ( hints == 0) {
+            btnHint.setEnabled(false);
+        }
+        
     }                                       
     
     

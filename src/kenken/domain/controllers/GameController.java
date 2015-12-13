@@ -139,7 +139,11 @@ public class GameController {
     }
     
     public int getHint(Pos p) {
-        return game.getBoard().getCell(p.f, p.c).getSolutionValue();
+        return game.getHint(p);
+    }
+    
+    public int getHints() {
+        return game.getHints();
     }
     
     public void newGame(String boardName, String mode) {
