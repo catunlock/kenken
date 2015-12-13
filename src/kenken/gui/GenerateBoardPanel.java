@@ -81,10 +81,10 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         lblGenerateBoard.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
         lblGenerateBoard.setText("GENERATE BOARD");
 
-        lblDifficult.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblDifficult.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         lblDifficult.setText("Difficulty:");
 
-        cmbDifficult.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cmbDifficult.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         cmbDifficult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Easy", "Medium", "Hard", "Insane" }));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Advanced"));
@@ -229,7 +229,7 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
