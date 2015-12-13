@@ -11,6 +11,7 @@ import kenken.domain.classes.Game;
 import kenken.persistance.controllers.GameDBController;
 import kenken.domain.algorithms.Generator;
 import kenken.domain.classes.CellKenken;
+import kenken.domain.classes.Pos;
 import kenken.domain.classes.Region;
 import kenken.domain.classes.User;
 import kenken.gui.InfoCell;
@@ -135,6 +136,10 @@ public class GameController {
             return infoCells;
 
         }
+    }
+    
+    public int getHint(Pos p) {
+        return game.getBoard().getCell(p.f, p.c).getSolutionValue();
     }
     
     public void newGame(String boardName, String mode) {

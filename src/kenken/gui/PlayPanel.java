@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import kenken.domain.classes.Pos;
 import sun.audio.*;
 
 /**
@@ -213,6 +214,12 @@ public class PlayPanel extends javax.swing.JPanel {
 
     private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        Pos p = boardPanel1.getSelectedPos();
+        
+        if (p.f != -1 && p.c != -1) {
+            int hint = mw.getGameController().getHint(p);
+            boardPanel1.setHint(p, String.valueOf(hint));
+        }
     }                                       
     
     

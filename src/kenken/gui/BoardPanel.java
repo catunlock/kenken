@@ -116,7 +116,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     {
         if(ic.hinted) {
             g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fillRect(posX, posY, padHor, padVer);
+            g2d.fillRect(posX, posY, padHor-1, padVer-1);
             g2d.setColor(Color.black);
         }
         
@@ -249,6 +249,8 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     public void setHint(Pos p, String value) {
         infoCells.get(p.f).get(p.c).value = value;
         infoCells.get(p.f).get(p.c).hinted = true;
+        
+        repaint();
     }
     
     @Override
