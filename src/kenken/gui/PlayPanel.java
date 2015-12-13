@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import kenken.domain.classes.Pos;
 import sun.audio.*;
 
 /**
@@ -210,7 +211,9 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveGameActionPerformed
 
     private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHintActionPerformed
-        // TODO add your handling code here:
+        Pos p = boardPanel1.getSelectedPos();
+        
+        board
     }//GEN-LAST:event_btnHintActionPerformed
     
     
