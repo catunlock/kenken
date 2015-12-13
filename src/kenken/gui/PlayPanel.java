@@ -121,8 +121,6 @@ public class PlayPanel extends javax.swing.JPanel {
         lblHint.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         lblHint.setText("Hints remaining: 3");
 
-        boardPanel1.setPreferredSize(new java.awt.Dimension(663, 663));
-
         javax.swing.GroupLayout boardPanel1Layout = new javax.swing.GroupLayout(boardPanel1);
         boardPanel1.setLayout(boardPanel1Layout);
         boardPanel1Layout.setHorizontalGroup(
@@ -156,7 +154,7 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addComponent(btnSaveGame)
                         .addGap(24, 24, 24))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(186, 186, 186)
+                .addGap(165, 165, 165)
                 .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -173,9 +171,9 @@ public class PlayPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                .addGap(21, 21, 21)
                 .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
