@@ -114,6 +114,12 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     
     private void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
     {
+        if(ic.hinted) {
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fillRect(posX, posY, padHor, padVer);
+            g2d.setColor(Color.black);
+        }
+        
         // Operation
         g2d.setFont(fontOperation);
         int posOperationY = (int) (posY + (FONT_SIZE_OPERATION - nColumns/1.5));
@@ -218,7 +224,33 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         // Selected Cell
         drawSelectedCell(g2d);
     }
+    
+    private void drawSelectedCell(Graphics2D g2d) {
+        
+        if (selectedCell.f != -1 && selectedCell.c != -1) {
+            int x = selectedCell.c*padHor;
+            int y = selectedCell.f*padVer;
 
+            g2d.setPaint(Color.blue);
+            g2d.fillRect(x, y, padHor, padVer);
+
+            g2d.setPaint(Color.white);
+            InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
+            drawCell(g2d, ic, x, y);
+
+            g2d.setPaint(Color.black);
+        }
+    }
+
+    public Pos getSelectedPos() {
+        return new Pos(selectedCell);
+    }
+    
+    public void setHint(Pos p, String value) {
+        infoCells.get(p.f).get(p.c).value = value;
+        infoCells.get(p.f).get(p.c).hinted = true;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
 
@@ -228,17 +260,22 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        selectedCell.c = e.getX() / padHor;
-        selectedCell.f = e.getY() / padVer;
+        int f = e.getY() / padVer;
+        int c = e.getX() / padHor;
         
-        System.out.println("Clicked at cell: " + selectedCell.f + " " + selectedCell.c);
-        
-        System.out.println("FOCUSABLE: " + isFocusable());
-        this.requestFocusInWindow();
-        System.out.println("FOCUSABLE: " + isFocusable());
-        
-        
-        repaint();
+        if (! infoCells.get(f).get(c).hinted ) {
+            selectedCell.c = c;
+            selectedCell.f = f;
+
+            System.out.println("Clicked at cell: " + selectedCell.f + " " + selectedCell.c);
+
+            System.out.println("FOCUSABLE: " + isFocusable());
+            this.requestFocusInWindow();
+            System.out.println("FOCUSABLE: " + isFocusable());
+
+
+            repaint();
+        }
     }
 
     @Override
@@ -260,24 +297,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     public void mouseExited(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    private void drawSelectedCell(Graphics2D g2d) {
-        
-        if (selectedCell.f != -1 && selectedCell.c != -1) {
-            int x = selectedCell.c*padHor;
-            int y = selectedCell.f*padVer;
-
-            g2d.setPaint(Color.blue);
-            g2d.fillRect(x, y, padHor, padVer);
-
-            g2d.setPaint(Color.white);
-            InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
-            drawCell(g2d, ic, x, y);
-
-            g2d.setPaint(Color.black);
-        }
-    }
-    
+   
     @Override
     public void keyTyped(KeyEvent e) {
         System.out.println("KEYTYPED: " + e.getKeyChar());

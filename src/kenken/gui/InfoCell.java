@@ -16,4 +16,5 @@ public class InfoCell {
     public String value = "";
     public boolean borderHoritzontal = false;
     public boolean borderVertical = false;
+    public boolean hinted = false;
 }
