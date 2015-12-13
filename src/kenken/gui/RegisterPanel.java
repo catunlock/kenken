@@ -176,8 +176,11 @@ public class RegisterPanel extends javax.swing.JPanel {
             }else if (result == -2){
                 lblErrores.setText("Internal Error.");
             }else{
-                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
-                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                int errcode = uc.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
+                if (errcode == 0){
+                    ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
+                    mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                }
             }
         }else{
             lblErrores.setText("Passwords are not equal.");
