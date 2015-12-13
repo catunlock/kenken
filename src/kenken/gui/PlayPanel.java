@@ -46,7 +46,6 @@ public class PlayPanel extends javax.swing.JPanel {
     }
 
     public void clearPanel() {
-        initTime();
         btnHint.setEnabled(true);
         btnCheck.setEnabled(true);
         btnSurrender.setEnabled(true);
@@ -63,6 +62,7 @@ public class PlayPanel extends javax.swing.JPanel {
             in = new FileInputStream("Robocraft Theme.wav");
             audio = new AudioStream(in);
             ap.start(audio);
+            musicOn = true;
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -100,9 +100,6 @@ public class PlayPanel extends javax.swing.JPanel {
             String timestring = horstr + ":" + minstr + ":" + segstr;
             lblTime.setText(timestring);
             timer.restart();
-            // OR
-            // Assumes clock is a JLabel
-            //lblTime.setText(new Date().toString()); 
         }
     };
 
