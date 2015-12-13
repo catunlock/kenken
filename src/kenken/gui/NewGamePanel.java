@@ -31,7 +31,6 @@ public class NewGamePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGenerateBoard = new javax.swing.JButton();
-        btnCreateBoard = new javax.swing.JButton();
         btnLoadBoard = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblNewGame = new javax.swing.JLabel();
@@ -41,14 +40,6 @@ public class NewGamePanel extends javax.swing.JPanel {
         btnGenerateBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerateBoardActionPerformed(evt);
-            }
-        });
-
-        btnCreateBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnCreateBoard.setText("Create Board");
-        btnCreateBoard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateBoardActionPerformed(evt);
             }
         });
 
@@ -76,19 +67,18 @@ public class NewGamePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnGenerateBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLoadBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCreateBoard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(lblNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLoadBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(318, 318, 318)
+                            .addComponent(btnGenerateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(343, 343, 343)
+                            .addComponent(lblNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(353, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -99,10 +89,8 @@ public class NewGamePanel extends javax.swing.JPanel {
                 .addGap(135, 135, 135)
                 .addComponent(btnGenerateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCreateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnLoadBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -111,10 +99,6 @@ public class NewGamePanel extends javax.swing.JPanel {
     private void btnGenerateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateBoardActionPerformed
         mw.setPanel(MainWindow.Panels.GenerateBoardPanel);
     }//GEN-LAST:event_btnGenerateBoardActionPerformed
-
-    private void btnCreateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBoardActionPerformed
-        mw.setPanel(MainWindow.Panels.CreateBoardPanel);
-    }//GEN-LAST:event_btnCreateBoardActionPerformed
 
     private void btnLoadBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadBoardActionPerformed
         ((LoadBoardPanel) (mw.getPanel(MainWindow.Panels.LoadBoardPanel))).updateList();
@@ -128,7 +112,6 @@ public class NewGamePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCreateBoard;
     private javax.swing.JButton btnGenerateBoard;
     private javax.swing.JButton btnLoadBoard;
     private javax.swing.JLabel lblNewGame;
