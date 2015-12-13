@@ -45,6 +45,14 @@ public class PlayPanel extends javax.swing.JPanel {
         
     }
 
+    public void clearPanel() {
+        initTime();
+        btnHint.setEnabled(true);
+        btnCheck.setEnabled(true);
+        btnSurrender.setEnabled(true);
+        boardPanel1.setSelectedCell(new Pos(-1,-1));
+    }
+    
     public void initTime(){
         time = Duration.ZERO;
         segundos = 0;

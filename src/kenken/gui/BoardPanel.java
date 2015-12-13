@@ -266,6 +266,11 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         repaint();
     }
     
+    public void setSelectedCell(Pos p) {
+        selectedCell.f = p.f;
+        selectedCell.c = p.c;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
 
