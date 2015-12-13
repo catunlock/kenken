@@ -197,6 +197,7 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         pp.initBoard(mw.getGameController().getInfoBoard());
         
         mw.setPanel(MainWindow.Panels.PlayPanel);
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
