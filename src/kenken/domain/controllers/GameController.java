@@ -5,6 +5,7 @@
  */
 package kenken.domain.controllers;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.Game;
@@ -25,6 +26,28 @@ public class GameController {
     GameDBController gdbc = new GameDBController();
     BoardController boardController = new BoardController();
     Game game;
+
+    public int updateAndSave(ArrayList<String> data, String username, String nompartida) {
+        Board b = this.game.getBoard();
+        int i = 0, j = 0;
+        for (int x = 2; x < data.size(); ++x){
+            int valor;
+            if ("".equals(data.get(x))) valor = 0;
+            else valor = Integer.parseInt(data.get(x));
+            b.getCell(i, j).setUserValue(valor);
+            ++j;
+            if (j == b.size()){
+                j = 0;
+                ++i;
+            }
+        }
+        this.game.setBoard(b);
+        Duration time = Duration.ZERO;
+        time.withSeconds(Long.parseLong(data.get(0)));
+        this.game.setTime(time);
+        this.game.setHints(Integer.parseInt(data.get(1)));
+        return saveGame(this.game, username, nompartida);
+    }
     
     /*
     Pre: 3 <= size => 9, dificultat != null

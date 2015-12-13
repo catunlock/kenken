@@ -19,5 +19,8 @@ public class InfoCell {
     public boolean hinted = false;
     public boolean showIsCorrect = false;
     public boolean correct = false;
-    
+
+    String getValue() {
+        return value;
+    }
 }

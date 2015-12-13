@@ -105,6 +105,12 @@ public class Game implements Serializable{
         return hints;
     }
     
-   
+   public void setTime(Duration temps) {
+        time = temps;
+    }
+
+    public void setHints(int x) {
+        hints = x;
+    }
     
 }

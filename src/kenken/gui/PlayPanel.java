@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import kenken.domain.classes.Pos;
+import kenken.domain.classes.*;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -24,13 +24,14 @@ import sun.audio.AudioStream;
 public class PlayPanel extends javax.swing.JPanel {
     private MainWindow mw;
     private Duration time;
-    private String a;
+    private String gamemode;
     private Timer timer;
-    private int segundos, minutos, horas;
+    private int segTotal, segundos, minutos, horas;
     AudioPlayer ap = AudioPlayer.player;
     InputStream in;
     AudioStream audio;
     boolean musicOn = true;
+    Game game;
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -81,6 +82,7 @@ public class PlayPanel extends javax.swing.JPanel {
     private ActionListener updateClockAction = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Assumes clock is a custom component
+            ++segTotal;
             ++segundos;
             if (segundos == 60) {
                 ++minutos;
@@ -279,7 +281,26 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
-        // TODO add your handling code here:
+        String nompartida = JOptionPane.showInputDialog("Type the name of the game you want to save.");
+        String username = mw.getUserController().getLoggedUser().getUsername();
+        ArrayList<String> data = new ArrayList<>();
+        data.add(Integer.toString(segTotal));
+        data.add(Integer.toString(mw.getGameController().getHints()));
+        int tamany = mw.getGameController().getInfoBoard().size();
+        for (int i = 0; i < tamany; ++i){
+            for (int j = 0; j < tamany; ++j){
+                Pos p = new Pos(i,j);
+                data.add(boardPanel1.getInfoCell(p).getValue());
+            }
+        }
+        int error = mw.getGameController().updateAndSave(data, username, nompartida);
+        if (error == -1) JOptionPane.showMessageDialog(this, "There already is a game called " + nompartida + " in your saved games.");
+        else{
+            mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            lblTime.setText("00:00:00");
+            ap.stop(audio);
+            timer.stop();
+        }
     }//GEN-LAST:event_btnSaveGameActionPerformed
 
     private void btnHintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHintActionPerformed
