@@ -44,6 +44,7 @@ import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.GameController;
 import kenken.domain.controllers.RankingController;
 import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.UserDataGetter;
 
 public class MainWindow {
     JPanel cards; //a panel that uses CardLayout
@@ -54,6 +55,7 @@ public class MainWindow {
     private GameController gc = new GameController();
     private RankingController rc = new RankingController();
     private UserController uc = new UserController();
+    private UserDataGetter dg = new UserDataGetter();
     
     public BoardController getBoardController() {
         return bc;
@@ -71,6 +73,9 @@ public class MainWindow {
         return uc;
     }
     
+    public UserDataGetter getUserDataGetter()  {
+        return dg;
+    }
     
     enum Panels {
         CreateBoardPanel,
@@ -86,7 +91,8 @@ public class MainWindow {
         RegisterPanel,
         LoginPanel,
         OptionsPanel,
-        ChooseRankingPanel;
+        ChooseRankingPanel,
+        DeleteBoardPanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -124,6 +130,7 @@ public class MainWindow {
         panels.put("RegisterPanel", new RegisterPanel(this));
         panels.put("OptionsPanel", new OptionsPanel(this));
         panels.put("ChooseRankingPanel", new ChooseRankingPanel(this));
+        panels.put("DeleteBoardPanel", new DeleteBoardPanel(this));
         
     }
     

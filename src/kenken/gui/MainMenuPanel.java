@@ -14,10 +14,12 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import kenken.domain.classes.BoardInfo;
 import kenken.domain.classes.User;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.UserController;
 import kenken.persistance.controllers.RankingDBController;
+import kenken.domain.controllers.UserDataGetter;
 
 /**
  *
@@ -43,14 +45,18 @@ public class MainMenuPanel extends javax.swing.JPanel {
         this.bc = this.mw.getBoardController();
     }
 
-    public void setUser(String username){
-        this.user = username;
+    public void setUser(String user){
+        ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
+        String solved, created, played;
+        played = userData.get(0);
+        created = userData.get(1);
+        solved = userData.get(2);
+        this.user = user;
         lblMainMenu.setText("Welcome, " + user);
-        User temp = this.uc.getUser(username);
-        lblBoardsCreatedTarget.setText(String.valueOf(temp.getActualCreatedBoard()));
-        lblBoardsResolvedTarget.setText(String.valueOf(temp.getSolvedGames()));
-        long timePlayed = temp.getTotalTimePlayed().getSeconds();
-        lblTimePlayedTarget.setText(String.valueOf(timePlayed + " seconds."));
+        User temp = this.uc.getLoggedUser();
+        lblBoardsCreatedTarget.setText(created);
+        lblBoardsResolvedTarget.setText(solved);
+        lblTimePlayedTarget.setText(played);
     }
         
     
@@ -80,6 +86,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
         lblMainMenu = new javax.swing.JLabel();
         btnLoadGame = new javax.swing.JButton();
         btnOptions = new javax.swing.JButton();
+        btnDeleteBoard = new javax.swing.JButton();
 
         btnExportBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnExportBoard.setText("Export Board");
@@ -210,28 +217,39 @@ public class MainMenuPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDeleteBoard.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        btnDeleteBoard.setText("Delete Board");
+        btnDeleteBoard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteBoardActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnOptions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(151, 151, 151)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCreateBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoadGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnImportBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExportBoard))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnDeleteBoard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCreateBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(btnLoadGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNewGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnExportBoard)
+                    .addComponent(btnImportBoard))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -249,19 +267,21 @@ public class MainMenuPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLoadGame, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCreateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnImportBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExportBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeleteBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblStatistics)
                         .addGap(32, 32, 32)
@@ -332,9 +352,15 @@ public class MainMenuPanel extends javax.swing.JPanel {
          mw.setPanel(MainWindow.Panels.CreateBoardPanel);
     }//GEN-LAST:event_btnCreateBoardActionPerformed
 
+    private void btnDeleteBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBoardActionPerformed
+        ((DeleteBoardPanel) mw.getPanel(MainWindow.Panels.DeleteBoardPanel)).updateList();
+        mw.setPanel(MainWindow.Panels.DeleteBoardPanel);
+    }//GEN-LAST:event_btnDeleteBoardActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateBoard;
+    private javax.swing.JButton btnDeleteBoard;
     private javax.swing.JButton btnExportBoard;
     private javax.swing.JButton btnImportBoard;
     private javax.swing.JButton btnLoadGame;

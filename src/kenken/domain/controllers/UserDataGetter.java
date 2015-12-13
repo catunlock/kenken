@@ -13,6 +13,11 @@ import kenken.domain.classes.User;
  * @author GERARD
  */
 public class UserDataGetter {
+    
+    public String getUsername(UserController uc){
+        return uc.getLoggedUser().getUsername();
+    }
+    
     public ArrayList<String> toString(UserController uc){
         User user = uc.getLoggedUser();
         ArrayList<String> dades = new ArrayList<>(3);
@@ -21,6 +26,7 @@ public class UserDataGetter {
         int userSolved, userStarted, percent;
         userSolved = user.getSolvedGames();
         userStarted = user.getStartedGames();
+        dades.add(Integer.toString(userSolved));
         if (userStarted == 0) percent = 0;
         else percent = (userSolved/userStarted)*100;
         dades.add(Integer.toString(percent) + "%");
