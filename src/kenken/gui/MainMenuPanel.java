@@ -19,6 +19,7 @@ import kenken.domain.classes.User;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.UserController;
 import kenken.persistance.controllers.RankingDBController;
+import kenken.domain.controllers.UserDataGetter;
 
 /**
  *
@@ -44,14 +45,18 @@ public class MainMenuPanel extends javax.swing.JPanel {
         this.bc = this.mw.getBoardController();
     }
 
-    public void setUser(){
-        this.user = this.uc.getLoggedUser().getUsername();
+    public void setUser(String user){
+        ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
+        String solved, created, played;
+        played = userData.get(0);
+        created = userData.get(1);
+        solved = userData.get(2);
+        this.user = user;
         lblMainMenu.setText("Welcome, " + user);
         User temp = this.uc.getLoggedUser();
-        lblBoardsCreatedTarget.setText(String.valueOf(temp.getActualCreatedBoard()));
-        lblBoardsResolvedTarget.setText(String.valueOf(temp.getSolvedGames()));
-        long timePlayed = temp.getTotalTimePlayed().getSeconds();
-        lblTimePlayedTarget.setText(String.valueOf(timePlayed + " seconds."));
+        lblBoardsCreatedTarget.setText(created);
+        lblBoardsResolvedTarget.setText(solved);
+        lblTimePlayedTarget.setText(played);
     }
         
     
