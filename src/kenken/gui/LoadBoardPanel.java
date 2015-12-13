@@ -53,7 +53,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnLoad = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         lblLoadBoard = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblCreador = new javax.swing.JLabel();
@@ -67,18 +66,10 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         lstBoards = new javax.swing.JList();
 
         btnLoad.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnLoad.setText("LOAD");
+        btnLoad.setText("PLAY");
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnDelete.setText("DELETE");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -132,11 +123,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(319, 319, 319)
                         .addComponent(lblLoadBoard))
                     .addGroup(layout.createSequentialGroup()
@@ -156,7 +142,10 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblShowCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(405, 405, 405)
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,11 +168,9 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
+                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -199,25 +186,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnLoadActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete " + bi.getName() + " board?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (n == 0) {
-            //eliminar la board
-            int result = mw.getBoardController().deleteBoard(bi.getName());
-            if (result == 0){
-                JOptionPane.showMessageDialog(null,
-                    "Board deleted.",
-                    "Información",JOptionPane.INFORMATION_MESSAGE);
-                updateList();
-            }else{
-                JOptionPane.showMessageDialog(null,
-                    "Internal Error",
-                    "Información",JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -232,7 +200,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnLoad;
     private javax.swing.JLabel lblCreador;
     private javax.swing.JLabel lblInfo;

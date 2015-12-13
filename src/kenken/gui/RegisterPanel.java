@@ -176,9 +176,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             }else if (result == -2){
                 lblErrores.setText("Internal Error.");
             }else{
-                //lblErrores.setText("User " + txtUsername.getText() + " created!.");
-                //((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
-                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
+                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser();
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
             }
         }else{
