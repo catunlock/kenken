@@ -44,7 +44,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblResult" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCheck" min="-2" max="-2" attributes="0"/>
                   <Component id="boardPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -76,7 +76,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnExit" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="btnSaveGame" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="lblResult" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCheck" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="23" max="32767" attributes="0"/>
                   </Group>
@@ -176,6 +176,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="CHECK"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSurrender">
       <Properties>
@@ -185,7 +188,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSurrenderActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblResult">
+    <Component class="javax.swing.JLabel" name="lblCheck">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
