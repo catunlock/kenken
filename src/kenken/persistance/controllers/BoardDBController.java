@@ -31,13 +31,21 @@ public class BoardDBController {
     private static final String ExtensionFisica = ".brd";
     private static final String ExtensionInfo = ".inf";
     
-    
+    /**
+     * A checker to see if exists the board wanted.
+     * @param boardName the Boardname to check its existance.
+     * @return A boolean true if the board exists, otherwise returns false.
+     */
     public boolean exists(String boardName){
         String path = getPathInfo(boardName);
         String pathInfo = path+ExtensionInfo;
         return new File(pathInfo).isFile();
     }
     
+    /**
+     * Getter of the Boardnames
+     * @return An ArrayList of Strings which contains all the boardnames.
+     */
     public ArrayList<String> getBoardnames(){
         ArrayList<String> boards = new ArrayList<>();
         File f = new File(DirectoryInfo);
@@ -48,10 +56,12 @@ public class BoardDBController {
         return boards;
     }
     
-    /*
-    Pre: boardname es nom de tauler existent a la DB
-    Post: retorna la informacio del board en format string    
-    */
+    
+    /**
+     * Getter of the info from the board selected.
+     * @param boardname The Boardname selected to show the info
+     * @return An ArrayList of Strings with the info of the Board.
+     */
     public ArrayList<String> getBoardInfoString(String boardname){
         ArrayList<String> info = new ArrayList<>();
         String path = getPathInfo(boardname);
@@ -76,14 +86,12 @@ public class BoardDBController {
         return info;
     }
     
-    /* Pre:  cert
-    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà que
-             s'ha creat a la base de dades una nova Board, o bé hi ha hagut algun problema.
-        Return:
-             0 = board creada correctament
-            -1 = board existent
-            -2 = error intern
-    */
+   
+    /**
+     * Creates a Board newBoard into the database.
+     * @param newBoard The Board to be Created.
+     * @return An Integer with the error code  0 : The Board was succesfully created. -1 : The Board already exists. -2 : Internal error.
+     */
     public int createBoard(Board newBoard){
         int result = 0;
         int resultInfo = 0;
@@ -114,15 +122,12 @@ public class BoardDBController {
         return result;
     }
     
-    /*  Pre: boardName != NULL
-    ** Post: Retorna un int el qual, segons el valor que tingui, indicarà si 
-             sha eliminat de la base de dades el board amb nom boardName, o bé 
-             si sha produït alguna excepció.
-    Return:
-         0 = board eliminat correctament
-        -1 = board no existent
-        -2 = error intern
-    */
+    
+    /**
+     * Deletes a board from the database.
+     * @param boardName The Boardname wanted to be deleted.
+     * @return An Integer with the error code  0 : The Board was succesfully deleted. -1 : The Board doesn't exist. -2 : Internal error.
+     */
     public int deleteBoard(String boardName) {
         
         int result;
@@ -154,6 +159,11 @@ public class BoardDBController {
     Pre: boardName != NULL
     Post: Retorna el board seleccionat, si b = NULL, el board no existeix
     */
+    /**
+     * Loads a board from the database.
+     * @param boardName The target board brought by its name.
+     * @return The loaded Board, if it's NULL, means couldn't be loaded.
+     */
     public Board loadBoard(String boardName){
         
         FileInputStream fis;
@@ -185,6 +195,10 @@ public class BoardDBController {
         return b;
     }
     
+    /**
+     * Getter of all the info about all the Boards.
+     * @return An ArrayList of BoardInfo containing all the info related.
+     */
     public ArrayList<BoardInfo> getBoardsInfo(){
         ArrayList<BoardInfo> boards = new ArrayList<>();
         
@@ -218,14 +232,21 @@ public class BoardDBController {
         return boards;
     }
     
-    /* 
-    Pre: board != null
-    Post: retorna un string amb el path en el que hauria de guardarse el board
-    */
+   
+    /**
+     * Getter of the filepath related to the Board.
+     * @param board The board to get the filepath.
+     * @return A String with the Filepath.
+     */
     private String getPathBoard(Board board){
         return getPathBoard(board.getBoardName());
     }
     
+    /**
+     * Getter of the filepath related to the infoBoard.
+     * @param board The board to get the filepath.
+     * @return A String with the Filepath.
+     */
     private String getPathInfo(Board board){
         return getPathInfo(board.getBoardName());
     }
@@ -234,10 +255,20 @@ public class BoardDBController {
     Pre: boardName != null
     Post: retorna un string amb el path en el que hauria de guardarse el board tenint en compte el directori
     */
+    /**
+     * Getter of the filepath related to the Boardname.
+     * @param boardName The board to get the filepath.
+     * @return A String with the Filepath.
+     */
     private String getPathBoard(String boardName){
         return DirectoryBoards+boardName;
     }
     
+    /**
+     * Getter of the filepath related to the infoBoard.
+     * @param boardName The board to get the filepath.
+     * @return A String with the Filepath.
+     */
     private String getPathInfo(String boardName){
         return DirectoryInfo+boardName;
     }
@@ -249,6 +280,12 @@ public class BoardDBController {
             0:  Informacio de board guardada correctament
             -2: Error intern
     */
+    /**
+     * Writes the infoBoard into the database.
+     * @param infoBoard The info from the previously selectec Board.
+     * @param infoPath The path where the infoBoard goes.
+     * @return An Integer with the error code  0 : The infoBoard was succesfully written. -2 : Internal error.
+     */
     private int writeBoardInfo(BoardInfo infoBoard, String infoPath) {
         int result;
         
@@ -277,6 +314,12 @@ public class BoardDBController {
             0:  Board guardada correctament
             -2: Error intern
     */
+    /**
+     * Write the Board into the database.
+     * @param newBoard The board wanted to be written into the database.
+     * @param pathFisica The path where the file will be stored.
+     * @return An Integer with the error code  0 : The Board was succesfully written. -2 : Internal error.
+     */
     private int writeBoardObj(Board newBoard, String pathFisica) {
         int result;
         
