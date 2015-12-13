@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Marc Ferré Monné
  */
 public class User implements Serializable{
-    
+
     private String username;
     private String password;
     private int solvedGames;
@@ -22,150 +22,193 @@ public class User implements Serializable{
     private Duration totalTimePlayed;
     private int totalCreatedBoards;
     private ArrayList<Board> createdBoards;
-    
+
+    /**
+     * Constructor of User.
+     * @param   username The name of the user.
+     * @param   password The password of the user.
+     */
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         totalTimePlayed = Duration.ZERO;
         this.createdBoards = new ArrayList(0);
     }
-    
-    /*
-    Pre: Cert
-    Post: Retorna el username de l'usuari.
-    */
+
+    /**
+     * Getter of the username from User.
+     * @return A String with the username.
+     */
     public String getUsername() {
         return username;
     }
-    
-    /*
-    Pre: username != null
-    Post: El username de l'usuari es modificat pel parametre username.
+
+   /**
+    * Setter of the username.
+    * @param username The new username of the User.
     */
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    /*
-    Pre: Cert
-    Post: Ens retorna el password de l'usuari.
+
+   /**
+    * Getter of the password.
+    * @return A String with the password.
     */
     public String getPassword() {
         return password;
     }
-    
-    /*
-    Pre: password != null
-    Post: Ens modifica el password de l'usuari actual amb el parametre password.
+
+   /**
+    * Setter of the password.
+    * @param password New password of the User.
     */
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    /*
-    Pre: Cert
-    Post: Ens retorna el nombre de jocs solucionats.
+
+   /**
+    * Getter of SolvedGames.
+    * @return An Integer with the solvedGames.
     */
     public int getSolvedGames(){
         return solvedGames;
     }
-    
-    /*
-    Pre: Cert
-    Post: Ens retorna la quantitat de jocs comencats.
+
+   /**
+    * Getter of StartedGames.
+    * @return An Integer with the startedGames.
     */
     public int getStartedGames(){
         return startedGames;
     }
-    
-    /*
-    Pre: Cert.
-    Post: Ens retorna l'objecte Duration totalTimePlayed que emmagatzema el temps jugat.
+
+   /**
+    * Getter of totalTimePlayed.
+    * @return An object Duration with the totalTimePlayed.
     */
     public Duration getTotalTimePlayed(){
         return totalTimePlayed;
     }
-    
-    /*
-    Pre: Cert
-    Post: Ens retorna la quantitat de taulers creat per l'usuari.
+
+   /**
+    * Getter of totalCreatedBoards.
+    * @return An Integer with the totalCreatedBoards.
     */
     public int getTotalCreatedBoards(){
         return totalCreatedBoards;
     }
-    
+
     /*
     Pre: Cert
     Post: Ens retorna la ArrayList<Board> que conte els Boards creats per l'usuari.
     */
+   /**
+    * Getter of the createdBoards.
+    * @return An ArrayList of Boards with the Boards creates of this user.
+    */
     public ArrayList<Board> getCreatedBoards(){
         return createdBoards;
     }
-    
+
     /*
     Pre: 0 >= pos < this.createdBoards.size()
     Post: Ens retorna la Board la qual esta a la posicio pos de createdBoard
     */
+   /**
+    * Getter of a createdBoard relative to the position.
+    * @param  pos The position of wanted Board.
+    * @return     Te Board relative to its position.
+    */
     public Board getCreatedBoard(int pos){
         return createdBoards.get(pos);
     }
-    
+
     /*
     Pre: Cert
     Post: Ens retorna els taulers que tenim creats actualment.
     */
+   /**
+    * Getter of ActualCreatedBoards
+    * @return An Integer with all of the boards that we have stored in our ArrayList.
+    */
     public int getActualCreatedBoard(){
         return createdBoards.size();
     }
-    
+
     /*
     Pre: Cert
     Post: Incrementa en 1 els jocs solucionats de l'usuari.
     */
+   /**
+    * Increments the SolvedGames in 1.
+    */
     public void incrementSolvedGames(){
         solvedGames++;
     }
-    
+
     /*
     Pre: Cert
     Post: Incrementa en 1 els jocs comencats de l'usuari.
     */
+   /**
+    * Increments the StartedGames in 1.
+    */
     public void incrementStartedGames(){
         startedGames++;
     }
-    
+
     /*
     Pre: time != null
     Post: Suma el temps actual jugat amb el parametre time.
     */
+   /**
+    * Increments the totalTimePlayed in relation to the parameter time.
+    * @param time A Duration time to be added to totalTimePlayed of the User.
+    */
     public void incrementTotalTimePlayed(Duration time){
         totalTimePlayed = totalTimePlayed.plus(time);
     }
-    
+
     /*
     Pre: Cert
     Post: Incrementa en 1 els taulers creats de l'usuari.
     */
+   /**
+    * IncrementsTotalCreatedBoards in 1.
+    */
     public void incrementTotalCreatedBoards(){
         totalCreatedBoards++;
     }
-    
+
     /*
     Pre: newBoard != null
     Post: Afegeix un nou Tauler al createdBoard de l'usuari.
     */
+   /**
+    * Adds a Board into the ArrayList of the User.
+    * @param newBoard The new Board to be added.
+    */
     public void addBoard(Board newBoard){
         createdBoards.add(newBoard);
     }
-    
+
     /*
     Pre: 0 >= pos < createdBoards.size()
     Post: Esborra el tauler de la posicio passada per parametre.
     */
+   /**
+    * Deletes a Board from the ArrayList of the User.
+    * @param pos The position of the board to be deleted.
+    */
     public void deleteBoard(int pos){
         createdBoards.remove(pos);
     }
-    /*
+
+    /**
+     * Converts a User to String, to send the ArrayList to the UI.
+     * @return An ArrayList with all the info of the User.
+     */
     public ArrayList<String> userToString(){
         ArrayList<String> arr = new ArrayList();
         arr.add(this.username);
@@ -179,7 +222,12 @@ public class User implements Serializable{
         }
         return arr;
     }
-    
+
+    /**
+     * Converts an ArrayList of String to a User.
+     * @param  arr Arraylist with the info of the User.
+     * @return     the User with all the information parsed.
+     */
     public static User stringToUser(ArrayList<String> arr){
         User user = new User(arr.get(0), arr.get(1));
         user.solvedGames = Integer.parseInt(arr.get(2));
@@ -191,5 +239,5 @@ public class User implements Serializable{
         }
         return user;
     }
-    */
+
 }
