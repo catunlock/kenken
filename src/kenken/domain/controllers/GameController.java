@@ -203,6 +203,23 @@ public class GameController {
         return getSavedGames(name);
     }
     
+    public ArrayList<ArrayList<Integer>> surrender() {
+        Board b = game.getBoard();
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>(b.size());
+       
+        for (int i = 0; i < b.size(); ++i) 
+        {
+            result.add(new ArrayList<>(b.size()));
+            
+            for (int j = 0; j < b.size(); ++j) 
+            {
+                result.get(i).add(b.getCell(i, j).getSolutionValue());
+            }
+        }
+        
+        return result;
+    }
+    
     /*
     Pre: cert
     Post: es retorna el game el qual estava jugant l'user username i la taula id

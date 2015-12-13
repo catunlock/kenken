@@ -17,4 +17,7 @@ public class InfoCell {
     public boolean borderHoritzontal = false;
     public boolean borderVertical = false;
     public boolean hinted = false;
+    public boolean showIsCorrect = false;
+    public boolean correct = false;
+    
 }

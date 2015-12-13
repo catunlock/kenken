@@ -114,6 +114,9 @@ public class PlayPanel extends javax.swing.JPanel {
         btnHint = new javax.swing.JButton();
         lblHint = new javax.swing.JLabel();
         boardPanel1 = new kenken.gui.BoardPanel();
+        btnCheck = new javax.swing.JButton();
+        btnSurrender = new javax.swing.JButton();
+        lblResult = new javax.swing.JLabel();
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnMusic.setText("MUSIC OFF");
@@ -168,6 +171,17 @@ public class PlayPanel extends javax.swing.JPanel {
             .addGap(0, 663, Short.MAX_VALUE)
         );
 
+        btnCheck.setText("CHECK");
+
+        btnSurrender.setText("SURRENDER");
+        btnSurrender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSurrenderActionPerformed(evt);
+            }
+        });
+
+        lblResult.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,11 +201,17 @@ public class PlayPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSaveGame)
                         .addGap(24, 24, 24))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(165, 165, 165)
-                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblResult)
+                    .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -210,10 +230,18 @@ public class PlayPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblResult))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSurrender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -262,14 +290,50 @@ public class PlayPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnHintActionPerformed
 
+    private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
+        // Mostrar el valor de todas las celdas, poner en rojo las que estan mal
+        // en gris las que no estaban, i en verde las que estaban bien.
+        
+        ArrayList<ArrayList<Integer>> values = mw.getGameController().surrender();
+        
+        for (int f = 0; f < values.size(); ++f) {
+            for (int c = 0; c < values.size(); ++c) {
+                
+                InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
+                int value = values.get(f).get(c);
+                
+                if (ic.value.equals("")) {
+                    ic.value = String.valueOf(value);
+                    ic.hinted = true;
+                }
+                else if (! ic.value.equals("")) {
+                    ic.showIsCorrect = true;
+                    
+                    if (Integer.parseInt(ic.value) ==  value) {
+                        ic.correct = true;
+                    }else {
+                        ic.value = String.valueOf(value);
+                        ic.correct = false;
+                    }
+                }
+                
+            }
+        }
+        
+        boardPanel1.repaint();
+    }//GEN-LAST:event_btnSurrenderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private kenken.gui.BoardPanel boardPanel1;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHint;
     private javax.swing.JButton btnMusic;
     private javax.swing.JButton btnSaveGame;
+    private javax.swing.JButton btnSurrender;
     private javax.swing.JLabel lblHint;
+    private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblTime;
     // End of variables declaration//GEN-END:variables
 }
