@@ -112,6 +112,11 @@ public class MainMenuPanel extends javax.swing.JPanel {
                 btnCreateBoardMouseClicked(evt);
             }
         });
+        btnCreateBoard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateBoardActionPerformed(evt);
+            }
+        });
 
         btnShowRanking.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnShowRanking.setText("Show Ranking");
@@ -322,6 +327,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnImportBoardActionPerformed
+
+    private void btnCreateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBoardActionPerformed
+         mw.setPanel(MainWindow.Panels.CreateBoardPanel);
+    }//GEN-LAST:event_btnCreateBoardActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
