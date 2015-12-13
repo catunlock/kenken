@@ -82,6 +82,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
     }
 
+    public InfoCell getInfoCell(Pos p) {
+        return infoCells.get(p.f).get(p.c);
+    }
+    
     private void drawColums(Graphics2D g2d) {
         int space = WIDTH / nColumns;
         for (int i = 0; i < nColumns; ++i) {
