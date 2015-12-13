@@ -166,6 +166,15 @@ public class GameController {
         game = new Game(Game.Mode.valueOf(mode), generated);
         game.setBoard(generated);
     }
+   
+    public void newCreateBoard(int size) {
+        Generator generador = new Generator();
+               
+        Board generated = new Board(size);
+        
+        game = new Game(Game.Mode.valueOf("Normal"), generated);
+        game.setBoard(generated);
+    }
     
     /*
     public Board createBoard(int size, String boardname){
