@@ -116,7 +116,7 @@ public class PlayPanel extends javax.swing.JPanel {
         boardPanel1 = new kenken.gui.BoardPanel();
         btnCheck = new javax.swing.JButton();
         btnSurrender = new javax.swing.JButton();
-        lblResult = new javax.swing.JLabel();
+        lblCheck = new javax.swing.JLabel();
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnMusic.setText("MUSIC OFF");
@@ -172,6 +172,11 @@ public class PlayPanel extends javax.swing.JPanel {
         );
 
         btnCheck.setText("CHECK");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
 
         btnSurrender.setText("SURRENDER");
         btnSurrender.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +185,7 @@ public class PlayPanel extends javax.swing.JPanel {
             }
         });
 
-        lblResult.setText("jLabel1");
+        lblCheck.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -210,7 +215,7 @@ public class PlayPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(165, 165, 165)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblResult)
+                    .addComponent(lblCheck)
                     .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -235,7 +240,7 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblResult))
+                            .addComponent(lblCheck))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +299,7 @@ public class PlayPanel extends javax.swing.JPanel {
         // Mostrar el valor de todas las celdas, poner en rojo las que estan mal
         // en gris las que no estaban, i en verde las que estaban bien.
         
-        ArrayList<ArrayList<Integer>> values = mw.getGameController().surrender();
+        ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
         
         for (int f = 0; f < values.size(); ++f) {
             for (int c = 0; c < values.size(); ++c) {
@@ -321,7 +326,36 @@ public class PlayPanel extends javax.swing.JPanel {
         }
         
         boardPanel1.repaint();
+        btnCheck.setEnabled(false);
+        btnSurrender.setEnabled(false);
+        btnHint.setEnabled(false);
     }//GEN-LAST:event_btnSurrenderActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        lblCheck.setText("Checking...");
+        
+        // Cojer i comprobar casilla a casilla si los valores que ha introducido
+        // el usuario son los que resuelven el kenken.
+        boolean wrong = false;
+        
+        ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
+        
+        for (int f = 0; f < values.size() && ! wrong; ++f) {
+            for (int c = 0; c < values.size() && ! wrong; ++c) {
+                InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
+                if (ic.value.equals("") || Integer.parseInt(ic.value) != values.get(f).get(c)) {
+                    wrong = true;
+                }
+            }
+        }
+        
+        if (wrong) {
+            lblCheck.setText("Solucion propuesta incorrecta.");
+        }
+        else {
+            lblCheck.setText("CORRECTO!");
+        }
+    }//GEN-LAST:event_btnCheckActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,8 +366,8 @@ public class PlayPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMusic;
     private javax.swing.JButton btnSaveGame;
     private javax.swing.JButton btnSurrender;
+    private javax.swing.JLabel lblCheck;
     private javax.swing.JLabel lblHint;
-    private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblTime;
     // End of variables declaration//GEN-END:variables
 }

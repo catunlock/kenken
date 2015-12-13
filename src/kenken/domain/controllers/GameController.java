@@ -203,7 +203,7 @@ public class GameController {
         return getSavedGames(name);
     }
     
-    public ArrayList<ArrayList<Integer>> surrender() {
+    public ArrayList<ArrayList<Integer>> getSolutionValues() {
         Board b = game.getBoard();
         ArrayList<ArrayList<Integer>> result = new ArrayList<>(b.size());
        

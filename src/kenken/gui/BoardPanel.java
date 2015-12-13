@@ -118,11 +118,20 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     
     private void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
     {
-        if(ic.hinted) {
+        if (ic.hinted) {
             g2d.setColor(Color.LIGHT_GRAY);
             g2d.fillRect(posX, posY, padHor-1, padVer-1);
-            g2d.setColor(Color.black);
+            
         }
+        else if (ic.showIsCorrect) {
+            if (ic.correct) {
+                g2d.setColor(Color.GREEN);        
+            }else {
+                g2d.setColor(Color.RED);
+            }
+            g2d.fillRect(posX, posY, padHor-1, padVer-1);
+        }
+        g2d.setColor(Color.black);
         
         // Operation
         g2d.setFont(fontOperation);
