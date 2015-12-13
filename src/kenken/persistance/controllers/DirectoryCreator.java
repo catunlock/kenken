@@ -12,9 +12,15 @@ import java.io.File;
  * @author GERARD
  */
 public class DirectoryCreator {
-    
+    /**
+     * The Default construcotr of DirectoryCreator
+     */
     public DirectoryCreator(){}
-    
+    /**
+     * Creates a new Directory for each new user created.
+     * @param username The name of the user to create the directory
+     * @return An Integer with the error code  0 : Directory succesfully created. -1 : The directory already exists.
+     */
     public int createUser(String username){
         File newuser = new File("Users/"+username+"/");
         File usergames = new File("Users/"+username+"/Games/");
@@ -27,7 +33,9 @@ public class DirectoryCreator {
             return 0;
         }
     }
-    
+    /**
+     * Creates the Initial Directories to save the files into the database.
+     */
     public void createInitial(){
         File dirusers = new File("Users/");
         if (dirusers.exists()){
