@@ -83,7 +83,7 @@ public class PlayPanel extends javax.swing.JPanel {
         boardPanel1 = new kenken.gui.BoardPanel();
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnMusic.setText("MUSIC ON/OFF");
+        btnMusic.setText("MUSIC OFF");
         btnMusic.setToolTipText("");
         btnMusic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +146,7 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addComponent(btnHint, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblHint)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
                         .addComponent(btnMusic)
                         .addGap(67, 67, 67)
                         .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,10 +188,12 @@ public class PlayPanel extends javax.swing.JPanel {
         if (musicOn) {
             ap.stop(audio);
             musicOn = false;
+            btnMusic.setText("MUSIC ON");
         }
         else {
             ap.start(audio);
             musicOn = true;
+            btnMusic.setText("MUSIC OFF");
         }
     }                                        
 
