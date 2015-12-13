@@ -13,11 +13,19 @@ import kenken.domain.classes.User;
  * @author GERARD
  */
 public class UserDataGetter {
-    
+    /**
+     * Getter of the username from a logged User.
+     * @param uc
+     * @return A String with the username.
+     */
     public String getUsername(UserController uc){
         return uc.getLoggedUser().getUsername();
     }
-    
+    /**
+     * Converts the userLogged to an Arraylist of Strings
+     * @param uc The UserController where we will get the loggedUser
+     * @return An ArrayList of Strings will store the info from the user.
+     */
     public ArrayList<String> toString(UserController uc){
         User user = uc.getLoggedUser();
         ArrayList<String> dades = new ArrayList<>(3);
