@@ -23,21 +23,21 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author GERARD
+ * @author Gerard Otero Martín
  */
 public class GameDBController {
     
     private static final String Extension = ".gam";
     private static String Directory = "Games/";
     
-    /*
-    Pre: cert
-    Post: s'ha guardat a la DB un game al que s'estava jugant una board amb nom
-    boardName i la qual l'estava jugant el jugador username i retorna
-    0 si s'ha guardat amb èxit
-    -1 si ja existeix
-    -2 si hi ha errors interns
-    */
+    
+    /**
+     * Saves a started Game into the database.
+     * @param game The game to be stored.
+     * @param username The username relationed to the game.
+     * @param nompartida The name of the Game to be identified.
+     * @return An Integer with the error code  0 : Saved succesfully. -1 : The game already exists. -2 : Internal error.
+     */
     public int saveGame(Game game, String username, String nompartida){
         int result;
         String filepath = getPath(nompartida, username);
@@ -52,11 +52,13 @@ public class GameDBController {
         return result;
     }
     
-    /*
-    Pre: cert
-    Post: es retorna el game el qual estava jugant l'user username i la taula
-    boardName que s'estava jugant
-    */
+    
+    /**
+     * Loads an existing game from the database.
+     * @param username The username of the relationed game.
+     * @param nompartida The name of the Game wanted to load.
+     * @return A Game Object, if it's NULL, the game couldn't be loaded.
+     */
     public Game loadGame(String username, String nompartida){
         
         FileInputStream fis;
@@ -85,6 +87,13 @@ public class GameDBController {
         }
     }
     
+    
+    /**
+     * Deletes a Game from the database.
+     * @param username The username of the game wanted to delete.
+     * @param game The game wanted to delete.
+     * @return An Integer with the error code  0 : Deleted succesfully. -1 : The game doesn't exist. -3 : Internal error.
+     */
     public int deleteGame(String username, String game){
         int result = -3;
         String filepath = "Users/"+username+"/"+Directory+game;
@@ -101,11 +110,12 @@ public class GameDBController {
         return result;
     }
     
-    /*
-    Pre: cert
-    Post: retorna un ArrayList amb els noms de totes les partides guardades de
-    l'usuari username
-    */
+   
+    /**
+     * Getter for all the name's Games.
+     * @param username The name of the User to select the games.
+     * @return An ArrayList of String with all of the games from the user.
+     */
     public ArrayList<String> getSavedGames(String username){
         ArrayList<String> results = new ArrayList<>();
         File[] files = new File("Users/"+username+"/"+Directory).listFiles();
@@ -121,22 +131,24 @@ public class GameDBController {
         }
     }
     
-    /*
-    Pre: cert
-    Post: obté el path del fitxer que es vol guardar o carregar
-    */
+    
+    /**
+     * Getter of the path where the game is.
+     * @param nompartida The name of the game.
+     * @param username The name of the User.
+     * @return A String with the pathfile.
+     */
     private String getPath(String nompartida, String username) {
         return "Users/"+username+"/"+Directory+nompartida+Extension;
     }
     
     
-    
-    /*
-    Pre: cert
-    Post: es guarda a la DB el game i retorna:
-    0 si s'ha fet amb èxit
-    -2 si hi ha errors interns
-    */
+    /**
+     * Writes the Game desired into the database.
+     * @param game The Game to write into the database.
+     * @param filepath The path where the file will go.
+     * @return An Integer with the error code  0 : Written succesfully. -2 : Internal error.
+     */
     private int writeGame(Game game, String filepath) {
         int result;
         
