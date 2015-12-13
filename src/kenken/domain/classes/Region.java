@@ -61,7 +61,7 @@ public class Region implements Serializable{
     public boolean isValid() {   
         boolean valid = false;
         
-        if (this.getCurrentSolutionResult() == this.getResult()) {
+        if (this.getCurrentUserResult() == this.getResult()) {
                 valid = true;
         }
        
@@ -98,6 +98,47 @@ public class Region implements Serializable{
                         break;
                     case Divide:
                         result = max(result,c.getSolutionValue())/ min(result,c.getSolutionValue());
+                        break;                    
+                    }
+
+                    
+                }
+            }
+        }
+        
+        return result;
+    }
+    
+    public int getCurrentUserResult() {
+        int result = 0;
+        
+        Region.OperationType op = this.getOperationType();
+        Iterator<CellKenken> it = this.getCellList().iterator();
+
+        if(it.hasNext()){
+            CellKenken c = it.next();
+            
+            if (c.getUserValue() != -1) {
+                result = c.getUserValue();
+            }
+            
+            while (it.hasNext()) {
+                c = it.next();
+                
+                if (c.getUserValue() != -1) {
+                    
+                    switch(op) {
+                    case Add:
+                        result += c.getUserValue();
+                        break;
+                    case Subtract:
+                        result = abs(result - c.getUserValue());
+                        break;
+                    case Multiply:
+                        result *= c.getUserValue();
+                        break;
+                    case Divide:
+                        result = max(result,c.getUserValue())/ min(result,c.getUserValue());
                         break;                    
                     }
 

@@ -36,7 +36,7 @@ public class BoardColorator {
         return Color.FG_DEFAULT;
     }
 
-    public static void print(Board board) {
+    public static void printSolution(Board board) {
       
         for (int f = 0; f < board.size(); ++f) {
             for (int c = 0; c < board.size(); ++c) {
@@ -45,7 +45,22 @@ public class BoardColorator {
                 Color color = colorByRegion(cell.getRegion());
                 
                 System.out.print(color + String.valueOf(cell.getSolutionValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
-                //System.out.print(color + String.valueOf(cell.getSolutionValue()) + Color.FG_DEFAULT + " ");
+                //System.out.printSolution(color + String.valueOf(cell.getSolutionValue()) + Color.FG_DEFAULT + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+    public static void printUser(Board board) {
+      
+        for (int f = 0; f < board.size(); ++f) {
+            for (int c = 0; c < board.size(); ++c) {
+                CellKenken cell = board.getCell(f, c);
+                
+                Color color = colorByRegion(cell.getRegion());
+                
+                System.out.print(color + String.valueOf(cell.getUserValue()) + "-" + String.valueOf(cell.getRegion()) + Color.FG_DEFAULT + " ");
+                //System.out.printSolution(color + String.valueOf(cell.getUserValue()) + Color.FG_DEFAULT + " ");
             }
             System.out.println();
         }

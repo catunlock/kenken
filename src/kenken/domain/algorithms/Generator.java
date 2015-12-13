@@ -62,7 +62,9 @@ public class Generator {
         RegionMaker rm = new RegionMaker();
         board.setRegions(rm.makeRegions());
         
-        BoardColorator.print(board);
+        BoardColorator.printSolution(board);
+        BoardColorator.printRegions(board);
+        
         return board;
     }
     
@@ -119,7 +121,7 @@ public class Generator {
                 if (board.getCell(p.f, p.c).getRegion() == 0 && ! empilat[p.f][p.c]) 
                 {
                     System.out.println("Start point of region: " + p);
-                    ArrayList<CellKenken> cells = makeRegion(p);
+                    ArrayList<CellKenken> cells = makeRegion(p, region);
                     
                     Region r = constructRegion(region, cells);
                     regions.add(r);
@@ -170,16 +172,21 @@ public class Generator {
         
         private Region constructRegion(int id, ArrayList<CellKenken> cells) {
             Region.OperationType op = randOperation(cells);
-            
+             
             Region result = null;
             Iterator<CellKenken> it = cells.iterator();
             
             if(it.hasNext()){
-                int resultValue = it.next().getSolutionValue();
+                Cell c = it.next();
+                int resultValue = c.getSolutionValue();
+                
+                if (op == Region.OperationType.None) {
+                    c.setUserValue(c.getSolutionValue());
+                }
                 
                 while (it.hasNext()) {
-                    Cell c = it.next();
-
+                    c = it.next();
+                    
                     switch(op) {
                         case Add:
                             resultValue += c.getSolutionValue();
@@ -218,7 +225,7 @@ public class Generator {
             return (int) max(1, min(r, board.size() - 1) );
         }
         
-        private ArrayList<CellKenken> makeRegion(Pos pos) {
+        private ArrayList<CellKenken> makeRegion(Pos pos, int region) {
             
             int regionSize = randRegionSize();
             int actualSize = 1;
@@ -231,6 +238,7 @@ public class Generator {
             while(! s.isEmpty()) {
                 Pos p = s.pop();
                 
+                setCellRegion(p, region);
                 cells.add(board.getCell(p.f, p.c));
                 
                 System.out.print(p + ", ");
@@ -314,14 +322,14 @@ public class Generator {
     public static void main(String[] args) {
         Generator g = new Generator();
         
-        float pfRegionSize = 2f;
+        float pfRegionSize = 1f;
         float pfOperation = 2f;
         long seed = 162;
         
-        Board b = g.generate(4, pfRegionSize, pfOperation, System.nanoTime());
-        BoardColorator.print(b);
+        Board b = g.generate(4, pfRegionSize, pfOperation, 1);
+        BoardColorator.printSolution(b);
         
-        //BoardColorator.printRegions(b);
+        BoardColorator.printRegions(b);
     }
     
 }

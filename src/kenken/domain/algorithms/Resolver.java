@@ -101,7 +101,7 @@ public class Resolver {
 		if (b.size() > 0) {
 	            for (int i = 0; i < b.size(); ++i) {
 	                for (int j = 0; j < b.size(); ++j) {
-	                    System.out.print(b.getCell(i, j).getSolutionValue() + " ");
+	                    System.out.print(b.getCell(i, j).getUserValue() + " ");
 	                }
 	                System.out.println();
 	            }
@@ -111,7 +111,7 @@ public class Resolver {
     private boolean checkNotPass(int nRegion, int newValue) {
         Region r = board.getRegions().get(nRegion-1);
         
-        int value = r.getCurrentSolutionResult();
+        int value = r.getCurrentUserResult();
         try {
             switch(r.getOperationType()) {
                 case Add:
@@ -158,11 +158,12 @@ public class Resolver {
         if (! trobat) {
             if (i >= cellsByRegion.size()) { 
                 if (board.isResolved()) {
-                    BoardColorator.print(board);
+                    BoardColorator.printUser(board);
                     System.out.println();
                     trobat = true;
                 }
                 System.out.println("Intento realizado.");
+                //BoardColorator.printSolution(board);
                 //escriure(board);
             }
             else if (untouchables.isUntouchable(cellsByRegion.get(i).getPosX(),
@@ -183,7 +184,7 @@ public class Resolver {
                     {    
                         Region r = board.getRegions().get(ck.getRegion()-1);
 
-                        ck.setSolutionValue(j+1);
+                        ck.setUserValue(j+1);
 
                         usedValues.set(f, c, j);
                         backtrack(i+1);
@@ -210,7 +211,7 @@ public class Resolver {
             if (r.getOperationType() == Region.OperationType.None) {
                 CellKenken c = r.getCellList().get(0);
                 untouchables.set(c.getPosX(),c.getPosY());
-                usedValues.set(c.getPosX(), c.getPosY(), c.getSolutionValue()-1);
+                usedValues.set(c.getPosX(), c.getPosY(), c.getUserValue()-1);
             }
         }
         
@@ -220,13 +221,10 @@ public class Resolver {
         
         return result;
     }
-    
-    
+
+     /*
     public static void main(String[] args) throws FileNotFoundException {
-        /*File file = new File("output2.log"); 
-        PrintStream printStream = new PrintStream(new FileOutputStream(file)); 
-        System.setOut(printStream);*/
-        /*
+        
         Board b = new Board(4);
         
         ArrayList<CellKenken> aCells = new ArrayList<>(3);
@@ -276,6 +274,7 @@ public class Resolver {
         
         ArrayList<CellKenken> gCells = new ArrayList<>(1);
         CellKenken gCell1 = b.getCell(3,2);
+        gCell1.setUserValue(3);
         gCell1.setSolutionValue(3);
         gCells.add(gCell1);
         Region rg = new Region(7,gCells, Region.OperationType.None, 3, false);
@@ -289,8 +288,8 @@ public class Resolver {
         regions.add(rf);
         regions.add(rg);
         
-        */
-Board b = new Board(7);
+        /*
+        Board b = new Board(7);
        
         ArrayList<CellKenken> aCells = new ArrayList<>(2);
        
@@ -369,7 +368,7 @@ Board b = new Board(7);
         ArrayList<CellKenken> kCells = new ArrayList<>(1);
        
         CellKenken kCell1 = b.getCell(3,0);
-        kCell1.setSolutionValue(4);
+        kCell1.setUserValue(4);
         kCells.add(kCell1);
        
         Region rk = new Region(11,kCells, Region.OperationType.None, 4, false);
@@ -476,24 +475,34 @@ Board b = new Board(7);
         regions.add(rt);
         regions.add(ru);
         regions.add(rv);
-
+        
         
         b.setRegions(regions);
         
-        BoardColorator.print(b);
+        BoardColorator.printSolution(b);
         BoardColorator.printRegions(b);
-        
-        b.setBoardName("Gerard 7x7");
-        b.setUsername("Gerard");
-        BoardDBController bdbc = new BoardDBController();
-        bdbc.createBoard(b);
-        
+
         Resolver r = new Resolver();
         if (r.resolve(b)) {
             System.out.println("The solution is: ");
-            BoardColorator.print(b);
+            BoardColorator.printSolution(b);
         }else {
             
         }
     }
+    */
+    
+      
+    public static void main(String[] args) {
+        Generator g = new Generator();
+        Board bGen = g.generate(7, 1.0f, 1.0f, System.nanoTime());
+        
+        
+        Resolver r = new Resolver();
+        if (r.resolve(bGen)) {
+            System.out.println("The solution is: ");
+            BoardColorator.printSolution(bGen);
+        }
+    }
+    
 }
