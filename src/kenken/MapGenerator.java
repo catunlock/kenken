@@ -3,228 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken.domain.algorithms;
+package kenken;
 
-import kenken.domain.classes.Pos;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import kenken.color.BoardColorator;
+import kenken.domain.algorithms.Resolver;
+import kenken.domain.classes.Board;
 import kenken.domain.classes.CellKenken;
 import kenken.domain.classes.Region;
-import kenken.domain.classes.Board;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import static java.lang.Integer.min;
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
-import java.util.ArrayList;
-import java.util.Iterator;
-import kenken.color.BoardColorator;
 import kenken.persistance.controllers.BoardDBController;
 
 /**
  *
  * @author SuNLoCK
  */
-public class Resolver {
-
-    private class UsedValues {
-        private ArrayList<ArrayList<Boolean>> numerosFila;
-        private ArrayList<ArrayList<Boolean>> numerosColumna;
-        
-        public UsedValues() {
-            numerosFila = new ArrayList<>();
-            numerosColumna = new ArrayList<>();
-            
-            for (int i = 0; i < board.size(); ++i) {
-                numerosFila.add(new ArrayList<>());
-                numerosColumna.add(new ArrayList<>());
-           
-                for (int j = 0; j < board.size(); ++j) {
-                    numerosFila.get(i).add(false);
-                    numerosColumna.get(i).add(false);
-            
-                }
-            }
-        }
+public class MapGenerator {
     
-        public void set(int f, int c, int number) {
-            numerosFila.get(f).set(number, true);
-            numerosColumna.get(c).set(number, true);
-        }
-        
-        public void unset(int f, int c, int number) {
-            numerosFila.get(f).set(number, false);
-            numerosColumna.get(c).set(number, false);
-        }
-        
-        public boolean isNotUsed(int f, int c, int number) {
-            return ! numerosFila.get(f).get(number) && ! numerosColumna.get(c).get(number);
-        }
-    }
-    
-    private class Untouchables {
-        private ArrayList<ArrayList<Boolean>> untouchables;
-        
-        public Untouchables() {
-            untouchables = new ArrayList<>();
-        
-            for (int i = 0; i < board.size(); ++i) {
-                untouchables.add(new ArrayList<>());
-
-                for (int j = 0; j < board.size(); ++j) {
-                    untouchables.get(i).add(false);
-                }
-            }
-        }
-        
-        public void set(int f, int c) {
-            untouchables.get(f).set(c, true);
-        }
-        
-        public void unset(int f, int c) {
-            untouchables.get(f).set(c, false);
-        }
-        
-        public boolean isUntouchable(int f, int c) {
-            return untouchables.get(f).get(c);
-        }
-        
-    }
-    
-    private Untouchables untouchables;
-    private UsedValues usedValues;
-    private Board board = null;
-    private ArrayList<CellKenken> cellsByRegion;
-    private boolean trobat = false;
-    
-    public void escriure(Board b) {
-		if (b.size() > 0) {
-	            for (int i = 0; i < b.size(); ++i) {
-	                for (int j = 0; j < b.size(); ++j) {
-	                    System.out.print(b.getCell(i, j).getUserValue() + " ");
-	                }
-	                System.out.println();
-	            }
-		}
-    }
-    
-    private boolean checkNotPass(int nRegion, int newValue) {
-        Region r = board.getRegions().get(nRegion-1);
-        
-        int value = r.getCurrentUserResult();
-        try {
-            switch(r.getOperationType()) {
-                case Add:
-                    value += newValue;
-                    break;
-                case Subtract:
-                    value = abs(value - newValue);
-                    break;
-                case Multiply:
-                    value *= newValue;
-                    break;
-                case Divide:
-                    value = max(value, newValue)/ min(value, newValue);
-                    break;                    
-                case None:
-                    break;
-                default:
-                    throw new AssertionError(r.getOperationType().name());
-            }
-        }catch (ArithmeticException e) {
-            
-        }
-        
-        System.out.println(value + "<=" + r.getResult());
-        return value <= r.getResult();
-    }
-    
-    private boolean isMultiple(int region, int newValue) {
-        Region r = board.getRegions().get(region);
-        
-        if (r.getOperationType() == Region.OperationType.Multiply && newValue != 1) {
-            return board.getRegions().get(region).getResult() % newValue == 0;
-        }
-        
-        if (r.getOperationType() == Region.OperationType.Divide && newValue != 1) {
-            return newValue % board.getRegions().get(region).getResult() == 0;
-        }
-        
-        return true;
-    }
-    
-    public void backtrack(int i) {
-        
-        if (! trobat) {
-            if (i >= cellsByRegion.size()) { 
-                if (board.isResolved()) {
-                    BoardColorator.printUser(board);
-                    System.out.println();
-                    trobat = true;
-                }
-                System.out.println("Intento realizado.");
-                //BoardColorator.printSolution(board);
-                //escriure(board);
-            }
-            else if (untouchables.isUntouchable(cellsByRegion.get(i).getPosX(),
-                    cellsByRegion.get(i).getPosY())) {
-                backtrack(i+1);
-            }
-            else {
-                CellKenken ck = cellsByRegion.get(i);
-
-                int f = ck.getPosX();
-                int c = ck.getPosY();
-
-                for (int j = 0; j < board.size(); ++j) {
-                    boolean condA = usedValues.isNotUsed(f, c, j);
-                    boolean condB = isMultiple(ck.getRegion()-1, j+1);
-
-                    if (condA && condB) 
-                    {    
-                        Region r = board.getRegions().get(ck.getRegion()-1);
-
-                        ck.setUserValue(j+1);
-
-                        usedValues.set(f, c, j);
-                        backtrack(i+1);
-                        usedValues.unset(f, c, j);
-                    }
-                }
-            }
-        }
-        
-    }
-
-    
-
-    
-    public boolean resolve(Board b) {
-        boolean result = false;
-        
-        board = b;
-        usedValues = new UsedValues();
-        untouchables = new Untouchables();
-        trobat = false;
-
-        for (Region r : b.getRegions()) {
-            if (r.getOperationType() == Region.OperationType.None) {
-                CellKenken c = r.getCellList().get(0);
-                untouchables.set(c.getPosX(),c.getPosY());
-                usedValues.set(c.getPosX(), c.getPosY(), c.getUserValue()-1);
-            }
-        }
-        
-        cellsByRegion = b.getAllCellsOrderedByRegion();
-        
-        backtrack(0);
-        
-        return result;
-    }
-
-     /*
-    public static void main(String[] args) throws FileNotFoundException {
-        
+    public Board original4() {
         Board b = new Board(4);
         
         ArrayList<CellKenken> aCells = new ArrayList<>(3);
@@ -288,7 +84,19 @@ public class Resolver {
         regions.add(rf);
         regions.add(rg);
         
-        /*
+        b.setRegions(regions);
+        b.setBoardName("Original 4x4");
+        b.setUsername("SuNLoCK");
+        
+
+        
+        BoardColorator.printSolution(b);
+        BoardColorator.printRegions(b);
+
+        return b;
+    }
+    
+    public Board original7() {
         Board b = new Board(7);
        
         ArrayList<CellKenken> aCells = new ArrayList<>(2);
@@ -479,30 +287,23 @@ public class Resolver {
         
         b.setRegions(regions);
         
+        b.setBoardName("Gerard 7x7");
+        b.setUsername("Gerard");
+                
         BoardColorator.printSolution(b);
         BoardColorator.printRegions(b);
 
-        Resolver r = new Resolver();
-        if (r.resolve(b)) {
-            System.out.println("The solution is: ");
-            BoardColorator.printSolution(b);
-        }else {
-            
-        }
+        return b;
     }
-    */
-    
-      
-    public static void main(String[] args) {
-        Generator g = new Generator();
-        Board bGen = g.generate(6, 1.0f, 1.0f, System.nanoTime());
+
+    public static void main(String[] args) throws FileNotFoundException {
+        MapGenerator mg = new MapGenerator();
+        mg.original4();
+        mg.original7();
         
-        
-        Resolver r = new Resolver();
-        if (r.resolve(bGen)) {
-            System.out.println("The solution is: ");
-            BoardColorator.printSolution(bGen);
-        }
+        BoardDBController bdbc = new BoardDBController();
+        bdbc.createBoard(mg.original4());
+        bdbc.createBoard(mg.original7());
     }
     
 }

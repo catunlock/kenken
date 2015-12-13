@@ -119,12 +119,12 @@ public class KenKen {
                                 System.out.println("1. Normal");
                                 System.out.println("2. TimeAttack");
                                 if (sc.nextInt() == 1) {
-                                    Game g = new Game("Normal");
-                                    g.setBoard(b);
+                                    //Game g = new Game("Normal");
+                                    //g.setBoard(b);
                                 }
                                 else{
-                                    Game g = new Game("TimeAttack");
-                                    g.setBoard(b);
+                                    //Game g = new Game("TimeAttack");
+                                    //g.setBoard(b);
                                 }
                                 error = 0;
                             }
@@ -199,12 +199,12 @@ public class KenKen {
                                     System.out.println("1. Normal");
                                     System.out.println("2. TimeAttack");
                                     if (sc.nextInt() == 1) {
-                                        Game g = new Game("Normal");
-                                        g.setBoard(b);
+                                        //Game g = new Game("Normal");
+                                        //g.setBoard(b);
                                     }
                                     else{
-                                        Game g = new Game("TimeAttack");
-                                        g.setBoard(b);
+                                        //Game g = new Game("TimeAttack");
+                                        //g.setBoard(b);
                                     }
                                     error = 0;
                                 }
@@ -218,12 +218,12 @@ public class KenKen {
                                 System.out.println("1. Normal");
                                 System.out.println("2. TimeAttack");
                                 if (sc.nextInt() == 1) {
-                                    Game g = new Game("Normal");
-                                    g.setBoard(genb);
+                                    //Game g = new Game("Normal");
+                                    //g.setBoard(genb);
                                 }
                                 else{
-                                    Game g = new Game("TimeAttack");
-                                    g.setBoard(genb);
+                                    //Game g = new Game("TimeAttack");
+                                    //g.setBoard(genb);
                                 }
                                 error = 0;
                             }
