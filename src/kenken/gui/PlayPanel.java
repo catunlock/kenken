@@ -7,6 +7,8 @@ package kenken.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class PlayPanel extends javax.swing.JPanel {
         this.mw = mw;     
         timer = new Timer(1000,updateClockAction);
         timer.setRepeats(true);
+        
     }
 
     public void initTime(){
@@ -254,4 +257,6 @@ public class PlayPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblHint;
     private javax.swing.JLabel lblTime;
     // End of variables declaration//GEN-END:variables
+
+
 }

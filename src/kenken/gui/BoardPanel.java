@@ -12,16 +12,21 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import kenken.domain.classes.Pos;
 
 /**
  *
  * @author alberto.lopez.sanchez
  */
-public class BoardPanel extends JPanel implements ActionListener{
+public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     
     private final int WIDTH = 663;
     private final int HEIGHT = 663;
@@ -38,10 +43,16 @@ public class BoardPanel extends JPanel implements ActionListener{
    
     private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
+    private Pos selectedCell = new Pos(-1, -1);
+    
     public BoardPanel() 
     {
         padHor = WIDTH / nColumns;
         padVer = HEIGHT / nColumns;
+
+        this.setFocusable(true);
+        this.addMouseListener(this);
+        this.addKeyListener(this);
         
         setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
         
@@ -196,11 +207,16 @@ public class BoardPanel extends JPanel implements ActionListener{
         	g2d.drawRect(0 + i , 0 + i, WIDTH - i*2, HEIGHT-1 - i*2);
         }
         
+        // Rows and columns
         g2d.setPaint(Color.black);
         drawColums(g2d);
         drawRows(g2d);
         
+        // Cells
         drawCells(g2d);
+        
+        // Selected Cell
+        drawSelectedCell(g2d);
     }
 
     @Override
@@ -210,10 +226,88 @@ public class BoardPanel extends JPanel implements ActionListener{
         doDrawing(g);
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        selectedCell.c = e.getX() / padHor;
+        selectedCell.f = e.getY() / padVer;
+        
+        System.out.println("Clicked at cell: " + selectedCell.f + " " + selectedCell.c);
+        
+        System.out.println("FOCUSABLE: " + isFocusable());
+        this.requestFocusInWindow();
+        System.out.println("FOCUSABLE: " + isFocusable());
+        
+        
+        repaint();
+    }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
+    public void mousePressed(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void drawSelectedCell(Graphics2D g2d) {
+        
+        if (selectedCell.f != -1 && selectedCell.c != -1) {
+            int x = selectedCell.c*padHor;
+            int y = selectedCell.f*padVer;
+
+            g2d.setPaint(Color.blue);
+            g2d.fillRect(x, y, padHor, padVer);
+
+            g2d.setPaint(Color.white);
+            InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
+            drawCell(g2d, ic, x, y);
+
+            g2d.setPaint(Color.black);
+        }
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("KEYTYPED: " + e.getKeyChar());
+        if (selectedCell.f != -1 && selectedCell.c != -1) {
+            try {
+                int value = Integer.parseInt(String.valueOf(e.getKeyChar()));
+                InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
+
+                ic.value = String.valueOf(value);
+
+                selectedCell.f = -1;
+                selectedCell.c = -1;
+
+                repaint();
+            } catch (java.lang.NumberFormatException ex) {
+                // Si peta es que el usuario no ha introducido un numero.
+            }
+        }
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //System.out.println("KEYPRESED: " + e.getKeyChar());
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
