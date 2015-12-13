@@ -117,15 +117,12 @@ public class CreateBoardPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         
+        String mode = "Normal";        
         int size = Integer.parseInt((String) cmbSize.getSelectedItem());
         mw.getGameController().newGameGenerateBoard("Hard", size, 1, 1, 1);
         
-        PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
-        pp.initBoard(mw.getGameController().getInfoBoard());
-        
-        
-        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
-        mw.setPanel(MainWindow.Panels.PlayPanel);
+        CreatePanel cp = (CreatePanel) mw.getPanel(MainWindow.Panels.CreatePanel);
+        cp.initBoard(mw.getGameController().getInfoBoard());
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

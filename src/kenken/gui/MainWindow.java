@@ -92,7 +92,8 @@ public class MainWindow {
         LoginPanel,
         OptionsPanel,
         ChooseRankingPanel,
-        DeleteBoardPanel;
+        DeleteBoardPanel,
+        CreatePanel;
         
         public static String[] getStrings() {
             int length = Panels.values().length;
@@ -131,7 +132,7 @@ public class MainWindow {
         panels.put("OptionsPanel", new OptionsPanel(this));
         panels.put("ChooseRankingPanel", new ChooseRankingPanel(this));
         panels.put("DeleteBoardPanel", new DeleteBoardPanel(this));
-        
+        panels.put("CreatePanel", new CreatePanel(this));
     }
     
     private void addPanelsToCardPanel() {
