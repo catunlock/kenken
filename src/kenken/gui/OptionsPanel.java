@@ -16,7 +16,6 @@ import kenken.domain.controllers.*;
 public class OptionsPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    private UserController uc;
     /**
      * Creates new form OptionsPanel
      * @param mw
@@ -28,6 +27,10 @@ public class OptionsPanel extends javax.swing.JPanel {
         txtPassword.setText("");
     }
 
+    public void clearTxr(){
+        txtPassword.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +108,7 @@ public class OptionsPanel extends javax.swing.JPanel {
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             String pass = Arrays.toString(txtPassword.getPassword());
-            int error = uc.deleteUser(pass);
+            int error = mw.getUserController().deleteUser(pass);
             if (error == 0) {
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
                 mw.setPanel(MainWindow.Panels.LoginPanel);
