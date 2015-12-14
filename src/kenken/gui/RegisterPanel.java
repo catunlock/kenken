@@ -31,6 +31,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         txtVerifyPassword.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
+        txtVerifyPassword.setBackground(Color.WHITE);
     }
     
     /**
