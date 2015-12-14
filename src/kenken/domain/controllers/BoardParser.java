@@ -24,6 +24,10 @@ public class BoardParser {
             this.board = board;
         }
         
+        public BoardParser(){
+            
+        }
+        
         private void initMatrix() {
             int size = board.size();
             infoCells = new ArrayList<>(size);

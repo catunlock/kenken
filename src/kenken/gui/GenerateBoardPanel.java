@@ -254,7 +254,7 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
         pp.clearPanel();
         pp.initBoard(mw.getGameController().getInfoBoard());
-                
+        pp.setNotLoaded();
         mw.setPanel(MainWindow.Panels.PlayPanel);
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnPlayActionPerformed

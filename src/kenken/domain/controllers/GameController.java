@@ -70,6 +70,10 @@ public class GameController {
         return game.getHints();
     }
     
+    public void resetHints(){
+        game.setHints(3);
+    }
+    
     public void newGame(String boardName, String mode) {
         
         Board board = boardController.loadBoard(boardName);
@@ -79,6 +83,7 @@ public class GameController {
     }
     
     public ArrayList<ArrayList<InfoCell>> getInfoBoard() {
+        boardParser = new BoardParser(this.game.getBoard());
         return boardParser.getInfoBoard();
     }
     
