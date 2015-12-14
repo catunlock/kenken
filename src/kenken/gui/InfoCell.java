@@ -14,13 +14,12 @@ public class InfoCell {
     public String operation = "";
     public String result = "";
     public String value = "";
+    public int region = -1;
     public boolean borderHoritzontal = false;
     public boolean borderVertical = false;
     public boolean hinted = false;
     public boolean showIsCorrect = false;
     public boolean correct = false;
 
-    String getValue() {
-        return value;
-    }
+    
 }

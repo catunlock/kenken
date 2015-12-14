@@ -72,7 +72,7 @@ public class GameControllerDriver {
                     userName = sc.next();
                     System.out.println("Introdueix nom de partida:");
                     gameName = sc.next();
-                    load = test.loadGame(userName, gameName);
+                    //load = test.loadGame(userName, gameName);
                     if (load == null) System.out.println("No existeix aquesta partida.");
                     else System.out.println("Partida "+gameName+" recuperada amb èxit.");
             }

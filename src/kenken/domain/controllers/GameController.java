@@ -32,8 +32,10 @@ public class GameController {
         int i = 0, j = 0;
         for (int x = 2; x < data.size(); ++x){
             int valor;
+            
             if ("".equals(data.get(x))) valor = 0;
             else valor = Integer.parseInt(data.get(x));
+            
             b.getCell(i, j).setUserValue(valor);
             ++j;
             if (j == b.size()){
@@ -63,19 +65,19 @@ public class GameController {
         
         private ArrayList<ArrayList<InfoCell>> initMatrix() {
             int nColumns = game.getBoard().size();
-            ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(nColumns);
+            ArrayList<ArrayList<InfoCell>> matrix = new ArrayList<>(nColumns);
 
             for (int i = 0; i < nColumns; ++i) 
             {
-                infoCells.add(new ArrayList<>(nColumns));
+                matrix.add(new ArrayList<>(nColumns));
 
                 for (int j = 0; j < nColumns; ++j) 
                 {
                     InfoCell ic = new InfoCell();       
-                    infoCells.get(i).add(ic);
+                    matrix.get(i).add(ic);
                 }
             }
-            return infoCells;
+            return matrix;
         }
         
         private void detectVerticalLimits() {

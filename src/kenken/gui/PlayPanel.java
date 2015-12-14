@@ -52,6 +52,8 @@ public class PlayPanel extends javax.swing.JPanel {
         btnCheck.setEnabled(true);
         btnSurrender.setEnabled(true);
         boardPanel1.setSelectedCell(new Pos(-1,-1));
+        
+        boardPanel1.setShowRegionNumber(true);
     }
     
     public void initTime(){
@@ -316,7 +318,7 @@ public class PlayPanel extends javax.swing.JPanel {
         for (int i = 0; i < tamany; ++i){
             for (int j = 0; j < tamany; ++j){
                 Pos p = new Pos(i,j);
-                data.add(boardPanel1.getInfoCell(p).getValue());
+                data.add(boardPanel1.getInfoCell(p).value);
             }
         }
         int error = mw.getGameController().updateAndSave(data, username, nompartida);

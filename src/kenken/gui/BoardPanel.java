@@ -40,7 +40,8 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     private int padHor;
     private int padVer;
     private float fontScale = 1.0f;
-   
+    private boolean showRegionNumber = false;
+
     private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
     private Pos selectedCell = new Pos(-1, -1);
@@ -70,20 +71,16 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
             }
         }
         
-        this.setOperation(1, 1, "", "3");
-        this.setHoritzontalBorder(1, 1, true);
-        this.setVerticalBorder(1, 1, true);
-        this.setValue(1, 1, "3");
-        
-        this.setOperation(3, 3, "", "3");
-        this.setHoritzontalBorder(3, 3, true);
-        this.setVerticalBorder(3, 3, true);
-        this.setValue(3, 3, "3");
+     
         
     }
 
     public InfoCell getInfoCell(Pos p) {
         return infoCells.get(p.f).get(p.c);
+    }
+    
+    public void setShowRegionNumber(boolean showRegionNumber) {
+        this.showRegionNumber = showRegionNumber;
     }
     
     private void drawColums(Graphics2D g2d) {
@@ -148,6 +145,17 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     	int posValueY = posY + (HEIGHT/nColumns/2) + FONT_SIZE_VALUE/3;
     	int posValueX = posX + (WIDTH/nColumns/3);
     	g2d.drawString(ic.value, posValueX, posValueY);
+        
+        if (showRegionNumber) {
+            g2d.setColor(Color.MAGENTA);
+            
+            g2d.setFont(fontOperation);
+            int posRegionY = (int) (posY + (FONT_SIZE_OPERATION - nColumns/1.5));
+            int posRegionX = (int) (posX + padHor - (FONT_SIZE_OPERATION*1.2));
+            g2d.drawString(String.valueOf(ic.region), posRegionX, posRegionY);
+            
+            g2d.setColor(Color.black);
+        }
         
     }
     

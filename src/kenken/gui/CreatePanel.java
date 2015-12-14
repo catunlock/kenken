@@ -35,8 +35,18 @@ public class CreatePanel extends javax.swing.JPanel {
         this.mw = mw;            
     }
     
-    public void initBoard(ArrayList<ArrayList<InfoCell>> matrix) {
-        boardPanel1.setInfoCells(matrix);
+    public void initBoard(int size) {
+        ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(size);
+        
+        for (int i = 0; i < size; ++i) 
+        {
+            infoCells.add(new ArrayList<>(size));
+            for (int j = 0; j < size; ++j) 
+            {
+                infoCells.get(i).add(new InfoCell());
+            }
+        }
+        boardPanel1.setInfoCells(infoCells);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +68,8 @@ public class CreatePanel extends javax.swing.JPanel {
         btnExit = new javax.swing.JButton();
         btnSaveBoard = new javax.swing.JButton();
         boardPanel1 = new kenken.gui.BoardPanel();
+        jButton1 = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
 
         btnExit.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnExit.setText("EXIT");
@@ -88,6 +100,9 @@ public class CreatePanel extends javax.swing.JPanel {
             .addGap(0, 663, Short.MAX_VALUE)
         );
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Make Region");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,16 +114,27 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addComponent(btnSaveBoard)
                 .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 172, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addContainerGap()
                 .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSaveBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,5 +158,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private kenken.gui.BoardPanel boardPanel1;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSaveBoard;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }

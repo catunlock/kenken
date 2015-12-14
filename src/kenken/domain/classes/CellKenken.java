@@ -13,6 +13,7 @@ public class CellKenken extends Cell{
     
     private int region = 0;
     private boolean visible = false;
+    private boolean hinted = false;
 
     public void setVisible(boolean visible) {
         this.visible = visible;

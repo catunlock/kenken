@@ -134,12 +134,14 @@ public class KenKen {
                             System.out.println(gc.getSavedGames(uc.getLoggedUser().getUsername()));
                             System.out.print("Nom de la partida que vols carregar:");
                             nom = sc.next();
+                            /*
                             Game g = gc.loadGame(uc.getLoggedUser().getUsername(), nom);
                             if (g == null) {
                                 System.out.println("No existeix aquesta partida");
                                 error = -1;
                             }
                             else  error = 0;
+                            */
                             break;
                         case 3:
                             System.out.print("Introdueix grandaria de la board que vols generar: ");
