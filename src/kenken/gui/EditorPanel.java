@@ -59,14 +59,17 @@ public class EditorPanel extends BoardPanel{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int f = e.getY() / padVer;
-        int c = e.getX() / padHor;
+        if (editRegionMode) {
+            int f = e.getY() / padVer;
+            int c = e.getX() / padHor;
+
+            InfoCell ic = infoCells.get(f).get(c);
+            ic.region = editRegionNumber;
+            ic.operation = editRegionOperation;
+
+            repaint();
+        }
         
-        InfoCell ic = infoCells.get(f).get(c);
-        ic.region = editRegionNumber;
-        ic.operation = editRegionOperation;
-        
-        repaint();
     }
     
     
