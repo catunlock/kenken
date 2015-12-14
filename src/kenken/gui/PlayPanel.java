@@ -109,6 +109,7 @@ public class PlayPanel extends javax.swing.JPanel {
                 if (value != 0) {
                     boardPanel1.setValue(i, j, String.valueOf(value));
                 }
+                else boardPanel1.setValue(i, j, "");
                 ++x;
             }
         }
