@@ -41,6 +41,23 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     private int padVer;
     private float fontScale = 1.0f;
     private boolean showRegionNumber = false;
+    private boolean editRegionMode = false;
+    private int editRegionNumber = -1;
+    private String editRegionOperation = "";
+
+    public void setEditRegionOperation(String editRegionOperation) {
+        this.editRegionOperation = editRegionOperation;
+    }
+    
+    public void setEditRegionMode(boolean editRegionMode) {
+        this.editRegionMode = editRegionMode;
+    }
+
+    public void setEditRegionNumber(int editRegionNumber) {
+        this.editRegionNumber = editRegionNumber;
+    }
+    
+    
 
     private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
@@ -292,16 +309,22 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         int c = e.getX() / padHor;
         
         if (! infoCells.get(f).get(c).hinted ) {
-            selectedCell.c = c;
-            selectedCell.f = f;
-
             System.out.println("Clicked at cell: " + selectedCell.f + " " + selectedCell.c);
+            if(editRegionMode) {
+                InfoCell ic = infoCells.get(f).get(c);
+                ic.region = editRegionNumber;
+                ic.operation = editRegionOperation;
+            } else{
+                selectedCell.c = c;
+                selectedCell.f = f;
 
-            System.out.println("FOCUSABLE: " + isFocusable());
-            this.requestFocusInWindow();
-            System.out.println("FOCUSABLE: " + isFocusable());
 
 
+                System.out.println("FOCUSABLE: " + isFocusable());
+                this.requestFocusInWindow();
+                System.out.println("FOCUSABLE: " + isFocusable());
+            }
+            
             repaint();
         }
     }
@@ -342,6 +365,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
 
                     repaint();
                 }
+                
                 
             } catch (java.lang.NumberFormatException ex) {
                 // Si peta es que el usuario no ha introducido un numero.

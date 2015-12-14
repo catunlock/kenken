@@ -15,6 +15,14 @@ public class CellKenken extends Cell{
     private boolean visible = false;
     private boolean hinted = false;
 
+    public boolean isHinted() {
+        return hinted;
+    }
+
+    public void setHinted(boolean hinted) {
+        this.hinted = hinted;
+    }
+
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
