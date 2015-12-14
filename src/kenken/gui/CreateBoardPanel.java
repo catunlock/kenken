@@ -126,7 +126,7 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        mw.setPanel(MainWindow.Panels.NewGamePanel);
+        mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
 

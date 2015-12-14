@@ -195,7 +195,7 @@ public class CreatePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit? All changes in board will be not saved.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
         }
