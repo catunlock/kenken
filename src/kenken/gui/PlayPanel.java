@@ -412,9 +412,11 @@ public class PlayPanel extends javax.swing.JPanel {
             }
         }
         
+        
         if (wrong){
-            wrong = mw.getGameController().resolve(mw.getGameController().getInfoBoard());
+            wrong = mw.getGameController().resolve(boardPanel1.getInfoCells());
         }
+
         
         if (wrong) {
             lblCheck.setText("Solucion propuesta incorrecta.");

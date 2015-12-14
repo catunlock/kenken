@@ -45,6 +45,7 @@ public class BoardParser {
                     CellKenken ck = board.getCell(i, j);
                     InfoCell ic = new InfoCell();       
                     ic.hinted = ck.isHinted();
+                    ic.region = ck.getRegion();
                     
                     if (ck.getUserValue() != -1 ) {
                         ic.value = String.valueOf(ck.getUserValue());
@@ -137,7 +138,7 @@ public class BoardParser {
 
         }
         
-         public Board parseInfoCell(){
+        public Board parseInfoCell(){
             ArrayList<Region> regions = new ArrayList<>();
             Board b = new Board(infoCells.size());
             int size = infoCells.size();

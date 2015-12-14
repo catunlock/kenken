@@ -74,6 +74,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
     }
 
+    public ArrayList<ArrayList<InfoCell>> getInfoCells() {
+        return infoCells;
+    }
+    
     public InfoCell getInfoCell(Pos p) {
         return infoCells.get(p.f).get(p.c);
     }
