@@ -11,6 +11,7 @@ import kenken.domain.classes.Board;
 import kenken.domain.classes.Game;
 import kenken.persistance.controllers.GameDBController;
 import kenken.domain.algorithms.Generator;
+import kenken.domain.algorithms.Resolver;
 import kenken.domain.classes.CellKenken;
 import kenken.domain.classes.Pos;
 import kenken.domain.classes.Region;
@@ -168,5 +169,12 @@ public class GameController {
         }
         return data;
     }
+    
+     public boolean resolve(ArrayList<ArrayList<InfoCell>> bC){
+        Resolver resolver = new Resolver();
+        BoardParser bP = new BoardParser(bC);
+        Board b = bP.parseInfoCell();        
+        return resolver.resolve(b);
+     }
     
 }
