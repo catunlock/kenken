@@ -222,7 +222,6 @@ public class Resolver {
 
     
     public boolean resolve(Board b) {
-        boolean result = false;
         
         board = b;
         usedValues = new UsedValues();
@@ -269,16 +268,16 @@ public class Resolver {
                     CellKenken c = r.getCellList().get(0);
                     int x = c.getPosX();
                     int y = c.getPosY();
-                    int solutionValue = c.getSolutionValue();
+                    int userValue = c.getUserValue();
                     
-                    usedValues.set(x, y, solutionValue-1);
-                    possibleValues.get(getCellID(c)).add(c.getSolutionValue());
+                    usedValues.set(x, y, userValue-1);
+                    possibleValues.get(getCellID(c)).add(c.getUserValue());
                     
                     for (int i = 0; i < board.size(); ++i) {
                         CellKenken cFila = board.getCell(x, i);
                         CellKenken cColumna = board.getCell(i, y);
-                        possibleValues.get(getCellID(cFila)).remove(solutionValue);
-                        possibleValues.get(getCellID(cColumna)).remove(solutionValue);
+                        possibleValues.get(getCellID(cFila)).remove(userValue);
+                        possibleValues.get(getCellID(cColumna)).remove(userValue);
                     }
                     
                     
@@ -296,7 +295,7 @@ public class Resolver {
         
         backtrack(0);
         
-        return result;
+        return trobat;
     }
     
     private void printPossibleValues() {
@@ -323,7 +322,7 @@ public class Resolver {
     
     public static void main(String[] args) {
         Generator g = new Generator();
-        Board bGen = g.generate(7, 0.7f, 1.0f, System.nanoTime());
+        Board bGen = g.generate(4, 1f, 1.0f, System.nanoTime());
         
         Resolver r = new Resolver();
         
@@ -333,7 +332,7 @@ public class Resolver {
         
         double milis = (t2-t1) / 1000000;
         
-        System.out.println("Found the anser in: " + milis + "ms" );
+        System.out.println("Found the answer in: " + milis + "ms" );
         if (resolved) {
             BoardColorator.printSolution(bGen);
         }

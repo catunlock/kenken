@@ -402,7 +402,7 @@ public class PlayPanel extends javax.swing.JPanel {
         boolean wrong = false;
         
         ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
-        
+        /*
         for (int f = 0; f < values.size() && ! wrong; ++f) {
             for (int c = 0; c < values.size() && ! wrong; ++c) {
                 InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
@@ -410,15 +410,11 @@ public class PlayPanel extends javax.swing.JPanel {
                     wrong = true;
                 }
             }
-        }
+        }*/       
         
+        boolean solucio = mw.getGameController().resolve(boardPanel1.getInfoCells());
         
-        if (wrong){
-            wrong = mw.getGameController().resolve(boardPanel1.getInfoCells());
-        }
-
-        
-        if (wrong) {
+        if (!solucio) {
             lblCheck.setText("Solucion propuesta incorrecta.");
         }
         else {

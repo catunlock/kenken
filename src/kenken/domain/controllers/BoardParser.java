@@ -163,8 +163,9 @@ public class BoardParser {
                     ck.setHinted(ic.hinted);
                     ck.setRegion(region);
                     ck.setUserValue(Integer.parseInt(ic.value));
-                    b.setCell(j, j, ck);
-                    boolean trobat = false;
+                    ck.setSolutionValue(Integer.valueOf(ic.value));
+                    b.setCell(i, j, ck);
+                                
                     int numreg = -1;
                     for (int z = 0; z < regions.size() && numreg == -1; ++z){
                         if (regions.get(z).getId() == region) numreg = z;
@@ -172,7 +173,6 @@ public class BoardParser {
                     if (numreg == -1){
                         ArrayList<CellKenken> ack = new ArrayList<>();
                         ack.add(ck);
-                        System.out.println(operation);
                         Region r = new Region(region, ack, Region.OperationType.valueOf(operation), Integer.parseInt(ic.result), ic.correct);
                         regions.add(r);
                     }
