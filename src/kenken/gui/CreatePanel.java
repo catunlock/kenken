@@ -51,8 +51,8 @@ public class CreatePanel extends javax.swing.JPanel {
                 infoCells.get(i).add(new InfoCell());
             }
         }
-        boardPanel1.setInfoCells(infoCells);
-        boardPanel1.setShowRegionNumber(true);
+        editorPanel1.setInfoCells(infoCells);
+        editorPanel1.setShowRegionNumber(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +73,6 @@ public class CreatePanel extends javax.swing.JPanel {
 
         btnExit = new javax.swing.JButton();
         btnSaveBoard = new javax.swing.JButton();
-        boardPanel1 = new kenken.gui.BoardPanel();
         btnMakeRegion = new javax.swing.JButton();
         spnRegion = new javax.swing.JSpinner();
         cmbOperation = new javax.swing.JComboBox();
@@ -81,6 +80,9 @@ public class CreatePanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        editorPanel1 = new kenken.gui.EditorPanel();
 
         btnExit.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnExit.setText("EXIT");
@@ -99,17 +101,6 @@ public class CreatePanel extends javax.swing.JPanel {
                 btnSaveBoardActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout boardPanel1Layout = new javax.swing.GroupLayout(boardPanel1);
-        boardPanel1.setLayout(boardPanel1Layout);
-        boardPanel1Layout.setHorizontalGroup(
-            boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
-        );
-        boardPanel1Layout.setVerticalGroup(
-            boardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
-        );
 
         btnMakeRegion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnMakeRegion.setText("Make Region");
@@ -130,6 +121,21 @@ public class CreatePanel extends javax.swing.JPanel {
 
         jLabel4.setText("lblStatus");
 
+        jLabel5.setText("Result:");
+
+        jTextField1.setText("0");
+
+        javax.swing.GroupLayout editorPanel1Layout = new javax.swing.GroupLayout(editorPanel1);
+        editorPanel1.setLayout(editorPanel1Layout);
+        editorPanel1Layout.setHorizontalGroup(
+            editorPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 663, Short.MAX_VALUE)
+        );
+        editorPanel1Layout.setVerticalGroup(
+            editorPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 663, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,35 +151,39 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addComponent(btnSaveBoard)
                 .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                        .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,26 +208,27 @@ public class CreatePanel extends javax.swing.JPanel {
     private void btnMakeRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRegionActionPerformed
         
         if(! editing) {
-            spnRegion.setEnabled(false);
-            cmbOperation.setEnabled(false);
-            
-            boardPanel1.setEditRegionMode(true);
+
+            editorPanel1.setEditRegionMode(true);
             Integer regionNumber = (Integer) spnRegion.getValue();
             String operation = convertToSimbol((Region.OperationType)cmbOperation.getSelectedItem());
             
             
-            boardPanel1.setEditRegionNumber(regionNumber);
-            boardPanel1.setEditRegionOperation(operation);
+            editorPanel1.setEditRegionNumber(regionNumber);
+            editorPanel1.setEditRegionOperation(operation);
             btnMakeRegion.setText("End Region");
             
+            spnRegion.setEnabled(false);
+            cmbOperation.setEnabled(false);
             editing = true;
         }
         else {
-            boardPanel1.setEditRegionMode(false);
+            editorPanel1.setEditRegionMode(false);
             btnMakeRegion.setText("Make Region");
             
             spnRegion.setEnabled(true);
             cmbOperation.setEnabled(true);
+            editing = false;
         }
         
     }//GEN-LAST:event_btnMakeRegionActionPerformed
@@ -241,15 +252,17 @@ public class CreatePanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private kenken.gui.BoardPanel boardPanel1;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnMakeRegion;
     private javax.swing.JButton btnSaveBoard;
     private javax.swing.JComboBox cmbOperation;
+    private kenken.gui.EditorPanel editorPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JSpinner spnRegion;
     // End of variables declaration//GEN-END:variables
 }

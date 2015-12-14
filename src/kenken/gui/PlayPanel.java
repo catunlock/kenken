@@ -53,7 +53,6 @@ public class PlayPanel extends javax.swing.JPanel {
         btnSurrender.setEnabled(true);
         boardPanel1.setSelectedCell(new Pos(-1,-1));
         
-        boardPanel1.setShowRegionNumber(true);
     }
     
     public void initTime(){

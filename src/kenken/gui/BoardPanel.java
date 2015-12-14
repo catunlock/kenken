@@ -32,34 +32,16 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     private final int HEIGHT = 663;
     private final int BORDER_SIZE = 4;
     private final int FONT_SIZE_VALUE = 58;
-    private final int FONT_SIZE_OPERATION = 22;
-    private Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
-    private Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
+    protected final int FONT_SIZE_OPERATION = 22;
+    protected Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
+    protected Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
     
-    private int nColumns = 4;
-    private int padHor;
-    private int padVer;
+    protected int nColumns = 4;
+    protected int padHor;
+    protected int padVer;
     private float fontScale = 1.0f;
-    private boolean showRegionNumber = false;
-    private boolean editRegionMode = false;
-    private int editRegionNumber = -1;
-    private String editRegionOperation = "";
 
-    public void setEditRegionOperation(String editRegionOperation) {
-        this.editRegionOperation = editRegionOperation;
-    }
-    
-    public void setEditRegionMode(boolean editRegionMode) {
-        this.editRegionMode = editRegionMode;
-    }
-
-    public void setEditRegionNumber(int editRegionNumber) {
-        this.editRegionNumber = editRegionNumber;
-    }
-    
-    
-
-    private ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
+    protected ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
     private Pos selectedCell = new Pos(-1, -1);
     
@@ -96,9 +78,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         return infoCells.get(p.f).get(p.c);
     }
     
-    public void setShowRegionNumber(boolean showRegionNumber) {
-        this.showRegionNumber = showRegionNumber;
-    }
+
     
     private void drawColums(Graphics2D g2d) {
         int space = WIDTH / nColumns;
@@ -130,7 +110,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         this.infoCells = matrix;
     }
     
-    private void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
+    protected void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
     {
         if (ic.hinted) {
             g2d.setColor(Color.LIGHT_GRAY);
@@ -162,18 +142,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     	int posValueY = posY + (HEIGHT/nColumns/2) + FONT_SIZE_VALUE/3;
     	int posValueX = posX + (WIDTH/nColumns/3);
     	g2d.drawString(ic.value, posValueX, posValueY);
-        
-        if (showRegionNumber) {
-            g2d.setColor(Color.MAGENTA);
-            
-            g2d.setFont(fontOperation);
-            int posRegionY = (int) (posY + (FONT_SIZE_OPERATION - nColumns/1.5));
-            int posRegionX = (int) (posX + padHor - (FONT_SIZE_OPERATION*1.2));
-            g2d.drawString(String.valueOf(ic.region), posRegionX, posRegionY);
-            
-            g2d.setColor(Color.black);
-        }
-        
+
     }
     
     private void drawCells(Graphics2D g2d) 
@@ -310,20 +279,11 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
         if (! infoCells.get(f).get(c).hinted ) {
             System.out.println("Clicked at cell: " + selectedCell.f + " " + selectedCell.c);
-            if(editRegionMode) {
-                InfoCell ic = infoCells.get(f).get(c);
-                ic.region = editRegionNumber;
-                ic.operation = editRegionOperation;
-            } else{
-                selectedCell.c = c;
-                selectedCell.f = f;
 
+            selectedCell.c = c;
+            selectedCell.f = f;
 
-
-                System.out.println("FOCUSABLE: " + isFocusable());
-                this.requestFocusInWindow();
-                System.out.println("FOCUSABLE: " + isFocusable());
-            }
+            this.requestFocusInWindow();
             
             repaint();
         }
