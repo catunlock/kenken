@@ -213,7 +213,6 @@ public class CreatePanel extends javax.swing.JPanel {
             Integer regionNumber = (Integer) spnRegion.getValue();
             String operation = convertToSimbol((Region.OperationType)cmbOperation.getSelectedItem());
             
-            
             editorPanel1.setEditRegionNumber(regionNumber);
             editorPanel1.setEditRegionOperation(operation);
             btnMakeRegion.setText("End Region");

@@ -7,6 +7,7 @@ package kenken.domain.classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 
 /**
@@ -138,6 +139,55 @@ public class Board implements Serializable {
         return it;
     }
     
+    public ArrayList<Region> getRegionsOrderedByOperation() {
+        ArrayList<Region> result = new ArrayList<Region>(regions.size());
+        
+        HashSet<Region> multAndDiv = new HashSet<>();
+        HashSet<Region> sumAndSub = new HashSet<>();
+        HashSet<Region> none = new HashSet<>();
+        
+        for (Region r : regions) {
+            switch (r.getOperationType()) {
+                case Add:
+                case Subtract: {
+                    sumAndSub.add(r);
+                }
+                    break;
+                case Multiply: 
+                case Divide: {
+                    multAndDiv.add(r);
+                }
+                    break;
+                case None: {
+                    none.add(r);
+                }
+                    break;
+                default:
+                    throw new AssertionError(r.getOperationType().name());
+                
+            }
+        }
+        
+        result.addAll(none);
+        result.addAll(multAndDiv);
+        result.addAll(sumAndSub);
+
+        
+        return result;
+    }
+    
+    public ArrayList<CellKenken> getAllCellsOrderedByOperation() {
+        ArrayList<CellKenken> result = new ArrayList<>(size()*size());
+        
+        for(Region r : getRegionsOrderedByOperation() ) {
+            for (CellKenken ck : r.getCellList()) {
+                result.add(ck);
+            }
+        }
+        
+        return result;
+    }
+    /*
     public ArrayList<CellKenken> getAllCellsOrderedByRegion() {
         ArrayList<CellKenken> r = new ArrayList<>(size()*size());
         
@@ -149,6 +199,6 @@ public class Board implements Serializable {
         
         return r;
     }
-    
+    */
 
 }

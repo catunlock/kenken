@@ -74,8 +74,9 @@ public class Generator {
             CellKenken c1 = board.getCell(i,k);
             CellKenken c2 = board.getCell(j,k);
             
-            board.setCell(j, k, c1);
-            board.setCell(i, k, c2);
+            int temp = c1.getSolutionValue();
+            c1.setSolutionValue(c2.getSolutionValue());
+            c2.setSolutionValue(temp);
         }
     }
  
@@ -84,8 +85,9 @@ public class Generator {
             CellKenken c1 = board.getCell(k,i);
             CellKenken c2 = board.getCell(k,j);
             
-            board.setCell(k, j, c1);
-            board.setCell(k, i, c2);
+            int temp = c1.getSolutionValue();
+            c1.setSolutionValue(c2.getSolutionValue());
+            c2.setSolutionValue(temp);
         }
     }
  
