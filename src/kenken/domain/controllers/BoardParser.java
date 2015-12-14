@@ -20,8 +20,16 @@ public class BoardParser {
         private ArrayList<ArrayList<InfoCell>> infoCells;
         private Board board;
         
+        public BoardParser(ArrayList<ArrayList<InfoCell>> infoCells){
+            this.infoCells = infoCells;
+        }
+        
         public BoardParser(Board board) {
             this.board = board;
+        }
+        
+        public BoardParser(){
+            
         }
         
         private void initMatrix() {
@@ -128,4 +136,53 @@ public class BoardParser {
             return infoCells;
 
         }
+        
+         public Board parseInfoCell(){
+            ArrayList<Region> regions = new ArrayList<>();
+            Board b = new Board(infoCells.size());
+            int size = infoCells.size();
+            int region;       
+            for (int i = 0; i < size; ++i){
+                for (int j = 0; j < size; ++j){
+                    String operation;
+                    InfoCell ic = infoCells.get(i).get(j);
+                    if ("-".equals(ic.operation)){
+                        operation = "Subtract";
+                    }else if("+".equals(ic.operation)){
+                        operation = "Add";
+                    }else if("*".equals(ic.operation)){
+                        operation = "Multiply";
+                    }else if("/".equals(ic.operation)){
+                        operation = "Divide";                        
+                    }else{
+                        operation = "None";
+                    }
+                    region = ic.region;
+                    CellKenken ck = new CellKenken(i,j,false);
+                    ck.setHinted(ic.hinted);
+                    ck.setRegion(region);
+                    ck.setUserValue(Integer.parseInt(ic.value));
+                    b.setCell(j, j, ck);
+                    boolean trobat = false;
+                    int numreg = -1;
+                    for (int z = 0; z < regions.size() && numreg == -1; ++z){
+                        if (regions.get(z).getId() == region) numreg = z;
+                    }
+                    if (numreg == -1){
+                        ArrayList<CellKenken> ack = new ArrayList<>();
+                        ack.add(ck);
+                        System.out.println(operation);
+                        Region r = new Region(region, ack, Region.OperationType.valueOf(operation), Integer.parseInt(ic.result), ic.correct);
+                        regions.add(r);
+                    }
+                    else{
+                        ArrayList<CellKenken> ack = regions.get(numreg).getCellList();
+                        ack.add(ck);
+                        regions.get(numreg).setCellList(ack);
+                    }    
+                }
+            }   
+            b.setRegions(regions);
+            return b;
+         }
     }

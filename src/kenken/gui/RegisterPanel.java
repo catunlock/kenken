@@ -31,6 +31,7 @@ public class RegisterPanel extends javax.swing.JPanel {
         txtVerifyPassword.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
+        txtVerifyPassword.setBackground(Color.WHITE);
     }
     
     /**
@@ -92,6 +93,12 @@ public class RegisterPanel extends javax.swing.JPanel {
         txtVerifyPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtVerifyPasswordKeyReleased(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
             }
         });
 
@@ -204,6 +211,14 @@ public class RegisterPanel extends javax.swing.JPanel {
         ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackMouseClicked
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
+            txtVerifyPassword.setBackground(Color.GREEN);
+        }else{
+            txtVerifyPassword.setBackground(Color.red);
+        }     
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

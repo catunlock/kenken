@@ -55,13 +55,22 @@ public class PlayPanel extends javax.swing.JPanel {
         
     }
     
+    public void setNotLoaded(){
+        loadedGame = false;
+        mw.getGameController().resetHints();
+    }
+    
     public void initTime(){
         if (!loadedGame){
             time = Duration.ZERO;
+            segTotal = 0;
             segundos = 0;
             minutos = 0;
             horas = 0;
         }
+        if (mw.getGameController().getHints() == 0) btnHint.setEnabled(false);
+        lblHint.setText("Hints remaining: " + Integer.toString(mw.getGameController().getHints()));
+        segThisGame = 0;
         timer.restart();
         try {
             in = new FileInputStream("Robocraft Theme.wav");
@@ -100,6 +109,7 @@ public class PlayPanel extends javax.swing.JPanel {
                 if (value != 0) {
                     boardPanel1.setValue(i, j, String.valueOf(value));
                 }
+                else boardPanel1.setValue(i, j, "");
                 ++x;
             }
         }
@@ -400,6 +410,10 @@ public class PlayPanel extends javax.swing.JPanel {
                     wrong = true;
                 }
             }
+        }
+        
+        if (wrong){
+            wrong = mw.getGameController().resolve(mw.getGameController().getInfoBoard());
         }
         
         if (wrong) {
