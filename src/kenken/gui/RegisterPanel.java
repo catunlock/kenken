@@ -95,6 +95,12 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
+
         lblErrores.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblErrores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -204,6 +210,14 @@ public class RegisterPanel extends javax.swing.JPanel {
         ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackMouseClicked
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
+            txtVerifyPassword.setBackground(Color.GREEN);
+        }else{
+            txtVerifyPassword.setBackground(Color.red);
+        }     
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
