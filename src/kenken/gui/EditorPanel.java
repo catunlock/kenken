@@ -5,6 +5,7 @@
  */
 package kenken.gui;
 
+import kenken.domain.controllers.CreatorController;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,7 @@ public class EditorPanel extends BoardPanel{
     private boolean editRegionMode = false;
     private int editRegionNumber = -1;
     private String editRegionOperation = "";
+    private CreatorController cc;
     
     public EditorPanel() {
         this.setFocusable(true);

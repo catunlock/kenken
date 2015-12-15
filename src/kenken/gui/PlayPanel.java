@@ -44,6 +44,7 @@ public class PlayPanel extends javax.swing.JPanel {
         this.mw = mw;     
         timer = new Timer(1000,updateClockAction);
         timer.setRepeats(true);
+        boardPanel1.setGameController(mw.getGameController());
         
     }
 
@@ -408,24 +409,25 @@ public class PlayPanel extends javax.swing.JPanel {
         // el usuario son los que resuelven el kenken.
         boolean wrong = false;
         
-        ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
-        /*
-        for (int f = 0; f < values.size() && ! wrong; ++f) {
-            for (int c = 0; c < values.size() && ! wrong; ++c) {
-                InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
-                if (ic.value.equals("") || Integer.parseInt(ic.value) != values.get(f).get(c)) {
-                    wrong = true;
-                }
-            }
-        }*/       
+        ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();     
         
-        boolean solucio = mw.getGameController().resolve(boardPanel1.getInfoCells());
+        boolean solucio = mw.getGameController().isCorrect();
         
         if (!solucio) {
             lblCheck.setText("Solucion propuesta incorrecta.");
         }
         else {
             lblCheck.setText("CORRECTO!");
+            Object[] options = {"OK"};
+            if(mw.getGameController().isGenerated()){
+                JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Your Time: Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                //PARAR TIEMPO Y PUTA MUSICA
+            }else{
+                JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+                mw.setPanel(MainWindow.Panels.EndGamePanel);
+                //PARAR TIEMPO Y PUTA MUSICA Y CREAR RANKING Y TAL
+            }
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 

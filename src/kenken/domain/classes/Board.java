@@ -83,9 +83,43 @@ public class Board implements Serializable {
         return null;
     }
     
-    public boolean isResolved() {
+    public boolean isCorrect() {
         boolean correct = true;
         
+        for (int f = 0; f < size() && correct; ++f){
+            boolean[] repetits = new boolean[size()+1];
+            
+            for (int c = 0; c < size() && correct; ++c) {
+                if (repetits[board[f][c].getUserValue()]) {
+                    correct = false;
+                }else {
+                    repetits[board[f][c].getUserValue()] = true;
+                }
+                
+            }
+        }
+        
+        for (int c = 0; c < size() && correct; ++c)  {
+            boolean[] repetits = new boolean[size()+1];
+    
+            for (int f = 0; f < size() && correct; ++f) {
+                if (repetits[board[f][c].getUserValue()]) {
+                    correct = false;
+                }else {
+                    repetits[board[f][c].getUserValue()] = true;
+                }
+                
+            }
+        }
+        
+        correct = correct && isResolved();
+
+        return correct;
+    }
+    
+    public boolean isResolved() {
+        boolean correct = true;
+
         int i = 0;
         while (correct && i < regions.size()) {
             correct = regions.get(i).isValid();

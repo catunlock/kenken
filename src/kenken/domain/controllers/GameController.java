@@ -24,10 +24,11 @@ import kenken.gui.InfoCell;
  */
 public class GameController {
     
-    GameDBController gdbc = new GameDBController();
-    BoardController boardController = new BoardController();
-    BoardParser boardParser;
-    Game game;
+    private GameDBController gdbc = new GameDBController();
+    private BoardController boardController = new BoardController();
+    private BoardParser boardParser;
+    private Game game;
+    private boolean generated = false;
 
     public int updateAndSave(ArrayList<String> data, String username, String nompartida) {
         Board b = this.game.getBoard();
@@ -89,6 +90,7 @@ public class GameController {
     }
     
     public void newGameGenerateBoard(String mode, int size, float pfRegionSize, float pfOperation, long seed) {
+        generated = true;
         Generator generador = new Generator();
                
         Board generated = generador.generate(size, pfRegionSize, pfOperation, seed);
@@ -170,11 +172,23 @@ public class GameController {
         return data;
     }
     
-     public boolean resolve(ArrayList<ArrayList<InfoCell>> bC){
+     public boolean resolve(){
         Resolver resolver = new Resolver();
-        BoardParser bP = new BoardParser(bC);
-        Board b = bP.parseInfoCell();        
-        return resolver.resolve(b);
+        return resolver.resolve(game.getBoard());
      }
+     
+     public boolean isCorrect(){
+         return this.game.getBoard().isCorrect();
+     }
+     
+     public void updateValue(int x, int c, int value) {
+         game.getBoard().getCell(x, c).setUserValue(value);
+     }
+
+    public boolean isGenerated() {
+        return generated;
+    }
+     
+     
     
 }

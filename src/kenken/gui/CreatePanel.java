@@ -26,7 +26,8 @@ import sun.audio.AudioStream;
 public class CreatePanel extends javax.swing.JPanel {
     private MainWindow mw;
     private boolean editing = false;
-   
+    private int countregions = 1;
+    
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -36,7 +37,7 @@ public class CreatePanel extends javax.swing.JPanel {
     public CreatePanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
-        
+        spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, countregions, 1));
         cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
     }
     
@@ -215,11 +216,11 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCheckBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckBoardActionPerformed
-        boolean correct = mw.getGameController().resolve(editorPanel1.getInfoCells());
+        boolean correct = mw.getGameController().resolve();
         if (correct){
-            
+            JOptionPane.showConfirmDialog(this, "This Board have a correct solution.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            
+            JOptionPane.showConfirmDialog(this, "This Board DO NOT have a correct solution.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnCheckBoardActionPerformed
 
@@ -242,6 +243,9 @@ public class CreatePanel extends javax.swing.JPanel {
         else {
             editorPanel1.setEditRegionMode(false);
             btnMakeRegion.setText("Make Region");
+            
+            spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, ++countregions, 1));
+            spnRegion.setValue(countregions);
             
             spnRegion.setEnabled(true);
             cmbOperation.setEnabled(true);

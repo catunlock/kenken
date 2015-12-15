@@ -21,6 +21,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import kenken.domain.classes.Pos;
+import kenken.domain.controllers.GameController;
 
 /**
  *
@@ -35,6 +36,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     protected final int FONT_SIZE_OPERATION = 22;
     protected Font fontValue = new Font("Consolas", Font.BOLD, FONT_SIZE_VALUE);
     protected Font fontOperation = new Font("Consolas", Font.PLAIN, FONT_SIZE_OPERATION);
+    private GameController gc;
     
     protected int nColumns = 4;
     protected int padHor;
@@ -44,6 +46,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     protected ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>();
     
     private Pos selectedCell = new Pos(-1, -1);
+   
     
     public BoardPanel() 
     {
@@ -74,6 +77,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
     }
 
+    public void setGameController(GameController gc) {
+        this.gc = gc;
+    }
+    
     public ArrayList<ArrayList<InfoCell>> getInfoCells() {
         return infoCells;
     }
@@ -321,7 +328,7 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
                 int value = Integer.parseInt(String.valueOf(e.getKeyChar()));
                 if (value > 0 && value <= nColumns) {
                     InfoCell ic = infoCells.get(selectedCell.f).get(selectedCell.c);
-
+                    gc.updateValue(selectedCell.f, selectedCell.c, value);
                     ic.value = String.valueOf(value);
 
                     selectedCell.f = -1;
