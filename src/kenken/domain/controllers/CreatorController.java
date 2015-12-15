@@ -72,7 +72,7 @@ public class CreatorController {
         Resolver resolver = new Resolver();
             
         boolean resultat = resolver.resolve(board);
-        this.board = resolver.getBoardSolved();
+        if (resultat) this.board = resolver.getBoardSolved();
         
         return resultat;
     }

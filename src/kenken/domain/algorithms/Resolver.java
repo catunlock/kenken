@@ -331,6 +331,13 @@ public class Resolver {
     }
     
     public Board getBoardSolved(){
+        for (int f = 0; f < boardSolved.size(); ++f) {
+            for (int c = 0; c < boardSolved.size(); ++c) {
+                boardSolved.getCell(f, c).setSolutionValue(
+                        boardSolved.getCell(f, c).getUserValue()
+                );
+            }
+        }
         return this.boardSolved;
     }
     
@@ -348,7 +355,7 @@ public class Resolver {
         
         System.out.println("Found the answer in: " + milis + "ms" );
         if (resolved) {
-            BoardColorator.printSolution(bGen);
+            BoardColorator.printSolution(r.getBoardSolved());
         }
     }
     

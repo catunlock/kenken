@@ -54,6 +54,7 @@ public class Generator {
                 int v = ((f+c)%board.size()) + 1;
                 CellKenken ce = board.getCell(f, c);
                 ce.setSolutionValue(v);
+                
             }
         }
         
