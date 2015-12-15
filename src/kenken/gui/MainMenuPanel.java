@@ -37,7 +37,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form MainMenuPanel
-     * @param mw
+     * @param mw Main Window Controller.
      */
     public MainMenuPanel(MainWindow mw) {
         initComponents();
@@ -46,6 +46,10 @@ public class MainMenuPanel extends javax.swing.JPanel {
         this.bc = this.mw.getBoardController();
     }
 
+    /**
+     * Sets the user to show its name in the display.
+     * @param user User to be set.
+     */
     public void setUser(String user){
         ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
         String solved, created, played;
@@ -295,24 +299,44 @@ public class MainMenuPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to New Game Panel when new Game button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnNewGameActionPerformed
 
+    /**
+     * Switches to Choose Ranking Panel when Show Ranking button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnShowRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRankingActionPerformed
         ((ChooseRankingPanel) mw.getPanel(MainWindow.Panels.ChooseRankingPanel)).setRankingList();
         mw.setPanel(MainWindow.Panels.ChooseRankingPanel);
     }//GEN-LAST:event_btnShowRankingActionPerformed
 
+    /**
+     * Switches to Export Board Panel when Export Board button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnExportBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportBoardMouseClicked
         ((ExportBoardPanel) mw.getPanel(MainWindow.Panels.ExportBoardPanel)).updateList();
         mw.setPanel(MainWindow.Panels.ExportBoardPanel);
     }//GEN-LAST:event_btnExportBoardMouseClicked
 
+    /**
+     * Switches to Create Board Panel when Create Board button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnCreateBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateBoardMouseClicked
         mw.setPanel(MainWindow.Panels.CreateBoardPanel);
     }//GEN-LAST:event_btnCreateBoardMouseClicked
 
+    /**
+     * Switches to  Panel when new Game button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
@@ -321,17 +345,29 @@ public class MainMenuPanel extends javax.swing.JPanel {
             mw.resetUserController();
         }
     }//GEN-LAST:event_btnLogOutMouseClicked
-
+    
+    /**
+     * Switches to Load Game Panel when Load Game button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
         ((LoadGamePanel) mw.getPanel(MainWindow.Panels.LoadGamePanel)).initPanel();
         mw.setPanel(MainWindow.Panels.LoadGamePanel);
         
     }//GEN-LAST:event_btnLoadGameActionPerformed
 
+    /**
+     * Switches to Options Panel when Options button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOptionsActionPerformed
         mw.setPanel(MainWindow.Panels.OptionsPanel);
     }//GEN-LAST:event_btnOptionsActionPerformed
 
+    /**
+     * Shows up a pop-up which lets you to select a board to import.
+     * @param evt Event trigger.
+     */
     private void btnImportBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportBoardActionPerformed
         JFileChooser fileChoose = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".brd", "brd");
@@ -348,10 +384,18 @@ public class MainMenuPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnImportBoardActionPerformed
 
+    /**
+     * Switches to Create Board Panel when Create Board button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnCreateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBoardActionPerformed
          mw.setPanel(MainWindow.Panels.CreateBoardPanel);
     }//GEN-LAST:event_btnCreateBoardActionPerformed
 
+    /**
+     * Switches to Delete Board Panel when Delete Board button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnDeleteBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBoardActionPerformed
         ((DeleteBoardPanel) mw.getPanel(MainWindow.Panels.DeleteBoardPanel)).updateList();
         mw.setPanel(MainWindow.Panels.DeleteBoardPanel);
