@@ -185,7 +185,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestActionPerformed
-        // TODO add your handling code here:
+        mw.setPanel(MainWindow.Panels.GuestPanel);
     }//GEN-LAST:event_btnGuestActionPerformed
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked

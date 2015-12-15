@@ -309,7 +309,14 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
-            mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            
+            if (mw.getUserController().getLoggedUser() == null){
+                ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+                mw.setPanel(MainWindow.Panels.LoginPanel);
+            }else{
+                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            }
+            
             lblTime.setText("00:00:00");
             ap.stop(audio);
             timer.stop();
