@@ -26,7 +26,7 @@ public class UserDataGetter {
      * @param uc The UserController where we will get the loggedUser
      * @return An ArrayList of Strings will store the info from the user.
      */
-    public ArrayList<String> toString(UserController uc){
+    public ArrayList<String> toString(UserControllerKenken uc){
         User user = uc.getLoggedUser();
         ArrayList<String> dades = new ArrayList<>(3);
         dades.add((Long.toString(user.getTotalTimePlayed().getSeconds())));
