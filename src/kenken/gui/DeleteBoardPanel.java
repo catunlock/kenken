@@ -42,6 +42,9 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Retrieves and Update the list of boards to select one to delete.
+     */
     public void updateList(){
         listModel = new DefaultListModel();
         
@@ -101,11 +104,6 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
         btnDelete.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnDelete.setText("DELETE");
         btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMouseClicked(evt);
-            }
-        });
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -205,16 +203,20 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Switches to Main Menu Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-
-    }//GEN-LAST:event_btnDeleteMouseClicked
-
+    /**
+     * When a Board is selected and Delete button is pressed, appears a confirm Dialog and erases the Board.
+     * @param evt Event trigger.
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
         int n = JOptionPane.showConfirmDialog(this, "Are you sure that you want to delete " + bi.getName() + " board?", "Warning", JOptionPane.YES_NO_OPTION);
@@ -234,6 +236,10 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * Shows the Creator of the board and board's size.
+     * @param evt Event trigger.
+     */
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
         lblShowCreador.setText(bi.getCreador());
