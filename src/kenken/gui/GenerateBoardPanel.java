@@ -21,6 +21,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         txtSeed.setText(String.valueOf(System.nanoTime()));
     }
     
+    /**
+     * Selects the difficult for the game.
+     * @param diff
+     * @return 
+     */
     private static float selectDifficult(String diff){
         float res;
         if ("Easy".equals(diff)) res = 0.7f;
@@ -235,10 +240,18 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to New Game Panel when Back button is pressed.
+     * @param evt 
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Starts a new game with the parameters selected in this panel.
+     * @param evt Event trigger.
+     */
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         String mode = (String) cmbbGameMode.getSelectedItem();
         int size = Integer.parseInt((String) cmbbSize.getSelectedItem());
@@ -263,12 +276,20 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRegionFactorActionPerformed
 
+    /**
+     * Listener for the slider of Region Size.
+     * @param evt Event trigger.
+     */
     private void sldRegionFactorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldRegionFactorStateChanged
         double value = sldRegionFactor.getValue();
         
         txtRegionFactor.setText(String.valueOf(value/100.0));
     }//GEN-LAST:event_sldRegionFactorStateChanged
 
+    /**
+     * Listener for the slider of Operation difficult.
+     * @param evt Event trigger.
+     */
     private void sldOperationFactorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldOperationFactorStateChanged
         double value = sldOperationFactor.getValue();
         
