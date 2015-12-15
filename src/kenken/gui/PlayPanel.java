@@ -382,40 +382,42 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnSurrenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurrenderActionPerformed
         // Mostrar el valor de todas las celdas, poner en rojo las que estan mal
         // en gris las que no estaban, i en verde las que estaban bien.
+        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to surrender the game?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (n == 0){
+            ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
         
-        ArrayList<ArrayList<Integer>> values = mw.getGameController().getSolutionValues();
-        
-        for (int f = 0; f < values.size(); ++f) {
-            for (int c = 0; c < values.size(); ++c) {
-                
-                InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
-                int value = values.get(f).get(c);
-                
-                if (ic.value.equals("")) {
-                    ic.value = String.valueOf(value);
-                    ic.hinted = true;
-                }
-                else if (! ic.value.equals("")) {
-                    ic.showIsCorrect = true;
-                    
-                    if (Integer.parseInt(ic.value) ==  value) {
-                        ic.correct = true;
-                    }else {
+            for (int f = 0; f < values.size(); ++f) {
+                for (int c = 0; c < values.size(); ++c) {
+
+                    InfoCell ic = boardPanel1.getInfoCell(new Pos(f,c));
+                    int value = values.get(f).get(c);
+
+                    if (ic.value.equals("")) {
                         ic.value = String.valueOf(value);
-                        ic.correct = false;
+                        ic.hinted = true;
                     }
+                    else if (! ic.value.equals("")) {
+                        ic.showIsCorrect = true;
+
+                        if (Integer.parseInt(ic.value) ==  value) {
+                            ic.correct = true;
+                        }else {
+                            ic.value = String.valueOf(value);
+                            ic.correct = false;
+                        }
+                    }
+
                 }
-                
             }
+            lblCheck.setText("Maybe next time...");
+            ap.stop(audio);
+            timer.stop();
+            boardPanel1.repaint();
+            btnCheck.setEnabled(false);
+            btnSaveGame.setEnabled(false);
+            btnSurrender.setEnabled(false);
+            btnHint.setEnabled(false);
         }
-        lblCheck.setText("Maybe next time...");
-        ap.stop(audio);
-        timer.stop();
-        boardPanel1.repaint();
-        btnCheck.setEnabled(false);
-        btnSaveGame.setEnabled(false);
-        btnSurrender.setEnabled(false);
-        btnHint.setEnabled(false);
     }//GEN-LAST:event_btnSurrenderActionPerformed
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
@@ -458,6 +460,7 @@ public class PlayPanel extends javax.swing.JPanel {
             Duration t = Duration.ofSeconds(tiempo);
             mw.getUserController().incrementTime(t);
             mw.getUserController().incrementSolvedGames();
+            lblCheck.setText(mw.getUserController().getUsername());
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
