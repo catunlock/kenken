@@ -43,6 +43,9 @@ public class ExportBoardPanel extends javax.swing.JPanel {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Sets the Board list every time ExportBoardPanel is retrieved.
+     */
     public void updateList(){
         listModel = new DefaultListModel();
         
@@ -102,11 +105,6 @@ public class ExportBoardPanel extends javax.swing.JPanel {
         btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExportMouseClicked(evt);
-            }
-        });
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
             }
         });
 
@@ -207,11 +205,19 @@ public class ExportBoardPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Main Menu Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Exports a Board when a board is selected from the list and export button is pressed.
+     * @param evt 
+     */
     private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
@@ -228,10 +234,10 @@ public class ExportBoardPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnExportMouseClicked
 
-    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExportActionPerformed
-
+    /**
+     * Changes the info of the board selected displayed on the panel.
+     * @param evt Event trigger.
+     */
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
         lblShowCreador.setText(bi.getCreador());
