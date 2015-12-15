@@ -106,7 +106,12 @@ public class NewGamePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadBoardActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        mw.setPanel(MainWindow.Panels.MainMenuPanel);
+        if (mw.getUserController().getUsername() == ""){
+                ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
+                mw.setPanel(MainWindow.Panels.GuestPanel);
+            }else{
+                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            }
     }//GEN-LAST:event_btnBackActionPerformed
 
 

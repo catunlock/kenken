@@ -311,7 +311,7 @@ public class PlayPanel extends javax.swing.JPanel {
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the game?", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             
-            if (mw.getUserController().getLoggedUser() == null){
+            if (mw.getUserController().getUsername() == ""){
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
                 mw.setPanel(MainWindow.Panels.LoginPanel);
             }else{
@@ -420,12 +420,21 @@ public class PlayPanel extends javax.swing.JPanel {
             lblCheck.setText("CORRECTO!");
             Object[] options = {"OK"};
             if(mw.getGameController().isGenerated()){
-                JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Your Time: Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+                ap.stop(audio);
+                timer.stop();
+                /*in = new FileInputStream("Robocraft Theme.wav");
+                audio = new AudioStream(in);*/
+                ap.start(audio);
+                JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
                 //PARAR TIEMPO Y PUTA MUSICA
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
                 mw.setPanel(MainWindow.Panels.EndGamePanel);
+                ap.stop(audio);
+                timer.stop();
+                long tiempo = horas*60*60+minutos*60+segundos;
+                //mw.getRankingController().addRecord(mw.getGameController().getBoardName(), mw.getUserController(), Game.Mode.Normal, tiempo);
                 //PARAR TIEMPO Y PUTA MUSICA Y CREAR RANKING Y TAL
             }
         }

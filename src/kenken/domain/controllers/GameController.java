@@ -62,7 +62,9 @@ public class GameController {
     Post: retorna una board generada amb el kenken de size = size
     */
     
-    
+    public String getBoardName(){
+        return this.game.getBoard().getBoardName();
+    }
     
     public int getHint(Pos p) {
         return game.getHint(p);

@@ -45,6 +45,7 @@ import kenken.domain.controllers.CreatorController;
 import kenken.domain.controllers.GameController;
 import kenken.domain.controllers.RankingController;
 import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.UserControllerKenken;
 import kenken.domain.controllers.UserDataGetter;
 
 public class MainWindow {
@@ -55,7 +56,7 @@ public class MainWindow {
     private BoardController bc = new BoardController();
     private GameController gc = new GameController();
     private RankingController rc = new RankingController();
-    private UserController uc = new UserController();
+    private UserControllerKenken uc = new UserControllerKenken();
     private UserDataGetter dg = new UserDataGetter();
     private CreatorController cc = new CreatorController();
 
@@ -75,7 +76,7 @@ public class MainWindow {
         return rc;
     }
 
-    public UserController getUserController() {
+    public UserControllerKenken getUserController() {
         return uc;
     }
     
@@ -113,6 +114,10 @@ public class MainWindow {
             return ss;
         }
     };
+    
+    public void resetUserController(){
+        this.uc = new UserControllerKenken();
+    }
     
     public void setPanel(Panels p) {
         CardLayout cl = (CardLayout)(cards.getLayout());

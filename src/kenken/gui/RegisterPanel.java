@@ -8,6 +8,7 @@ package kenken.gui;
 import java.awt.Color;
 import java.util.Arrays;
 import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.UserControllerKenken;
 
 /**
  *
@@ -16,7 +17,7 @@ import kenken.domain.controllers.UserController;
 public class RegisterPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    private UserController uc;
+    private UserControllerKenken uc;
     /**
      * Creates new form RegisterPanel
      * @param mw

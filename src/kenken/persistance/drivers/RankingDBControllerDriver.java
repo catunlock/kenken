@@ -11,6 +11,7 @@ import kenken.domain.controllers.RankingController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import kenken.domain.classes.Game;
 
 /**
  *
@@ -20,7 +21,7 @@ public class RankingDBControllerDriver {
     public static void main(String[] args) throws IOException{
         RankingController test = new RankingController();
         Scanner scan = new Scanner(System.in);
-        Ranking testRanking = new Ranking("Manolo", Ranking.GameMode.Normal);
+        Ranking testRanking = new Ranking("Manolo", Game.Mode.Normal);
         
         System.out.println("-----------------------------------------------");
         System.out.println("Provant RankingDBController");
@@ -45,7 +46,7 @@ public class RankingDBControllerDriver {
                     ranking = scan.next();
                     System.out.println("Introdueix el Mode de joc del qual sera el ranking: ");
                     gameMode = scan.next();
-                    System.out.println(test.createRanking(ranking, Ranking.GameMode.valueOf(gameMode)));
+                    System.out.println(test.createRanking(ranking, Game.Mode.valueOf(gameMode)));
                     break;
                 case 2:
                     System.out.println("Introdueix el nom i el temps del record que vols afegir al ranking");

@@ -6,6 +6,7 @@
 package kenken.domain.drivers;
 
 import java.util.Scanner;
+import kenken.domain.classes.Game;
 import kenken.domain.classes.Ranking;
 import kenken.domain.classes.Record;
 
@@ -17,7 +18,7 @@ public class RankingDriver {
     public static void main (String[] args){
         Scanner scan = new Scanner(System.in);
         int opt;
-        Ranking ranking = new Ranking("Tauler", Ranking.GameMode.Normal);
+        Ranking ranking = new Ranking("Tauler", Game.Mode.Normal);
         System.out.println("Per defecte hem creat un ranking buit amb el nom de Tauler 'Tauler' i amb gameMode Normal");
         System.out.println("Escull una de les seguents opcions:");
         System.out.println("1. Crea un Ranking nou.");
@@ -35,7 +36,7 @@ public class RankingDriver {
                     String nomTauler = scan.next();
                     System.out.print("Introdueix el mode de joc[Normal, TimeAttack]: ");
                     String modeJoc = scan.next();
-                    ranking = new Ranking(nomTauler, Ranking.GameMode.valueOf(modeJoc));
+                    ranking = new Ranking(nomTauler, Game.Mode.valueOf(modeJoc));
                     break;
                 case 2:
                     System.out.println("Introudeix alguna posicio existent del ranking:");

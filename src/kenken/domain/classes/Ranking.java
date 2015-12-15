@@ -14,18 +14,17 @@ import java.util.ArrayList;
  */
 public class Ranking implements Serializable{
     
-    public enum GameMode{Normal, TimeAttack};
     
     private String boardName;
     private ArrayList<Record> recordList;
-    private GameMode gameMode;
+    private Game.Mode gameMode;
 
     /**
      * Constuctor of Ranking with parameters boardName and gameMode.
      * @param boardName The BoardName related to the Ranking.
      * @param gameMode The GameMode related to the Ranking.
      */
-    public Ranking(String boardName, GameMode gameMode) {
+    public Ranking(String boardName, Game.Mode gameMode) {
         this.boardName = boardName;
         this.gameMode = gameMode;
         this.recordList = new ArrayList(0);
@@ -82,7 +81,7 @@ public class Ranking implements Serializable{
      * Getter of GameMode.
      * @return An Enum type of GameMode.
      */
-    public GameMode getGameMode() {
+    public Game.Mode getGameMode() {
         return gameMode;
     }
     
@@ -145,7 +144,7 @@ public class Ranking implements Serializable{
      * @return The Ranking converted.
      */
     public static Ranking stringToRanking(ArrayList<String> arr){
-        Ranking ranking = new Ranking(arr.get(0), GameMode.valueOf(arr.get(arr.size() - 1)));
+        Ranking ranking = new Ranking(arr.get(0), Game.Mode.valueOf(arr.get(arr.size() - 1)));
         for(int i = 1; i < arr.size() - 1; i += 2){
             //long time = Long.parseLong(arr.get(i + 1));
             Record temp = new Record(arr.get(i), Long.parseLong(arr.get(i + 1)));

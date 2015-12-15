@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.util.Arrays;
 import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.UserControllerKenken;
 
 /**
  *
@@ -164,7 +165,7 @@ public class LoginPanel extends javax.swing.JPanel {
         String username = txtUser.getText();
         String password = Arrays.toString(txtPassword.getPassword());
 
-        UserController uc = mw.getUserController();
+        UserControllerKenken uc = mw.getUserController();
 
         int errcode = uc.login(username, password);
         if(errcode == -1) {

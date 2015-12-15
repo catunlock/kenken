@@ -18,6 +18,7 @@ import kenken.domain.classes.BoardInfo;
 import kenken.domain.classes.User;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.UserController;
+import kenken.domain.controllers.UserControllerKenken;
 import kenken.persistance.controllers.RankingDBController;
 import kenken.domain.controllers.UserDataGetter;
 
@@ -30,7 +31,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
     
     private MainWindow mw;
     private String user;
-    private UserController uc;
+    private UserControllerKenken uc;
     private Component modalToComponent;
     private BoardController bc;
     
@@ -317,6 +318,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
         if (n == 0) {
             ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
             mw.setPanel(MainWindow.Panels.LoginPanel);
+            mw.resetUserController();
         }
     }//GEN-LAST:event_btnLogOutMouseClicked
 
