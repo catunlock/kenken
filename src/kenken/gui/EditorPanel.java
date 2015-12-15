@@ -24,38 +24,72 @@ public class EditorPanel extends BoardPanel{
     private CreatorController cc;
 
     
+    /**
+     * Default constructor of EditorPanel.
+     */
     public EditorPanel() {
         this.setFocusable(true);
         this.addMouseListener(this);
     }
     
+    /**
+     * Setter of editRegionResult.
+     * @param editRegionResult Replaces this.editRegionResult with editRegionResult.
+     */
     public void setEditRegionResult(String editRegionResult) {
         this.editRegionResult = editRegionResult;
     }
     
+    /**
+     * Setter of editRegionOperation.
+     * @param editRegionOperation Replaces this.editRegionOperation with editRegionOperation.
+     */
     public void setEditRegionOperation(String editRegionOperation) {
         this.editRegionOperation = editRegionOperation;
     }
     
+    /**
+     * Setter of editRegionMode.
+     * @param editRegionMode Replaces this.editRegionMode with editRegionMode.
+     */
     public void setEditRegionMode(boolean editRegionMode) {
         this.editRegionMode = editRegionMode;
     }
 
+    /**
+     * Setter of editRegionNumber.
+     * @param editRegionNumber Replaces this.editRegionNumber with editRegionNumber.
+     */
     public void setEditRegionNumber(int editRegionNumber) {
         this.editRegionNumber = editRegionNumber;
         cc.setEditRegion(editRegionNumber);
     }
     
+    /**
+     * Setter of ShowRegionNumber.
+     * @param showRegionNumber Replaces this.showRegionNumber with showRegionNumber.
+     */
     public void setShowRegionNumber(boolean showRegionNumber) {
         this.showRegionNumber = showRegionNumber;
     }
 
+    /**
+     * Sets the creatorController to the editorPanel.
+     * @param cc The CreatorController which will be placed.
+     */
     public void setCreatorController(CreatorController cc) {
         this.cc = cc;
     }
     
     
 
+    /**
+     * Draws a Cell to the editor Panel.
+     * @param g2d The Graphic tool to draw in display.
+     * @param ic The infoCell to be drawn.
+     * @param posX Position x to draw.
+     * @param posY Position y to draw.
+     */
     @Override
     protected void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) {
         super.drawCell(g2d, ic, posX, posY);
@@ -72,6 +106,10 @@ public class EditorPanel extends BoardPanel{
         }
     }
 
+    /**
+     * If is editing the regions, creates a region when clicks to a cell.
+     * @param e Event trigger.
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (editRegionMode) {
