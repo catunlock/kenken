@@ -29,12 +29,16 @@ public class LoginPanel extends javax.swing.JPanel {
     private MainWindow mw;
     /**
      * Creates new form LoginPanel
+     * @param mw Main Window Controller.
      */
     public LoginPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
     }
 
+    /**
+     * Clears the text when from Login Panel textbox.
+     */
     public void clearTxt(){
         lblErrorMessage.setText("");
         txtUser.setText("");
@@ -89,11 +93,6 @@ public class LoginPanel extends javax.swing.JPanel {
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegisterMouseClicked(evt);
-            }
-        });
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -171,6 +170,10 @@ public class LoginPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Login the user entered in the textbox and switches to MainMenuPanel if the user exist.
+     * @param evt Event trigger.
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String username = txtUser.getText();
@@ -192,14 +195,18 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegisterActionPerformed
-
+    /**
+     * Switches to GuestPanel when Guest button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestActionPerformed
         mw.setPanel(MainWindow.Panels.GuestPanel);
     }//GEN-LAST:event_btnGuestActionPerformed
 
+    /**
+     * Switches to RegisterPanel when Register button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         mw.setPanel(MainWindow.Panels.RegisterPanel);
         ((RegisterPanel) mw.getPanel(MainWindow.Panels.RegisterPanel)).clearTxt();
