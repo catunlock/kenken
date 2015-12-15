@@ -302,13 +302,15 @@ public class CreatePanel extends javax.swing.JPanel {
         btnClear.setEnabled(false);
         boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
         lblCheking.setText("Checking... ");
-        
-        ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
+       
         if (correct){
+            ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
             lblCheking.setText("");
             btnSaveBoard.setEnabled(true);
             JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-  
+            
+            mw.getUserController().incrementTotalCreatedBoards();
+            
             ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
             
             for (int f = 0; f < infoCells.size(); ++f) {

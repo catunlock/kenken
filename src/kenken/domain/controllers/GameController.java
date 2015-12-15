@@ -200,8 +200,7 @@ public class GameController {
 
     public boolean isGenerated() {
         return generated;
-    }
-     
+    }    
      
     
 }

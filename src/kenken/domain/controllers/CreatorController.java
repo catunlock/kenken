@@ -102,6 +102,13 @@ public class CreatorController {
         board.setBoardName(boardname);
         board.setUsername(username);
         BoardController bc = new BoardController();
+        
+        for (int i = 0; i < board.size(); ++i){
+            for (int j = 0; j < board.size(); ++j){
+                board.getCell(i, j).setUserValue(-1);
+            }
+        }
+        
         return bc.saveCreatedBoard(board);
     }
 }

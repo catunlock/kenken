@@ -85,6 +85,7 @@ public class PlayPanel extends javax.swing.JPanel {
     }
     
     public void initBoard(ArrayList<ArrayList<InfoCell>> matrix) {
+        mw.getUserController().incrementStartedGames();
         btnSurrender.setEnabled(true);
         btnHint.setEnabled(true);
         btnCheck.setEnabled(true);
@@ -434,6 +435,7 @@ public class PlayPanel extends javax.swing.JPanel {
         else {
             lblCheck.setText("CORRECTO!");
             Object[] options = {"OK"};
+            long tiempo = horas*60*60+minutos*60+segundos;
             if(mw.getGameController().isGenerated()){
                 ap.stop(audio);
                 timer.stop();
@@ -442,19 +444,20 @@ public class PlayPanel extends javax.swing.JPanel {
                 ap.start(audio);
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
-                //PARAR TIEMPO Y PUTA MUSICA
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
                 mw.setPanel(MainWindow.Panels.EndGamePanel);
                 ap.stop(audio);
                 timer.stop();
-                long tiempo = horas*60*60+minutos*60+segundos;
                 String boardname = mw.getGameController().getBoardName();
                 mw.getRankingController().addRecord(boardname, mw.getUserController().getUsername(), Game.Mode.Normal, tiempo);
                 ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed(boardname);
                 ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).updateList();
                 mw.setPanel(MainWindow.Panels.EndGamePanel);
             }
+            Duration t = Duration.ofSeconds(tiempo);
+            mw.getUserController().incrementTime(t);
+            mw.getUserController().incrementSolvedGames();
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 

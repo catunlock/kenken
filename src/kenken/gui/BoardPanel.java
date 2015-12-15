@@ -149,6 +149,14 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     public void setInfoCells(ArrayList<ArrayList<InfoCell>> matrix) {
         setSize(matrix.size());
         this.infoCells = matrix;
+        
+        for (int f = 0; f < matrix.size(); ++f) {
+            for (int c = 0; c < matrix.size(); ++c) {
+                if (infoCells.get(f).get(c).value == "-1") {
+                    infoCells.get(f).get(c).value = "";
+                }
+            }
+        }
     }
     
     /**
