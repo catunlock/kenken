@@ -63,7 +63,7 @@ public class GameDBController {
         
         FileInputStream fis;
         Game game;
-        String filepath = "Users/"+username+"/"+Directory+nompartida;
+        String filepath = "Users/"+username+"/"+nompartida;
         if (new File(filepath).exists()){
             try {
             fis = new FileInputStream(filepath);
@@ -96,7 +96,7 @@ public class GameDBController {
      */
     public int deleteGame(String username, String game){
         int result = -3;
-        String filepath = "Users/"+username+"/"+Directory+game;
+        String filepath = "Users/"+username+"/"+game;
         if(new File(filepath).exists()){
             try{
                 Files.delete(FileSystems.getDefault().getPath(filepath));
@@ -118,7 +118,7 @@ public class GameDBController {
      */
     public ArrayList<String> getSavedGames(String username){
         ArrayList<String> results = new ArrayList<>();
-        File[] files = new File("Users/"+username+"/"+Directory).listFiles();
+        File[] files = new File("Users/"+username+"/").listFiles();
         if (files == null) return null;
         else {
             //If this pathname does not denote a directory, then listFiles() returns null.
@@ -139,7 +139,7 @@ public class GameDBController {
      * @return A String with the pathfile.
      */
     private String getPath(String nompartida, String username) {
-        return "Users/"+username+"/"+Directory+nompartida+Extension;
+        return "Users/"+username+"/"+nompartida+Extension;
     }
     
     

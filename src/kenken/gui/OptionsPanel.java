@@ -109,8 +109,11 @@ public class OptionsPanel extends javax.swing.JPanel {
         if (n == 0) {
             String pass = Arrays.toString(txtPassword.getPassword());
             UserControllerKenken uc = mw.getUserController();
+            String name = uc.getUsername();
             int error = uc.deleteUser(pass);
             if (error == 0) {
+                GameController gc = new GameController();
+                gc.deleteGames(name);
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
                 mw.setPanel(MainWindow.Panels.LoginPanel);
             }

@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.awt.Color;
 import java.util.Arrays;
+import kenken.domain.controllers.GameController;
 import kenken.domain.controllers.UserController;
 import kenken.domain.controllers.UserControllerKenken;
 
@@ -184,6 +185,8 @@ public class RegisterPanel extends javax.swing.JPanel {
             }else if (result == -2){
                 lblErrores.setText("Internal Error.");
             }else{
+                GameController gc = new GameController();
+                gc.createGames(txtUsername.getText());
                 int errcode = uc.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
                 if (errcode == 0){
                     ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
