@@ -61,26 +61,50 @@ public class MainWindow {
     private UserDataGetter dg = new UserDataGetter();
     private CreatorController cc = new CreatorController();
 
+    /**
+     * Getter of Creator Controller.
+     * @return The creator controller.
+     */
     public CreatorController getCreatorController() {
         return cc;
     }
     
+    /**
+     * Getter of Board Controller.
+     * @return The Board controller.
+     */
     public BoardController getBoardController() {
         return bc;
     }
 
+    /**
+     * Getter of Game Controller.
+     * @return The Game controller.
+     */
     public GameController getGameController() {
         return gc;
     }
 
+    /**
+     * Getter of Ranking Controller.
+     * @return The ranking controller.
+     */
     public RankingController getRankingController() {
         return rc;
     }
 
+    /**
+     * Getter of user Controller.
+     * @return The user controller.
+     */
     public UserControllerKenken getUserController() {
         return uc;
     }
     
+    /**
+     * Getter of UserDataGetter.
+     * @return The UserDataGetter.
+     */
     public UserDataGetter getUserDataGetter()  {
         return dg;
     }
@@ -116,19 +140,34 @@ public class MainWindow {
         }
     };
     
+    /**
+     * Resets User Controller with a new one.
+     */
     public void resetUserController(){
         this.uc = new UserControllerKenken();
     }
     
+    /**
+     * Setter of Panels.
+     * @param p Sets the old panel with the panel p.
+     */
     public void setPanel(Panels p) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, p.name());
     }
     
+    /**
+     * Getter of panel name.
+     * @param p The panel whose want to get the name.
+     * @return The JPanel wanted. 
+     */
     public JPanel getPanel(Panels p) {
         return panels.get(p.name());
     }
     
+    /**
+     * Create all the panels existing in the program.
+     */
     private void createPanels() {
         panels.put("LoginPanel", new LoginPanel(this));
         panels.put("CreateBoardPanel", new CreateBoardPanel(this));
@@ -149,12 +188,19 @@ public class MainWindow {
         panels.put("GuestPanel", new GuestPanel(this));
     }
     
+    /**
+     * Adds every panel existing in the CardPanel
+     */
     private void addPanelsToCardPanel() {
         for(Entry<String, JPanel> e : panels.entrySet()) {
             cards.add(e.getKey(), e.getValue());
         }
     }
     
+    /**
+     * Adds components to the pane.
+     * @param pane The pane to be filled.
+     */
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
