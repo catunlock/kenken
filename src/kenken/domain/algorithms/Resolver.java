@@ -234,6 +234,8 @@ public class Resolver {
             usedValues = new UsedValues();
             possibleValues = new HashMap<>();
             trobat = false;
+            
+            boolean valid = true;
 
             // Init HashMap<Integer, HashSet<Integer>>
             for (Region r : b.getRegions()) {
@@ -250,8 +252,13 @@ public class Resolver {
             for (Region r : b.getRegions()) {
                 Region.OperationType op = r.getOperationType();
                 switch(op) {
-                    case Add:
+                    
                     case Subtract: {
+                        if (r.getCellList().size() != 2) {
+                            valid = false;
+                        }
+                    }
+                    case Add: {
                         for (CellKenken c : r.getCellList()) {
                             for (int i = 1; i <= b.size(); ++i) {
                                 possibleValues.get(getCellID(c)).add(i);
@@ -259,8 +266,13 @@ public class Resolver {
                         }
                     }
                     break;
-                    case Multiply:
+                    
                     case Divide: {
+                        if (r.getCellList().size() != 2) {
+                            valid = false;
+                        }
+                    }
+                    case Multiply: {
                         for (CellKenken c : r.getCellList()) {
                             for (int i = 1; i <= b.size(); ++i) {
                                 if (isMultiple(r, i)) {
@@ -295,13 +307,20 @@ public class Resolver {
 
                 }
             }
+            
+            if (valid) {
+                printPossibleValues();
 
-            printPossibleValues();
+                cellsByRegion = b.getAllCellsOrderedByOperation();
 
-            cellsByRegion = b.getAllCellsOrderedByOperation();
-
-            backtrack(0);
-            return trobat;
+                backtrack(0);
+                return trobat;
+            }
+            else {
+                return false;
+            }
+            
+            
         }else {
             throw new RuntimeException("Este board ya lo has resuelto.");
         }

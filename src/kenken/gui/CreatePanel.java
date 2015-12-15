@@ -309,8 +309,6 @@ public class CreatePanel extends javax.swing.JPanel {
             btnSaveBoard.setEnabled(true);
             JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
             
-            mw.getUserController().incrementTotalCreatedBoards();
-            
             ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
             
             for (int f = 0; f < infoCells.size(); ++f) {
@@ -393,6 +391,9 @@ public class CreatePanel extends javax.swing.JPanel {
         if (result == 0){  
             JOptionPane.showOptionDialog(this,"Board saved.","Success",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
             btnSaveBoard.setEnabled(false);
+            mw.getUserController().incrementTotalCreatedBoards();
+            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
+            mw.setPanel(MainWindow.Panels.MainMenuPanel);
         }else{
             JOptionPane.showOptionDialog(this,"Internal Error.","Error",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
