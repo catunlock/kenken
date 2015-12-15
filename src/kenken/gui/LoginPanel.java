@@ -179,9 +179,7 @@ public class LoginPanel extends javax.swing.JPanel {
         String username = txtUser.getText();
         String password = Arrays.toString(txtPassword.getPassword());
 
-        UserControllerKenken uc = mw.getUserController();
-
-        int errcode = uc.login(username, password);
+        int errcode = mw.getUserController().login(username, password);
         if(errcode == -1) {
             lblErrorMessage.setText("L'usuari no existeix.");
         }else if(errcode == -2){
@@ -192,6 +190,7 @@ public class LoginPanel extends javax.swing.JPanel {
         }else {
             ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUser.getText());
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

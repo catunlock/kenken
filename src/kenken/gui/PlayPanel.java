@@ -441,11 +441,7 @@ public class PlayPanel extends javax.swing.JPanel {
             if(mw.getGameController().isGenerated()){
                 ap.stop(audio);
                 timer.stop();
-                /*in = new FileInputStream("Robocraft Theme.wav");
-                audio = new AudioStream(in);*/
-                ap.start(audio);
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
@@ -462,6 +458,8 @@ public class PlayPanel extends javax.swing.JPanel {
             mw.getUserController().incrementTime(t);
             mw.getUserController().incrementSolvedGames();
             lblCheck.setText(mw.getUserController().getUsername());
+            mw.getUserController().updateUser();
+            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
