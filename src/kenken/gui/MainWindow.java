@@ -47,6 +47,7 @@ import kenken.domain.controllers.RankingController;
 import kenken.domain.controllers.UserController;
 import kenken.domain.controllers.UserControllerKenken;
 import kenken.domain.controllers.UserDataGetter;
+import kenken.persistance.controllers.DirectoryCreator;
 
 public class MainWindow {
     JPanel cards; //a panel that uses CardLayout
@@ -202,6 +203,8 @@ public class MainWindow {
         }
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
+        DirectoryCreator dc = new DirectoryCreator();
+        dc.createInitial();
         
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.

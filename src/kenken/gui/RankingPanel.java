@@ -112,7 +112,7 @@ public class RankingPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(197, 197, 197)
                         .addComponent(lblRanking)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

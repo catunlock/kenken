@@ -17,7 +17,7 @@ import kenken.domain.controllers.*;
 public class LoadGamePanel extends javax.swing.JPanel {
 
     private MainWindow mw;
-    private UserController uc;
+    private UserControllerKenken uc;
     private GameController gc;
     ArrayList<String> games;
     /**
@@ -112,7 +112,7 @@ public class LoadGamePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(316, 316, 316)
                         .addComponent(lblLoadGame, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

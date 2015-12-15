@@ -51,9 +51,7 @@ public class KenKen {
         String nom;
         String pass;
         while (!salir){
-            /*
-            Seleccionamos registro, login o invitado
-            */
+
             while (error != 0 && !salir){
                 System.out.println("Vols registrar un usuari, fer login, o jugar com a convidat?");
                 System.out.println("1. Registrar");
