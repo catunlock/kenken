@@ -445,6 +445,7 @@ public class PlayPanel extends javax.swing.JPanel {
                 audio = new AudioStream(in);*/
                 ap.start(audio);
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);

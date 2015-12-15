@@ -58,12 +58,23 @@ public class MainMenuPanel extends javax.swing.JPanel {
         solved = userData.get(2);
         this.user = user;
         lblMainMenu.setText("Welcome, " + user);
-        User temp = this.uc.getLoggedUser();
         lblBoardsCreatedTarget.setText(created);
         lblBoardsResolvedTarget.setText(solved);
         lblTimePlayedTarget.setText(played);
     }
-        
+       
+    public void updateList(){
+        ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
+        String solved, created, played;
+        played = userData.get(0);
+        created = userData.get(1);
+        solved = userData.get(2);
+        this.user = user;
+        lblMainMenu.setText("Welcome, " + user);
+        lblBoardsCreatedTarget.setText(created);
+        lblBoardsResolvedTarget.setText(solved);
+        lblTimePlayedTarget.setText(played);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
