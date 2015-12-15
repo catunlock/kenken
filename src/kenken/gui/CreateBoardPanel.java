@@ -103,6 +103,10 @@ public class CreateBoardPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creates an empty Board with the parameters selected in the panel when button Create is pressed.
+     * @param evt Event trigger.
+     */
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         
         String mode = "Normal";        
@@ -114,6 +118,10 @@ public class CreateBoardPanel extends javax.swing.JPanel {
         mw.setPanel(MainWindow.Panels.CreatePanel);
     }//GEN-LAST:event_btnCreateActionPerformed
 
+    /**
+     * Switches to Main Menu Panel when Back is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed

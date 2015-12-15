@@ -30,6 +30,9 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
         this.rc = this.mw.getRankingController();
     }
     
+    /**
+     * Retrieves all the rankings to show them.
+     */
     public void setRankingList(){
         ArrayList<String> rankList = RankingDBController.getRankingBoardnames();
         this.listmodel = new DefaultListModel();
@@ -125,10 +128,18 @@ public class ChooseRankingPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Changes to MainMenuPanel when Back is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Loads a selected Ranking from the list.
+     * @param evt Event trigger.
+     */
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         String select = (String) lstRanking.getSelectedValue();
         ((RankingPanel) mw.getPanel(MainWindow.Panels.RankingPanel)).clearRecordsList();

@@ -47,7 +47,9 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     
     private Pos selectedCell = new Pos(-1, -1);
    
-    
+    /**
+     * Default Constructor of BoardPanel
+     */
     public BoardPanel() 
     {
         padHor = WIDTH / nColumns;
@@ -77,20 +79,36 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
     }
 
+    /**
+     * Sets a GameController for BoardPanel
+     * @param gc The GameController to be set to the BoardPanel.
+     */
     public void setGameController(GameController gc) {
         this.gc = gc;
     }
     
+    /**
+     * Getter of InfoCells.
+     * @return An ArrayList of InfoCells contained in BoardPanel.
+     */
     public ArrayList<ArrayList<InfoCell>> getInfoCells() {
         return infoCells;
     }
     
+    /**
+     * Getter of a InfoCell given a Position p.
+     * @param p The position of the infoCell to retrieve.
+     * @return The infoCell at the p Position.
+     */
     public InfoCell getInfoCell(Pos p) {
         return infoCells.get(p.f).get(p.c);
     }
     
 
-    
+    /**
+     * Draw the columns of the Board.
+     * @param g2d The Graphic tool to draw in display.
+     */
     private void drawColums(Graphics2D g2d) {
         int space = WIDTH / nColumns;
         for (int i = 0; i < nColumns; ++i) {
@@ -98,6 +116,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         }
     }
     
+    /**
+     * Draw the rows of the Board.
+     * @param g2d The graphic tool to draw in display.
+     */
     private void drawRows(Graphics2D g2d) {
         int space = HEIGHT / nColumns;
         for (int i = 0; i < nColumns; ++i) {
@@ -105,6 +127,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         }
     }
     
+    /**
+     * Setter of the size of the graphic Board.
+     * @param size An Integer which contains the size x size measurements.
+     */
     private void setSize(int size) {
         nColumns = size;
         padHor = WIDTH / nColumns;
@@ -116,11 +142,22 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         fontOperation = new Font("Consolas", Font.PLAIN, (int) fontSizeOperation);
     }
     
+    /**
+     * Sets a full matrix of infoCells
+     * @param matrix The matrix which will set up this.infoCells
+     */
     public void setInfoCells(ArrayList<ArrayList<InfoCell>> matrix) {
         setSize(matrix.size());
         this.infoCells = matrix;
     }
     
+    /**
+     * Draws a Cell of the graphic Board.
+     * @param g2d The graphic tool to draw in display.
+     * @param ic The infocell which will be drawn.
+     * @param posX The x position in the board where the Cell will be drawn.
+     * @param posY The y position in the board where the Cell will be drawn.
+     */
     protected void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) 
     {
         if (ic.hinted) {
@@ -156,6 +193,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
 
     }
     
+    /**
+     * Draw all the cells in the graphic Board.
+     * @param g2d The graphic tool to draw in display.
+     */
     private void drawCells(Graphics2D g2d) 
     {   
         if (infoCells.size() > 0){
@@ -179,6 +220,12 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         
     }
     
+    /**
+     * Draws the vertical Border of the graphic Board.
+     * @param g2d The graphic tool to draw in display.
+     * @param row The row position of the Board.
+     * @param column The column position of the Board.
+     */
     private void drawBorderVertical(Graphics g2d, int row, int column) {
     	int y = row*padVer;
     	int x = column*padHor;
@@ -188,6 +235,12 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     	}
     }
     
+    /**
+     * Draws the Horitzontal border of the graphic Board.
+     * @param g2d The graphic tool to draw in display.
+     * @param row The row position of the Board.
+     * @param column The column position of the Board.
+     */
     private void drawBorderHoritzontal(Graphics g2d, int row, int column) {
     	int y = row*padVer;
     	int x = column*padHor;
@@ -197,27 +250,56 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     	}
     }
     
+    /**
+     * Sets an Operation into a Region of the graphic Board.
+     * @param row The row position to set the operation.
+     * @param column The column position to set the operation.
+     * @param op The operation to set.
+     * @param resultValue The result set to the infoCell.
+     */
     public void setOperation(int row, int column, String op, String resultValue) {
         InfoCell ic = infoCells.get(row).get(column);
         ic.operation = op;
         ic.result = resultValue;
     }
     
+    /**
+     * Sets the Horitzontal to a InfoCell.
+     * @param row The row position of the board.
+     * @param column The column position of the board.
+     * @param b The boolean which indicates if we have to draw the border.
+     */
     public void setVerticalBorder(int row, int column, boolean b) {
         InfoCell ic = infoCells.get(row).get(column);
         ic.borderVertical = b;
     }
     
+    /**
+     * Sets the horitzontalBorder to a infoCell
+     * @param row The row position of the board.
+     * @param column The column position of the board.
+     * @param b The boolean which indicates if we have to draw the border.
+     */
     public void setHoritzontalBorder(int row, int column, boolean b) {
         InfoCell ic = infoCells.get(row).get(column);
         ic.borderHoritzontal = b;
     }
     
+    /**
+     * Sets a given value to a infoCell.
+     * @param row The row position of the board.
+     * @param column The column position of the board.
+     * @param value The value to be set in the infoCell.
+     */
     public void setValue(int row, int column, String value) {
         InfoCell ic = infoCells.get(row).get(column);
         ic.value = value;
     } 
     
+    /**
+     * This method does all the Drawing work.
+     * @param g The graphic tool to draw in display.
+     */
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -243,6 +325,10 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         drawSelectedCell(g2d);
     }
     
+    /**
+     * Draws a selected cell in display.
+     * @param g2d The graphic tool to draw in display.
+     */
     private void drawSelectedCell(Graphics2D g2d) {
         
         if (selectedCell.f != -1 && selectedCell.c != -1) {
@@ -260,10 +346,19 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         }
     }
 
+    /**
+     * Gets a copy of a selected position.
+     * @return A copy of a pos in the board.
+     */
     public Pos getSelectedPos() {
         return new Pos(selectedCell);
     }
     
+    /**
+     * Sets a Cell hinted and shows its value.
+     * @param p The position to hint the value.
+     * @param value The value hinted.
+     */
     public void setHint(Pos p, String value) {
         infoCells.get(p.f).get(p.c).value = value;
         infoCells.get(p.f).get(p.c).hinted = true;
@@ -271,11 +366,19 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
         repaint();
     }
     
+    /**
+     * Sets a selected cell by a pos.
+     * @param p The position which will replace the old selectedCell
+     */
     public void setSelectedCell(Pos p) {
         selectedCell.f = p.f;
         selectedCell.c = p.c;
     }
     
+    /**
+     * Paints a component to the panel.
+     * @param g The graphic tool to draw in display.
+     */
     @Override
     public void paintComponent(Graphics g) {
 
