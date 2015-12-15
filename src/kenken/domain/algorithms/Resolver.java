@@ -32,7 +32,7 @@ import kenken.persistance.controllers.BoardDBController;
  * @author SuNLoCK
  */
 public class Resolver {
-
+    
     private class UsedValues {
         private ArrayList<ArrayList<Boolean>> numerosFila;
         private ArrayList<ArrayList<Boolean>> numerosColumna;
@@ -180,6 +180,7 @@ public class Resolver {
             
             if (i >= cellsByRegion.size()) { 
                 if (board.isResolved()) {
+                    System.out.println("Resolver solution:");
                     BoardColorator.printUser(board);
                     System.out.println();
                     trobat = true;
@@ -318,6 +319,10 @@ public class Resolver {
 
     private int getCellID(Cell c) {
         return c.getPosX() * 10 + c.getPosY();
+    }
+    
+    public Board getBoard(){
+        return this.board;
     }
     
     public static void main(String[] args) {

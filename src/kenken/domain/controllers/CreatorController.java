@@ -6,6 +6,7 @@
 package kenken.domain.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import kenken.color.BoardColorator;
 import kenken.domain.algorithms.Resolver;
 import kenken.domain.classes.Board;
@@ -55,10 +56,10 @@ public class CreatorController {
             for (int c = 0; c < infoCells.size(); ++c) {
                 
                 InfoCell ic = infoCells.get(f).get(c);
-                CellKenken ck = board.getCell(f, c);
-                
+                CellKenken ck = board.getCell(f, c);         
                 ck.setHinted(ic.hinted);
                 ck.setRegion(ic.region);
+                
                 if(ic.operation.equals("")) {
                     ck.setSolutionValue(Integer.parseInt(ic.result));
                     ck.setUserValue(Integer.parseInt(ic.result));
@@ -67,28 +68,60 @@ public class CreatorController {
             }
         }
         
+        System.out.println("Bien board:");
         board.setRegions(regions);
-        BoardColorator.printSolution(board);
+        BoardColorator.printUser(board);
         
         Resolver resolver = new Resolver();
-        resolver.resolve(board);
+        //resolver.resolve(board);
         
-        return resolver.resolve(board);
+        System.out.println("Yo que se:");
+        BoardColorator.printSolution(board);
+        
+        System.out.println("User board:");
+        BoardColorator.printUser(board);
+        boolean a = resolver.resolve(board);
+        this.board = resolver.getBoard();
+        return a;
     }
-
-    public ArrayList<ArrayList<Integer>> getSolutionValues() {
+    
+    public Board getBoard(){
+        return this.board;
+    }
+    
+    public ArrayList<ArrayList<Integer>> getUserValues() {
         
         ArrayList<ArrayList<Integer>> result = new ArrayList<>(board.size());
        
+        for(int f = 0; f < board.size(); ++f) {
+            result.add(new ArrayList<>(board.size()));
+            for (int c = 0; c < board.size(); ++c) {
+                result.get(f).add(0);
+            }
+        }
+        
+        Iterator<CellKenken> it = board.iterator();
+        while(it.hasNext()) {
+            CellKenken ck = it.next();
+            
+            result.get(ck.getPosX()).set(ck.getPosY(), ck.getUserValue());
+        }
+        
+        /*
         for (int i = 0; i < board.size(); ++i) 
         {
             result.add(new ArrayList<>(board.size()));
             
             for (int j = 0; j < board.size(); ++j) 
             {
-                result.get(i).add(board.getCell(i, j).getUserValue());
+                result.get(i).add(-2);
+                
+                int valueck = board.getCell(i, j).getUserValue();
+                System.out.println(valueck);
+                result.get(i).set(j,valueck);
             }
         }
+        */
         
         return result;
     }

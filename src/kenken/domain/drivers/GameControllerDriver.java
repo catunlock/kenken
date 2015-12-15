@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kenken.domain.controllers;
+package kenken.domain.drivers;
 
 import kenken.domain.classes.Game;
 import kenken.domain.classes.Board;
@@ -11,6 +11,7 @@ import kenken.domain.controllers.GameController;
 import java.util.ArrayList;
 import java.util.Scanner;
 import kenken.domain.algorithms.Generator;
+import kenken.domain.controllers.GameController;
 
 /**
  *
