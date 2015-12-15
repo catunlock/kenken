@@ -42,6 +42,10 @@ public class CreatePanel extends javax.swing.JPanel {
         editorPanel1.setCreatorController(mw.getCreatorController());
     }
     
+    /**
+     * Initializes a Board.
+     * @param size Indicates the size of the Board.
+     */
     public void initBoard(int size) {
         countregions = 1;
         editing = false;
@@ -216,6 +220,10 @@ public class CreatePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Shows up a Confirmation Dialog and switches to Main Menu Panel.
+     * @param evt Event trigger.
+     */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit? All changes in board will be not saved.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
@@ -223,6 +231,10 @@ public class CreatePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnExitActionPerformed
 
+    /**
+     * Checks if the Board have a solution.
+     * @param evt Event trigger.
+     */
     private void btnCheckBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckBoardActionPerformed
         
         
@@ -234,6 +246,10 @@ public class CreatePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCheckBoardActionPerformed
 
+    /**
+     * Let us to a create a shape for a region.
+     * @param evt Event trigger.
+     */
     private void btnMakeRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRegionActionPerformed
         
         if(! editing) {
@@ -273,6 +289,10 @@ public class CreatePanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnMakeRegionActionPerformed
 
+    /**
+     * Saves the Board if haves a solution.
+     * @param evt 
+     */
     private void btnSaveBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveBoardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveBoardActionPerformed
@@ -295,6 +315,11 @@ public class CreatePanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Converts a symbol of a region to a OperationType.
+     * @param symbol Symbol wanted to convert.
+     * @return An OperationType related to its symbol.
+     */
     public Region.OperationType convertToOperation(String symbol){ 
 
         switch(symbol) {
