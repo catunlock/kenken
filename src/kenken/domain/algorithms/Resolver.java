@@ -102,8 +102,10 @@ public class Resolver {
     //private Untouchables untouchables;
     private UsedValues usedValues;
     private Board board = null;
+    private Board boardSolved;
     private ArrayList<CellKenken> cellsByRegion;
     private boolean trobat = false;
+    private boolean resolved = false;
     
     public void escriure(Board b) {
 		if (b.size() > 0) {
@@ -182,6 +184,7 @@ public class Resolver {
                 if (board.isResolved()) {
                     System.out.println("Resolver solution:");
                     BoardColorator.printUser(board);
+                    boardSolved = new Board(board);
                     System.out.println();
                     trobat = true;
                 }
@@ -224,79 +227,85 @@ public class Resolver {
     
     public boolean resolve(Board b) {
         
-        board = b;
-        usedValues = new UsedValues();
-        possibleValues = new HashMap<>();
-        trobat = false;
-        
-        // Init HashMap<Integer, HashSet<Integer>>
-        for (Region r : b.getRegions()) {
-            for (CellKenken ck : r.getCellList()) {
-                int cellID = getCellID(ck);
-                HashSet<Integer> hs = new HashSet<Integer>();
-                possibleValues.put(cellID, hs);
-                
-            }
+        if(!resolved) {
+            resolved = true;
             
-        }
-  
-        // 1. Marcar las celdas intocables, en los valores usados i en la lista de posibles valores.
-        for (Region r : b.getRegions()) {
-            Region.OperationType op = r.getOperationType();
-            switch(op) {
-                case Add:
-                case Subtract: {
-                    for (CellKenken c : r.getCellList()) {
-                        for (int i = 1; i <= b.size(); ++i) {
-                            possibleValues.get(getCellID(c)).add(i);
-                        }
-                    }
+            board = b;
+            usedValues = new UsedValues();
+            possibleValues = new HashMap<>();
+            trobat = false;
+
+            // Init HashMap<Integer, HashSet<Integer>>
+            for (Region r : b.getRegions()) {
+                for (CellKenken ck : r.getCellList()) {
+                    int cellID = getCellID(ck);
+                    HashSet<Integer> hs = new HashSet<Integer>();
+                    possibleValues.put(cellID, hs);
+
                 }
-                break;
-                case Multiply:
-                case Divide: {
-                    for (CellKenken c : r.getCellList()) {
-                        for (int i = 1; i <= b.size(); ++i) {
-                            if (isMultiple(r, i)) {
+
+            }
+
+            // 1. Marcar las celdas intocables, en los valores usados i en la lista de posibles valores.
+            for (Region r : b.getRegions()) {
+                Region.OperationType op = r.getOperationType();
+                switch(op) {
+                    case Add:
+                    case Subtract: {
+                        for (CellKenken c : r.getCellList()) {
+                            for (int i = 1; i <= b.size(); ++i) {
                                 possibleValues.get(getCellID(c)).add(i);
                             }
                         }
                     }
-                }
-                break;
-                   
-                case None: {
-                    CellKenken c = r.getCellList().get(0);
-                    int x = c.getPosX();
-                    int y = c.getPosY();
-                    int userValue = c.getUserValue();
-                    
-                    usedValues.set(x, y, userValue-1);
-                    possibleValues.get(getCellID(c)).add(c.getUserValue());
-                    
-                    for (int i = 0; i < board.size(); ++i) {
-                        CellKenken cFila = board.getCell(x, i);
-                        CellKenken cColumna = board.getCell(i, y);
-                        possibleValues.get(getCellID(cFila)).remove(userValue);
-                        possibleValues.get(getCellID(cColumna)).remove(userValue);
-                    }
-                    
-                    
-                }
                     break;
-                default:
-                    throw new AssertionError(op.name());
-                
+                    case Multiply:
+                    case Divide: {
+                        for (CellKenken c : r.getCellList()) {
+                            for (int i = 1; i <= b.size(); ++i) {
+                                if (isMultiple(r, i)) {
+                                    possibleValues.get(getCellID(c)).add(i);
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                    case None: {
+                        CellKenken c = r.getCellList().get(0);
+                        int x = c.getPosX();
+                        int y = c.getPosY();
+                        int userValue = c.getUserValue();
+
+                        usedValues.set(x, y, userValue-1);
+                        possibleValues.get(getCellID(c)).add(c.getUserValue());
+
+                        for (int i = 0; i < board.size(); ++i) {
+                            CellKenken cFila = board.getCell(x, i);
+                            CellKenken cColumna = board.getCell(i, y);
+                            possibleValues.get(getCellID(cFila)).remove(userValue);
+                            possibleValues.get(getCellID(cColumna)).remove(userValue);
+                        }
+
+
+                    }
+                        break;
+                    default:
+                        throw new AssertionError(op.name());
+
+                }
             }
+
+            printPossibleValues();
+
+            cellsByRegion = b.getAllCellsOrderedByOperation();
+
+            backtrack(0);
+            return trobat;
+        }else {
+            throw new RuntimeException("Este board ya lo has resuelto.");
         }
         
-        printPossibleValues();
-              
-        cellsByRegion = b.getAllCellsOrderedByOperation();
-        
-        backtrack(0);
-        
-        return trobat;
     }
     
     private void printPossibleValues() {
@@ -321,8 +330,8 @@ public class Resolver {
         return c.getPosX() * 10 + c.getPosY();
     }
     
-    public Board getBoard(){
-        return this.board;
+    public Board getBoardSolved(){
+        return this.boardSolved;
     }
     
     public static void main(String[] args) {

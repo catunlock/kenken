@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class Board implements Serializable {
     private String name;
     private String username;
-    CellKenken[][] board;
+    private CellKenken[][] board;
     private ArrayList<Region> regions;
     
     /**
@@ -33,6 +33,35 @@ public class Board implements Serializable {
         }
         
         regions = new ArrayList<>();
+    }
+    
+    public Board(Board b) {
+        this.name = b.name;
+        this.username = b.username;
+        this.board = new CellKenken[b.size()][b.size()];
+        
+        for (int f = 0; f < b.size(); ++f) {
+            for (int c = 0; c < b.size(); ++c) {
+                this.board[f][c] = new CellKenken(b.getCell(f, c));
+            }
+        }
+        
+        regions = new ArrayList<>();
+        for (int i = 0; i < b.getRegions().size(); ++i) {
+            Region r = b.getRegions().get(i);
+            
+            ArrayList<CellKenken> prevCells = r.getCellList();
+            ArrayList<CellKenken> newCells = new ArrayList<>();
+            for (int j = 0; j < prevCells.size(); ++j) {
+                CellKenken prevCK = prevCells.get(j);
+                
+                newCells.add(this.board[prevCK.getPosX()][prevCK.getPosY()]);
+                
+            }
+            
+            regions.add(new Region(r.getId(),newCells, r.getOperationType(), r.getResult(), r.isValid()));
+            
+        }
     }
     
     /**

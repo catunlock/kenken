@@ -15,6 +15,15 @@ public class CellKenken extends Cell{
     private boolean visible = false;
     private boolean hinted = false;
 
+    public CellKenken(CellKenken ck) {
+        super(ck.getPosX(), ck.getPosY(), ck.isOriginal(), ck.getSolutionValue());
+        
+        this.setHinted(ck.isHinted());
+        this.setRegion(ck.getRegion());
+        this.setUserValue(ck.getUserValue());
+        this.setVisible(ck.isVisible());
+    }
+    
     /**
      * Getter of hinted.
      * @return A boolean to true if the cell is hinted.

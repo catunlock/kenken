@@ -10,7 +10,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import kenken.color.BoardColorator;
-import kenken.domain.classes.Board;
 import kenken.domain.classes.Pos;
 import kenken.domain.classes.Region;
 import kenken.gui.MainWindow;
@@ -53,6 +52,9 @@ public class CreatePanel extends javax.swing.JPanel {
         cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
         txtResult.setText("1");
         btnSaveBoard.setEnabled(false);
+        btnCheckBoard.setEnabled(true);
+        btnClear.setEnabled(true);
+        txtResult.setEditable(true);
         
         ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(size);
         
@@ -100,6 +102,7 @@ public class CreatePanel extends javax.swing.JPanel {
         cmbOperation = new javax.swing.JComboBox();
         spnRegion = new javax.swing.JSpinner();
         btnExit = new javax.swing.JButton();
+        lblCheking = new javax.swing.JLabel();
 
         btnClear.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnClear.setText("CLEAR");
@@ -220,16 +223,12 @@ public class CreatePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 27, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblShowStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(20, 20, 20)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,12 +237,20 @@ public class CreatePanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(btnSaveBoard)
-                        .addGap(18, 18, 18)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnSaveBoard))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 27, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(402, 402, 402)
+                .addComponent(lblCheking, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -255,15 +262,17 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblShowStatus)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(lblCheking)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCheckBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSaveBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
+                    .addComponent(btnSaveBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -289,26 +298,30 @@ public class CreatePanel extends javax.swing.JPanel {
      */
     private void btnCheckBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckBoardActionPerformed
         Object[] options = {"OK"};
-        
+        btnCheckBoard.setEnabled(false);
+        btnClear.setEnabled(false);
         boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
-        ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
-        Board b = mw.getCreatorController().getBoard();
-        BoardColorator.printSolution(b);
-        if (correct){
-            JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-            btnSaveBoard.setEnabled(true);
-            
+        lblCheking.setText("Checking... ");
         
+        ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
+        if (correct){
+            lblCheking.setText("");
+            btnSaveBoard.setEnabled(true);
+            JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+  
             ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
             
-            for (int f = 0; f < b.size(); ++f) {
-                for (int c = 0; c < b.size(); ++c) {
+            for (int f = 0; f < infoCells.size(); ++f) {
+                for (int c = 0; c < infoCells.size(); ++c) {
                     
-                    infoCells.get(f).get(c).value = String.valueOf(b.getCell(f, c).getUserValue());
+                    infoCells.get(f).get(c).value = String.valueOf(values.get(f).get(c));
                 }
             }  
             repaint();
         }else{
+            lblCheking.setText("");
+            btnCheckBoard.setEnabled(true);
+            btnClear.setEnabled(true);
             JOptionPane.showOptionDialog(this,"This Board DO NOT have a correct solution.","Inorrect",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
     }//GEN-LAST:event_btnCheckBoardActionPerformed
@@ -319,7 +332,7 @@ public class CreatePanel extends javax.swing.JPanel {
      */
     private void btnMakeRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRegionActionPerformed
         
-        if(! editing) {
+        if(!editing) {
             
             editorPanel1.setEditRegionMode(true);
             Integer regionNumber = (Integer) spnRegion.getValue();
@@ -334,7 +347,7 @@ public class CreatePanel extends javax.swing.JPanel {
             spnRegion.setEnabled(false);
             cmbOperation.setEnabled(false);
             editing = true;
-            
+            txtResult.setEditable(false);
             
             if (!mw.getCreatorController().existRegion(regionNumber)) {
                Region.OperationType op =  convertToOperation(operation);
@@ -343,6 +356,7 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         }
         else {
+            txtResult.setEditable(true);
             editorPanel1.setEditRegionMode(false);
             btnMakeRegion.setText("Make Region");
             
@@ -376,6 +390,7 @@ public class CreatePanel extends javax.swing.JPanel {
         }
         if (result == 0){  
             JOptionPane.showOptionDialog(this,"Board saved.","Success",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+            btnSaveBoard.setEnabled(false);
         }else{
             JOptionPane.showOptionDialog(this,"Internal Error.","Error",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
@@ -436,6 +451,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbOperation;
     private kenken.gui.EditorPanel editorPanel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCheking;
     private javax.swing.JLabel lblOperation;
     private javax.swing.JLabel lblRegion;
     private javax.swing.JLabel lblResult;

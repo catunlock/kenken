@@ -68,25 +68,13 @@ public class CreatorController {
             }
         }
         
-        System.out.println("Bien board:");
         board.setRegions(regions);
-        BoardColorator.printUser(board);
-        
         Resolver resolver = new Resolver();
-        //resolver.resolve(board);
+            
+        boolean resultat = resolver.resolve(board);
+        this.board = resolver.getBoardSolved();
         
-        System.out.println("Yo que se:");
-        BoardColorator.printSolution(board);
-        
-        System.out.println("User board:");
-        BoardColorator.printUser(board);
-        boolean a = resolver.resolve(board);
-        this.board = resolver.getBoard();
-        return a;
-    }
-    
-    public Board getBoard(){
-        return this.board;
+        return resultat;
     }
     
     public ArrayList<ArrayList<Integer>> getUserValues() {
@@ -106,22 +94,6 @@ public class CreatorController {
             
             result.get(ck.getPosX()).set(ck.getPosY(), ck.getUserValue());
         }
-        
-        /*
-        for (int i = 0; i < board.size(); ++i) 
-        {
-            result.add(new ArrayList<>(board.size()));
-            
-            for (int j = 0; j < board.size(); ++j) 
-            {
-                result.get(i).add(-2);
-                
-                int valueck = board.getCell(i, j).getUserValue();
-                System.out.println(valueck);
-                result.get(i).set(j,valueck);
-            }
-        }
-        */
         
         return result;
     }
