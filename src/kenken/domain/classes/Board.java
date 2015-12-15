@@ -20,6 +20,10 @@ public class Board implements Serializable {
     CellKenken[][] board;
     private ArrayList<Region> regions;
     
+    /**
+     * Constructor of Board with size parameter.
+     * @param size The size of the new Board.
+     */
     public Board(int size) {
         board = new CellKenken[size][size];
         for (int i = 0; i < size; ++i){
@@ -31,34 +35,70 @@ public class Board implements Serializable {
         regions = new ArrayList<>();
     }
     
+    /**
+     * Getter of the Boardname.
+     * @return A String with the BoardName.
+     */
     public String getBoardName(){
         return name;
     }
       
+    /**
+     * Getter of the Username.
+     * @return A String with the username.
+     */
     public String getUsername(){
         return username;
     }
     
+     /**
+     * Setter of boardname.
+     * @param boardname Replaces this.boardname by boardname.
+     */
     public void setBoardName(String boardname){
         this.name = boardname;
     }
     
+    /**
+     * Setter of username.
+     * @param username Sets this.username with username.
+     */
     public void setUsername(String username){
         this.username = username;
     }
     
+    /**
+     * Getter of CellKenken from the Board.
+     * @param x The row location of the cell.
+     * @param y The column location of the cell.
+     * @return A CellKenken at the pos (x,y)
+     */
     public CellKenken getCell(int x, int y) {
         return board[x][y];
     }
     
+    /**
+     * Getter of board's size.
+     * @return An Integer with the board's size.
+     */
     public int size() {
         return board.length;
     }
     
+    /**
+     * Setter of CellKenken given a Position.
+     * @param x  The row location of the cell.
+     * @param y  The column location of the cell.
+     * @param c The CellKenken which will replace the old CellKenken.
+     */
     public void setCell(int x, int y, CellKenken c) {
         board[x][y] = c;
     }
 
+    /**
+     * Converts a Board into a String.
+     * @return The Board changed to a String.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -71,18 +111,35 @@ public class Board implements Serializable {
         return sb.toString();
     }
     
+    /**
+     * Setter of Regions.
+     * @param regions The new ArrayList which will set the region.
+     */
     public void setRegions(ArrayList<Region> regions) {
         this.regions = regions;
     }
     
+    /**
+     * Getter of Region.
+     * @return Returns the Region as a copy.
+     */
     public ArrayList<Region> getRegions() {
         return new ArrayList<Region>(regions);
     }
     
+    /**
+     * Converts the String into a Board.
+     * @param b The String with al the board info.
+     * @return The Object Board converted.
+     */
     public static Board toBoard(String b){
         return null;
     }
     
+    /**
+     * Shows us if the Board is succesfully resolved.
+     * @return A boolean true if it is resolved, otherwise will be false.
+     */
     public boolean isResolved() {
         boolean correct = true;
         
@@ -96,7 +153,10 @@ public class Board implements Serializable {
     }
 
     
-    
+    /**
+     * Creates an Iterator  to go through the regions.
+     * @return A new Iterator to use it with regions.
+     */
     public Iterator<CellKenken> iterator() {
         Iterator<CellKenken> it = new Iterator<CellKenken>() {
             
@@ -139,6 +199,10 @@ public class Board implements Serializable {
         return it;
     }
     
+    /**
+     * Gets an ArrayList of Regions ordered by operation.
+     * @return An ArrayList of Regions ordered by operation.
+     */
     public ArrayList<Region> getRegionsOrderedByOperation() {
         ArrayList<Region> result = new ArrayList<Region>(regions.size());
         
@@ -176,6 +240,10 @@ public class Board implements Serializable {
         return result;
     }
     
+    /**
+     * Gets an ArrayList of Cells ordered by operation.
+     * @return An ArrayList of Cells ordered by operation.
+     */
     public ArrayList<CellKenken> getAllCellsOrderedByOperation() {
         ArrayList<CellKenken> result = new ArrayList<>(size()*size());
         
@@ -187,6 +255,11 @@ public class Board implements Serializable {
         
         return result;
     }
+    
+    /**
+     * Getter of cells ordered by region.
+     * @return An ArrayList of CellKenken which we'll have the cells ordered by region.
+     */
     /*
     public ArrayList<CellKenken> getAllCellsOrderedByRegion() {
         ArrayList<CellKenken> r = new ArrayList<>(size()*size());
