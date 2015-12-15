@@ -21,7 +21,7 @@ public class RegisterPanel extends javax.swing.JPanel {
     private UserControllerKenken uc;
     /**
      * Creates new form RegisterPanel
-     * @param mw
+     * @param mw Main Window Controller.
      */
     public RegisterPanel(MainWindow mw) {
         initComponents();
@@ -29,6 +29,9 @@ public class RegisterPanel extends javax.swing.JPanel {
         this.uc = mw.getUserController();
     }
 
+    /**
+     * Clear the texts from the Fields.
+     */
     public void clearTxt(){
         txtVerifyPassword.setText("");
         txtUsername.setText("");
@@ -174,6 +177,10 @@ public class RegisterPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * If doesn't exist the user entered, creates a user with the information provided.
+     * @param evt Event trigger.
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
 
         if("".equals(txtUsername.getText())){
@@ -199,11 +206,19 @@ public class RegisterPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * Switches to Login Panel when back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Verifies the password when a key is released.
+     * @param evt Event trigger.
+     */
     private void txtVerifyPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVerifyPasswordKeyReleased
         if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
             txtVerifyPassword.setBackground(Color.GREEN);
@@ -212,11 +227,19 @@ public class RegisterPanel extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_txtVerifyPasswordKeyReleased
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
         ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnBackMouseClicked
 
+    /**
+     * Verifies the password when a key is released.
+     * @param evt Event trigger.
+     */
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
             txtVerifyPassword.setBackground(Color.GREEN);
