@@ -18,8 +18,10 @@ public class RankingPanel extends javax.swing.JPanel {
     private MainWindow mw;
     private RankingController rc;
     private DefaultTableModel dtm;
+    
     /**
      * Creates new form RankingPanel
+     * @param mw Main Window Controller.
      */
     public RankingPanel(MainWindow mw) {
         initComponents();
@@ -28,6 +30,10 @@ public class RankingPanel extends javax.swing.JPanel {
         this.dtm = (DefaultTableModel) tblRanking.getModel();
     }
     
+    /**
+     * Sets the list of record in the ranking.
+     * @param boardname The boardname related to the ranking.
+     */
     public void setRecordsList(String boardname){
         ArrayList<String> show = rc.showRanking(boardname);
         show.remove(show.size() - 1);
@@ -37,6 +43,10 @@ public class RankingPanel extends javax.swing.JPanel {
             this.dtm.addRow(row);
         }
     }
+    
+    /**
+     * Clears the List of records.
+     */
     public void clearRecordsList(){
         int size = tblRanking.getRowCount();
         for (int i = 0; i < size; i++){
@@ -127,6 +137,10 @@ public class RankingPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Choose Ranking Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.ChooseRankingPanel);
     }//GEN-LAST:event_btnBackActionPerformed
