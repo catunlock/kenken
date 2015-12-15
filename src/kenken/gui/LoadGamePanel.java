@@ -21,13 +21,17 @@ public class LoadGamePanel extends javax.swing.JPanel {
     private GameController gc;
     ArrayList<String> games;
     /**
-     * Creates new form LoadGamePanel
+     * Creates a form of LoadGamePanel.
+     * @param mw Main Window Controller.
      */
     public LoadGamePanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
     }
     
+    /**
+     * Initializes the Panel.
+     */
     public void initPanel(){
         uc = mw.getUserController();
         gc = new GameController();
@@ -133,10 +137,18 @@ public class LoadGamePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Main Menu Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Load the selected game from the list and switches to play panel.
+     * @param evt Event trigger.
+     */
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         ArrayList<Integer> data = mw.getGameController().loadGame(mw.getUserController().getLoggedUser().getUsername(), (String) lstGames.getSelectedValue());
         int time = mw.getGameController().getTime();
@@ -148,6 +160,10 @@ public class LoadGamePanel extends javax.swing.JPanel {
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 
+    /**
+     * Deletes the selected game from the list and shows up a confirm dialog to erase the game.
+     * @param evt Event trigger.
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String gameToDelete = (String) lstGames.getSelectedValue();
         if (gameToDelete == null) JOptionPane.showMessageDialog(this, "Please select a game to delete", "Select a game", JOptionPane.WARNING_MESSAGE);
