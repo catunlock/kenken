@@ -26,6 +26,9 @@ public class EndGamePanel extends javax.swing.JPanel {
         this.mw = mw;
     }
     
+    /**
+     * Sets the Ranking List every time we enter the End Game Panel.
+     */
     public void updateList(){
         tableModel = (DefaultTableModel) tblRanking.getModel();
         
@@ -35,6 +38,10 @@ public class EndGamePanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Sets the info boardPlayed.
+     * @param boardPlayed The boardPlayed in the game.
+     */
     public void setBoardPlayed(String boardPlayed){
         this.boardPlayed = boardPlayed;
         lblBoardName.setText(boardPlayed);
@@ -139,6 +146,10 @@ public class EndGamePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Main Menu Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
