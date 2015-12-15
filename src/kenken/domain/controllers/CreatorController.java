@@ -86,7 +86,7 @@ public class CreatorController {
             
             for (int j = 0; j < board.size(); ++j) 
             {
-                result.get(i).add(board.getCell(i, j).getSolutionValue());
+                result.get(i).add(board.getCell(i, j).getUserValue());
             }
         }
         

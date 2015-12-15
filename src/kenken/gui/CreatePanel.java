@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kenken.gui;
 
 import java.awt.event.ActionEvent;
@@ -16,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import kenken.domain.classes.Pos;
 import kenken.domain.classes.Region;
+import kenken.gui.MainWindow;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -29,8 +25,8 @@ public class CreatePanel extends javax.swing.JPanel {
     private int countregions = 1;
     private int size;
     
-    //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
-    //cuando se produzca el evento suba un segundo al Duration, y que sea éste
+    //Deberias poner aqui un Duration que cada segundo1 del Timer cambie, y que
+    //cuando se produzca el evento suba un segundo al Duration, y que sea �ste
     //el que aparezca en pantalla en el lblTime
     /**
      * Creates new form PlayPanel
@@ -92,7 +88,7 @@ public class CreatePanel extends javax.swing.JPanel {
         lblShowStatus = new javax.swing.JLabel();
         editorPanel1 = new kenken.gui.EditorPanel();
         btnSaveBoard = new javax.swing.JButton();
-        btnExit1 = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblResult = new javax.swing.JLabel();
         txtResult = new javax.swing.JTextField();
@@ -143,12 +139,12 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         });
 
-        btnExit1.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnExit1.setText("HELP");
-        btnExit1.setToolTipText("");
-        btnExit1.addActionListener(new java.awt.event.ActionListener() {
+        btnHelp.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnHelp.setText("HELP");
+        btnHelp.setToolTipText("");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExit1ActionPerformed(evt);
+                btnHelpActionPerformed(evt);
             }
         });
 
@@ -237,7 +233,7 @@ public class CreatePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblShowStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
                                 .addComponent(btnSaveBoard)
                                 .addGap(20, 20, 20)))))
@@ -254,7 +250,6 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 1, Short.MAX_VALUE)
@@ -262,7 +257,7 @@ public class CreatePanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSaveBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -277,12 +272,12 @@ public class CreatePanel extends javax.swing.JPanel {
      * Shows up a Confirmation Dialog and switches to Main Menu Panel.
      * @param evt Event trigger.
      */
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {                                        
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit? All changes in board will be not saved.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
         }
-    }//GEN-LAST:event_btnExitActionPerformed
+    }                                       
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         mw.getCreatorController().initNewBoard(size);      
         initBoard(size);
@@ -382,13 +377,9 @@ public class CreatePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSaveBoardActionPerformed
 
-    private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnExit1ActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExitActionPerformed
+    }//GEN-LAST:event_btnHelpActionPerformed
 
     private String convertToSimbol(Region.OperationType op) {
         switch(op) {
@@ -435,7 +426,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCheckBoard;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExit1;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnMakeRegion;
     private javax.swing.JButton btnSaveBoard;
     private javax.swing.JComboBox cmbOperation;
