@@ -18,8 +18,7 @@ public class OptionsPanel extends javax.swing.JPanel {
     private MainWindow mw;
     /**
      * Creates new form OptionsPanel
-     * @param mw
-     * @param uc
+     * @param mw Main Window Controller.
      */
     public OptionsPanel(MainWindow mw) {
         initComponents();
@@ -27,6 +26,9 @@ public class OptionsPanel extends javax.swing.JPanel {
         txtPassword.setText("");
     }
 
+    /**
+     * Clears the Txtpassword field.
+     */
     public void clearTxr(){
         txtPassword.setText("");
     }
@@ -100,17 +102,28 @@ public class OptionsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Main menu Panel when back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.MainMenuPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * When the password matches with the user password and the delete button is pressed a pop-up will show up and confirm the deletion.
+     * @param evt Event trigger.
+     */
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             String pass = Arrays.toString(txtPassword.getPassword());
             UserControllerKenken uc = mw.getUserController();
+            String name = uc.getUsername();
             int error = uc.deleteUser(pass);
             if (error == 0) {
+                GameController gc = new GameController();
+                gc.deleteGames(name);
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
                 mw.setPanel(MainWindow.Panels.LoginPanel);
             }

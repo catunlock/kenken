@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import kenken.domain.classes.Board;
 import kenken.domain.classes.BoardInfo;
+import kenken.domain.controllers.UserController;
 
 /**
  *
@@ -52,7 +53,9 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
         if (infoBoard != null){
             for(BoardInfo bInf : infoBoard){
                 // mostrar solo las tablas creadas por el usuario
-                if(bInf.getCreador() == null ? mw.getUserDataGetter().getUsername(mw.getUserController()) == null : bInf.getCreador().equals(mw.getUserDataGetter().getUsername(mw.getUserController()))){
+                String creator = bInf.getCreador();
+                String user = mw.getUserDataGetter().getUsername(mw.getUserController());
+                if(creator.equals(user)){
                     listModel.addElement(bInf.getName());
                 }
             }
@@ -241,9 +244,11 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
      * @param evt Event trigger.
      */
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
-        lblShowCreador.setText(bi.getCreador());
-        lblShowTamany.setText(bi.getSize());
+        if (lstBoards.getSelectedIndex() != -1){
+            BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
+            lblShowCreador.setText(bi.getCreador());
+            lblShowTamany.setText(bi.getSize());
+        }
     }//GEN-LAST:event_lstBoardsValueChanged
 
 

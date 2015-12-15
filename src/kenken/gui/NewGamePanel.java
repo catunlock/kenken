@@ -14,7 +14,7 @@ public class NewGamePanel extends javax.swing.JPanel {
     private MainWindow mw;
     /**
      * Creates new form NewGamePanel
-     * @param mw
+     * @param mw Main Window Controller.
      */
     public NewGamePanel(MainWindow mw) {
         initComponents();
@@ -96,15 +96,27 @@ public class NewGamePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Generate Board Panel when Generate Board button is pressed.
+     * @param evt Even trigger.
+     */
     private void btnGenerateBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateBoardActionPerformed
         mw.setPanel(MainWindow.Panels.GenerateBoardPanel);
     }//GEN-LAST:event_btnGenerateBoardActionPerformed
 
+    /**
+     * Loads de Board list from Load Board Panel and switches to it.
+     * @param evt Event trigger.
+     */
     private void btnLoadBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadBoardActionPerformed
         ((LoadBoardPanel) (mw.getPanel(MainWindow.Panels.LoadBoardPanel))).updateList();
         mw.setPanel(MainWindow.Panels.LoadBoardPanel);
     }//GEN-LAST:event_btnLoadBoardActionPerformed
 
+    /**
+     * If the user is a guest, switches to Guest panel, otherwise to Main menu Panel.
+     * @param evt Even trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         if (mw.getUserController().getUsername() == ""){
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();

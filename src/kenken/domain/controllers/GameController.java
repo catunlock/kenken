@@ -17,6 +17,7 @@ import kenken.domain.classes.Pos;
 import kenken.domain.classes.Region;
 import kenken.domain.classes.User;
 import kenken.gui.InfoCell;
+import kenken.persistance.controllers.DirectoryCreator;
 
 /**
  *
@@ -30,6 +31,16 @@ public class GameController {
     private Game game;
     private boolean generated = false;
 
+    public int createGames(String username){
+        DirectoryCreator dc = new DirectoryCreator();
+        return dc.createUser(username);
+    }
+    
+    public int deleteGames(String username){
+        DirectoryCreator dc = new DirectoryCreator();
+        return dc.deleteUser(username);
+    }
+    
     public int updateAndSave(ArrayList<String> data, String username, String nompartida) {
         Board b = this.game.getBoard();
         int i = 0, j = 0;

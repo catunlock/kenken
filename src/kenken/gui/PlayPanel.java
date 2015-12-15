@@ -334,24 +334,29 @@ public class PlayPanel extends javax.swing.JPanel {
     private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
         int segonsTotals = segTotal+segThisGame;
         String nompartida = JOptionPane.showInputDialog("Type the name of the game you want to save.");
-        String username = mw.getUserController().getLoggedUser().getUsername();
-        ArrayList<String> data = new ArrayList<>();
-        data.add(Integer.toString(segonsTotals));
-        data.add(Integer.toString(mw.getGameController().getHints()));
-        int tamany = mw.getGameController().getInfoBoard().size();
-        for (int i = 0; i < tamany; ++i){
-            for (int j = 0; j < tamany; ++j){
-                Pos p = new Pos(i,j);
-                data.add(boardPanel1.getInfoCell(p).value);
-            }
+        if (nompartida == null || "null".equals(nompartida) || "".equals(nompartida)) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid name.");
         }
-        int error = mw.getGameController().updateAndSave(data, username, nompartida);
-        if (error == -1) JOptionPane.showMessageDialog(this, "There already is a game called " + nompartida + " in your saved games.");
-        else{
-            mw.setPanel(MainWindow.Panels.MainMenuPanel);
-            lblTime.setText("00:00:00");
-            ap.stop(audio);
-            timer.stop();
+        else {
+            String username = mw.getUserController().getLoggedUser().getUsername();
+            ArrayList<String> data = new ArrayList<>();
+            data.add(Integer.toString(segonsTotals));
+            data.add(Integer.toString(mw.getGameController().getHints()));
+            int tamany = mw.getGameController().getInfoBoard().size();
+            for (int i = 0; i < tamany; ++i){
+                for (int j = 0; j < tamany; ++j){
+                    Pos p = new Pos(i,j);
+                    data.add(boardPanel1.getInfoCell(p).value);
+                }
+            }
+            int error = mw.getGameController().updateAndSave(data, username, nompartida);
+            if (error == -1) JOptionPane.showMessageDialog(this, "There already is a game called " + nompartida + " in your saved games.");
+            else{
+                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                lblTime.setText("00:00:00");
+                ap.stop(audio);
+                timer.stop();
+            }
         }
     }//GEN-LAST:event_btnSaveGameActionPerformed
 
