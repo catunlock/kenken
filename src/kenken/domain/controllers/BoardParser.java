@@ -20,18 +20,32 @@ public class BoardParser {
         private ArrayList<ArrayList<InfoCell>> infoCells;
         private Board board;
         
+        /**
+         * Constructor of BoardParser with infoCells parameter.
+         * @param infoCells InfoCells previously initialized.
+         */
         public BoardParser(ArrayList<ArrayList<InfoCell>> infoCells){
             this.infoCells = infoCells;
         }
         
+        /**
+         * Construtor of BoardParser with Board initialized.
+         * @param board The initialized board.
+         */
         public BoardParser(Board board) {
             this.board = board;
         }
         
+        /**
+         * Default Constructor of BoardParser.
+         */
         public BoardParser(){
             
         }
         
+        /**
+         * Initializes a Matrix with Cells.
+         */
         private void initMatrix() {
             int size = board.size();
             infoCells = new ArrayList<>(size);
@@ -56,6 +70,9 @@ public class BoardParser {
             }
         }
         
+        /**
+         * Detects the vertical Limits of the Board.
+         */
         private void detectVerticalLimits() {
             
             for (int f = 0; f < infoCells.size(); ++f) {
@@ -72,6 +89,9 @@ public class BoardParser {
             }
         }
         
+        /**
+         * Detects the Horitzontal limits of the Board.
+         */
         private void detectHoritzontalLimits() {
             
             for (int c = 0; c < infoCells.size(); ++c) {
@@ -86,6 +106,9 @@ public class BoardParser {
             }
         }
         
+        /**
+         * Detects the Operations of each region.
+         */
         private void detectOperations() {
             boolean[] detectats = new boolean[board.getRegions().size()+1];
             
@@ -106,6 +129,11 @@ public class BoardParser {
             }
         }
         
+        /**
+         * Converts an Enum OperationType to a symbol.
+         * @param op The OperationType to be converted.
+         * @return A String with the symbol of the operation.
+         */
         private String convertToSimbol(Region.OperationType op) {
             switch(op) {
                 case Add:
@@ -138,6 +166,10 @@ public class BoardParser {
 
         }
         
+        /**
+         * Parses all the infoCells to a Object Board.
+         * @return The Board parsed.
+         */
         public Board parseInfoCell(){
             ArrayList<Region> regions = new ArrayList<>();
             Board b = new Board(infoCells.size());
