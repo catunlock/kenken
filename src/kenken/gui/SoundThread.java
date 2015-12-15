@@ -12,21 +12,34 @@ public class SoundThread extends Thread {
     Thread t;
     Clip clip;
     
+    /**
+     * Plays the music.
+     */
     public void play() {
         
         t.start();
     }
     
+    /**
+     * Stops the music.
+     */
     public void stopMusic() {
         clip.stop();
     }
 
+    /**
+     * Sets a new SoundThread and also sets a deamon.
+     * @param resource Sets a new resource to the thread.
+     */
     public SoundThread(String resource) {
         this.resource = resource;
         t = new SoundThread(resource);
         t.setDaemon(true);
     }
 
+    /**
+     * Runs the SoundThread.
+     */
     @Override
     public void run() {
         clip = null;
