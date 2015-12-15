@@ -60,8 +60,8 @@ public class CreatorController {
                 ck.setHinted(ic.hinted);
                 ck.setRegion(ic.region);
                 if(ic.operation.equals("")) {
-                    ck.setSolutionValue(Integer.parseInt(ic.value));
-                    ck.setUserValue(Integer.parseInt(ic.value));
+                    ck.setSolutionValue(Integer.parseInt(ic.result));
+                    ck.setUserValue(Integer.parseInt(ic.result));
                 }
                 regions.get(ic.region-1).addCell(ck);
             }
