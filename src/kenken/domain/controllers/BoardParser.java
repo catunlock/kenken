@@ -162,8 +162,9 @@ public class BoardParser {
                     CellKenken ck = new CellKenken(i,j,false);
                     ck.setHinted(ic.hinted);
                     ck.setRegion(region);
-                    ck.setUserValue(Integer.parseInt(ic.value));
-                    ck.setSolutionValue(Integer.valueOf(ic.value));
+                    int value = Integer.parseInt(ic.value);
+                    ck.setUserValue(value);
+                    ck.setSolutionValue(value);
                     b.setCell(i, j, ck);
                                 
                     int numreg = -1;
