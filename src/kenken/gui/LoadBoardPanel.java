@@ -24,14 +24,16 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form LoadBoardPanel
-     * @param mw
+     * @param mw Main Window Controller.
      */
     public LoadBoardPanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
     }
 
-    
+    /**
+     * Sets the Boards list every time LoadBoardPanel is accessed.
+     */
     public void updateList(){
         listModel = new DefaultListModel();
         
@@ -176,6 +178,10 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Loads the selected board from the list and the game begins.
+     * @param evt Event trigger.
+     */
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
         
@@ -186,10 +192,18 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnLoadActionPerformed
 
+    /**
+     * Switches to New Game Panel when Back button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Changes the information about the board displayed.
+     * @param evt Event trigger.
+     */
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
         BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
         lblShowCreador.setText(bi.getCreador());
