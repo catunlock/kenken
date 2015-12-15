@@ -43,7 +43,7 @@ public class EditorPanel extends BoardPanel{
 
     public void setEditRegionNumber(int editRegionNumber) {
         this.editRegionNumber = editRegionNumber;
-        cc.setEditRegion(editRegionNumber);
+       
     }
     
     public void setShowRegionNumber(boolean showRegionNumber) {

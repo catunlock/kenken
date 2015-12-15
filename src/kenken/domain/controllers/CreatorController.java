@@ -12,6 +12,7 @@ import kenken.domain.classes.Board;
 import kenken.domain.classes.CellKenken;
 import kenken.domain.classes.Region;
 import kenken.gui.InfoCell;
+import kenken.persistance.controllers.BoardDBController;
 
 /**
  *
@@ -20,7 +21,6 @@ import kenken.gui.InfoCell;
 public class CreatorController {
     private Board board;
     private ArrayList<Region> regions;
-    private int editRegion;
     
     public CreatorController() {
         
@@ -48,9 +48,6 @@ public class CreatorController {
         regions.get(editRegion-1).getCellList().add(ck);
     }
     */
-    public void setEditRegion(int nRegion) {
-        editRegion = nRegion;
-    }
     
     public boolean resolve(ArrayList<ArrayList<InfoCell>> infoCells){
         
@@ -77,5 +74,29 @@ public class CreatorController {
         resolver.resolve(board);
         
         return resolver.resolve(board);
+    }
+
+    public ArrayList<ArrayList<Integer>> getSolutionValues() {
+        
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>(board.size());
+       
+        for (int i = 0; i < board.size(); ++i) 
+        {
+            result.add(new ArrayList<>(board.size()));
+            
+            for (int j = 0; j < board.size(); ++j) 
+            {
+                result.get(i).add(board.getCell(i, j).getSolutionValue());
+            }
+        }
+        
+        return result;
+    }
+    
+    public int saveBoard(String boardname, String username){
+        board.setBoardName(boardname);
+        board.setUsername(username);
+        BoardController bc = new BoardController();
+        return bc.saveCreatedBoard(board);
     }
 }

@@ -27,6 +27,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private MainWindow mw;
     private boolean editing = false;
     private int countregions = 1;
+    private int size;
     
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
@@ -43,11 +44,13 @@ public class CreatePanel extends javax.swing.JPanel {
     }
     
     public void initBoard(int size) {
+        this.size = size;
         countregions = 1;
         editing = false;
         spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, countregions, 1));
         cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
         txtResult.setText("1");
+        btnSaveBoard.setEnabled(false);
         
         ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(size);
         
@@ -80,31 +83,33 @@ public class CreatePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnExit = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         btnCheckBoard = new javax.swing.JButton();
-        btnMakeRegion = new javax.swing.JButton();
-        spnRegion = new javax.swing.JSpinner();
-        cmbOperation = new javax.swing.JComboBox();
-        lblRegion = new javax.swing.JLabel();
-        lblOperation = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
         lblShowStatus = new javax.swing.JLabel();
-        lblResult = new javax.swing.JLabel();
-        txtResult = new javax.swing.JTextField();
         editorPanel1 = new kenken.gui.EditorPanel();
         btnSaveBoard = new javax.swing.JButton();
+        btnExit1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblResult = new javax.swing.JLabel();
+        txtResult = new javax.swing.JTextField();
+        lblRegion = new javax.swing.JLabel();
+        btnMakeRegion = new javax.swing.JButton();
+        lblOperation = new javax.swing.JLabel();
+        cmbOperation = new javax.swing.JComboBox();
+        spnRegion = new javax.swing.JSpinner();
+        btnExit = new javax.swing.JButton();
 
-        btnExit.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnExit.setText("EXIT");
-        btnExit.setToolTipText("");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnClear.setText("CLEAR");
+        btnClear.setToolTipText("");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
         btnCheckBoard.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        btnCheckBoard.setText("CHECK BOARD");
+        btnCheckBoard.setText("FIND SOLUTION");
         btnCheckBoard.setToolTipText("");
         btnCheckBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,28 +117,7 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         });
 
-        btnMakeRegion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnMakeRegion.setText("Make Region");
-        btnMakeRegion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMakeRegionActionPerformed(evt);
-            }
-        });
-
-        cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblRegion.setText("Region:");
-
-        lblOperation.setText("Operation:");
-
-        lblStatus.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblStatus.setText("Status: ");
-
-        lblShowStatus.setText("lblStatus");
-
-        lblResult.setText("Result:");
-
-        txtResult.setText("0");
+        lblShowStatus.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout editorPanel1Layout = new javax.swing.GroupLayout(editorPanel1);
         editorPanel1.setLayout(editorPanel1Layout);
@@ -155,41 +139,109 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         });
 
+        btnExit1.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnExit1.setText("HELP");
+        btnExit1.setToolTipText("");
+        btnExit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExit1ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edit"));
+
+        lblResult.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
+        lblResult.setText("Result:");
+
+        txtResult.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
+        txtResult.setText("1");
+
+        lblRegion.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
+        lblRegion.setText("Region:");
+
+        btnMakeRegion.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnMakeRegion.setText("Make Region");
+        btnMakeRegion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMakeRegionActionPerformed(evt);
+            }
+        });
+
+        lblOperation.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
+        lblOperation.setText("Operation:");
+
+        cmbOperation.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRegion)
+                .addGap(18, 18, 18)
+                .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(lblOperation)
+                .addGap(18, 18, 18)
+                .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblResult)
+                .addGap(18, 18, 18)
+                .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRegion)
+                .addComponent(lblOperation)
+                .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblResult)
+                .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        btnExit.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnExit.setText("EXIT");
+        btnExit.setToolTipText("");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRegion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblOperation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblResult)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnCheckBoard)
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblShowStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnSaveBoard)
+                                .addGap(20, 20, 20)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblShowStatus)
-                .addGap(182, 182, 182)
-                .addComponent(btnCheckBoard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSaveBoard)
-                .addGap(18, 18, 18))
+                .addGap(122, 122, 122)
+                .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,40 +249,50 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(editorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMakeRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRegion)
-                    .addComponent(lblOperation)
-                    .addComponent(lblResult)
-                    .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCheckBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatus)
-                    .addComponent(lblShowStatus)
-                    .addComponent(btnSaveBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addComponent(lblShowStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSaveBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCheckBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit? All changes in board will be not saved.", "Warning", JOptionPane.YES_NO_OPTION);
-        if (n == 0) {
-            mw.setPanel(MainWindow.Panels.MainMenuPanel);
-        }
-    }//GEN-LAST:event_btnExitActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        mw.getCreatorController().initNewBoard(size);      
+        initBoard(size);
+        repaint();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnCheckBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckBoardActionPerformed
-        
-        
+        Object[] options = {"OK"};
         boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
         if (correct){
-            JOptionPane.showConfirmDialog(this, "This Board have a correct solution.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+            btnSaveBoard.setEnabled(true);
+            
+            ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getSolutionValues();
+            ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
+            
+            for (int f = 0; f < values.size(); ++f) {
+                for (int c = 0; c < values.size(); ++c) {
+                    infoCells.get(f).get(c).value = String.valueOf(values.get(f).get(c));
+                }
+            }  
+            repaint();
         }else{
-            JOptionPane.showConfirmDialog(this, "This Board DO NOT have a correct solution.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showOptionDialog(this,"This Board DO NOT have a correct solution.","Inorrect",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
     }//GEN-LAST:event_btnCheckBoardActionPerformed
 
@@ -274,8 +336,33 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMakeRegionActionPerformed
 
     private void btnSaveBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveBoardActionPerformed
-        // TODO add your handling code here:
+        Object[] options = {"OK"};
+        int result = -1;
+        String message = "Insert Board name:";
+        while (result == -1){
+            String boardname =  JOptionPane.showInputDialog(this, message, "Save",
+                    JOptionPane.QUESTION_MESSAGE);    
+            if (boardname != "") {
+                result = mw.getCreatorController().saveBoard(boardname,mw.getUserController().getUsername());
+                message = "Boardname in use. Please insert another Board name:";
+            }else{
+                message = "Please insert a Board name:";
+            }     
+        }
+        if (result == 0){  
+            JOptionPane.showOptionDialog(this,"Board saved.","Success",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+        }else{
+            JOptionPane.showOptionDialog(this,"Internal Error.","Error",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+        }
     }//GEN-LAST:event_btnSaveBoardActionPerformed
+
+    private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExit1ActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private String convertToSimbol(Region.OperationType op) {
         switch(op) {
@@ -315,16 +402,18 @@ public class CreatePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCheckBoard;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExit1;
     private javax.swing.JButton btnMakeRegion;
     private javax.swing.JButton btnSaveBoard;
     private javax.swing.JComboBox cmbOperation;
     private kenken.gui.EditorPanel editorPanel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblOperation;
     private javax.swing.JLabel lblRegion;
     private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblShowStatus;
-    private javax.swing.JLabel lblStatus;
     private javax.swing.JSpinner spnRegion;
     private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables

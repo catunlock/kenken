@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kenken.domain.classes.BoardInfo;
+import kenken.domain.controllers.BoardController;
 
 /**
  *
@@ -110,10 +111,7 @@ public class BoardDBController {
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);
-            
-            //comprobar errores
-            System.out.println("resultInfo: " + resultInfo);
-            System.out.println("resultObj: " + resultObj);      
+                 
             if (resultInfo == -2 || resultObj == -2){
                 result = -2;
             }
@@ -341,4 +339,21 @@ public class BoardDBController {
         return result;
     }
     
+    /*
+    Pre: boardname != null & file != null
+    Post: guarda la board con boardname en el fichero file
+    */  
+    public void saveBoard(String boardname, File file){
+        FileOutputStream fos;      
+        Board newBoard = loadBoard(boardname);     
+        ObjectOutputStream oos;
+        try {
+            fos = new FileOutputStream(file);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(newBoard);
+            fos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+    }   
 }

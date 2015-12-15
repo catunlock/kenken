@@ -66,17 +66,7 @@ public class BoardController {
      * @param file File to be stored the board.
      */
     public void saveBoard(String boardname, File file){
-        FileOutputStream fos;      
-        Board newBoard = exportBoard(boardname);     
-        ObjectOutputStream oos;
-        try {
-            fos = new FileOutputStream(file);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(newBoard);
-            fos.close();
-        } catch (IOException ex) {
-            Logger.getLogger(BoardController.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        bDBc.saveBoard(boardname, file);
     }
     
     /* Pre: board != null
@@ -138,6 +128,10 @@ public class BoardController {
      */
     public int deleteBoard(String boardname){
         return bDBc.deleteBoard(boardname);
+    }
+    
+    public int saveCreatedBoard(Board b){
+        return bDBc.createBoard(b);
     }
     
 }
