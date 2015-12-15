@@ -12,17 +12,35 @@ package kenken.domain.classes;
 public class Pos {
     public int f = 0;
     public int c = 0;
+    
+    /**
+     * Default Constructor of Pos.
+     */
     public Pos() {}
+    
+    /**
+     * Constructor of Pos with parameters f and c.
+     * @param f An Integer with the row position.
+     * @param c An Integer with the column position.
+     */
     public Pos(int f, int c) {
         this.f = f;
         this.c = c;
     }
     
+    /**
+     * A Copy Constructor of Pos.
+     * @param p The p Pos to copy.
+     */
     public Pos(Pos p) {
         this.f = p.f;
         this.c = p.c;
     }
 
+    /**
+     * Converts the Pos Object to a String
+     * @return The String with all the Pos information.
+     */
     @Override
     public String toString() {
         return "Pos{" + "f=" + f + ", c=" + c + '}';
