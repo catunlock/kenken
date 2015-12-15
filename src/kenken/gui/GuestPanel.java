@@ -15,7 +15,7 @@ public class GuestPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form GuestPanel
-     * @param mw
+     * @param mw Main Window Controller.
      */
     public GuestPanel(MainWindow mw) {
         initComponents();
@@ -90,11 +90,19 @@ public class GuestPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Switches to Login Panel when Exit button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
         mw.setPanel(MainWindow.Panels.LoginPanel);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    /**
+     * Switches to New Game Panel when New Game button is pressed.
+     * @param evt Event trigger.
+     */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         mw.setPanel(MainWindow.Panels.NewGamePanel);
     }//GEN-LAST:event_btnNewGameActionPerformed
