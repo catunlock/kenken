@@ -32,7 +32,10 @@ public class Region implements Serializable{
     private boolean valid;
     private int id;
 
-
+    public void addCell(CellKenken ck) {
+        cellList.add(ck);
+    }
+    
     /**
      * The constructor of Region
      * @param id An integer eith the id.

@@ -174,7 +174,7 @@ public class Resolver {
         return true;
     }
     
-    public void backtrack(int i) {
+    private void backtrack(int i) {
         
         if (! trobat) {
             

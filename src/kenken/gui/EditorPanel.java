@@ -20,11 +20,17 @@ public class EditorPanel extends BoardPanel{
     private boolean editRegionMode = false;
     private int editRegionNumber = -1;
     private String editRegionOperation = "";
+    private String editRegionResult = "";
     private CreatorController cc;
+
     
     public EditorPanel() {
         this.setFocusable(true);
         this.addMouseListener(this);
+    }
+    
+    public void setEditRegionResult(String editRegionResult) {
+        this.editRegionResult = editRegionResult;
     }
     
     public void setEditRegionOperation(String editRegionOperation) {
@@ -37,11 +43,18 @@ public class EditorPanel extends BoardPanel{
 
     public void setEditRegionNumber(int editRegionNumber) {
         this.editRegionNumber = editRegionNumber;
+        cc.setEditRegion(editRegionNumber);
     }
     
     public void setShowRegionNumber(boolean showRegionNumber) {
         this.showRegionNumber = showRegionNumber;
     }
+
+    public void setCreatorController(CreatorController cc) {
+        this.cc = cc;
+    }
+    
+    
 
     @Override
     protected void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) {
@@ -68,7 +81,8 @@ public class EditorPanel extends BoardPanel{
             InfoCell ic = infoCells.get(f).get(c);
             ic.region = editRegionNumber;
             ic.operation = editRegionOperation;
-
+            ic.result = editRegionResult;
+            
             repaint();
         }
         

@@ -137,10 +137,9 @@ public class Board implements Serializable {
     }
     
     /**
-     * Shows us if the Board is succesfully resolved.
+     * Shows us if the Board is correct.
      * @return A boolean true if it is resolved, otherwise will be false.
      */
-    public boolean isResolved() {
     public boolean isCorrect() {
         boolean correct = true;
         

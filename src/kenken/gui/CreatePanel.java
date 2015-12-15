@@ -39,9 +39,16 @@ public class CreatePanel extends javax.swing.JPanel {
         this.mw = mw;
         spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, countregions, 1));
         cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
+        editorPanel1.setCreatorController(mw.getCreatorController());
     }
     
     public void initBoard(int size) {
+        countregions = 1;
+        editing = false;
+        spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, countregions, 1));
+        cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
+        txtResult.setText("1");
+        
         ArrayList<ArrayList<InfoCell>> infoCells = new ArrayList<>(size);
         
         for (int i = 0; i < size; ++i) 
@@ -52,6 +59,7 @@ public class CreatePanel extends javax.swing.JPanel {
                 infoCells.get(i).add(new InfoCell());
             }
         }
+        
         editorPanel1.setInfoCells(infoCells);
         editorPanel1.setShowRegionNumber(true);
     }
@@ -216,7 +224,9 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCheckBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckBoardActionPerformed
-        boolean correct = mw.getGameController().resolve();
+        
+        
+        boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
         if (correct){
             JOptionPane.showConfirmDialog(this, "This Board have a correct solution.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }else{
@@ -227,18 +237,27 @@ public class CreatePanel extends javax.swing.JPanel {
     private void btnMakeRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeRegionActionPerformed
         
         if(! editing) {
-
+            
             editorPanel1.setEditRegionMode(true);
             Integer regionNumber = (Integer) spnRegion.getValue();
             String operation = convertToSimbol((Region.OperationType)cmbOperation.getSelectedItem());
+            String result = txtResult.getText();
             
             editorPanel1.setEditRegionNumber(regionNumber);
             editorPanel1.setEditRegionOperation(operation);
+            editorPanel1.setEditRegionResult(result);
             btnMakeRegion.setText("End Region");
             
             spnRegion.setEnabled(false);
             cmbOperation.setEnabled(false);
             editing = true;
+            
+            
+            if (!mw.getCreatorController().existRegion(regionNumber)) {
+               Region.OperationType op =  convertToOperation(operation);
+                              
+               mw.getCreatorController().addRegion(regionNumber, op, Integer.parseInt(result), true);
+            }
         }
         else {
             editorPanel1.setEditRegionMode(false);
@@ -273,6 +292,24 @@ public class CreatePanel extends javax.swing.JPanel {
             default:
                 throw new AssertionError(op.name());
 
+        }
+    }
+    
+    public Region.OperationType convertToOperation(String symbol){ 
+
+        switch(symbol) {
+            case "+":
+                return Region.OperationType.Add;
+            case "-":
+                return Region.OperationType.Subtract;
+            case "*":
+                return Region.OperationType.Multiply;
+            case "/":
+                return Region.OperationType.Divide;
+            case "":
+                return Region.OperationType.None;
+            default:
+                throw new AssertionError("Simbolo desconocido.");
         }
     }
 

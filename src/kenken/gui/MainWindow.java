@@ -41,6 +41,7 @@ import java.util.Hashtable;
 import java.util.Map.Entry;
 import javax.swing.*;
 import kenken.domain.controllers.BoardController;
+import kenken.domain.controllers.CreatorController;
 import kenken.domain.controllers.GameController;
 import kenken.domain.controllers.RankingController;
 import kenken.domain.controllers.UserController;
@@ -56,6 +57,11 @@ public class MainWindow {
     private RankingController rc = new RankingController();
     private UserController uc = new UserController();
     private UserDataGetter dg = new UserDataGetter();
+    private CreatorController cc = new CreatorController();
+
+    public CreatorController getCreatorController() {
+        return cc;
+    }
     
     public BoardController getBoardController() {
         return bc;

@@ -122,6 +122,7 @@ public class CreateBoardPanel extends javax.swing.JPanel {
                 
         CreatePanel cp = (CreatePanel) mw.getPanel(MainWindow.Panels.CreatePanel);
         cp.initBoard(size);
+        mw.getCreatorController().initNewBoard(size);
         mw.setPanel(MainWindow.Panels.CreatePanel);
     }//GEN-LAST:event_btnCreateActionPerformed
 
