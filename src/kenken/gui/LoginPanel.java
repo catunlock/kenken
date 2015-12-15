@@ -5,6 +5,9 @@
  */
 package kenken.gui;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Arrays;
 import kenken.domain.controllers.UserController;
 import kenken.domain.controllers.UserControllerKenken;
@@ -15,6 +18,14 @@ import kenken.domain.controllers.UserControllerKenken;
  */
 public class LoginPanel extends javax.swing.JPanel {
 
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image background = Toolkit.getDefaultToolkit().createImage("background.jpg");      
+        g.drawImage(background, 0, 0, null);
+    }
+    
     private MainWindow mw;
     /**
      * Creates new form LoginPanel
@@ -131,7 +142,7 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

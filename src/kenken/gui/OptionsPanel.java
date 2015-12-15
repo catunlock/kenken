@@ -78,7 +78,7 @@ public class OptionsPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 338, Short.MAX_VALUE)
+                .addGap(0, 263, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,7 +108,8 @@ public class OptionsPanel extends javax.swing.JPanel {
         int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your user? This will erase all your data permanently.", "Warning", JOptionPane.YES_NO_OPTION);
         if (n == 0) {
             String pass = Arrays.toString(txtPassword.getPassword());
-            int error = mw.getUserController().deleteUser(pass);
+            UserControllerKenken uc = mw.getUserController();
+            int error = uc.deleteUser(pass);
             if (error == 0) {
                 ((LoginPanel) mw.getPanel(MainWindow.Panels.LoginPanel)).clearTxt();
                 mw.setPanel(MainWindow.Panels.LoginPanel);

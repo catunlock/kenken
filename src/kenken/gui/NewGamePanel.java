@@ -79,7 +79,7 @@ public class NewGamePanel extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(343, 343, 343)
                             .addComponent(lblNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(353, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
