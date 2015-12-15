@@ -20,32 +20,55 @@ public class Ranking implements Serializable{
     private ArrayList<Record> recordList;
     private GameMode gameMode;
 
+    /**
+     * Constuctor of Ranking with parameters boardName and gameMode.
+     * @param boardName The BoardName related to the Ranking.
+     * @param gameMode The GameMode related to the Ranking.
+     */
     public Ranking(String boardName, GameMode gameMode) {
         this.boardName = boardName;
         this.gameMode = gameMode;
         this.recordList = new ArrayList(0);
     }
 
+    /**
+     * Getter of BoardName.
+     * @return A String with the boardName.
+     */
     public String getBoardName() {
         return boardName;
     }
 
+    /**
+     * Getter of RecordList.
+     * @return An ArrayList of Record with all the records contained in the Ranking.
+     */
     public ArrayList<Record> getRecordList() {
         return recordList;
     }
     
+    /**
+     * Getter of the size of RecordList.
+     * @return An Integer with the number of Records contained in the Ranking.
+     */
     public int getRecordListSize(){
         return this.recordList.size();
     }
-    /*
-    Pre: pos ha de ser una posició existent del Ranking.
-    */
+    
+    /**
+     * Getter of Record given a Position.
+     * @param pos The position of the Ranking to get the Record.
+     * @return A Record selected by the parameter pos.
+     */
     public Record getRecordByPos(int pos){
         return this.recordList.get(pos);
     }
-    /*
-    Pre: this.recordList.size() == 10
-    */
+    
+    /**
+     * Setter of Record by position.
+     * @param pos The position of the Record to be replaced.
+     * @param rec The new Record which will replace the old record.
+     */
     public void setRecordByPos(int pos, Record rec){
         int i = this.recordList.size() - 1;
         while (pos != i){
@@ -55,10 +78,18 @@ public class Ranking implements Serializable{
         this.recordList.set(pos, rec);
     }
 
+    /**
+     * Getter of GameMode.
+     * @return An Enum type of GameMode.
+     */
     public GameMode getGameMode() {
         return gameMode;
     }
     
+    /**
+     * Tries to add a new Record into the Ranking.
+     * @param record The Record to add in the Ranking.
+     */
     public void addRecord(Record record){
         if (this.recordList.size() == 0) this.recordList.add(record);
         else{
@@ -82,12 +113,21 @@ public class Ranking implements Serializable{
         }
     }
     
+    /**
+     * Tries to add a Record into a given position if the size of Ranking is lesser than 10.
+     * @param pos The given position to add the Record.
+     * @param record The Record to add into the Ranking.
+     */
     public void addRecordAtPos(int pos, Record record){
         if (recordList.size() < 10){
             recordList.add(pos, record);
         }
     }
     
+    /**
+     * Converts the Ranking into an ArrayList of String.
+     * @return An ArrayList of String with the Ranking info.
+     */
     public ArrayList<String> rankingToString(){
         ArrayList<String> arr = new ArrayList();
         arr.add(this.boardName);
@@ -99,6 +139,11 @@ public class Ranking implements Serializable{
         return arr;
     }
     
+    /**
+     * Converts an ArrayList of String to a Ranking.
+     * @param arr The ArrayList of String to convert into a Ranking.
+     * @return The Ranking converted.
+     */
     public static Ranking stringToRanking(ArrayList<String> arr){
         Ranking ranking = new Ranking(arr.get(0), GameMode.valueOf(arr.get(arr.size() - 1)));
         for(int i = 1; i < arr.size() - 1; i += 2){
