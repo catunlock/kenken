@@ -35,6 +35,7 @@ package kenken.gui;
  * CardLayoutDemo.java
  *
  */
+import static com.sun.org.apache.bcel.internal.util.SecuritySupport.getResourceAsStream;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -72,14 +73,11 @@ public class MainWindow {
         GraphicsEnvironment ge = 
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
         try {
-            File file;
-            file = new File(getClass().getResource("FLUBBER.TTF").toURI());
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, file));
+
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("FLUBBER.TTF")));
         } catch (FontFormatException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -279,6 +277,8 @@ public class MainWindow {
       
         DirectoryCreator dc = new DirectoryCreator();
         dc.createInitial();
+        
+
         
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.

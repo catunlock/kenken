@@ -57,6 +57,7 @@ public class Board implements Serializable {
         this.name = b.name;
         this.username = b.username;
         this.board = new CellKenken[b.size()][b.size()];
+        this.difficult = b.difficult;
         
         for (int f = 0; f < b.size(); ++f) {
             for (int c = 0; c < b.size(); ++c) {
