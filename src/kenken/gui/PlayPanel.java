@@ -223,6 +223,11 @@ public class PlayPanel extends javax.swing.JPanel {
                 }
         }
         playMirror();
+        btnCheck.setEnabled(false);
+        btnSaveGame.setEnabled(false);
+        btnSurrender.setEnabled(false);
+        btnHint.setEnabled(false);
+        lblCheck.setText("YOU LOST!");
         boardPanel1.repaint();
     }
     

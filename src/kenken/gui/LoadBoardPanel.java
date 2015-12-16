@@ -68,6 +68,8 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         lstBoards = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         lblDifficultad = new javax.swing.JLabel();
+        lblGameMode = new javax.swing.JLabel();
+        cmbbGameMode = new javax.swing.JComboBox();
 
         btnLoad.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnLoad.setText("PLAY");
@@ -117,13 +119,25 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         });
         scrllBoards.setViewportView(lstBoards);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         jLabel1.setText("Difficultad:");
+
+        lblDifficultad.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+
+        lblGameMode.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        lblGameMode.setText("Game Mode:");
+
+        cmbbGameMode.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
+        cmbbGameMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "TimeAttack" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(390, 390, 390))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -152,10 +166,13 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                                     .addComponent(lblShowCreador, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                     .addComponent(lblShowTamany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblDifficultad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(405, 405, 405)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbbGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(168, 168, 168)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,14 +193,18 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                            .addComponent(lblDifficultad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDifficultad, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbbGameMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addGap(116, 116, 116)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -195,12 +216,17 @@ public class LoadBoardPanel extends javax.swing.JPanel {
      */
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
-        
+        String mode = (String) cmbbGameMode.getSelectedItem();
         mw.getGameController().newGame(boardNameSelected, modo);
         pp.initBoard(mw.getGameController().getInfoBoard());
         
+        if ("Normal".equals(mode)){
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
+        }
+        else{
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTimeAttack(mw.getGameController().getInfoBoard().size());
+        }
         mw.setPanel(MainWindow.Panels.PlayPanel);
-        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnLoadActionPerformed
 
     /**
@@ -232,9 +258,11 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLoad;
+    private javax.swing.JComboBox cmbbGameMode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCreador;
     private javax.swing.JLabel lblDifficultad;
+    private javax.swing.JLabel lblGameMode;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblLoadBoard;
     private javax.swing.JLabel lblSelectBoard;
