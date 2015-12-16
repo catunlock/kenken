@@ -133,10 +133,8 @@ public class BoardDBController {
         
         int result;
         //trobar el path
-        String pathBrd = getPathBoard(boardName);
-        String pathInf = getPathInfo(boardName);
-        String pathFisica = pathBrd+ExtensionFisica;
-        String pathInfo = pathInf+ExtensionInfo;
+        String pathFisica = getPathBoard(boardName);
+        String pathInfo = getPathInfo(boardName);
         boolean Fisica = new File(pathFisica).isFile();
         //si no existeix el Board
         if(!(Fisica)){
