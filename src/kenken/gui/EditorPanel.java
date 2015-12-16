@@ -18,6 +18,7 @@ public class EditorPanel extends BoardPanel{
     
     private boolean showRegionNumber = false;
     private boolean editRegionMode = false;
+    private boolean added = false;
     private int editRegionNumber = -1;
     private String editRegionOperation = "";
     private String editRegionResult = "";
@@ -91,7 +92,9 @@ public class EditorPanel extends BoardPanel{
         this.cc = cc;
     }
     
-    
+    public void setStartEditing(){
+        added = false;
+    }
 
     /**
      * Draws a Cell to the editor Panel.
@@ -127,6 +130,7 @@ public class EditorPanel extends BoardPanel{
     @Override
     public void mouseClicked(MouseEvent e) {
         if (editRegionMode) {
+            added = true;
             int f = e.getY() / padVer;
             int c = e.getX() / padHor;
 
@@ -141,6 +145,8 @@ public class EditorPanel extends BoardPanel{
         
     }
     
-    
+    public boolean getEdited(){
+        return added;
+    }
     
 }

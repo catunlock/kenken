@@ -373,6 +373,7 @@ public class CreatePanel extends javax.swing.JPanel {
             String operation = convertToSimbol((Region.OperationType)cmbOperation.getSelectedItem());
             String result = txtResult.getText();
             
+            editorPanel1.setStartEditing();
             editorPanel1.setEditRegionNumber(regionNumber);
             editorPanel1.setEditRegionOperation(operation);
             editorPanel1.setEditRegionResult(result);
@@ -397,15 +398,15 @@ public class CreatePanel extends javax.swing.JPanel {
             editorPanel1.setEditRegionMode(false);
             btnMakeRegion.setText("Make Region");
             
-            spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, ++countregions, 1));
-            spnRegion.setValue(countregions);
-            
-            
             btnClear.setEnabled(true);
             btnCheckBoard.setEnabled(true);
             
             cmbOperation.setEnabled(true);
             editing = false;
+            if (editorPanel1.getEdited()){
+                spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, ++countregions, 1));
+                spnRegion.setValue(countregions);
+            }
         }
         
     }//GEN-LAST:event_btnMakeRegionActionPerformed
