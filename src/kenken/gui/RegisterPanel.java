@@ -197,7 +197,7 @@ public class RegisterPanel extends javax.swing.JPanel {
                 int errcode = uc.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
                 if (errcode == 0){
                     ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
-                    mw.getUserController().login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
+                    mw.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
                     mw.setPanel(MainWindow.Panels.MainMenuPanel);
                 }
             }

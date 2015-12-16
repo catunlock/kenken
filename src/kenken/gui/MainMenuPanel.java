@@ -51,20 +51,20 @@ public class MainMenuPanel extends javax.swing.JPanel {
      * @param user User to be set.
      */
     public void setUser(String user){
-        ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
+        /*ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
         String solved, created, played;
         played = userData.get(0);
         created = userData.get(1);
-        solved = userData.get(2);
+        solved = userData.get(2);*/
         this.user = user;
         lblMainMenu.setText("Welcome, " + user);
-        lblBoardsCreatedTarget.setText(created);
+       /* lblBoardsCreatedTarget.setText(created);
         lblBoardsResolvedTarget.setText(solved);
-        lblTimePlayedTarget.setText(played);
+        lblTimePlayedTarget.setText(played);*/
     }
        
     public void updateList(){
-        ArrayList<String> userData = mw.getUserDataGetter().toString(uc) ;
+        ArrayList<String> userData = mw.getUserDataGetter().toString(mw.getUserController()) ;
         String solved, created, played;
         played = userData.get(0);
         created = userData.get(1);

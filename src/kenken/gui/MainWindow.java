@@ -109,6 +109,10 @@ public class MainWindow {
         return dg;
     }
     
+    public int login(String username, String password){
+        return uc.login(username, password);
+    }
+    
     enum Panels {
         CreateBoardPanel,
         ExportBoardPanel,

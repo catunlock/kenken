@@ -179,7 +179,7 @@ public class LoginPanel extends javax.swing.JPanel {
         String username = txtUser.getText();
         String password = Arrays.toString(txtPassword.getPassword());
 
-        int errcode = mw.getUserController().login(username, password);
+        int errcode = mw.login(username, password);
         if(errcode == -1) {
             lblErrorMessage.setText("L'usuari no existeix.");
         }else if(errcode == -2){
