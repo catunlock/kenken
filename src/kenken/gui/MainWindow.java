@@ -40,6 +40,7 @@ import java.awt.event.*;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import kenken.domain.controllers.BoardController;
 import kenken.domain.controllers.CreatorController;
 import kenken.domain.controllers.GameController;
@@ -243,16 +244,18 @@ public class MainWindow {
     }
     
     public static void main(String[] args) {
-        /* Use an appropriate Look and Feel */
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            
-        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         /* Turn off metal's use of bold fonts */
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
+        //UIManager.put("swing.boldMetal", Boolean.FALSE);
         DirectoryCreator dc = new DirectoryCreator();
         dc.createInitial();
         
