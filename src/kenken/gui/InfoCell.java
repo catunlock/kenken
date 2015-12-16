@@ -5,6 +5,9 @@
  */
 package kenken.gui;
 
+import java.awt.Color;
+
+
 /**
  *
  * @author SuNLoCK
@@ -20,6 +23,6 @@ public class InfoCell {
     public boolean hinted = false;
     public boolean showIsCorrect = false;
     public boolean correct = false;
-
+    public Color backgroundColor = Color.WHITE;
     
 }

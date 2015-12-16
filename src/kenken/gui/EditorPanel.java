@@ -22,7 +22,17 @@ public class EditorPanel extends BoardPanel{
     private String editRegionOperation = "";
     private String editRegionResult = "";
     private CreatorController cc;
+    private Color editRegionColor = Color.WHITE;
 
+    public Color getEditRegionColor() {
+        return editRegionColor;
+    }
+
+    public void setEditRegionColor(Color editRegionColor) {
+        this.editRegionColor = editRegionColor;
+    }
+    
+    
     
     /**
      * Default constructor of EditorPanel.
@@ -92,6 +102,10 @@ public class EditorPanel extends BoardPanel{
      */
     @Override
     protected void drawCell(Graphics2D g2d, InfoCell ic, int posX, int posY) {
+        
+        g2d.setColor(ic.backgroundColor);
+        g2d.fillRect(posX+1, posY+1, padHor-2, padVer-2);
+        
         super.drawCell(g2d, ic, posX, posY);
         
         if (showRegionNumber) {
@@ -120,6 +134,7 @@ public class EditorPanel extends BoardPanel{
             ic.region = editRegionNumber;
             ic.operation = editRegionOperation;
             ic.result = editRegionResult;
+            ic.backgroundColor = editRegionColor;
             
             repaint();
         }

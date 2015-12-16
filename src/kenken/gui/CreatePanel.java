@@ -1,5 +1,6 @@
 package kenken.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -21,10 +22,36 @@ import sun.audio.AudioStream;
  * @author SuNLoCK
  */
 public class CreatePanel extends javax.swing.JPanel {
+    
+    private class Colorator {
+        private int currentColor = 0;
+        private ArrayList<Color> colors;
+        
+        public Colorator() {
+            colors = new ArrayList<>(8);
+            colors.add(Color.MAGENTA);
+            colors.add(Color.GREEN);
+            colors.add(Color.LIGHT_GRAY);
+            colors.add(Color.ORANGE);
+            colors.add(Color.YELLOW);
+            colors.add(Color.cyan);
+            colors.add(Color.orange);
+            colors.add(Color.red);
+        }
+        
+        public Color getCurrentColor() {
+            return colors.get(currentColor++);
+        }
+        
+    }
+    
+    
     private MainWindow mw;
     private boolean editing = false;
     private int countregions = 1;
     private int size;
+    private Colorator colorator;
+
     
     //Deberias poner aqui un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea �ste
@@ -48,6 +75,7 @@ public class CreatePanel extends javax.swing.JPanel {
         this.size = size;
         countregions = 1;
         editing = false;
+        colorator = new Colorator();
         spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, countregions, 1));
         cmbOperation.setModel(new javax.swing.DefaultComboBoxModel(Region.OperationType.values()));
         txtResult.setText("1");
@@ -344,6 +372,7 @@ public class CreatePanel extends javax.swing.JPanel {
             editorPanel1.setEditRegionNumber(regionNumber);
             editorPanel1.setEditRegionOperation(operation);
             editorPanel1.setEditRegionResult(result);
+            editorPanel1.setEditRegionColor(colorator.getCurrentColor());
             btnMakeRegion.setText("End Region");
             
             btnClear.setEnabled(false);
@@ -470,4 +499,6 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JSpinner spnRegion;
     private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables
+
+
 }
