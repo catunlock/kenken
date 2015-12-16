@@ -180,9 +180,13 @@ public class Board implements Serializable {
             boolean[] repetits = new boolean[size()+1];
             
             for (int c = 0; c < size() && correct; ++c) {
-                if (repetits[board[f][c].getUserValue()]) {
+                if (board[f][c].getUserValue() == -1) {
                     correct = false;
-                }else {
+                }
+                else if (repetits[board[f][c].getUserValue()]){
+                    correct = false;
+                }
+                else {
                     repetits[board[f][c].getUserValue()] = true;
                 }
                 
