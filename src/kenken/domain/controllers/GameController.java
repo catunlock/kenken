@@ -31,16 +31,33 @@ public class GameController {
     private Game game;
     private boolean generated = false;
 
+    /**
+     * Creates a user directory.
+     * @param username The owner of the directory.
+     * @return An integer with error code 0 : Directory succesfully created. -1 : The User already exists.
+     */
     public int createGames(String username){
         DirectoryCreator dc = new DirectoryCreator();
         return dc.createUser(username);
     }
     
+    /**
+     * Deletes a user Directory.
+     * @param username The owner of the directory.
+     * @return An integer with error code 0 : Directory succesfully deleted. -1 : The User doesn't exist.
+     */
     public int deleteGames(String username){
         DirectoryCreator dc = new DirectoryCreator();
         return dc.deleteUser(username);
     }
     
+    /**
+     * Updates the data of a game and then saves it to the database.
+     * @param data Contains the data.
+     * @param username The owner of the game.
+     * @param nompartida The name of the game.
+     * @return An Integer with the error code  0 : Saved succesfully. -1 : The game already exists. -2 : Internal error.
+     */
     public int updateAndSave(ArrayList<String> data, String username, String nompartida) {
         Board b = this.game.getBoard();
         int i = 0, j = 0;
@@ -64,6 +81,10 @@ public class GameController {
         return saveGame(this.game, username, nompartida);
     }
 
+    /**
+     * Gets the time of the game.
+     * @return An integer with the time in seconds.
+     */
     public int getTime() {
         return (int) this.game.getTime().getSeconds();
     }
@@ -73,22 +94,43 @@ public class GameController {
     Post: retorna una board generada amb el kenken de size = size
     */
     
+    /**
+     * Gets the name of the board.
+     * @return A string with the boardname.
+     */
     public String getBoardName(){
         return this.game.getBoard().getBoardName();
     }
     
+    /**
+     * Gets a hint from a position.
+     * @param p The position to be hinted.
+     * @return 
+     */
     public int getHint(Pos p) {
         return game.getHint(p);
     }
     
+    /**
+     * Gets the number of hints avaliable.
+     * @return An int with the hints.
+     */
     public int getHints() {
         return game.getHints();
     }
     
+    /**
+     * Reset the number of hints avaliable.
+     */
     public void resetHints(){
         game.setHints(3);
     }
     
+    /**
+     * Sets a new Game with a board and a mode
+     * @param boardName The board to be loaded.
+     * @param mode The mode to be played.
+     */
     public void newGame(String boardName, String mode) {
         
         Board board = boardController.loadBoard(boardName);
@@ -97,6 +139,10 @@ public class GameController {
         
     }
     
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<ArrayList<InfoCell>> getInfoBoard() {
         boardParser = new BoardParser(this.game.getBoard());
         return boardParser.getInfoBoard();

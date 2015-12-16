@@ -32,6 +32,10 @@ public class Region implements Serializable{
     private boolean valid;
     private int id;
 
+    /**
+     * Adds a cell into the region.
+     * @param ck The CellKenken wanted to add.
+     */
     public void addCell(CellKenken ck) {
         cellList.add(ck);
     }

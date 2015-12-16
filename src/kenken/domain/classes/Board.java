@@ -35,6 +35,10 @@ public class Board implements Serializable {
         regions = new ArrayList<>();
     }
     
+    /**
+     * Copy constructor of Board.
+     * @param b Copy b and creates a new Board.
+     */
     public Board(Board b) {
         this.name = b.name;
         this.username = b.username;
@@ -203,6 +207,10 @@ public class Board implements Serializable {
         return correct;
     }
     
+    /**
+     * Checks if the Board is resolved.
+     * @return True if it's resolved, otherwise false.
+     */
     public boolean isResolved() {
         boolean correct = true;
 

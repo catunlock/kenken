@@ -104,6 +104,11 @@ public class BoardController {
     }
     
     /* TODO: WTF? */
+    /**
+     * Exports a Board to play the board anywhere.
+     * @param boardName The name of the board to export.
+     * @return A object Board.
+     */
     public Board exportBoard(String boardName) {
         return bDBc.loadBoard(boardName);
     }
@@ -130,6 +135,11 @@ public class BoardController {
         return bDBc.deleteBoard(boardname);
     }
     
+    /**
+     * Saves the board inmediately after of creating it.
+     * @param b the Board to be saved.
+     * @return An Integer with the error code  0 : The Board was succesfully created. -1 : The Board already exists. -2 : Internal error.
+     */
     public int saveCreatedBoard(Board b){
         return bDBc.createBoard(b);
     }

@@ -37,7 +37,7 @@ public class BoardInfo implements Serializable{
     }
 
     /**
-     * Gette of the Creator's name.
+     * Getter of the Creator's name.
      * @return A String with the creator's name.
      */
     public String getCreador() {

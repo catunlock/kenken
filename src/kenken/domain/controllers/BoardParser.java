@@ -152,6 +152,10 @@ public class BoardParser {
             }
         }
         
+        /**
+         * Gets all the info of the board.
+         * @return An arrayList of InfoCells with all the info.
+         */
         public ArrayList<ArrayList<InfoCell>> getInfoBoard() {
 
             initMatrix();

@@ -14,7 +14,11 @@ public class CellKenken extends Cell{
     private int region = 0;
     private boolean visible = false;
     private boolean hinted = false;
-
+    
+    /**
+     * Constructor copy of CellKenken.
+     * @param ck The CellKenken which will be copied.
+     */
     public CellKenken(CellKenken ck) {
         super(ck.getPosX(), ck.getPosY(), ck.isOriginal(), ck.getSolutionValue());
         

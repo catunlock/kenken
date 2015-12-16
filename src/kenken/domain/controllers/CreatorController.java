@@ -23,19 +23,38 @@ public class CreatorController {
     private Board board;
     private ArrayList<Region> regions;
     
+    /**
+     * Default constructor of CreatorController.
+     */
     public CreatorController() {
         
     }
     
+    /**
+     * Initializes a new Board with a size.
+     * @param size Size of the new Board.
+     */
     public void initNewBoard(int size) {
         board = new Board(size);
         regions = new ArrayList<>();
     }
     
+    /**
+     * Checks existance of a Region.
+     * @param nRegion The Region to be checked.
+     * @return True if exists, otherwise false.
+     */
     public boolean existRegion(int nRegion) {
         return regions.size() >= nRegion;
     }
     
+    /**
+     * Adds a Region into a Board to be created.
+     * @param id The identification of the board.
+     * @param op The operation of the region.
+     * @param result The result of the region.
+     * @param valid false.
+     */
     public void addRegion(int id, Region.OperationType op, int result, boolean valid) 
     {
         regions.add(new Region(id,new ArrayList<>(),op,result,valid));
@@ -50,6 +69,11 @@ public class CreatorController {
     }
     */
     
+    /**
+     * Tries to solve the board created.
+     * @param infoCells The Board created by the user.
+     * @return true if it can be resolved, false otherwise.
+     */
     public boolean resolve(ArrayList<ArrayList<InfoCell>> infoCells){
         
         for (int f = 0; f < infoCells.size(); ++f) {
@@ -77,6 +101,10 @@ public class CreatorController {
         return resultat;
     }
     
+    /**
+     * Get all the user values from the board.
+     * @return A Matrix as the user values board.
+     */
     public ArrayList<ArrayList<Integer>> getUserValues() {
         
         ArrayList<ArrayList<Integer>> result = new ArrayList<>(board.size());
@@ -98,6 +126,12 @@ public class CreatorController {
         return result;
     }
     
+    /**
+     * Saves the board created by the user.
+     * @param boardname The name of the new created Board.
+     * @param username The username of the creator.
+     * @return An Integer with the error code  0 : The Board was succesfully created. -1 : The Board already exists. -2 : Internal error.
+     */
     public int saveBoard(String boardname, String username){
         board.setBoardName(boardname);
         board.setUsername(username);
