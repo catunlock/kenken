@@ -73,6 +73,10 @@ public class PlayPanel extends javax.swing.JPanel {
         lblHint.setText("Hints remaining: " + Integer.toString(mw.getGameController().getHints()));
         segThisGame = 0;
         timer.restart();
+        initAudio();
+    }
+    
+    public void initAudio(){
         try {
             in = new FileInputStream("Robocraft Theme.wav");
             audio = new AudioStream(in);
@@ -105,6 +109,8 @@ public class PlayPanel extends javax.swing.JPanel {
         horas = segTotal/3600;
         minutos = (segTotal/60)%60;
         segundos = segTotal%60;
+        timer.restart();
+        initAudio();
     }
     
     public void setValues(ArrayList<Integer> data){
@@ -119,6 +125,30 @@ public class PlayPanel extends javax.swing.JPanel {
                 else boardPanel1.setValue(i, j, "");
                 ++x;
             }
+        }
+    }
+    
+    private void playTrumpet(){
+        try {
+            in = new FileInputStream("tadaa.wav");
+            audio = new AudioStream(in);
+            ap.start(audio);
+            musicOn = true;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    private void playMirror(){
+        try {
+            in = new FileInputStream("Mirror.wav");
+            audio = new AudioStream(in);
+            ap.start(audio);
+            musicOn = true;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
         }
     }
     
@@ -422,6 +452,7 @@ public class PlayPanel extends javax.swing.JPanel {
             lblCheck.setText("Maybe next time...");
             ap.stop(audio);
             timer.stop();
+            playMirror();
             boardPanel1.repaint();
             btnCheck.setEnabled(false);
             btnSaveGame.setEnabled(false);
@@ -448,16 +479,14 @@ public class PlayPanel extends javax.swing.JPanel {
             lblCheck.setText("CORRECTO!");
             Object[] options = {"OK"};
             long tiempo = segThisGame;
-            if(mw.getGameController().isGenerated()){
-                ap.stop(audio);
-                timer.stop();
+            ap.stop(audio);
+            timer.stop();
+            playTrumpet();
+            if(mw.getGameController().isGenerated()){  
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
                 mw.setPanel(MainWindow.Panels.MainMenuPanel);
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-                mw.setPanel(MainWindow.Panels.EndGamePanel);
-                ap.stop(audio);
-                timer.stop();
                 String boardname = mw.getGameController().getBoardName();
                 mw.getRankingController().addRecord(boardname, mw.getUserController().getUsername(), Game.Mode.Normal, tiempo);
                 ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed(boardname);

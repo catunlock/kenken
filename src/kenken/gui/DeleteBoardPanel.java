@@ -48,15 +48,16 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
      */
     public void updateList(){
         listModel = new DefaultListModel();
-        
-        infoBoard = mw.getBoardController().getBoardsInfo();
-        if (infoBoard != null){
-            for(BoardInfo bInf : infoBoard){
+        infoBoard = new ArrayList<>();
+        ArrayList<BoardInfo> listBoards = mw.getBoardController().getBoardsInfo();
+        if (listBoards != null){
+            for(BoardInfo bInf : listBoards){
                 // mostrar solo las tablas creadas por el usuario
                 String creator = bInf.getCreador();
                 String user = mw.getUserDataGetter().getUsername(mw.getUserController());
                 if(creator.equals(user)){
                     listModel.addElement(bInf.getName());
+                    infoBoard.add(bInf);
                 }
             }
         }
@@ -114,7 +115,7 @@ public class DeleteBoardPanel extends javax.swing.JPanel {
         });
 
         lblExport.setFont(new java.awt.Font("Flubber", 0, 48)); // NOI18N
-        lblExport.setText("DELECT BOARD");
+        lblExport.setText("DELETE BOARD");
         lblExport.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         scrllBoards.setToolTipText("");
