@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import kenken.domain.controllers.RankingController;
 
 /**
  *
@@ -17,6 +18,8 @@ public class EndGamePanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private MainWindow mw;
     private String boardPlayed;
+    private RankingController rc;
+    private DefaultTableModel dtm;
     /**
      * Creates new form EndGamePanel
      * @param mw
@@ -24,17 +27,34 @@ public class EndGamePanel extends javax.swing.JPanel {
     public EndGamePanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        this.rc = this.mw.getRankingController();
+        this.dtm = (DefaultTableModel) tblRanking.getModel();
+    }
+    
+    public void clearRecordsList(){
+        int size = tblRanking.getRowCount();
+        for (int i = 0; i < size; i++){
+            this.dtm.removeRow(0);
+        }
     }
     
     /**
      * Sets the Ranking List every time we enter the End Game Panel.
      */
     public void updateList(){
-        tableModel = (DefaultTableModel) tblRanking.getModel();
+        /*tableModel = (DefaultTableModel) tblRanking.getModel();
         
         ArrayList<String> records = mw.getRankingController().getStringRanking(boardPlayed);
         for(int i=0;i<records.size();i+=2){
             tableModel.addRow(new Object[]{records.get(i+1),records.get(i)});
+        }*/
+        
+        ArrayList<String> show = rc.showRanking(boardPlayed);
+        show.remove(show.size() - 1);
+        show.remove(0);
+        for(int i = 0; i < show.size(); i += 2){
+            String[] row = {show.get(i), show.get(i + 1)};
+            this.dtm.addRow(row);
         }
     }
     

@@ -577,7 +577,8 @@ public class PlayPanel extends javax.swing.JPanel {
                 String boardname = mw.getGameController().getBoardName();
                 mw.getRankingController().addRecord(boardname, mw.getUserController().getUsername(), Game.Mode.Normal, tiempo);
                 ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed(boardname);
-                ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).updateList();
+                ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).clearRecordsList();
+                ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).updateList();              
                 mw.setPanel(MainWindow.Panels.EndGamePanel);
             }
             Duration t = Duration.ofSeconds(tiempo);
