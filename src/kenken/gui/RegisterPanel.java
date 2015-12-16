@@ -185,24 +185,31 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         if("".equals(txtUsername.getText())){
             lblErrores.setText("Please enter an username.");
-        }else if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
-            int result = uc.createUser(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
-            if (result == -1){
-                lblErrores.setText("Username " + txtUsername.getText() + " already in use.");
-            }else if (result == -2){
-                lblErrores.setText("Internal Error.");
-            }else{
-                GameController gc = new GameController();
-                gc.createGames(txtUsername.getText());
-                int errcode = uc.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
-                if (errcode == 0){
-                    ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
-                    mw.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
-                    mw.setPanel(MainWindow.Panels.MainMenuPanel);
-                }
-            }
         }else{
-            lblErrores.setText("Passwords are not equal.");
+            if (Arrays.toString(txtPassword.getPassword()) != "[]"){
+                if (Arrays.equals(txtPassword.getPassword(), txtVerifyPassword.getPassword())){
+                    int result = uc.createUser(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
+                    if (result == -1){
+                        lblErrores.setText("Username " + txtUsername.getText() + " already in use.");
+                    }else if (result == -2){
+                        lblErrores.setText("Internal Error.");
+                    }else{
+                        GameController gc = new GameController();
+                        gc.createGames(txtUsername.getText());
+                        int errcode = uc.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
+                        if (errcode == 0){
+                            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).setUser(txtUsername.getText());
+                            mw.login(txtUsername.getText(), Arrays.toString(txtPassword.getPassword()));
+                            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
+                            mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                        }
+                    }
+                }else{
+                    lblErrores.setText("Passwords are not equal.");
+                }
+            }else{
+                lblErrores.setText("Please enter a password.");
+            } 
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
