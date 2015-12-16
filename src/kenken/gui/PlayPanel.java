@@ -224,6 +224,7 @@ public class PlayPanel extends javax.swing.JPanel {
                         minutos = 0;
                     }
                 }
+                timer.restart();
             }
             else{
                 ++segThisGame;
@@ -246,6 +247,7 @@ public class PlayPanel extends javax.swing.JPanel {
                 if (segTotal <= 0) {
                     endGameAttack();
                 }
+                else timer.restart();
             }
             String horstr, minstr, segstr;
             if (horas < 10) horstr = "0" + Long.toString(horas);
@@ -256,7 +258,7 @@ public class PlayPanel extends javax.swing.JPanel {
             else segstr = Long.toString(segundos);
             String timestring = horstr + ":" + minstr + ":" + segstr;
             lblTime.setText(timestring);
-            timer.restart();
+            
             
         }
     };

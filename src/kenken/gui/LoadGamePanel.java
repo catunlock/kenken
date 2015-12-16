@@ -156,7 +156,7 @@ public class LoadGamePanel extends javax.swing.JPanel {
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initBoard(mw.getGameController().getInfoBoard());
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setTime(time);
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setValues(data);
-        //((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 

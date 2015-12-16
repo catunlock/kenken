@@ -370,7 +370,9 @@ public class BoardPanel extends JPanel implements MouseListener, KeyListener{
     public void setHint(Pos p, String value) {
         infoCells.get(p.f).get(p.c).value = value;
         infoCells.get(p.f).get(p.c).hinted = true;
-        
+        InfoCell ic = infoCells.get(p.f).get(p.c);
+        gc.updateValue(p.f, p.c, Integer.parseInt(value));
+        ic.value = String.valueOf(value);
         repaint();
     }
     
