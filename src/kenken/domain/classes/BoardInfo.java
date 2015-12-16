@@ -15,18 +15,27 @@ public class BoardInfo implements Serializable{
     private String name;
     private String creador;
     private String size;
+    private String difficult;
 
     /**
      * Constructor of BoardInfo with the name of the board, with the creator and the size of the board.
      * @param name The name of the Board.
      * @param creador The name of the player who made it.
      * @param size The size of the board.
+     * @param difficult The difficult of the board.
      */
-    public BoardInfo(String name, String creador, String size) {
+    public BoardInfo(String name, String creador, String size, String difficult) {
         this.name = name;
         this.creador = creador;
         this.size = size;
+        this.difficult = difficult;
     }
+
+    public String getDifficult() {
+        return difficult;
+    }
+    
+    
 
     /**
      * Getter of the name of the Board.

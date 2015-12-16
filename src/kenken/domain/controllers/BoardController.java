@@ -56,7 +56,7 @@ public class BoardController {
      * Calls the BoardDBController to get all the boardnames.
      * @return An Arraylist with the names of the boards.
      */
-    public ArrayList<String> getBoardnames() {
+    public ArrayList<String> getBoardNames() {
         return bDBc.getBoardnames();
     }
     

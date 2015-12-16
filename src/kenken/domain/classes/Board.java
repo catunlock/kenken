@@ -15,11 +15,25 @@ import java.util.Iterator;
  * @author xaloc
  */
 public class Board implements Serializable {
+    public enum Difficult {
+        Easy, Medium, Hard, Insane
+    }
+    
     private String name;
     private String username;
     private CellKenken[][] board;
     private ArrayList<Region> regions;
+    private Difficult difficult;
+
+    public Difficult getDifficult() {
+        return difficult;
+    }
+
+    public void setDifficult(Difficult difficult) {
+        this.difficult = difficult;
+    }
     
+      
     /**
      * Constructor of Board with size parameter.
      * @param size The size of the new Board.

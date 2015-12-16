@@ -49,10 +49,14 @@ public class BoardDBController {
      */
     public ArrayList<String> getBoardnames(){
         ArrayList<String> boards = new ArrayList<>();
+        
         File f = new File(DirectoryInfo);
         File[] ficheros = f.listFiles();
+        
         for (int x=0;x<ficheros.length;x++){
-            boards.add(ficheros[x].getName());
+            String fileName = ficheros[x].getName();
+            String[] split = fileName.split("[.]");
+            boards.add(split[0]);
         }
         return boards;
     }
@@ -65,14 +69,14 @@ public class BoardDBController {
      */
     public ArrayList<String> getBoardInfoString(String boardname){
         ArrayList<String> info = new ArrayList<>();
-        String path = getPathInfo(boardname);
-        String pathInfo = path+ExtensionInfo;
+        String pathInfo = getPathInfo(boardname);
         try{
-            FileInputStream fis = new FileInputStream(path);   
+            FileInputStream fis = new FileInputStream(pathInfo);   
             ObjectInputStream ois = new ObjectInputStream(fis);
             BoardInfo boardInfo = (BoardInfo) ois.readObject();
             info.add(boardInfo.getCreador());
             info.add(boardInfo.getSize());
+            info.add(boardInfo.getDifficult());
             fis.close();
         }catch (ClassNotFoundException ex) {
                 Logger.getLogger(BoardDBController.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +111,7 @@ public class BoardDBController {
         }
         else{
             
-            BoardInfo infoBoard = new BoardInfo(newBoard.getBoardName(),newBoard.getUsername(),String.valueOf(newBoard.size()));
+            BoardInfo infoBoard = new BoardInfo(newBoard.getBoardName(),newBoard.getUsername(),String.valueOf(newBoard.size()), newBoard.getDifficult().name());
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);
@@ -167,10 +171,8 @@ public class BoardDBController {
         FileInputStream fis;
         Board b = null;
         //generar el posible path
-        String pathBrd = getPathBoard(boardName);
-        String pathInf = getPathInfo(boardName);
-        String pathFisica = pathBrd+ExtensionFisica;
-        String pathInfo = pathInf+ExtensionInfo;
+        String pathFisica = getPathBoard(boardName);
+        String pathInfo = getPathInfo(boardName);
         
         //nomes intentarem carregar si existeix el arxiu
         if ( (new File(pathInfo).isFile()) ){
@@ -259,7 +261,7 @@ public class BoardDBController {
      * @return A String with the Filepath.
      */
     private String getPathBoard(String boardName){
-        return DirectoryBoards+boardName;
+        return DirectoryBoards+boardName+ExtensionFisica;
     }
     
     /**
@@ -268,7 +270,7 @@ public class BoardDBController {
      * @return A String with the Filepath.
      */
     private String getPathInfo(String boardName){
-        return DirectoryInfo+boardName;
+        return DirectoryInfo+boardName+ExtensionInfo;
     }
     
     /* 

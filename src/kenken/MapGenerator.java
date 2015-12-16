@@ -87,6 +87,7 @@ public class MapGenerator {
         b.setRegions(regions);
         b.setBoardName("Original 4x4");
         b.setUsername("SuNLoCK");
+        b.setDifficult(Board.Difficult.Medium);
         
 
         
@@ -289,6 +290,7 @@ public class MapGenerator {
         
         b.setBoardName("Gerard 7x7");
         b.setUsername("Gerard");
+        b.setDifficult(Board.Difficult.Hard);
                 
         BoardColorator.printSolution(b);
         BoardColorator.printRegions(b);

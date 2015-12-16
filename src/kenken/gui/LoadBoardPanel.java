@@ -18,7 +18,8 @@ public class LoadBoardPanel extends javax.swing.JPanel {
 
     private MainWindow mw;
     private DefaultListModel listModel;
-    private ArrayList<BoardInfo> infoBoard = new ArrayList<>();
+    
+    private ArrayList<String> boardNames;
     private String boardNameSelected;
     private String modo = "Normal";
     
@@ -37,12 +38,11 @@ public class LoadBoardPanel extends javax.swing.JPanel {
     public void updateList(){
         listModel = new DefaultListModel();
         
-        infoBoard = mw.getBoardController().getBoardsInfo();
-        if (infoBoard != null){
-            for(BoardInfo bInf : infoBoard){
-                listModel.addElement(bInf.getName());
-            }
+        boardNames = mw.getBoardController().getBoardNames();
+        for (String bName : boardNames) {
+            listModel.addElement(bName);
         }
+        
         lstBoards.setModel(listModel);
     }
     /**
@@ -66,6 +66,8 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         scrllBoards = new javax.swing.JScrollPane();
         modelo=new DefaultListModel();
         lstBoards = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+        lblDifficultad = new javax.swing.JLabel();
 
         btnLoad.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         btnLoad.setText("PLAY");
@@ -115,6 +117,9 @@ public class LoadBoardPanel extends javax.swing.JPanel {
         });
         scrllBoards.setViewportView(lstBoards);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Difficultad:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,17 +143,19 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblInfo)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCreador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTamany, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblShowCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblShowCreador, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                    .addComponent(lblShowTamany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblDifficultad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(405, 405, 405)
                         .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +168,6 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                     .addComponent(lblInfo))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,8 +175,13 @@ public class LoadBoardPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(43, 43, 43)
+                            .addComponent(lblShowTamany, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(lblDifficultad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(scrllBoards, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,17 +216,25 @@ public class LoadBoardPanel extends javax.swing.JPanel {
      * @param evt Event trigger.
      */
     private void lstBoardsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstBoardsValueChanged
-        BoardInfo bi = infoBoard.get(lstBoards.getSelectedIndex());
-        lblShowCreador.setText(bi.getCreador());
-        lblShowTamany.setText(bi.getSize());
-        boardNameSelected = bi.getName();
+        
+        String bName = boardNames.get(lstBoards.getSelectedIndex());
+        
+        ArrayList<String> bi = mw.getBoardController().getBoardInfoString(bName);
+        
+        lblShowCreador.setText(bi.get(0));
+        lblShowTamany.setText(bi.get(1));
+        lblDifficultad.setText(bi.get(2));
+        
+        boardNameSelected = bName;
     }//GEN-LAST:event_lstBoardsValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLoad;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCreador;
+    private javax.swing.JLabel lblDifficultad;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblLoadBoard;
     private javax.swing.JLabel lblSelectBoard;
