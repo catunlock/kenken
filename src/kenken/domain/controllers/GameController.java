@@ -241,6 +241,10 @@ public class GameController {
         return data;
     }
     
+    public String gameMode(){
+        return this.game.getMode();
+    }
+    
      public boolean resolve(){
         Resolver resolver = new Resolver();
         return resolver.resolve(game.getBoard());

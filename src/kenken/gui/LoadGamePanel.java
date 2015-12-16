@@ -154,9 +154,14 @@ public class LoadGamePanel extends javax.swing.JPanel {
         int time = mw.getGameController().getTime();
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).clearPanel();
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initBoard(mw.getGameController().getInfoBoard());
-        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setTime(time);
         ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setValues(data);
-        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
+        String mode = mw.getGameController().gameMode(); 
+        if ("Normal".equals(mode)){
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setTime(time);
+        }
+        else{
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setTimeAttack(time);
+        }
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnLoadActionPerformed
 

@@ -36,6 +36,7 @@ public class LoadBoardPanel extends javax.swing.JPanel {
      * Sets the Boards list every time LoadBoardPanel is accessed.
      */
     public void updateList(){
+        
         listModel = new DefaultListModel();
         
         boardNames = mw.getBoardController().getBoardNames();

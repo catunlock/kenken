@@ -156,6 +156,17 @@ public class PlayPanel extends javax.swing.JPanel {
         initAudio();
     }
     
+    public void setTimeAttack(long time){
+        loadedGame = true;
+        segTotal = time;
+        horas = segTotal/3600;
+        minutos = ((segTotal-1)/60);
+        segundos = segTotal%60;
+        firstSecond = true;
+        timer.restart();
+        initAudioTimeAttack();
+    }
+    
     public void setValues(ArrayList<Integer> data){
         int tamany = mw.getGameController().getInfoBoard().size();
         int x = 0, value;
