@@ -79,8 +79,24 @@ public class PlayPanel extends javax.swing.JPanel {
         initAudio();
     }
     
-    public void initTimeAttack(long time){
+    public void initTimeAttack(int size){
         timeAttack = true;
+        long time = 0;
+        if (size == 3){
+            time = 30;
+        }else if (size == 4){
+            time = 60;
+        }else if (size == 5){
+            time = 240;
+        }else if (size == 6){
+            time = 500;
+        }else if (size == 7){
+            time = 700;
+        }else if (size == 8){
+            time = 900;
+        }else if (size == 9){
+            time = 1800;
+        }
         segTotal = time;
         horas = segTotal/3600;
         minutos = ((segTotal-1)/60);
