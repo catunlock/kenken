@@ -226,7 +226,7 @@ public class MainMenuPanel extends javax.swing.JPanel {
         });
 
         btnOptions.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
-        btnOptions.setText("Delete account");
+        btnOptions.setText("Options");
         btnOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOptionsActionPerformed(evt);
