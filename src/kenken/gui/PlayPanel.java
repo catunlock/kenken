@@ -357,6 +357,11 @@ public class PlayPanel extends javax.swing.JPanel {
                 lblTime.setText("00:00:00");
                 ap.stop(audio);
                 timer.stop();
+                long tiempo = segThisGame;
+                Duration t = Duration.ofSeconds(tiempo);
+                mw.getUserController().incrementTime(t);
+                mw.getUserController().updateUser();
+                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
             }
         }
     }//GEN-LAST:event_btnSaveGameActionPerformed
@@ -409,6 +414,11 @@ public class PlayPanel extends javax.swing.JPanel {
 
                 }
             }
+            long tiempo = segThisGame;
+            Duration t = Duration.ofSeconds(tiempo);
+            mw.getUserController().incrementTime(t);
+            mw.getUserController().updateUser();
+            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
             lblCheck.setText("Maybe next time...");
             ap.stop(audio);
             timer.stop();
@@ -437,7 +447,7 @@ public class PlayPanel extends javax.swing.JPanel {
         else {
             lblCheck.setText("CORRECTO!");
             Object[] options = {"OK"};
-            long tiempo = horas*60*60+minutos*60+segundos;
+            long tiempo = segThisGame;
             if(mw.getGameController().isGenerated()){
                 ap.stop(audio);
                 timer.stop();
