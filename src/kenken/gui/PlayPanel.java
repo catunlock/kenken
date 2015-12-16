@@ -298,6 +298,7 @@ public class PlayPanel extends javax.swing.JPanel {
         btnCheck = new javax.swing.JButton();
         btnSurrender = new javax.swing.JButton();
         lblCheck = new javax.swing.JLabel();
+        btnHelp = new javax.swing.JButton();
 
         btnMusic.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnMusic.setText("MUSIC OFF");
@@ -370,6 +371,15 @@ public class PlayPanel extends javax.swing.JPanel {
 
         lblCheck.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
 
+        btnHelp.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
+        btnHelp.setText("HELP");
+        btnHelp.setToolTipText("");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -395,7 +405,8 @@ public class PlayPanel extends javax.swing.JPanel {
                             .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSaveGame)
-                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -415,20 +426,23 @@ public class PlayPanel extends javax.swing.JPanel {
                         .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(lblCheck)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(btnSaveGame, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(lblCheck)
-                .addGap(31, 31, 31))
+                        .addGap(52, 52, 52)
+                        .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -617,11 +631,19 @@ public class PlayPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        JOptionPane.showMessageDialog(null, "Instructions:\n\nClick on the field, and then press in your keyboard the number that you want.\n\n"
+                + "(You can only introduce numbers between 1 and the size of board).\n\n"
+                + "Once all values entered, click on 'Check' to see if your solution is correct.\n\n"
+                + "You can always click 'Surrender' to finish the game and see all solutions... But we don't like loosers :)", "HELP", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnHelpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private kenken.gui.BoardPanel boardPanel1;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnHint;
     private javax.swing.JButton btnMusic;
     private javax.swing.JButton btnSaveGame;

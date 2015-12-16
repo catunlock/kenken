@@ -441,7 +441,10 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveBoardActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Instructions:\n\n1. For making a region, select the operation, enter the correct value, and click 'Make Region'\n\n"
+                + "2. Select all the region fields.\n\n3. Once selected, click again on 'End Region'\n\n"
+                + "4. When all regions made, click on 'Resolve'\n\n"
+                + "If theres some mistakes made, just click on 'Clear' and start all over again.", "HELP", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private String convertToSimbol(Region.OperationType op) {
