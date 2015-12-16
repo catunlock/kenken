@@ -19,6 +19,8 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         initComponents();
         this.mw = mw;
         txtSeed.setText(String.valueOf(System.nanoTime()));
+        
+        setDifficult();
     }
     
     /**
@@ -26,15 +28,43 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
      * @param diff
      * @return 
      */
-    private static float selectDifficult(String diff){
-        float res;
-        if ("Easy".equals(diff)) res = 0.7f;
-        else if ("Medium".equals(diff)) res = 1.2f;
-        else if ("Hard".equals(diff)) res = 1.7f;
-        else res = 2;
-        return res;
+    private static float selectDifficultSize(String diff, String size){
+        int rSize = Integer.parseInt(size);
+        
+        
+        if (rSize > 4 && (diff.equals("Medium") || diff.equals("Easy"))) {
+            return 1 - ((rSize - 4) * 0.1f);
+            //5 -> 0.9
+            //6 -> 0.8
+            //7 -> 0.7
+            //8 -> 0.6
+            //9 -> 0.5
+        }
+        else if (diff.equals("Hard")) {
+            return 1.2f;
+        }
+        else if (diff.equals("Insane")) {
+            return 2.0f;
+        }
+        
+        return 1.0f;
     }
 
+    private static float selectDifficultOperation(String diff, String size) {
+        switch(diff) {
+            case "Easy":
+                return 0.8f;
+            case "Medium":
+                return 1.0f;
+            case "Hard":
+                return 1.4f;
+            case "Insane":
+                return 2.0f;
+            default:
+                return 1.0f;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +104,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
 
         cmbbSize.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         cmbbSize.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3", "4", "5", "6", "7", "8", "9" }));
+        cmbbSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbbSizeActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
         btnBack.setText("BACK");
@@ -91,6 +126,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
 
         cmbDifficult.setFont(new java.awt.Font("Flubber", 0, 24)); // NOI18N
         cmbDifficult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Easy", "Medium", "Hard", "Insane" }));
+        cmbDifficult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDifficultActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Advanced"));
 
@@ -300,6 +340,27 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         txtOperationFactor.setText(String.valueOf(value/100.0));
     }//GEN-LAST:event_sldOperationFactorStateChanged
 
+    private void cmbbSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbbSizeActionPerformed
+        
+        setDifficult();
+        
+    }//GEN-LAST:event_cmbbSizeActionPerformed
+
+    private void cmbDifficultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDifficultActionPerformed
+              
+        setDifficult();
+    }//GEN-LAST:event_cmbDifficultActionPerformed
+
+    private void setDifficult() {
+        String diff = (String) cmbDifficult.getSelectedItem();
+        String size = (String) cmbbSize.getSelectedItem();
+        
+        float diffOperation = selectDifficultOperation(diff, size);
+        float diffSize = selectDifficultSize(diff, size);
+        
+        sldRegionFactor.setValue((int) (diffSize*100));
+        sldOperationFactor.setValue((int) (diffOperation*100));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
