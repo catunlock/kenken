@@ -26,21 +26,21 @@ public class UserControllerKenken extends UserController{
      * Increments the started games.
      */
     public void incrementStartedGames(){
-        this.getLoggedUser().incrementStartedGames();
+        if (this.getLoggedUser() != null) this.getLoggedUser().incrementStartedGames();
     }
     
     /**
      * Increments the solved games.
      */
     public void incrementSolvedGames() {
-        this.getLoggedUser().incrementSolvedGames();
+        if (this.getLoggedUser() != null) this.getLoggedUser().incrementSolvedGames();
     }
     
     /**
      * Increments the total Created Boards.
      */
     public void incrementTotalCreatedBoards(){
-        this.getLoggedUser().incrementTotalCreatedBoards();
+        if (this.getLoggedUser() != null) this.getLoggedUser().incrementTotalCreatedBoards();
     }
     
     /**
@@ -48,7 +48,7 @@ public class UserControllerKenken extends UserController{
      * @param time The time to be operated.
      */
     public void incrementTime(Duration time){
-        this.getLoggedUser().incrementTotalTimePlayed(time);
+        if (this.getLoggedUser() != null) this.getLoggedUser().incrementTotalTimePlayed(time);
     }
             
  

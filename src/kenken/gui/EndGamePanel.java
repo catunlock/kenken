@@ -7,6 +7,7 @@ package kenken.gui;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import kenken.domain.controllers.RankingController;
 
 /**
  *
@@ -17,6 +18,8 @@ public class EndGamePanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private MainWindow mw;
     private String boardPlayed;
+    private RankingController rc;
+    private DefaultTableModel dtm;
     /**
      * Creates new form EndGamePanel
      * @param mw
@@ -24,17 +27,34 @@ public class EndGamePanel extends javax.swing.JPanel {
     public EndGamePanel(MainWindow mw) {
         initComponents();
         this.mw = mw;
+        this.rc = this.mw.getRankingController();
+        this.dtm = (DefaultTableModel) tblRanking.getModel();
+    }
+    
+    public void clearRecordsList(){
+        int size = tblRanking.getRowCount();
+        for (int i = 0; i < size; i++){
+            this.dtm.removeRow(0);
+        }
     }
     
     /**
      * Sets the Ranking List every time we enter the End Game Panel.
      */
     public void updateList(){
-        tableModel = (DefaultTableModel) tblRanking.getModel();
+        /*tableModel = (DefaultTableModel) tblRanking.getModel();
         
         ArrayList<String> records = mw.getRankingController().getStringRanking(boardPlayed);
         for(int i=0;i<records.size();i+=2){
             tableModel.addRow(new Object[]{records.get(i+1),records.get(i)});
+        }*/
+        
+        ArrayList<String> show = rc.showRanking(boardPlayed);
+        show.remove(show.size() - 1);
+        show.remove(0);
+        for(int i = 0; i < show.size(); i += 2){
+            String[] row = {show.get(i), show.get(i + 1)};
+            this.dtm.addRow(row);
         }
     }
     
@@ -110,14 +130,7 @@ public class EndGamePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(151, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +139,12 @@ public class EndGamePanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(385, 385, 385)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(lblRankStats, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblBoardName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

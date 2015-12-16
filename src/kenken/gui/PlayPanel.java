@@ -353,7 +353,6 @@ public class PlayPanel extends javax.swing.JPanel {
         });
 
         lblCheck.setFont(new java.awt.Font("Flubber", 0, 18)); // NOI18N
-        lblCheck.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -381,7 +380,7 @@ public class PlayPanel extends javax.swing.JPanel {
                             .addComponent(btnSurrender, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSaveGame)
                             .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -411,7 +410,7 @@ public class PlayPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(boardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(lblCheck)
                 .addGap(31, 31, 31))
         );
@@ -531,11 +530,6 @@ public class PlayPanel extends javax.swing.JPanel {
 
                 }
             }
-            long tiempo = segThisGame;
-            Duration t = Duration.ofSeconds(tiempo);
-            mw.getUserController().incrementTime(t);
-            mw.getUserController().updateUser();
-            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
             lblCheck.setText("Maybe next time...");
             ap.stop(audio);
             timer.stop();
@@ -545,6 +539,13 @@ public class PlayPanel extends javax.swing.JPanel {
             btnSaveGame.setEnabled(false);
             btnSurrender.setEnabled(false);
             btnHint.setEnabled(false);
+            if (mw.getUserController().getUsername() != ""){
+                long tiempo = segThisGame;
+                Duration t = Duration.ofSeconds(tiempo);
+                mw.getUserController().incrementTime(t);
+                mw.getUserController().updateUser();
+                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
+            }
         }
     }//GEN-LAST:event_btnSurrenderActionPerformed
 
@@ -571,21 +572,32 @@ public class PlayPanel extends javax.swing.JPanel {
             playTrumpet();
             if(mw.getGameController().isGenerated()){  
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED.\nYour Time: " + horas+ ":"+minutos+":"+segundos + "\nClick Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-                mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                if (mw.getUserController().getUsername() != "") {
+                    mw.setPanel(MainWindow.Panels.MainMenuPanel);
+                }else{
+                    mw.setPanel(MainWindow.Panels.GuestPanel);
+                }
             }else{
                 JOptionPane.showOptionDialog(this,"CONGRATULATIONS! YOU HAVE SUCCEED. Click Continue","Congratulations!",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-                String boardname = mw.getGameController().getBoardName();
-                mw.getRankingController().addRecord(boardname, mw.getUserController().getUsername(), Game.Mode.Normal, tiempo);
-                ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed(boardname);
-                ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).updateList();
-                mw.setPanel(MainWindow.Panels.EndGamePanel);
+                if (mw.getUserController().getUsername() != "") {
+                    String boardname = mw.getGameController().getBoardName();
+                    mw.getRankingController().addRecord(boardname, mw.getUserController().getUsername(), Game.Mode.Normal, tiempo);
+                    ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).setBoardPlayed(boardname);
+                    ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).clearRecordsList();
+                    ((EndGamePanel) mw.getPanel(MainWindow.Panels.EndGamePanel)).updateList();              
+                    mw.setPanel(MainWindow.Panels.EndGamePanel);
+                }else{
+                    mw.setPanel(MainWindow.Panels.GuestPanel);
+                }
             }
-            Duration t = Duration.ofSeconds(tiempo);
-            mw.getUserController().incrementTime(t);
-            mw.getUserController().incrementSolvedGames();
-            lblCheck.setText(mw.getUserController().getUsername());
-            mw.getUserController().updateUser();
-            ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
+            if (mw.getUserController().getUsername() != ""){
+                Duration t = Duration.ofSeconds(tiempo);
+                mw.getUserController().incrementTime(t);
+                mw.getUserController().incrementSolvedGames();
+                lblCheck.setText(mw.getUserController().getUsername());
+                mw.getUserController().updateUser();
+                ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
+            }
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
