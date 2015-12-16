@@ -394,6 +394,7 @@ public class CreatePanel extends javax.swing.JPanel {
             mw.getUserController().incrementTotalCreatedBoards();
             ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
+            mw.getUserController().updateUser();
         }else{
             JOptionPane.showOptionDialog(this,"Internal Error.","Error",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
