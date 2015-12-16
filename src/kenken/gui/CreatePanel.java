@@ -438,10 +438,13 @@ public class CreatePanel extends javax.swing.JPanel {
         Object[] options = {"OK"};
         int result = -1;
         String message = "Insert Board name:";
-        while (result == -1){
+        boolean wantSave = true;
+        while (result == -1 && wantSave){
             String boardname =  JOptionPane.showInputDialog(this, message, "Save",
-                    JOptionPane.QUESTION_MESSAGE);    
-            if (boardname != "") {
+                    JOptionPane.QUESTION_MESSAGE);
+            if (boardname == null) {
+                wantSave = false;
+            }else if (boardname != "") {
                 result = mw.getCreatorController().saveBoard(boardname,mw.getUserController().getUsername());
                 message = "Boardname in use. Please insert another Board name:";
             }else{
@@ -455,7 +458,7 @@ public class CreatePanel extends javax.swing.JPanel {
             ((MainMenuPanel) mw.getPanel(MainWindow.Panels.MainMenuPanel)).updateList();
             mw.setPanel(MainWindow.Panels.MainMenuPanel);
             mw.getUserController().updateUser();
-        }else{
+        }else if(wantSave){
             JOptionPane.showOptionDialog(this,"Internal Error.","Error",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         }
     }//GEN-LAST:event_btnSaveBoardActionPerformed
