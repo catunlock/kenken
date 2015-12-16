@@ -52,10 +52,6 @@ public class CreatePanel extends javax.swing.JPanel {
     private int size;
     private Colorator colorator;
 
-    
-    //Deberias poner aqui un Duration que cada segundo1 del Timer cambie, y que
-    //cuando se produzca el evento suba un segundo al Duration, y que sea �ste
-    //el que aparezca en pantalla en el lblTime
     /**
      * Creates new form PlayPanel
      */
@@ -327,6 +323,20 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     /**
+     * Checks if any value of the board is in blank
+     */
+    private boolean checkBlank(){
+        ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
+        boolean blank = false;
+        for (int f = 0; f < infoCells.size(); ++f) {
+            for (int c = 0; c < infoCells.size(); ++c) {
+                if (infoCells.get(f).get(c).value == "") blank = true;
+            }
+        }
+        return blank;
+    }
+    
+    /**
      * Checks if the Board have a solution.
      * @param evt Event trigger.
      */
@@ -334,30 +344,38 @@ public class CreatePanel extends javax.swing.JPanel {
         Object[] options = {"OK"};
         btnCheckBoard.setEnabled(false);
         btnClear.setEnabled(false);
-        boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
+        
         lblCheking.setText("Checking... ");
-       
-        if (correct){
-            ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
-            lblCheking.setText("");
-            btnSaveBoard.setEnabled(true);
-            JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-            
-            ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
-            
-            for (int f = 0; f < infoCells.size(); ++f) {
-                for (int c = 0; c < infoCells.size(); ++c) {
-                    
-                    infoCells.get(f).get(c).value = String.valueOf(values.get(f).get(c));
-                }
-            }  
-            repaint();
-        }else{
+        boolean blank = checkBlank();
+        if (blank){
+            JOptionPane.showOptionDialog(this,"Please enter a correct value for all cells.","Incomplete",JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
             lblCheking.setText("");
             btnCheckBoard.setEnabled(true);
             btnClear.setEnabled(true);
-            JOptionPane.showOptionDialog(this,"This Board DO NOT have a correct solution.","Inorrect",JOptionPane.PLAIN_MESSAGE,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-        }
+        }else{
+            boolean correct = mw.getCreatorController().resolve(editorPanel1.getInfoCells());
+            if (correct){
+                ArrayList<ArrayList<Integer>> values = mw.getCreatorController().getUserValues();
+                lblCheking.setText("");
+                btnSaveBoard.setEnabled(true);
+                JOptionPane.showOptionDialog(this,"This Board have a correct solution!.","Correct",JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
+
+                ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
+
+                for (int f = 0; f < infoCells.size(); ++f) {
+                    for (int c = 0; c < infoCells.size(); ++c) {
+
+                        infoCells.get(f).get(c).value = String.valueOf(values.get(f).get(c));
+                    }
+                }  
+                repaint();
+            }else{
+                lblCheking.setText("");
+                btnCheckBoard.setEnabled(true);
+                btnClear.setEnabled(true);
+                JOptionPane.showOptionDialog(this,"This Board DO NOT have a correct solution.","Inorrect",JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
+            }
+        }  
     }//GEN-LAST:event_btnCheckBoardActionPerformed
 
     /**
