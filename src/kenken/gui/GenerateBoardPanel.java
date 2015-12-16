@@ -307,11 +307,11 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         pp.initBoard(mw.getGameController().getInfoBoard());
         pp.setNotLoaded();
         
-        if (mode == "Normal"){
+        if ("Normal".equals(mode)){
             ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
         }
         else{
-            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTimeAttack(10);
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTimeAttack(300);
         }
         mw.setPanel(MainWindow.Panels.PlayPanel);
     }//GEN-LAST:event_btnPlayActionPerformed

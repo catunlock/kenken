@@ -34,6 +34,7 @@ public class PlayPanel extends javax.swing.JPanel {
     private boolean musicOn = true;
     Game game;
     private boolean timeAttack = false;
+    private boolean firstSecond = false;
     //Deberías poner aquí un Duration que cada segundo1 del Timer cambie, y que
     //cuando se produzca el evento suba un segundo al Duration, y que sea éste
     //el que aparezca en pantalla en el lblTime
@@ -63,6 +64,7 @@ public class PlayPanel extends javax.swing.JPanel {
     }
     
     public void initTime(){
+        timeAttack = false;
         if (!loadedGame){
             time = Duration.ZERO;
             segTotal = 0;
@@ -82,7 +84,8 @@ public class PlayPanel extends javax.swing.JPanel {
         segTotal = time;
         horas = segTotal/3600;
         minutos = ((segTotal-1)/60);
-        segundos = segTotal;
+        segundos = segTotal%60;
+        firstSecond = true;
         timer.restart();
         initAudioTimeAttack();
     }
@@ -223,31 +226,38 @@ public class PlayPanel extends javax.swing.JPanel {
                 }
             }
             else{
+                ++segThisGame;
                 --segTotal;
                 --segundos;
-                if (segundos <= 0) {
-                    --minutos;
-                    segundos = 59;
-                        if (minutos <= 0){
+                if (segundos < 0){
+                    if (!firstSecond) {
+                        --minutos;
+                        segundos = 59;
+                        if (minutos < 0){
                             --horas;
                             minutos = 59;
                         }
                     }
+                    else {
+                        firstSecond = false;
+                        segundos = 59;
+                    }
+                }
+                if (segTotal <= 0) {
+                    endGameAttack();
+                }
             }
-            if (segTotal <= 0) {
-                endGameAttack();
-            }else{
-                String horstr, minstr, segstr;
-                if (horas < 10) horstr = "0" + Long.toString(horas);
-                else horstr = Long.toString(horas);
-                if (minutos < 10) minstr = "0" + Long.toString(minutos);
-                else minstr = Long.toString(minutos);
-                if (segundos < 10) segstr = "0" + Long.toString(segundos);
-                else segstr = Long.toString(segundos);
-                String timestring = horstr + ":" + minstr + ":" + segstr;
-                lblTime.setText(timestring);
-                timer.restart();
-            }
+            String horstr, minstr, segstr;
+            if (horas < 10) horstr = "0" + Long.toString(horas);
+            else horstr = Long.toString(horas);
+            if (minutos < 10) minstr = "0" + Long.toString(minutos);
+            else minstr = Long.toString(minutos);
+            if (segundos < 10) segstr = "0" + Long.toString(segundos);
+            else segstr = Long.toString(segundos);
+            String timestring = horstr + ":" + minstr + ":" + segstr;
+            lblTime.setText(timestring);
+            timer.restart();
+            
         }
     };
 
@@ -436,7 +446,9 @@ public class PlayPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveGameActionPerformed
-        long segonsTotals = segTotal+segThisGame;
+        long segonsTotals;
+        if (timeAttack) segonsTotals = segTotal - segThisGame;
+        else segonsTotals = segTotal + segThisGame;
         String nompartida = JOptionPane.showInputDialog("Type the name of the game you want to save.");
         if (nompartida == null || "null".equals(nompartida) || "".equals(nompartida)) {
             JOptionPane.showMessageDialog(this, "Please enter a valid name.");
