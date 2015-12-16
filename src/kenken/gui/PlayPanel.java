@@ -97,6 +97,7 @@ public class PlayPanel extends javax.swing.JPanel {
         }else if (size == 9){
             time = 1800;
         }
+        segThisGame = 0;
         segTotal = time;
         horas = segTotal/3600;
         minutos = ((segTotal-1)/60);
@@ -148,6 +149,8 @@ public class PlayPanel extends javax.swing.JPanel {
     
     public void setTime(long time){
         loadedGame = true;
+        timeAttack = false;
+        segThisGame = 0;
         segTotal = time;
         horas = segTotal/3600;
         minutos = (segTotal/60)%60;
@@ -158,6 +161,8 @@ public class PlayPanel extends javax.swing.JPanel {
     
     public void setTimeAttack(long time){
         loadedGame = true;
+        timeAttack = true;
+        segThisGame = 0;
         segTotal = time;
         horas = segTotal/3600;
         minutos = ((segTotal-1)/60);
