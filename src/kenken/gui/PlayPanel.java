@@ -109,8 +109,9 @@ public class PlayPanel extends javax.swing.JPanel {
     
     public void initAudio(){
         try {
-            in = new FileInputStream("Robocraft Theme.wav");
-            audio = new AudioStream(in);
+            
+            //in = new FileInputStream("Robocraft Theme.wav");
+            audio = new AudioStream(getClass().getResourceAsStream("/kenken/sounds/Robocraft Theme.wav"));
             ap.start(audio);
             musicOn = true;
         }
@@ -121,8 +122,8 @@ public class PlayPanel extends javax.swing.JPanel {
     
     public void initAudioTimeAttack(){
         try {
-            in = new FileInputStream("timeattack.wav");
-            audio = new AudioStream(in);
+            //in = new FileInputStream("timeattack.wav");
+            audio = new AudioStream(getClass().getResourceAsStream("/kenken/sounds/timeattack.wav"));
             ap.start(audio);
             musicOn = true;
             timer.restart();
@@ -189,8 +190,8 @@ public class PlayPanel extends javax.swing.JPanel {
     
     private void playTrumpet(){
         try {
-            in = new FileInputStream("tadaa.wav");
-            audio = new AudioStream(in);
+            //in = new FileInputStream("tadaa.wav");
+            audio = new AudioStream(getClass().getResourceAsStream("/kenken/sounds/tadaa.wav"));
             ap.start(audio);
             musicOn = true;
         }
@@ -201,8 +202,8 @@ public class PlayPanel extends javax.swing.JPanel {
     
     private void playMirror(){
         try {
-            in = new FileInputStream("Mirror.wav");
-            audio = new AudioStream(in);
+            //in = new FileInputStream("Mirror.wav");
+            audio = new AudioStream(getClass().getResourceAsStream("/kenken/sounds/Mirror.wav"));
             ap.start(audio);
             musicOn = true;
         }
