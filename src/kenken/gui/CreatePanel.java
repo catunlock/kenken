@@ -328,9 +328,10 @@ public class CreatePanel extends javax.swing.JPanel {
     private boolean checkBlank(){
         ArrayList<ArrayList<InfoCell>> infoCells = editorPanel1.getInfoCells();
         boolean blank = false;
+        
         for (int f = 0; f < infoCells.size(); ++f) {
             for (int c = 0; c < infoCells.size(); ++c) {
-                if (infoCells.get(f).get(c).value == "") blank = true;
+                if (infoCells.get(f).get(c).region == -1) blank = true;
             }
         }
         return blank;
@@ -348,7 +349,7 @@ public class CreatePanel extends javax.swing.JPanel {
         lblCheking.setText("Checking... ");
         boolean blank = checkBlank();
         if (blank){
-            JOptionPane.showOptionDialog(this,"Please enter a correct value for all cells.","Incomplete",JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
+            JOptionPane.showOptionDialog(this,"All the cells need to have a region.","Incomplete",JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
             lblCheking.setText("");
             btnCheckBoard.setEnabled(true);
             btnClear.setEnabled(true);
