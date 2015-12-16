@@ -20,16 +20,30 @@ public class RankingController {
     
     RankingDBController rkDBC = new RankingDBController();
     
+    /**
+     * Default constructor of Ranking Controller.
+     */
     public RankingController(){
         
     }
     
+    /**
+     * Creates a new Ranking with a boardname related and also a game mode.
+     * @param boardName Board related to the ranking.
+     * @param gameMode Game mode related to the ranking.
+     * @return Returns the error code  0 : Created Succesfully. -1 : The Ranking already exists. -2 : Internal error.
+     */
     public int createRanking(String boardName, Game.Mode gameMode){
         Ranking newRanking = new Ranking(boardName, gameMode);
         int result = rkDBC.createRanking(newRanking);
         return result;
     }
     
+    /**
+     * Gets a ranking from the database.
+     * @param boardName 
+     * @return 
+     */
     public Ranking getRanking(String boardName){
         Ranking ranking = rkDBC.getRanking(boardName);
         return ranking;

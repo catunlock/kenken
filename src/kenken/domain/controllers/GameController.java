@@ -140,14 +140,22 @@ public class GameController {
     }
     
     /**
-     * 
-     * @return 
+     * Gets the info from the board.
+     * @return A matrix as a board of info cells.
      */
     public ArrayList<ArrayList<InfoCell>> getInfoBoard() {
         boardParser = new BoardParser(this.game.getBoard());
         return boardParser.getInfoBoard();
     }
     
+    /**
+     * 
+     * @param mode
+     * @param size
+     * @param pfRegionSize
+     * @param pfOperation
+     * @param seed 
+     */
     public void newGameGenerateBoard(String mode, int size, float pfRegionSize, float pfOperation, long seed) {
         generated = true;
         Generator generador = new Generator();

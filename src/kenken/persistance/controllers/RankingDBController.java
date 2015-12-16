@@ -30,7 +30,7 @@ public class RankingDBController {
     /**
      * Creates a new Ranking in the Database.
      * @param  newRanking Ranking to be stored in the database.
-     * @return            Returns de error code  0 : Created Succesfully. -1 : The Ranking already exists. -2 : Internal error
+     * @return            Returns the error code  0 : Created Succesfully. -1 : The Ranking already exists. -2 : Internal error
      */
     public int createRanking(Ranking newRanking){
         int result = 1;
