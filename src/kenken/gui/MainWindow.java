@@ -37,8 +37,13 @@ package kenken.gui;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Hashtable;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import kenken.domain.controllers.BoardController;
@@ -62,6 +67,23 @@ public class MainWindow {
     private UserDataGetter dg = new UserDataGetter();
     private CreatorController cc = new CreatorController();
 
+    
+    public MainWindow() {
+        GraphicsEnvironment ge = 
+                GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            File file;
+            file = new File(getClass().getResource("FLUBBER.TTF").toURI());
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, file));
+        } catch (FontFormatException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Getter of Creator Controller.
      * @return The creator controller.
@@ -254,8 +276,7 @@ public class MainWindow {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        /* Turn off metal's use of bold fonts */
-        //UIManager.put("swing.boldMetal", Boolean.FALSE);
+      
         DirectoryCreator dc = new DirectoryCreator();
         dc.createInitial();
         

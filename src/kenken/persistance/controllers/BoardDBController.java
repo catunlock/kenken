@@ -133,6 +133,7 @@ public class BoardDBController {
         
         int result;
         //trobar el path
+        
         String pathFisica = getPathBoard(boardName);
         String pathInfo = getPathInfo(boardName);
         boolean Fisica = new File(pathFisica).isFile();
