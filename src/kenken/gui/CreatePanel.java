@@ -177,6 +177,8 @@ public class CreatePanel extends javax.swing.JPanel {
 
         cmbOperation.setFont(new java.awt.Font("Flubber", 0, 14)); // NOI18N
 
+        spnRegion.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -344,7 +346,9 @@ public class CreatePanel extends javax.swing.JPanel {
             editorPanel1.setEditRegionResult(result);
             btnMakeRegion.setText("End Region");
             
-            spnRegion.setEnabled(false);
+            btnClear.setEnabled(false);
+            btnCheckBoard.setEnabled(false);
+            
             cmbOperation.setEnabled(false);
             editing = true;
             txtResult.setEditable(false);
@@ -363,7 +367,10 @@ public class CreatePanel extends javax.swing.JPanel {
             spnRegion.setModel(new javax.swing.SpinnerNumberModel(1, 1, ++countregions, 1));
             spnRegion.setValue(countregions);
             
-            spnRegion.setEnabled(true);
+            
+            btnClear.setEnabled(true);
+            btnCheckBoard.setEnabled(true);
+            
             cmbOperation.setEnabled(true);
             editing = false;
         }

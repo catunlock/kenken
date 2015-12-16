@@ -253,6 +253,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spnRegion">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

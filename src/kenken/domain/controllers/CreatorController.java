@@ -135,6 +135,7 @@ public class CreatorController {
     public int saveBoard(String boardname, String username){
         board.setBoardName(boardname);
         board.setUsername(username);
+        board.setDifficult(Board.Difficult.Medium);
         BoardController bc = new BoardController();
         
         for (int i = 0; i < board.size(); ++i){

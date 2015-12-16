@@ -101,10 +101,9 @@ public class BoardDBController {
         int result = 0;
         int resultInfo = 0;
         int resultObj = 0;
-        String pathBrd = getPathBoard(newBoard);
-        String pathInf = getPathInfo(newBoard);
-        String pathFisica = pathBrd+ExtensionFisica;
-        String pathInfo = pathInf+ExtensionInfo;
+
+        String pathFisica = getPathBoard(newBoard);
+        String pathInfo = getPathInfo(newBoard);
         
         if (new File(pathInfo).isFile() || new File(pathFisica).isFile()) {
             result = -1;
