@@ -50,6 +50,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private boolean editing = false;
     private int countregions = 1;
     private int size;
+    private String difficult;
     private Colorator colorator;
 
     /**
@@ -67,8 +68,9 @@ public class CreatePanel extends javax.swing.JPanel {
      * Initializes a Board.
      * @param size Indicates the size of the Board.
      */
-    public void initBoard(int size) {
+    public void initBoard(int size, String difficult) {
         this.size = size;
+        this.difficult = difficult;
         countregions = 1;
         editing = false;
         colorator = new Colorator();
@@ -317,8 +319,8 @@ public class CreatePanel extends javax.swing.JPanel {
         }
     }                                       
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        mw.getCreatorController().initNewBoard(size);      
-        initBoard(size);
+        mw.getCreatorController().initNewBoard(size, difficult);      
+        initBoard(size, difficult);
         repaint();
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -445,7 +447,7 @@ public class CreatePanel extends javax.swing.JPanel {
             if (boardname == null) {
                 wantSave = false;
             }else if (boardname != "") {
-                result = mw.getCreatorController().saveBoard(boardname,mw.getUserController().getUsername());
+                result = mw.getCreatorController().saveBoard(boardname,mw.getUserController().getUsername(), difficult);
                 message = "Boardname in use. Please insert another Board name:";
             }else{
                 message = "Please insert a Board name:";

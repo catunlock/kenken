@@ -33,9 +33,11 @@ public class CreatorController {
     /**
      * Initializes a new Board with a size.
      * @param size Size of the new Board.
+     * @param difficult Difficult of the new Board.
      */
-    public void initNewBoard(int size) {
+    public void initNewBoard(int size, String difficult) {
         board = new Board(size);
+        board.setDifficult(Board.Difficult.valueOf(difficult));
         regions = new ArrayList<>();
     }
     
@@ -132,10 +134,11 @@ public class CreatorController {
      * @param username The username of the creator.
      * @return An Integer with the error code  0 : The Board was succesfully created. -1 : The Board already exists. -2 : Internal error.
      */
-    public int saveBoard(String boardname, String username){
+    public int saveBoard(String boardname, String username, String difficult){
         board.setBoardName(boardname);
         board.setUsername(username);
-        board.setDifficult(Board.Difficult.Medium);
+        board.setDifficult(Board.Difficult.valueOf(difficult));
+        
         BoardController bc = new BoardController();
         
         for (int i = 0; i < board.size(); ++i){

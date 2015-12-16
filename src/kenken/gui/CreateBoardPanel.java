@@ -5,6 +5,9 @@
  */
 package kenken.gui;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author SuNLoCK
@@ -17,6 +20,9 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     public CreateBoardPanel(MainWindow mw) {
         initComponents();
          this.mw = mw;
+         
+         String[] difficultStrings = { "Easy", "Medium", "Hard", "Insane"};
+         cmbDifficult.setModel(new DefaultComboBoxModel(difficultStrings));
     }
 
     /**
@@ -33,6 +39,8 @@ public class CreateBoardPanel extends javax.swing.JPanel {
         cmbSize = new javax.swing.JComboBox();
         lblCreateBoard = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbDifficult = new javax.swing.JComboBox();
 
         btnCreate.setFont(new java.awt.Font("Flubber", 0, 36)); // NOI18N
         btnCreate.setText("CREATE");
@@ -61,6 +69,10 @@ public class CreateBoardPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
+        cmbDifficult.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,24 +90,32 @@ public class CreateBoardPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(298, 298, 298))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblCreateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(254, 254, 254))))
+                        .addGap(254, 254, 254))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbSize, 0, 166, Short.MAX_VALUE)
+                            .addComponent(cmbDifficult, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(299, 299, 299))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addComponent(lblCreateBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSize, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,12 +129,13 @@ public class CreateBoardPanel extends javax.swing.JPanel {
      */
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         
-        String mode = "Normal";        
         int size = Integer.parseInt((String) cmbSize.getSelectedItem());
-                
+        String difficult = (String) cmbDifficult.getSelectedItem();
+        
         CreatePanel cp = (CreatePanel) mw.getPanel(MainWindow.Panels.CreatePanel);
-        cp.initBoard(size);
-        mw.getCreatorController().initNewBoard(size);
+        cp.initBoard(size, difficult);
+        
+        mw.getCreatorController().initNewBoard(size, difficult);
         mw.setPanel(MainWindow.Panels.CreatePanel);
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -130,7 +151,9 @@ public class CreateBoardPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
+    private javax.swing.JComboBox cmbDifficult;
     private javax.swing.JComboBox cmbSize;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCreateBoard;
     private javax.swing.JLabel lblSize;
     // End of variables declaration//GEN-END:variables

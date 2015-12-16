@@ -109,8 +109,12 @@ public class BoardDBController {
             result = -1;
         }
         else{
+            String boardName = newBoard.getBoardName();
+            String creator = newBoard.getUsername();
+            String size = String.valueOf(newBoard.size());
+            String difficult = newBoard.getDifficult().name();
             
-            BoardInfo infoBoard = new BoardInfo(newBoard.getBoardName(),newBoard.getUsername(),String.valueOf(newBoard.size()), newBoard.getDifficult().name());
+            BoardInfo infoBoard = new BoardInfo(boardName,creator,size,difficult );
             //crear el fichero de info y fisico
             resultInfo = writeBoardInfo(infoBoard, pathInfo);
             resultObj = writeBoardObj(newBoard, pathFisica);
