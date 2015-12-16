@@ -108,7 +108,9 @@ public class GameController {
      * @return 
      */
     public int getHint(Pos p) {
-        return game.getHint(p);
+        int hint = game.getHint(p);
+        game.getBoard().getCell(p.c, p.f).setUserValue(hint);
+        return hint;
     }
     
     /**
