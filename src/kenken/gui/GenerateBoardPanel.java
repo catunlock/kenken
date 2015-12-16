@@ -258,9 +258,7 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         float pfRegionSize = Float.parseFloat(txtRegionFactor.getText());
         float pfOperation = Float.parseFloat(txtOperationFactor.getText());
         long seed = Long.parseLong(txtSeed.getText());
-        
-        
-        
+       
         mw.getGameController().newGameGenerateBoard(mode, size, pfRegionSize, 
                 pfOperation, seed);
         
@@ -268,8 +266,14 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
         pp.clearPanel();
         pp.initBoard(mw.getGameController().getInfoBoard());
         pp.setNotLoaded();
+        
+        if (mode == "Normal"){
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
+        }
+        else{
+            ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTimeAttack(10);
+        }
         mw.setPanel(MainWindow.Panels.PlayPanel);
-        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void txtRegionFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegionFactorActionPerformed
