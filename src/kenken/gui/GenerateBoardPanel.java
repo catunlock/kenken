@@ -301,11 +301,9 @@ public class GenerateBoardPanel extends javax.swing.JPanel {
        
         mw.getGameController().newGameGenerateBoard(mode, size, pfRegionSize, 
                 pfOperation, seed);
-        
-        PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
-        pp.clearPanel();
-        pp.initBoard(mw.getGameController().getInfoBoard());
-        pp.setNotLoaded();
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).clearPanel();
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initBoard(mw.getGameController().getInfoBoard());
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setNotLoaded();
         
         if ("Normal".equals(mode)){
             ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();

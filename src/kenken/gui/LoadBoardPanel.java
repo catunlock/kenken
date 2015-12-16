@@ -216,10 +216,10 @@ public class LoadBoardPanel extends javax.swing.JPanel {
      * @param evt Event trigger.
      */
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        PlayPanel pp = (PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel);
         String mode = (String) cmbbGameMode.getSelectedItem();
         mw.getGameController().newGame(boardNameSelected, modo);
-        pp.initBoard(mw.getGameController().getInfoBoard());
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initBoard(mw.getGameController().getInfoBoard());
+        ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).setNotLoaded();
         
         if ("Normal".equals(mode)){
             ((PlayPanel) mw.getPanel(MainWindow.Panels.PlayPanel)).initTime();

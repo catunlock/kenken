@@ -265,7 +265,6 @@ public class PlayPanel extends javax.swing.JPanel {
             }
             else{
                 ++segThisGame;
-                --segTotal;
                 --segundos;
                 if (segundos < 0){
                     if (!firstSecond) {
